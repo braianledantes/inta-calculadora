@@ -36,7 +36,7 @@ export function CardMaquinariaPlan({plan, tractores, implementos, onUpdate, onDe
 
         <NumberValue name="Potencia" value={plan.tractor.potencia} unit="HP" />
         <NumberValue name="Precio" value={plan.tractor.precioDolar} unit="US$" />
-        <NumberValue name="Gasto conservación coeficiente" value={plan.tractor.gastoMantenimiento} unit="AR$" formated={false} />
+        <NumberValue name="Gasto conservación coeficiente" value={plan.tractor.gastoMantenimiento} />
         <NumberValue name="Horas útiles" value={plan.tractor.horasVidaUtil} unit="h" />
         <NumberValue name="Valor residual" value={plan.tractor.porcentajeValorResidual} unit="%" />
         <NumberValue name="Amortización" esComputado value={plan.amortizacionTractor} unit="AR$/h" />
@@ -51,7 +51,7 @@ export function CardMaquinariaPlan({plan, tractores, implementos, onUpdate, onDe
         />
 
         <NumberValue name="Precio" value={plan.implemento.precioDolar} unit="US$" />
-        <NumberValue name="Gasto conservación coeficiente" value={plan.implemento.gastoMantenimiento} unit="AR$" formated={false} />
+        <NumberValue name="Gasto conservación coeficiente" value={plan.implemento.gastoMantenimiento} />
         <NumberValue name="Horas útiles" value={plan.implemento.horasVidaUtil} unit="h" />
         <NumberValue name="Valor residual" value={plan.implemento.porcentajeValorResidual} unit="%" />
         <NumberValue name="Consumo combustible" value={plan.implemento.consumoCombustible} unit="lt/h" />

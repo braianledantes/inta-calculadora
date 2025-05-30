@@ -39,13 +39,14 @@ export function CardSanitarioPlan({plan, sanitizantes, onUpdate, onDelete}) {
           onChange={handleUpdateSanitizante}
         />
 
-        <NumberValue name="Precio US$" value={plan.sanitizante.precioEnvaseDolar} formated />
-        <NumberValue name="Dosis por hl" value={plan.sanitizante.dosisAplicacion} formated={false} unit={plan.sanitizante.unidadDosisAplicacion}/>
-        <InputNumber name="Volumen por hl/ha" value={plan.volumenPorHectarea} onChange={handleUpdateVolumenPorHectarea} />
-        <NumberValue name="Cantidad por tratamiento" value={plan.cantidadPorHectarea} formated={false} esComputado/>
-        <NumberValue name="Costo por tratamiento" value={plan.costoTotalPorTratamiento} unit="AR$" esComputado
-                     formated={false}/>
-        <InputNumber name="Cant. tratamientos" value={plan.cantTratamientos} onChange={handleUpdateCantTratamientos} />
+        <NumberValue name="Precio US$" value={plan.sanitizante.precioEnvaseDolar}/>
+        <NumberValue name="Dosis por hl" value={plan.sanitizante.dosisAplicacion}
+                     unit={plan.sanitizante.unidadDosisAplicacion}/>
+        <InputNumber name="Volumen por hl/ha" value={plan.volumenPorHectarea}
+                     onChange={handleUpdateVolumenPorHectarea}/>
+        <NumberValue name="Cantidad por tratamiento" value={plan.cantidadPorHectarea} esComputado/>
+        <NumberValue name="Costo por tratamiento" value={plan.costoTotalPorTratamiento} unit="AR$" esComputado/>
+        <InputNumber name="Cant. tratamientos" value={plan.cantTratamientos} onChange={handleUpdateCantTratamientos}/>
         <NumberValue name="Costo Total" esComputado value={plan.costoTotalPorHectarea} unit="AR$/ha"/>
       </div>
 

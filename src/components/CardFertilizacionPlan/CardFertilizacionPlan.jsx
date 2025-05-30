@@ -35,9 +35,8 @@ export function CardFertilizacionPlan({plan, fertilizantes, onUpdate, onDelete})
         />
 
         <NumberValue name="Precio" value={plan.fertilizante.precioEnvaseDolar} unit="US$"/>
-        <NumberValue name="Dosis por ha" value={plan.fertilizante.dosisAplicacion} unit={plan.fertilizante.unidadDosisAplicacion}
-                     formated={false}/>
-        <NumberValue name="Costo tratamiento" esComputado value={plan.costoTotalPorTratamiento} unit="AR$/tratamiento"/>
+        <NumberValue name="Dosis por ha" value={plan.fertilizante.dosisAplicacion} unit={plan.fertilizante.unidadDosisAplicacion}/>
+        <NumberValue name="Costo por tratamiento" esComputado value={plan.costoTotalPorTratamiento} unit="AR$"/>
         <InputNumber name="Cant. tratamientos" value={plan.cantTratamientos} onChange={handleUpdateCantTratamientos} />
         <NumberValue name="Costo Total" esComputado value={plan.costoTotalPorHectarea} unit="AR$/ha"/>
       </div>
