@@ -26,7 +26,7 @@ export default function InputDolar({ value, onChange, onRefresh }) {
         step="1"
       />
       <button
-        className="p-2 bg-yellow-800 text-white hover:bg-yellow-700"
+        className="p-2 bg-yellow-800 text-white hover:bg-yellow-700 hover:cursor-pointer"
         onClick={onRefresh}
       >
         <RefreshCw />

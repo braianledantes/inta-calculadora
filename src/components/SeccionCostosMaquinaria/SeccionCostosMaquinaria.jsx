@@ -4,6 +4,8 @@ import InputGasoil from "../InputGasoil/InputGasoil.jsx";
 import InputOptions from "../InputOptions/InputOptions.jsx";
 import {useContext} from "react";
 import {AppContext} from "../../context/AppContext.jsx";
+import SectionTitle from "../SectionTitle/SectionTitle.jsx";
+import AddPlanButton from "../AddPlanButton/AddPlanButton.jsx";
 
 export default function SeccionCostosMaquinaria() {
   const {
@@ -39,11 +41,13 @@ export default function SeccionCostosMaquinaria() {
   }
 
   return (
-    <section className="flex flex-col gap-4 p-4">
-      <h2 className="text-lg font-bold">Costos de Maquinaria</h2>
-      <div>
-        <InputDolar value={valorDolar} onChange={updateDolar} onRefresh={refreshDolar}/>
-        <InputGasoil value={valorGasoilina} onChange={updateGasolina}/>
+    <section className="flex flex-col gap-4 p-4 border-1 bg-white">
+      <SectionTitle title="Costos de Maquinaria"/>
+      <div className="flex justify-between flex-wrap gap-2">
+        <div className="flex justify-center items-end gap-4">
+          <InputDolar value={valorDolar} onChange={updateDolar} onRefresh={refreshDolar}/>
+          <InputGasoil value={valorGasoilina} onChange={updateGasolina}/>
+        </div>
         <InputOptions label="Estado Fenológico" options={estadosFenologicos.map(e => e.nombre)}
                       onChange={handleEstadoChange} value={estadoFenologicoMaquinaria.nombre}/>
       </div>
@@ -53,7 +57,9 @@ export default function SeccionCostosMaquinaria() {
                                      onDelete={deletePlan} onUpdate={updatePlan}/>;
         })}
       </div>
-      <button className="p-2 border-1 hover:cursor-pointer" onClick={handleAddPlan}>Agregar Plan</button>
+      <div className="flex justify-end">
+        <AddPlanButton onClick={handleAddPlan}/>
+      </div>
     </section>
   )
 }

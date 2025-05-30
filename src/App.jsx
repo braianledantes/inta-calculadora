@@ -3,14 +3,20 @@ import SeccionCostosMaquinaria from "./components/SeccionCostosMaquinaria/Seccio
 import SeccionCostosFertilizacion from "./components/SeccionCostosFertilizacion/SeccionCostosFertilizacion.jsx";
 import SeccionCostosSanitarios from "./components/SeccionCostosSanitarios/SeccionCostosSanitarios.jsx";
 import {AppProvider} from "./context/AppContext.jsx";
+import Footer from "./components/Footer/Footer.jsx";
 
 function App() {
   return (
     <AppProvider>
       <Header/>
-      <SeccionCostosMaquinaria/>
-      <SeccionCostosFertilizacion/>
-      <SeccionCostosSanitarios/>
+      <main className="flex flex-col gap-4 p-4 bg-amber-50">
+        <div className="container mx-auto p-4 flex flex-col gap-4">
+          <SeccionCostosMaquinaria/>
+          <SeccionCostosFertilizacion/>
+          <SeccionCostosSanitarios/>
+        </div>
+      </main>
+      <Footer />
     </AppProvider>
   )
 }

@@ -3,6 +3,8 @@ import {CardFertilizacionPlan} from "../CardFertilizacionPlan/CardFertilizacionP
 import InputOptions from "../InputOptions/InputOptions.jsx";
 import {useContext} from "react";
 import {AppContext} from "../../context/AppContext.jsx";
+import SectionTitle from "../SectionTitle/SectionTitle.jsx";
+import AddPlanButton from "../AddPlanButton/AddPlanButton.jsx";
 
 export default function SeccionCostosFertilizacion() {
   const {
@@ -35,10 +37,12 @@ export default function SeccionCostosFertilizacion() {
   }
 
   return (
-    <section className="flex flex-col gap-4 p-4">
-      <h2 className="text-lg font-bold">Costos de Fertilización</h2>
-      <div>
-        <InputDolar value={valorDolar} onChange={updateDolar} onRefresh={refreshDolar}/>
+    <section className="flex flex-col gap-4 p-4 border-1 bg-white">
+      <SectionTitle title="Costos de Fertilización"/>
+      <div className="flex justify-between flex-wrap gap-2">
+        <div className="flex justify-center items-end gap-4">
+          <InputDolar value={valorDolar} onChange={updateDolar} onRefresh={refreshDolar}/>
+        </div>
         <InputOptions label="Estado Fenológico" options={estadosFenologicos.map(e => e.nombre)}
                       onChange={handleEstadoChange} value={estadoFenologicoFertilizante.nombre}/>
       </div>
@@ -48,7 +52,7 @@ export default function SeccionCostosFertilizacion() {
                                         onDelete={deletePlan} onUpdate={updatePlan}/>;
         })}
       </div>
-      <button className="p-2 border-1 hover:cursor-pointer" onClick={handleAddPlan}>Agregar Plan</button>
+      <AddPlanButton onClick={handleAddPlan}/>
     </section>
   );
 }
