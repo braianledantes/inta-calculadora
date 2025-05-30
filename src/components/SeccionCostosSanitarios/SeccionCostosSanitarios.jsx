@@ -14,10 +14,13 @@ export default function SeccionCostosSanitarios() {
     addPlan,
     updatePlan,
     deletePlan,
-    estadoFenologico,
-    setEstadoFenologico,
-    estadosFenologicos,
   } = useContext(AppContext).sanitizantes;
+
+  const {
+    estadosFenologicos,
+    estadoFenologicoSanitizante,
+    setEstadoFenologicoSanitizante,
+  } = useContext(AppContext).estadosFenologicos;
 
   const handleAddPlan = () => {
     addPlan();
@@ -27,7 +30,7 @@ export default function SeccionCostosSanitarios() {
     const newEstado = e.target.value;
     const estadoSeleccionado = estadosFenologicos.find(e => e.nombre === newEstado);
     if (estadoSeleccionado) {
-      setEstadoFenologico(estadoSeleccionado);
+      setEstadoFenologicoSanitizante(estadoSeleccionado);
     }
   }
 
@@ -37,7 +40,7 @@ export default function SeccionCostosSanitarios() {
       <div>
         <InputDolar value={valorDolar} onChange={updateDolar} onRefresh={refreshDolar}/>
         <InputOptions label="Estado Fenológico" options={estadosFenologicos.map(e => e.nombre)}
-                      onChange={handleEstadoChange} value={estadoFenologico.nombre}/>
+                      onChange={handleEstadoChange} value={estadoFenologicoSanitizante.nombre}/>
       </div>
       <div className="flex flex-col gap-4">
         {planes.map((plan) => {

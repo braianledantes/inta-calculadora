@@ -1,36 +1,26 @@
-import mookdata from '../mookdata/mookdata.json';
 import {useEffect, useState} from "react";
 import {getDolar} from "../utils/utils.js";
 import {calcularValoresPlanSanitario} from "../services/calculos.js";
+import * as LocalDb from "../data/local.js";
 
 export const useSanitizantes = () => {
   const [valorDolar, setValorDollar] = useState(0);
   const [planes, setPlanes] = useState([]);
-  const [estadosFenologicos, setEstadosFenologicos] = useState([]);
-  const [estadoFenologico, setEstadoFenologico] = useState({
-    numero: -1,
-    nombre: "Sin definir",
-    descripcion: "Seleccione un estado fenológico",
-  });
 
-  const [sanitizantes, setSanitizantes] = useState([]);
+  const [sanitizantes, setSanitizantes] = useState(LocalDb.getSanitizantes());
 
   useEffect(() => {
     const fetchDolar = async () => {
       const valor = await getDolar();
       setValorDollar(valor);
     }
-
-    const fetchData = async () => {
-      setEstadosFenologicos(mookdata.estadosFenologicos);
-      setEstadoFenologico(mookdata.estadosFenologicos[0]);
-      setSanitizantes(mookdata.sanitizantes);
-    }
-
-    fetchData().then();
     fetchDolar().then();
-
   }, []);
+
+  const saveSanitizantes = (s) => {
+    setSanitizantes(s);
+    LocalDb.saveSanitizantes(s);
+  }
 
   const getPlan = (id) => {
     return planes.find((plan) => plan.id === id);
@@ -95,8 +85,6 @@ export const useSanitizantes = () => {
     addPlan,
     updatePlan,
     deletePlan,
-    estadoFenologico,
-    setEstadoFenologico,
-    estadosFenologicos,
+    saveSanitizantes,
   };
 }

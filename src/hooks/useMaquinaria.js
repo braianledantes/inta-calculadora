@@ -1,39 +1,33 @@
-import mookdata from '../mookdata/mookdata.json';
 import {useEffect, useState} from "react";
 import {getDolar} from "../utils/utils.js";
 import {calcularValoresPlanMaquinaria} from "../services/calculos.js";
+import * as LocalDb from "../data/local.js";
 
 export const useMaquinaria = () => {
   const [valorDolar, setValorDollar] = useState(0);
   const [valorGasoilina, setValorGasolina] = useState(0);
   const [planes, setPlanes] = useState([]);
-  const [estadosFenologicos, setEstadosFenologicos] = useState([]);
-  const [estadoFenologico, setEstadoFenologico] = useState({
-    numero: -1,
-    nombre: "Sin definir",
-    descripcion: "Seleccione un estado fenológico",
-  });
 
-  const [tractores, setTractores] = useState([]);
-  const [implementos, setImplementos] = useState([]);
+  const [tractores, setTractores] = useState(LocalDb.getTractores());
+  const [implementos, setImplementos] = useState(LocalDb.getImplementos());
 
   useEffect(() => {
     const fetchDolar = async () => {
       const valor = await getDolar();
       setValorDollar(valor);
     }
-
-    const fetchData = async () => {
-      setTractores(mookdata.tractores);
-      setImplementos(mookdata.implementos);
-      setEstadosFenologicos(mookdata.estadosFenologicos);
-      setEstadoFenologico(mookdata.estadosFenologicos[0]);
-    }
-
-    fetchData().then();
     fetchDolar().then();
-
   }, []);
+
+  const saveTractores = (t) => {
+    setTractores(t);
+    LocalDb.saveTractores(t)
+  }
+
+  const saveImplementos = (i) => {
+    setImplementos(i);
+    LocalDb.saveImplementos(i);
+  }
 
   const getPlane = (id) => {
     return planes.find((plan) => plan.id === id);
@@ -106,8 +100,7 @@ export const useMaquinaria = () => {
     addPlan,
     updatePlan,
     deletePlan,
-    estadoFenologico,
-    setEstadoFenologico,
-    estadosFenologicos,
+    saveTractores,
+    saveImplementos,
   };
 }

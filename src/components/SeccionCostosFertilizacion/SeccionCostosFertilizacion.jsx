@@ -14,10 +14,13 @@ export default function SeccionCostosFertilizacion() {
     addPlan,
     updatePlan,
     deletePlan,
-    estadoFenologico,
-    setEstadoFenologico,
-    estadosFenologicos,
   } = useContext(AppContext).fertilizantes;
+
+  const {
+    estadosFenologicos,
+    estadoFenologicoFertilizante,
+    setEstadoFenologicoFertilizante
+  } = useContext(AppContext).estadosFenologicos;
 
   const handleAddPlan = () => {
     addPlan();
@@ -27,7 +30,7 @@ export default function SeccionCostosFertilizacion() {
     const newEstado = e.target.value;
     const estadoSeleccionado = estadosFenologicos.find(e => e.nombre === newEstado);
     if (estadoSeleccionado) {
-      setEstadoFenologico(estadoSeleccionado);
+      setEstadoFenologicoFertilizante(estadoSeleccionado);
     }
   }
 
@@ -37,7 +40,7 @@ export default function SeccionCostosFertilizacion() {
       <div>
         <InputDolar value={valorDolar} onChange={updateDolar} onRefresh={refreshDolar}/>
         <InputOptions label="Estado Fenológico" options={estadosFenologicos.map(e => e.nombre)}
-                      onChange={handleEstadoChange} value={estadoFenologico.nombre}/>
+                      onChange={handleEstadoChange} value={estadoFenologicoFertilizante.nombre}/>
       </div>
       <div className="flex flex-col gap-4">
         {planes.map((plan) => {

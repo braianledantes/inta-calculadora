@@ -1,4 +1,5 @@
 import sipan from '../../assets/Logos_Header.svg';
+import ImportExcel from "../ImportExcel/ImportExcel.jsx";
 
 const Header = () => {
   return (
@@ -14,12 +15,7 @@ const Header = () => {
 
         {/* Navegación */}
         <nav className="flex flex-col md:flex-row items-center gap-1 text-sm md:text-base font-semibold w-full md:w-auto">
-          <a
-            href="#home"
-            className="w-full text-center md:w-auto px-4 py-3 bg-gradient-to-b from-[#66c7e0] to-[#059fd1] text-white no-underline hover:brightness-110 transition"
-          >
-            Home
-          </a>
+          <ImportExcel />
         </nav>
       </div>
     </header>

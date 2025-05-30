@@ -18,10 +18,13 @@ export default function SeccionCostosMaquinaria() {
     deletePlan,
     tractores,
     implementos,
-    estadoFenologico,
-    setEstadoFenologico,
-    estadosFenologicos,
   } = useContext(AppContext).maquinaria;
+
+  const {
+    estadosFenologicos,
+    estadoFenologicoMaquinaria,
+    setEstadoFenologicoMaquinaria,
+  } = useContext(AppContext).estadosFenologicos;
 
   const handleAddPlan = () => {
     addPlan();
@@ -31,7 +34,7 @@ export default function SeccionCostosMaquinaria() {
     const newEstado = e.target.value;
     const estadoSeleccionado = estadosFenologicos.find(e => e.nombre === newEstado);
     if (estadoSeleccionado) {
-      setEstadoFenologico(estadoSeleccionado);
+      setEstadoFenologicoMaquinaria(estadoSeleccionado);
     }
   }
 
@@ -42,7 +45,7 @@ export default function SeccionCostosMaquinaria() {
         <InputDolar value={valorDolar} onChange={updateDolar} onRefresh={refreshDolar}/>
         <InputGasoil value={valorGasoilina} onChange={updateGasolina}/>
         <InputOptions label="Estado Fenológico" options={estadosFenologicos.map(e => e.nombre)}
-                      onChange={handleEstadoChange} value={estadoFenologico.nombre}/>
+                      onChange={handleEstadoChange} value={estadoFenologicoMaquinaria.nombre}/>
       </div>
       <div className="flex flex-col gap-4">
         {planes.map((plan) => {
