@@ -1,8 +1,9 @@
-import {useMaquinaria} from "../../hooks/useMaquinaria.js";
 import {CardMaquinariaPlan} from "../CardMaquinariaPlan/CardMaquinariaPlan.jsx";
 import InputDolar from "../InputDolar/InputDolar.jsx";
 import InputGasoil from "../InputGasoil/InputGasoil.jsx";
 import InputOptions from "../InputOptions/InputOptions.jsx";
+import {useContext} from "react";
+import {AppContext} from "../../context/AppContext.jsx";
 
 export default function SeccionCostosMaquinaria() {
   const {
@@ -20,7 +21,7 @@ export default function SeccionCostosMaquinaria() {
     estadoFenologico,
     setEstadoFenologico,
     estadosFenologicos,
-  } = useMaquinaria();
+  } = useContext(AppContext).maquinaria;
 
   const handleAddPlan = () => {
     addPlan();
@@ -40,7 +41,8 @@ export default function SeccionCostosMaquinaria() {
       <div>
         <InputDolar value={valorDolar} onChange={updateDolar} onRefresh={refreshDolar}/>
         <InputGasoil value={valorGasoilina} onChange={updateGasolina}/>
-        <InputOptions label="Estado Fenológico" options={estadosFenologicos.map(e => e.nombre)} onChange={handleEstadoChange} value={estadoFenologico.nombre} />
+        <InputOptions label="Estado Fenológico" options={estadosFenologicos.map(e => e.nombre)}
+                      onChange={handleEstadoChange} value={estadoFenologico.nombre}/>
       </div>
       <div className="flex flex-col gap-4">
         {planes.map((plan) => {

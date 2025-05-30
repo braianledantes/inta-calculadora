@@ -1,7 +1,8 @@
 import InputDolar from "../InputDolar/InputDolar.jsx";
 import InputOptions from "../InputOptions/InputOptions.jsx";
-import {useSanitizantes} from "../../hooks/useSanitizantes.js";
 import {CardSanitarioPlan} from "../CardSanitarioPlan/CardSanitarioPlan.jsx";
+import {useContext} from "react";
+import {AppContext} from "../../context/AppContext.jsx";
 
 export default function SeccionCostosSanitarios() {
   const {
@@ -16,7 +17,7 @@ export default function SeccionCostosSanitarios() {
     estadoFenologico,
     setEstadoFenologico,
     estadosFenologicos,
-  } = useSanitizantes();
+  } = useContext(AppContext).sanitizantes;
 
   const handleAddPlan = () => {
     addPlan();
@@ -35,12 +36,13 @@ export default function SeccionCostosSanitarios() {
       <h2 className="text-lg font-bold">Costos Sanitarios</h2>
       <div>
         <InputDolar value={valorDolar} onChange={updateDolar} onRefresh={refreshDolar}/>
-        <InputOptions label="Estado Fenológico" options={estadosFenologicos.map(e => e.nombre)} onChange={handleEstadoChange} value={estadoFenologico.nombre} />
+        <InputOptions label="Estado Fenológico" options={estadosFenologicos.map(e => e.nombre)}
+                      onChange={handleEstadoChange} value={estadoFenologico.nombre}/>
       </div>
       <div className="flex flex-col gap-4">
         {planes.map((plan) => {
           return <CardSanitarioPlan key={plan.id} plan={plan} sanitizantes={sanitizantes}
-                                        onDelete={deletePlan} onUpdate={updatePlan}/>;
+                                    onDelete={deletePlan} onUpdate={updatePlan}/>;
         })}
       </div>
       <button className="p-2 border-1 hover:cursor-pointer" onClick={handleAddPlan}>Agregar Plan</button>
