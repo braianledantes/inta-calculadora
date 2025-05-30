@@ -9,7 +9,7 @@ export default function InputNumber({name, value, onChange}) {
       <label className="flex">
         {name}
       </label>
-      <input className="bg-gray-100 p-2 border rounded-md w-full"
+      <input className="bg-blue-100 p-2 border rounded-md w-full"
              type="number"
              value={value}
              onChange={handleChange}

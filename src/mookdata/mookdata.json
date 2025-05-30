@@ -65,18 +65,18 @@
       "nombre": "Aceite Mineral",
       "precioEnvaseDolar": 1.50,
       "volumenEnvase": 1,
-      "unidadVolumenEnvase": "litro",
+      "unidadVolumenEnvase": "lt",
       "dosisAplicacion": 0.5,
-      "unidadDosisAplicacion": "litro"
+      "unidadDosisAplicacion": "lt"
     },
     {
       "numero": 2,
       "nombre": "Aceite de Pino",
       "precioEnvaseDolar": 2.00,
       "volumenEnvase": 1,
-      "unidadVolumenEnvase": "litro",
+      "unidadVolumenEnvase": "lt",
       "dosisAplicacion": 0.5,
-      "unidadDosisAplicacion": "litro"
+      "unidadDosisAplicacion": "lt"
     }
   ],
   "estadosFenologicos": [

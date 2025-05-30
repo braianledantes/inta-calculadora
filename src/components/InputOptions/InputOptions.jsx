@@ -5,7 +5,7 @@ export default function InputOptions({label, value,  options, onChange}) {
         {label}
       </label>
       <select
-        className="bg-gray-100 p-2 border rounded-md w-full"
+        className="bg-blue-100 p-2 border rounded-md w-full"
         value={value}
         onChange={onChange}
       >

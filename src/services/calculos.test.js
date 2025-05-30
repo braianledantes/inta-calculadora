@@ -1,6 +1,10 @@
 import test from 'node:test';
 import { describe, it } from 'node:test';
-import {calcularValoresPlanFertilizante, calcularValoresPlanMaquinaria} from "./calculos.js";
+import {
+  calcularValoresPlanFertilizante,
+  calcularValoresPlanMaquinaria,
+  calcularValoresPlanSanitario
+} from "./calculos.js";
 import * as assert from "node:assert";
 
 const valorDolar = 1050;
@@ -78,4 +82,46 @@ describe('calcularValoresPlanFertilizante', () => {
     assert.equal(result.costoTotalPorTratamiento, 135450, "Costo total por tratamiento incorrecto");
     assert.equal(result.costoTotalPorHectarea, 270900, "Costo total por hectárea incorrecto");
   });
+});
+
+describe('calcularValoresPlanSanitario', () => {
+  it('primer sanitizante', () => {
+    const sanitizante = {
+      numero: 1,
+      nombre: "Aceite de Verano",
+      precioEnvaseDolar: 2,
+      volumenEnvase: 1,
+      unidadVolumenEnvase: "L",
+      dosisAplicacion: 0.25,
+      unidadDosisAplicacion: "L"
+    };
+    const volumenPorHectarea = 20;
+    const cantTratamientos = 1;
+    const result = calcularValoresPlanSanitario(sanitizante, volumenPorHectarea, cantTratamientos, valorDolar);
+
+    // verifica los calculos del sanitizante
+    assert.equal(result.cantidadPorHectarea, 5, "Cantidad por hectárea incorrecta");
+    assert.equal(result.costoTotalPorTratamiento, 10500, "Costo total por tratamiento incorrecto");
+    assert.equal(result.costoTotalPorHectarea, 10500, "Costo total por hectárea incorrecto");
+  });
+  it('segundo sanitizante', () => {
+    const sanitizante = {
+      numero: 2,
+      nombre: "Abamectina",
+      precioEnvaseDolar: 168,
+      volumenEnvase: 1,
+      unidadVolumenEnvase: "L",
+      dosisAplicacion: 0.05,
+      unidadDosisAplicacion: "L"
+    };
+    const volumenPorHectarea = 20;
+    const cantTratamientos = 2;
+    const result = calcularValoresPlanSanitario(sanitizante, volumenPorHectarea, cantTratamientos, valorDolar);
+
+    // verifica los calculos del sanitizante
+    assert.equal(result.cantidadPorHectarea, 1, "Cantidad por hectárea incorrecta");
+    assert.equal(result.costoTotalPorTratamiento, 176400, "Costo total por tratamiento incorrecto");
+    assert.equal(result.costoTotalPorHectarea, 352800, "Costo total por hectárea incorrecto");
+  });
+
 });

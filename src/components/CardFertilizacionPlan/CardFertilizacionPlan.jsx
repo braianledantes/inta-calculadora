@@ -28,7 +28,7 @@ export function CardFertilizacionPlan({plan, fertilizantes, onUpdate, onDelete})
       </div>
       <div className="flex flex-row gap-4 flex-wrap mb-4">
         <InputOptions
-          label="Tractor:"
+          label="Principio Activo:"
           value={plan.fertilizante.nombre}
           options={fertilizantes.map(t => t.nombre)}
           onChange={handleUpdateFertilizante}
