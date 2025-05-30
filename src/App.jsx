@@ -1,10 +1,12 @@
 import SeccionCostosMaquinaria from "./components/SeccionCostosMaquinaria/SeccionCostosMaquinaria.jsx";
+import Header from "./components/Header/Header.jsx";
 
 function App() {
   return (
     <>
-      <h1>Welcome to My App</h1>
+      <Header/>
       <SeccionCostosMaquinaria/>
+
     </>
   )
 }
