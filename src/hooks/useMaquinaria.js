@@ -7,6 +7,12 @@ export const useMaquinaria = () => {
   const [valorDolar, setValorDollar] = useState(0);
   const [valorGasoilina, setValorGasolina] = useState(0);
   const [planes, setPlanes] = useState([]);
+  const [estadosFenologicos, setEstadosFenologicos] = useState([]);
+  const [estadoFenologico, setEstadoFenologico] = useState({
+    numero: -1,
+    nombre: "Sin definir",
+    descripcion: "Seleccione un estado fenológico",
+  });
 
   const [tractores, setTractores] = useState([]);
   const [implementos, setImplementos] = useState([]);
@@ -20,6 +26,8 @@ export const useMaquinaria = () => {
     const fetchData = async () => {
       setTractores(mookdata.tractores);
       setImplementos(mookdata.implementos);
+      setEstadosFenologicos(mookdata.estadosFenologicos);
+      setEstadoFenologico(mookdata.estadosFenologicos[0]);
     }
 
     fetchData().then();
@@ -97,6 +105,9 @@ export const useMaquinaria = () => {
     getPlane,
     addPlan,
     updatePlan,
-    deletePlan
+    deletePlan,
+    estadoFenologico,
+    setEstadoFenologico,
+    estadosFenologicos,
   };
 }

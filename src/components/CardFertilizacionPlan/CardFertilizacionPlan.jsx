@@ -3,7 +3,7 @@ import InputOptions from "../InputOptions/InputOptions.jsx";
 import NumberValue from "../NumberValue/NumberValue.jsx";
 import InputNumber from "../InputNumber/InputNumber.jsx";
 
-export function CardMaquinariaPlan({plan, fertilizantes, onUpdate, onDelete}) {
+export function CardFertilizacionPlan({plan, fertilizantes, onUpdate, onDelete}) {
 
   const handleDelete = () => {
     onDelete(plan.id);
@@ -15,9 +15,8 @@ export function CardMaquinariaPlan({plan, fertilizantes, onUpdate, onDelete}) {
     onUpdate(plan.id, fertilizante, plan.cantTratamientos);
   }
 
-  const handleUpdateCantTratamientos = (e) => {
-    const cantTratamientos = parseFloat(e.target.value);
-    if (isNaN(cantTratamientos)) return;
+  const handleUpdateCantTratamientos = (valor) => {
+    const cantTratamientos = parseFloat(valor);
     onUpdate(plan.id, plan.fertilizante, cantTratamientos);
   }
 
@@ -38,9 +37,9 @@ export function CardMaquinariaPlan({plan, fertilizantes, onUpdate, onDelete}) {
         <NumberValue name="Precio" value={plan.fertilizante.precioEnvaseDolar} unit="US$"/>
         <NumberValue name="Dosis por ha" value={plan.fertilizante.dosisAplicacion} unit={plan.fertilizante.unidadDosisAplicacion}
                      formated={false}/>
-        <NumberValue name="Costo tratamiento" esComputado value={plan.costoTotalTratamiento} unit="AR$/tratamiento"/>
-        <InputNumber name="Cant. tratamientos" value={plan.amortizacionTractor} onChange={handleUpdateCantTratamientos} />
-        <NumberValue name="Costo Total" esComputado value={plan.costoTotal} unit="AR$/ha"/>
+        <NumberValue name="Costo tratamiento" esComputado value={plan.costoTotalPorTratamiento} unit="AR$/tratamiento"/>
+        <InputNumber name="Cant. tratamientos" value={plan.cantTratamientos} onChange={handleUpdateCantTratamientos} />
+        <NumberValue name="Costo Total" esComputado value={plan.costoTotalPorHectarea} unit="AR$/ha"/>
       </div>
 
     </div>

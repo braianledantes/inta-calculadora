@@ -6,6 +6,12 @@ import {calcularValoresPlanFertilizante} from "../services/calculos.js";
 export const useFertilizante = () => {
   const [valorDolar, setValorDollar] = useState(0);
   const [planes, setPlanes] = useState([]);
+  const [estadosFenologicos, setEstadosFenologicos] = useState([]);
+  const [estadoFenologico, setEstadoFenologico] = useState({
+    numero: -1,
+    nombre: "Sin definir",
+    descripcion: "Seleccione un estado fenológico",
+  });
 
   const [fertilizantes, setFertilizantes] = useState([]);
 
@@ -16,6 +22,8 @@ export const useFertilizante = () => {
     }
 
     const fetchData = async () => {
+      setEstadosFenologicos(mookdata.estadosFenologicos);
+      setEstadoFenologico(mookdata.estadosFenologicos[0]);
       setFertilizantes(mookdata.fertilizantes);
     }
 
@@ -83,6 +91,9 @@ export const useFertilizante = () => {
     getPlan,
     addPlan,
     updatePlan,
-    deletePlan
+    deletePlan,
+    estadoFenologico,
+    setEstadoFenologico,
+    estadosFenologicos,
   };
 }

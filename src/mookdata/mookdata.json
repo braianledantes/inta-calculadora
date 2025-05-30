@@ -78,5 +78,32 @@
       "dosisAplicacion": 0.5,
       "unidadDosisAplicacion": "litro"
     }
+  ],
+  "estadosFenologicos": [
+    {
+      "numero": 1,
+      "nombre": "Germinación",
+      "descripcion": "Inicio del desarrollo de la planta a partir de la semilla."
+    },
+    {
+      "numero": 2,
+      "nombre": "Plántula",
+      "descripcion": "Etapa temprana de crecimiento donde la planta desarrolla sus primeras hojas."
+    },
+    {
+      "numero": 3,
+      "nombre": "Vegetativo",
+      "descripcion": "Fase de crecimiento activo donde la planta desarrolla tallos y hojas."
+    },
+    {
+      "numero": 4,
+      "nombre": "Floración",
+      "descripcion": "Etapa en la que la planta produce flores."
+    },
+    {
+      "numero": 5,
+      "nombre": "Fructificación",
+      "descripcion": "Fase en la que se desarrollan los frutos a partir de las flores."
+    }
   ]
 }

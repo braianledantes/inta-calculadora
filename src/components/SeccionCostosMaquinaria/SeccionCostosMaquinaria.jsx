@@ -2,6 +2,7 @@ import {useMaquinaria} from "../../hooks/useMaquinaria.js";
 import {CardMaquinariaPlan} from "../CardMaquinariaPlan/CardMaquinariaPlan.jsx";
 import InputDolar from "../InputDolar/InputDolar.jsx";
 import InputGasoil from "../InputGasoil/InputGasoil.jsx";
+import InputOptions from "../InputOptions/InputOptions.jsx";
 
 export default function SeccionCostosMaquinaria() {
   const {
@@ -15,11 +16,22 @@ export default function SeccionCostosMaquinaria() {
     updatePlan,
     deletePlan,
     tractores,
-    implementos
+    implementos,
+    estadoFenologico,
+    setEstadoFenologico,
+    estadosFenologicos,
   } = useMaquinaria();
 
   const handleAddPlan = () => {
     addPlan();
+  }
+
+  const handleEstadoChange = (e) => {
+    const newEstado = e.target.value;
+    const estadoSeleccionado = estadosFenologicos.find(e => e.nombre === newEstado);
+    if (estadoSeleccionado) {
+      setEstadoFenologico(estadoSeleccionado);
+    }
   }
 
   return (
@@ -28,6 +40,7 @@ export default function SeccionCostosMaquinaria() {
       <div>
         <InputDolar value={valorDolar} onChange={updateDolar} onRefresh={refreshDolar}/>
         <InputGasoil value={valorGasoilina} onChange={updateGasolina}/>
+        <InputOptions label="Estado Fenológico" options={estadosFenologicos.map(e => e.nombre)} onChange={handleEstadoChange} value={estadoFenologico.nombre} />
       </div>
       <div className="flex flex-col gap-4">
         {planes.map((plan) => {
