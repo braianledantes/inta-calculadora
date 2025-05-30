@@ -1,5 +1,6 @@
 import test from 'node:test';
-import {calcularValoresPlan} from "./calculos.js";
+import { describe, it } from 'node:test';
+import {calcularValoresPlanFertilizante, calcularValoresPlanMaquinaria} from "./calculos.js";
 import * as assert from "node:assert";
 
 const valorDolar = 1050;
@@ -26,7 +27,7 @@ test('calcularValoresPlan', () => {
     consumoCombustible: 0.14
   };
 
-  const result = calcularValoresPlan(tractor, implemento, valorDolar, valorGasoilina);
+  const result = calcularValoresPlanMaquinaria(tractor, implemento, valorDolar, valorGasoilina);
 
   // verifica los calculos del tractor
   assert.equal(result.amortizacionTractor, 3800, "Amortización del tractor incorrecta");
@@ -39,4 +40,42 @@ test('calcularValoresPlan', () => {
   // verifica el costo economico total
   assert.equal(result.costoEconomico, 20090, "Costo económico total incorrecto");
 
+});
+
+describe('calcularValoresPlanFertilizante', () => {
+  it('primer fertilizante ', () => {
+    const fertilizante = {
+      numero: 1,
+      nombre: "Sulfonitrato",
+      precioEnvaseDolar: 1.2,
+      volumenEnvase: 1,
+      unidadVolumenEnvase: "kg",
+      dosisAplicacion: 60,
+      unidadDosisAplicacion: "kg"
+    };
+    const cantTratamientos = 1;
+    const result = calcularValoresPlanFertilizante(fertilizante, cantTratamientos, valorDolar);
+
+    // verifica los calculos del fertilizante
+    assert.equal(result.costoTotalPorTratamiento, 75600, "Costo total por tratamiento incorrecto");
+    assert.equal(result.costoTotalPorHectarea, 75600, "Costo total por hectárea incorrecto");
+  });
+
+  it('segundo fertilizante ', () => {
+    const fertilizante = {
+      numero: 1,
+      nombre: "Triple 15",
+      precioEnvaseDolar: 0.86,
+      volumenEnvase: 1,
+      unidadVolumenEnvase: "kg",
+      dosisAplicacion: 150,
+      unidadDosisAplicacion: "kg"
+    };
+    const cantTratamientos = 2;
+    const result = calcularValoresPlanFertilizante(fertilizante, cantTratamientos, valorDolar);
+
+    // verifica los calculos del fertilizante
+    assert.equal(result.costoTotalPorTratamiento, 135450, "Costo total por tratamiento incorrecto");
+    assert.equal(result.costoTotalPorHectarea, 270900, "Costo total por hectárea incorrecto");
+  });
 });

@@ -1,0 +1,82 @@
+{
+  "tractores": [
+    {
+      "id": 1,
+      "nombre": "Tractor 60 CV",
+      "precioDolar": 54286,
+      "gastoMantenimiento": 0.00007,
+      "horasVidaUtil": 12000,
+      "porcentajeValorResidual": 20,
+      "potencia": 60
+    },
+    {
+      "id": 2,
+      "nombre": "Tractor 2",
+      "precioDolar": 82875,
+      "gastoMantenimiento": 0.00004,
+      "horasVidaUtil": 12000,
+      "porcentajeValorResidual": 20,
+      "potencia": 80
+    }
+  ],
+  "implementos": [
+    {
+      "id": 1,
+      "nombre": "Acoplado Metálico",
+      "precioDolar": 5714,
+      "gastoMantenimiento": 0.0004,
+      "horasVidaUtil": 5000,
+      "porcentajeValorResidual": 10,
+      "consumoCombustible": 0.14
+    },
+    {
+      "id": 2,
+      "nombre": "Aporcador",
+      "precioDolar": 2321,
+      "gastoMantenimiento": 0.00025,
+      "horasVidaUtil": 4000,
+      "porcentajeValorResidual": 10,
+      "consumoCombustible": 0.11
+    }
+  ],
+  "fertilizantes": [
+    {
+      "numero": 1,
+      "nombre": "Acido borico",
+      "precioEnvaseDolar": 2.46,
+      "volumenEnvase": 1,
+      "unidadVolumenEnvase": "kg",
+      "dosisAplicacion": 0.5,
+      "unidadDosisAplicacion": "kg"
+    },
+    {
+      "numero": 2,
+      "nombre": "Acido fosforico",
+      "precioEnvaseDolar": 3.50,
+      "volumenEnvase": 1,
+      "unidadVolumenEnvase": "kg",
+      "dosisAplicacion": 0.5,
+      "unidadDosisAplicacion": "kg"
+    }
+  ],
+  "sanitizantes": [
+    {
+      "numero": 1,
+      "nombre": "Aceite Mineral",
+      "precioEnvaseDolar": 1.50,
+      "volumenEnvase": 1,
+      "unidadVolumenEnvase": "litro",
+      "dosisAplicacion": 0.5,
+      "unidadDosisAplicacion": "litro"
+    },
+    {
+      "numero": 2,
+      "nombre": "Aceite de Pino",
+      "precioEnvaseDolar": 2.00,
+      "volumenEnvase": 1,
+      "unidadVolumenEnvase": "litro",
+      "dosisAplicacion": 0.5,
+      "unidadDosisAplicacion": "litro"
+    }
+  ]
+}
