@@ -41,7 +41,7 @@ export default function SeccionCostosMaquinaria() {
   }
 
   return (
-    <section className="flex flex-col gap-4 p-4 border-1 bg-white">
+    <section className="flex flex-col gap-4 p-4 border-1 bg-red-50">
       <SectionTitle title="Costos de Maquinaria"/>
       <div className="flex justify-between flex-wrap gap-2">
         <div className="flex justify-center items-end gap-4">

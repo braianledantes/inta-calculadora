@@ -24,7 +24,7 @@ export function CardMaquinariaPlan({plan, tractores, implementos, onUpdate, onDe
   return (
     <div className="p-4 border rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
       <div className="flex items-center justify-between mb-4">
-        <PlanTitle title={`Plan ${plan.id}`} />
+        <PlanTitle title={`Plan ${plan.id}`}/>
         <DeleteBotton onDelete={handleDelete}/>
       </div>
       <div className="flex flex-row gap-4 flex-wrap mb-4">
@@ -35,15 +35,15 @@ export function CardMaquinariaPlan({plan, tractores, implementos, onUpdate, onDe
           onChange={handleUpdateTractor}
         />
 
-        <NumberValue name="Potencia" value={plan.tractor.potencia} unit="HP" />
-        <NumberValue name="Precio" value={plan.tractor.precioDolar} unit="US$" />
-        <NumberValue name="Gasto conservación coeficiente" value={plan.tractor.gastoMantenimiento} />
-        <NumberValue name="Horas útiles" value={plan.tractor.horasVidaUtil} unit="h" />
-        <NumberValue name="Valor residual" value={plan.tractor.porcentajeValorResidual} unit="%" />
-        <NumberValue name="Amortización" esComputado value={plan.amortizacionTractor} unit="AR$/h" />
-        <NumberValue name="Gasto conservación" esComputado value={plan.gastoConservacionTractor} unit="AR$/h" />
+        <NumberValue name="Potencia" value={plan.tractor.potencia} unit="HP"/>
+        <NumberValue name="Precio" value={plan.tractor.precioDolar} unit="US$"/>
+        <NumberValue name="Gasto conservación coeficiente" value={plan.tractor.gastoMantenimiento}/>
+        <NumberValue name="Horas útiles" value={plan.tractor.horasVidaUtil} unit="h"/>
+        <NumberValue name="Valor residual" value={plan.tractor.porcentajeValorResidual} unit="%"/>
+        <NumberValue name="Amortización" esComputado value={plan.amortizacionTractor} unit="AR$/h"/>
+        <NumberValue name="Gasto conservación" esComputado value={plan.gastoConservacionTractor} unit="AR$/h"/>
       </div>
-      <div className="flex flex-wrap items-center gap-3 mb-4">
+      <div className="flex flex-wrap items-center gap-3 mb-4 border-t pt-3">
         <InputOptions
           label="Implemento:"
           value={plan.implemento.nombre}
@@ -51,16 +51,18 @@ export function CardMaquinariaPlan({plan, tractores, implementos, onUpdate, onDe
           onChange={handleUpdateImplemento}
         />
 
-        <NumberValue name="Precio" value={plan.implemento.precioDolar} unit="US$" />
-        <NumberValue name="Gasto conservación coeficiente" value={plan.implemento.gastoMantenimiento} />
-        <NumberValue name="Horas útiles" value={plan.implemento.horasVidaUtil} unit="h" />
-        <NumberValue name="Valor residual" value={plan.implemento.porcentajeValorResidual} unit="%" />
-        <NumberValue name="Consumo combustible" value={plan.implemento.consumoCombustible} unit="lt/h" />
-        <NumberValue name="Amortización" esComputado value={plan.amortizacionImplemento} unit="AR$" />
-        <NumberValue name="Costo combustible" esComputado value={plan.costoCombustibleImplemento} unit="AR$/h" />
-        <NumberValue name="Gasto conservación" esComputado value={plan.gastoConservacionImplemento} unit="AR$/h" />
+        <NumberValue name="Precio" value={plan.implemento.precioDolar} unit="US$"/>
+        <NumberValue name="Gasto conservación coeficiente" value={plan.implemento.gastoMantenimiento}/>
+        <NumberValue name="Horas útiles" value={plan.implemento.horasVidaUtil} unit="h"/>
+        <NumberValue name="Valor residual" value={plan.implemento.porcentajeValorResidual} unit="%"/>
+        <NumberValue name="Consumo combustible" value={plan.implemento.consumoCombustible} unit="lt/h"/>
+        <NumberValue name="Amortización" esComputado value={plan.amortizacionImplemento} unit="AR$"/>
+        <NumberValue name="Costo combustible" esComputado value={plan.costoCombustibleImplemento} unit="AR$/h"/>
+        <NumberValue name="Gasto conservación" esComputado value={plan.gastoConservacionImplemento} unit="AR$/h"/>
       </div>
-      <NumberValue name="Costo Total" esComputado value={plan.costoEconomico} unit="AR$/h" />
+      <div className="flex flex-wrap justify-end items-center gap-3 mb-4 border-t  pt-3">
+        <NumberValue name="Costo Total" esComputado value={plan.costoEconomico} unit="AR$/h"/>
+      </div>
     </div>
   )
 }
