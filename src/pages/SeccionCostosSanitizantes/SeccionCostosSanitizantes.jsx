@@ -1,10 +1,10 @@
-import InputDolar from "../InputDolar/InputDolar.jsx";
-import {CardSanitizantePlan} from "../CardSanitizantePlan/CardSanitizantePlan.jsx";
+import InputDolar from "../../components/InputDolar/InputDolar.jsx";
+import {CardSanitizantePlan} from "../../components/CardSanitizantePlan/CardSanitizantePlan.jsx";
 import {useContext} from "react";
 import {AppContext} from "../../context/AppContext.jsx";
-import AddPlanButton from "../AddPlanButton/AddPlanButton.jsx";
-import SectionTitle from "../SectionTitle/SectionTitle.jsx";
-import SelectorEstadoFenologico from "../SelectorEstadoFenologico/SelectorEstadoFenologico.jsx";
+import AddPlanButton from "../../components/AddPlanButton/AddPlanButton.jsx";
+import SectionTitle from "../../components/SectionTitle/SectionTitle.jsx";
+import SelectorEstadoFenologico from "../../components/SelectorEstadoFenologico/SelectorEstadoFenologico.jsx";
 
 export default function SeccionCostosSanitizantes() {
   const {

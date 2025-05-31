@@ -1,12 +1,12 @@
-import {CardMaquinariaPlan} from "../CardMaquinariaPlan/CardMaquinariaPlan.jsx";
-import InputDolar from "../InputDolar/InputDolar.jsx";
-import InputGasoil from "../InputGasoil/InputGasoil.jsx";
-import InputOptions from "../InputOptions/InputOptions.jsx";
+import {CardMaquinariaPlan} from "../../components/CardMaquinariaPlan/CardMaquinariaPlan.jsx";
+import InputDolar from "../../components/InputDolar/InputDolar.jsx";
+import InputGasoil from "../../components/InputGasoil/InputGasoil.jsx";
+import InputOptions from "../../components/InputOptions/InputOptions.jsx";
 import {useContext} from "react";
 import {AppContext} from "../../context/AppContext.jsx";
-import SectionTitle from "../SectionTitle/SectionTitle.jsx";
-import AddPlanButton from "../AddPlanButton/AddPlanButton.jsx";
-import SelectorEstadoFenologico from "../SelectorEstadoFenologico/SelectorEstadoFenologico.jsx";
+import SectionTitle from "../../components/SectionTitle/SectionTitle.jsx";
+import AddPlanButton from "../../components/AddPlanButton/AddPlanButton.jsx";
+import SelectorEstadoFenologico from "../../components/SelectorEstadoFenologico/SelectorEstadoFenologico.jsx";
 
 export default function SeccionCostosMaquinaria() {
   const {

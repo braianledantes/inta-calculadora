@@ -1,10 +1,11 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router";
 import Header from "./components/Header/Header.jsx";
-import SeccionCostosMaquinaria from "./components/SeccionCostosMaquinaria/SeccionCostosMaquinaria.jsx";
-import SeccionCostosFertilizacion from "./components/SeccionCostosFertilizacion/SeccionCostosFertilizacion.jsx";
-import SeccionCostosSanitizantes from "./components/SeccionCostosSanitizantes/SeccionCostosSanitizantes.jsx";
+import SeccionCostosMaquinaria from "./pages/SeccionCostosMaquinaria/SeccionCostosMaquinaria.jsx";
+import SeccionCostosFertilizacion from "./pages/SeccionCostosFertilizacion/SeccionCostosFertilizacion.jsx";
+import SeccionCostosSanitizantes from "./pages/SeccionCostosSanitizantes/SeccionCostosSanitizantes.jsx";
 import { AppProvider } from "./context/AppContext.jsx";
 import Footer from "./components/Footer/Footer.jsx";
+import PageNotFound from "./pages/PageNotFound/PageNotFound.jsx";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
               <Route path="/maquinaria" element={<SeccionCostosMaquinaria />} />
               <Route path="/fertilizacion" element={<SeccionCostosFertilizacion />} />
               <Route path="/sanitizantes" element={<SeccionCostosSanitizantes />} />
+              <Route path="*" element={<PageNotFound />} />
             </Routes>
           </div>
         </main>
