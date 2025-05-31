@@ -6,6 +6,7 @@ import {useContext} from "react";
 import {AppContext} from "../../context/AppContext.jsx";
 import SectionTitle from "../SectionTitle/SectionTitle.jsx";
 import AddPlanButton from "../AddPlanButton/AddPlanButton.jsx";
+import SelectorEstadoFenologico from "../SelectorEstadoFenologico/SelectorEstadoFenologico.jsx";
 
 export default function SeccionCostosMaquinaria() {
   const {
@@ -32,14 +33,6 @@ export default function SeccionCostosMaquinaria() {
     addPlan();
   }
 
-  const handleEstadoChange = (e) => {
-    const newEstado = e.target.value;
-    const estadoSeleccionado = estadosFenologicos.find(e => e.nombre === newEstado);
-    if (estadoSeleccionado) {
-      setEstadoFenologicoMaquinaria(estadoSeleccionado);
-    }
-  }
-
   return (
     <div className="bg-gray-100 p-8 my-4">
       <SectionTitle title="🔧 Costos de Maquinaria"/>
@@ -47,11 +40,10 @@ export default function SeccionCostosMaquinaria() {
       <div className="flex flex-wrap justify-center items-center gap-6 mb-8">
         <InputDolar value={valorDolar} onChange={updateDolar} onRefresh={refreshDolar}/>
         <InputGasoil value={valorGasoilina} onChange={updateGasolina}/>
-        <InputOptions
-          label="Estado fenológico"
-          value={estadoFenologicoMaquinaria?.nombre || ""}
-          options={estadosFenologicos.map(e => e.nombre)}
-          onChange={handleEstadoChange}
+        <SelectorEstadoFenologico
+          estados={estadosFenologicos}
+          estadoSeleccionado={estadoFenologicoMaquinaria}
+          setEstadoSeleccionado={setEstadoFenologicoMaquinaria}
         />
       </div>
 

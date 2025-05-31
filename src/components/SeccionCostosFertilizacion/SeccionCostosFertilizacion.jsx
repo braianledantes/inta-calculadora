@@ -5,6 +5,7 @@ import {useContext} from "react";
 import {AppContext} from "../../context/AppContext.jsx";
 import SectionTitle from "../SectionTitle/SectionTitle.jsx";
 import AddPlanButton from "../AddPlanButton/AddPlanButton.jsx";
+import SelectorEstadoFenologico from "../SelectorEstadoFenologico/SelectorEstadoFenologico.jsx";
 
 export default function SeccionCostosFertilizacion() {
   const {
@@ -28,25 +29,16 @@ export default function SeccionCostosFertilizacion() {
     addPlan();
   }
 
-  const handleEstadoChange = (e) => {
-    const newEstado = e.target.value;
-    const estadoSeleccionado = estadosFenologicos.find(e => e.nombre === newEstado);
-    if (estadoSeleccionado) {
-      setEstadoFenologicoFertilizante(estadoSeleccionado);
-    }
-  }
-
   return (
     <div className="bg-gray-100 p-8 my-4">
       <SectionTitle title="🌱 Costos de Fertilización"/>
 
       <div className="flex flex-wrap justify-center items-center gap-6 mb-8">
         <InputDolar value={valorDolar} onChange={updateDolar} onRefresh={refreshDolar}/>
-        <InputOptions
-          label="Estado fenológico"
-          value={estadoFenologicoFertilizante?.nombre || ""}
-          options={estadosFenologicos.map(e => e.nombre)}
-          onChange={handleEstadoChange}
+        <SelectorEstadoFenologico
+          estados={estadosFenologicos}
+          estadoSeleccionado={estadoFenologicoFertilizante}
+          setEstadoSeleccionado={setEstadoFenologicoFertilizante}
         />
       </div>
 
