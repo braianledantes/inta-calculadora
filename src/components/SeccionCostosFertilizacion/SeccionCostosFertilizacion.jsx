@@ -55,7 +55,7 @@ export default function SeccionCostosFertilizacion() {
                                onDelete={deletePlan} onUpdate={updatePlan}/>
       ))}
 
-      <AddPlanButton onClick={handleAddPlan}/>
+      <AddPlanButton text="Agregar nuevo plan de fertilización" onClick={handleAddPlan}/>
     </div>
   );
 }

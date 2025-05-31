@@ -55,7 +55,7 @@ export default function SeccionCostosSanitizantes() {
                              onDelete={deletePlan} onUpdate={updatePlan}/>
       ))}
 
-      <AddPlanButton onClick={handleAddPlan}/>
+      <AddPlanButton text="Agregar nuevo plan de sanitización" onClick={handleAddPlan}/>
     </div>
   );
 }

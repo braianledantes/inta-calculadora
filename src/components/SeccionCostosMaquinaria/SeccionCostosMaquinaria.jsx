@@ -60,7 +60,7 @@ export default function SeccionCostosMaquinaria() {
                             onDelete={deletePlan} onUpdate={updatePlan}/>
       ))}
 
-      <AddPlanButton onClick={handleAddPlan}/>
+      <AddPlanButton text="Agregar nuevo plan de maquinaria" onClick={handleAddPlan}/>
     </div>
   )
 }
