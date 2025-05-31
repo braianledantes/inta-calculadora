@@ -37,7 +37,7 @@ export default function SeccionCostosFertilizacion() {
   }
 
   return (
-    <section className="flex flex-col gap-4 p-4 border-1 bg-green-50">
+    <section className="flex flex-col gap-4 p-4">
       <SectionTitle title="Costos de Fertilización"/>
       <div className="flex justify-between flex-wrap gap-2">
         <div className="flex justify-center items-end gap-4">

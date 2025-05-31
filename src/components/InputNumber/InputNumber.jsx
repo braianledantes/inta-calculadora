@@ -5,11 +5,11 @@ export default function InputNumber({name, value, onChange}) {
   };
 
   return (
-    <div>
+    <div className="block text-sm font-medium">
       <label className="flex">
         {name}
       </label>
-      <input className="bg-blue-100 p-2 border rounded-md w-full"
+      <input className="w-full p-2 border border-gray-300 rounded-md"
              type="number"
              value={value}
              onChange={handleChange}

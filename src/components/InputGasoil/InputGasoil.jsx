@@ -8,21 +8,16 @@ export default function InputGasoil({value, onChange}) {
   }
 
   return (
-    <div className="flex gap-1 border rounded bg-yellow-100 text-yellow-800">
-      <label className="p-2 font-semibold text-yellow-800 border-r-1 border-yellow-800 w-full text-right">
-        Valor del Gasoil
-      </label>
-      <label className="p-2">
-        AR$
-      </label>
+    <div className="bg-white shadow-md rounded-lg p-4">
+      <label className="block text-sm font-medium text-gray-700 mb-1">⛽ Valor del Gasoil</label>
       <input
-        className="flex w-full p-2 bg-yellow-100 text-yellow-800 self-start"
         type="number"
         value={value}
         onChange={handleChange}
         min="0"
-        step="1"
-      />
+        className="w-32 p-2 border border-gray-300 rounded-md"
+      />{' '}
+      ARS
     </div>
   );
 }

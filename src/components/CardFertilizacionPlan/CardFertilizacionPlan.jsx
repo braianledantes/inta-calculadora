@@ -1,4 +1,4 @@
-import DeleteBotton from "../DeleteButton/DeleteButton.jsx";
+import DeleteButton from "../DeleteButton/DeleteButton.jsx";
 import InputOptions from "../InputOptions/InputOptions.jsx";
 import NumberValue from "../NumberValue/NumberValue.jsx";
 import InputNumber from "../InputNumber/InputNumber.jsx";
@@ -22,10 +22,10 @@ export function CardFertilizacionPlan({plan, fertilizantes, onUpdate, onDelete})
   }
 
   return (
-    <div className="p-4 border rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+    <div className="bg-white p-4 border rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
       <div className="flex items-center justify-between mb-4">
         <PlanTitle title={`Plan ${plan.id}`} />
-        <DeleteBotton onDelete={handleDelete}/>
+        <DeleteButton onDelete={handleDelete}/>
       </div>
       <div className="flex flex-row gap-4 flex-wrap mb-4">
         <InputOptions

@@ -1,36 +1,35 @@
-import {RefreshCw} from "lucide-react";
+import {RefreshCcw} from "lucide-react";
 
 export default function InputDolar({ value, onChange, onRefresh }) {
 
-  const handleChange = (event) => {
-    const newValue = parseFloat(event.target.value);
-    if (!isNaN(newValue)) {
-      onChange(newValue);
-    }
-  }
+        const handleChange = (event) => {
+          const newValue = parseFloat(event.target.value);
+          if (!isNaN(newValue)) {
+            onChange(newValue);
+          }
+        }
 
-  return (
-    <div className="flex gap-1 border rounded bg-yellow-100 text-yellow-800">
-      <label className="p-2 font-semibold text-yellow-800 border-r-1 border-yellow-800 w-full text-right">
-        Valor del Dólar
-      </label>
-      <label className="p-2">
-        US$
-      </label>
-      <input
-        className="flex w-full p-2 bg-yellow-100 text-yellow-800 self-start"
-        type="number"
-        value={value}
-        onChange={handleChange}
-        min="0"
-        step="1"
-      />
-      <button
-        className="p-2 bg-yellow-800 text-white hover:bg-yellow-700 hover:cursor-pointer"
-        onClick={onRefresh}
-      >
-        <RefreshCw />
-      </button>
-    </div>
-  );
-}
+        return (
+          <div className="bg-white shadow-md rounded-lg p-4 w-fit">
+            <label className="block text-sm font-medium text-gray-700 mb-2">💵 Valor del Dólar</label>
+            <div className="flex items-center gap-2">
+              <input
+                type="number"
+                value={value}
+                onChange={handleChange}
+                min="0"
+                className="w-28 p-2 border border-gray-300 rounded-md text-right"
+              />
+              <span className="text-gray-600 font-medium">US$</span>
+              <button
+                type="button"
+                onClick={onRefresh}
+                className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+                title="Sincronizar valor del dólar"
+              >
+                <RefreshCcw />
+              </button>
+            </div>
+          </div>
+        );
+      }

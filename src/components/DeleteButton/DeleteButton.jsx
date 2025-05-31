@@ -1,9 +1,5 @@
-import {CircleX, Trash2} from "lucide-react";
-
-export default function DeleteBotton({ onDelete }) {
+export default function DeleteButton({ onDelete }) {
   return (
-    <button className="group py-2 px-4 rounded w-auto h-10 cursor-pointer" onClick={onDelete}>
-      <Trash2 className="stroke-black group-hover:stroke-[#009dc0] transition-colors" />
-    </button>
+    <button className="text-red-500 hover:text-red-700 text-lg hover:cursor-pointer" onClick={onDelete}>🗑️</button>
   )
 }

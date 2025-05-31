@@ -41,25 +41,26 @@ export default function SeccionCostosMaquinaria() {
   }
 
   return (
-    <section className="flex flex-col gap-4 p-4 border-1 bg-red-50">
-      <SectionTitle title="Costos de Maquinaria"/>
-      <div className="flex justify-between flex-wrap gap-2">
-        <div className="flex justify-center items-end gap-4">
-          <InputDolar value={valorDolar} onChange={updateDolar} onRefresh={refreshDolar}/>
-          <InputGasoil value={valorGasoilina} onChange={updateGasolina}/>
-        </div>
-        <InputOptions label="Estado Fenológico" options={estadosFenologicos.map(e => e.nombre)}
-                      onChange={handleEstadoChange} value={estadoFenologicoMaquinaria.nombre}/>
+    <div className="bg-gray-100 p-8 my-4">
+      <SectionTitle title="🔧 Costos de Maquinaria"/>
+
+      <div className="flex flex-wrap justify-center items-center gap-6 mb-8">
+        <InputDolar value={valorDolar} onChange={updateDolar} onRefresh={refreshDolar}/>
+        <InputGasoil value={valorGasoilina} onChange={updateGasolina}/>
+        <InputOptions
+          label="Estado fenológico"
+          value={estadoFenologicoMaquinaria?.nombre || ""}
+          options={estadosFenologicos.map(e => e.nombre)}
+          onChange={handleEstadoChange}
+        />
       </div>
-      <div className="flex flex-col gap-4">
-        {planes.map((plan) => {
-          return <CardMaquinariaPlan key={plan.id} plan={plan} tractores={tractores} implementos={implementos}
-                                     onDelete={deletePlan} onUpdate={updatePlan}/>;
-        })}
-      </div>
-      <div className="flex justify-end">
-        <AddPlanButton onClick={handleAddPlan}/>
-      </div>
-    </section>
+
+      {planes.map(plan => (
+        <CardMaquinariaPlan key={plan.id} plan={plan} tractores={tractores} implementos={implementos}
+                            onDelete={deletePlan} onUpdate={updatePlan}/>
+      ))}
+
+      <AddPlanButton onClick={handleAddPlan}/>
+    </div>
   )
 }

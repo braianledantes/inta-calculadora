@@ -1,6 +1,4 @@
 export default function PlanTitle({ title }) {
   return (
-    <h5 className="text-center bg-[#1b2830] px-4 h-10 leading-10 text-white uppercase">
-      {title}
-    </h5>
+    <h5 className="text-xl font-semibold bg-gray-100 rounded-md py-2 px-4">{title}</h5>
   );}

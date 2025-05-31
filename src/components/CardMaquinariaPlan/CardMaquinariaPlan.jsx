@@ -1,4 +1,4 @@
-import DeleteBotton from "../DeleteButton/DeleteButton.jsx";
+import DeleteButton from "../DeleteButton/DeleteButton.jsx";
 import InputOptions from "../InputOptions/InputOptions.jsx";
 import NumberValue from "../NumberValue/NumberValue.jsx";
 import PlanTitle from "../PlanTitle/PlanTitle.jsx";
@@ -22,46 +22,47 @@ export function CardMaquinariaPlan({plan, tractores, implementos, onUpdate, onDe
   }
 
   return (
-    <div className="p-4 border rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-      <div className="flex items-center justify-between mb-4">
+    <div className="bg-white shadow-lg rounded-xl p-6 mb-8">
+      <div className="flex justify-between items-center mb-4">
         <PlanTitle title={`Plan ${plan.id}`}/>
-        <DeleteBotton onDelete={handleDelete}/>
+        <DeleteButton onDelete={handleDelete}/>
       </div>
-      <div className="flex flex-row gap-4 flex-wrap mb-4">
-        <InputOptions
-          label="Tractor:"
-          value={plan.tractor.nombre}
-          options={tractores.map(t => t.nombre)}
-          onChange={handleUpdateTractor}
-        />
 
-        <NumberValue name="Potencia" value={plan.tractor.potencia} unit="HP"/>
-        <NumberValue name="Precio" value={plan.tractor.precioDolar} unit="US$"/>
-        <NumberValue name="Gasto conservación coeficiente" value={plan.tractor.gastoMantenimiento}/>
-        <NumberValue name="Horas útiles" value={plan.tractor.horasVidaUtil} unit="h"/>
-        <NumberValue name="Valor residual" value={plan.tractor.porcentajeValorResidual} unit="%"/>
-        <NumberValue name="Amortización" esComputado value={plan.amortizacionTractor} unit="AR$/h"/>
-        <NumberValue name="Gasto conservación" esComputado value={plan.gastoConservacionTractor} unit="AR$/h"/>
+      <div className="mb-6">
+        <h3 className="text-lg font-medium text-gray-700 mb-2">🚜 Datos del Tractor</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <InputOptions label="Tractor" value={plan.tractor.nombre} options={tractores.map(t => t.nombre)}
+                        onChange={handleUpdateTractor}/>
+          <NumberValue name="Potencia" value={plan.tractor.potencia} unit="HP"/>
+          <NumberValue name="Precio" value={plan.tractor.precioDolar} unit="US$"/>
+          <NumberValue name="Coeficiente conservación" value={plan.tractor.gastoMantenimiento}/>
+          <NumberValue name="Horas útiles" value={plan.tractor.horasVidaUtil} unit="h"/>
+          <NumberValue name="Valor residual" value={plan.tractor.porcentajeValorResidual} unit="%"/>
+        </div>
+        <div className="mt-3 bg-green-100 text-green-700 font-semibold p-3 rounded-md">
+          💰 Amortización: {plan.amortizacionTractor} ARS/h | Conservación: {plan.gastoConservacionTractor} ARS/h
+        </div>
       </div>
-      <div className="flex flex-wrap items-center gap-3 mb-4 border-t pt-3">
-        <InputOptions
-          label="Implemento:"
-          value={plan.implemento.nombre}
-          options={implementos.map(t => t.nombre)}
-          onChange={handleUpdateImplemento}
-        />
 
-        <NumberValue name="Precio" value={plan.implemento.precioDolar} unit="US$"/>
-        <NumberValue name="Gasto conservación coeficiente" value={plan.implemento.gastoMantenimiento}/>
-        <NumberValue name="Horas útiles" value={plan.implemento.horasVidaUtil} unit="h"/>
-        <NumberValue name="Valor residual" value={plan.implemento.porcentajeValorResidual} unit="%"/>
-        <NumberValue name="Consumo combustible" value={plan.implemento.consumoCombustible} unit="lt/h"/>
-        <NumberValue name="Amortización" esComputado value={plan.amortizacionImplemento} unit="AR$"/>
-        <NumberValue name="Costo combustible" esComputado value={plan.costoCombustibleImplemento} unit="AR$/h"/>
-        <NumberValue name="Gasto conservación" esComputado value={plan.gastoConservacionImplemento} unit="AR$/h"/>
+      <div className="mb-6">
+        <h3 className="text-lg font-medium text-gray-700 mb-2">🧩 Implemento</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <InputOptions label="Implemento" value={plan.implemento.nombre} options={implementos.map(i => i.nombre)}
+                        onChange={handleUpdateImplemento}/>
+          <NumberValue name="Consumo" value={plan.implemento.consumoCombustible} unit="lt/h"/>
+          <NumberValue name="Precio" value={plan.implemento.precioDolar} unit="US$"/>
+          <NumberValue name="Coeficiente conservación" value={plan.implemento.gastoMantenimiento}/>
+          <NumberValue name="Horas útiles" value={plan.implemento.horasVidaUtil} unit="h"/>
+          <NumberValue name="Valor residual" value={plan.implemento.porcentajeValorResidual} unit="%"/>
+        </div>
+        <div className="mt-3 bg-green-100 text-green-700 font-semibold p-3 rounded-md">
+          🛢️ Combustible: {plan.costoCombustibleImplemento} ARS/h | Amortización: {plan.amortizacionImplemento} ARS/h |
+          Conservación: {plan.gastoConservacionImplemento} ARS/h
+        </div>
       </div>
-      <div className="flex flex-wrap justify-end items-center gap-3 mb-4 border-t  pt-3">
-        <NumberValue name="Costo Total" esComputado value={plan.costoEconomico} unit="AR$/h"/>
+
+      <div className="text-right text-xl font-bold text-green-600">
+        Costo Total: {plan.costoEconomico.toLocaleString()} ARS/h
       </div>
     </div>
   )
