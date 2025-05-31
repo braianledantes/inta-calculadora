@@ -1,12 +1,12 @@
 import {CardMaquinariaPlan} from "../../components/CardMaquinariaPlan/CardMaquinariaPlan.jsx";
 import InputDolar from "../../components/InputDolar/InputDolar.jsx";
 import InputGasoil from "../../components/InputGasoil/InputGasoil.jsx";
-import InputOptions from "../../components/InputOptions/InputOptions.jsx";
 import {useContext} from "react";
 import {AppContext} from "../../context/AppContext.jsx";
 import SectionTitle from "../../components/SectionTitle/SectionTitle.jsx";
 import AddPlanButton from "../../components/AddPlanButton/AddPlanButton.jsx";
 import SelectorEstadoFenologico from "../../components/SelectorEstadoFenologico/SelectorEstadoFenologico.jsx";
+import Grafico from '../../components/Grafico/Grafico.jsx'
 
 export default function SeccionCostosMaquinaria() {
   const {
@@ -33,6 +33,12 @@ export default function SeccionCostosMaquinaria() {
     addPlan();
   }
 
+  const chartData = planes.map(p => ({
+   name: `Plan ${p.id}`,
+   total: p.costoEconomico, 
+  }))
+
+
   return (
     <div className="bg-gray-100 py-8 my-4">
       <SectionTitle title="🔧 Costos de Maquinaria"/>
@@ -48,10 +54,9 @@ export default function SeccionCostosMaquinaria() {
       </div>
 
       {planes.map(plan => (
-        <CardMaquinariaPlan key={plan.id} plan={plan} tractores={tractores} implementos={implementos}
-                            onDelete={deletePlan} onUpdate={updatePlan}/>
+          <CardMaquinariaPlan key={plan.id} plan={plan} tractores={tractores} implementos={implementos} onDelete={deletePlan} onUpdate={updatePlan}/>
       ))}
-
+       <Grafico data={chartData}/>
       <AddPlanButton text="Agregar nuevo plan de maquinaria" onClick={handleAddPlan}/>
     </div>
   )
