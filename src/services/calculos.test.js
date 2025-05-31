@@ -1,5 +1,4 @@
-import test from 'node:test';
-import { describe, it } from 'node:test';
+import test, {describe, it} from 'node:test';
 import {
   calcularValoresPlanFertilizante,
   calcularValoresPlanMaquinaria,

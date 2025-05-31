@@ -1,4 +1,4 @@
-import {Navigate, Route, BrowserRouter, Routes} from "react-router";
+import {BrowserRouter, Navigate, Route, Routes} from "react-router";
 import MainLayout from "../layout/MainLayout.jsx";
 import SeccionCostosMaquinaria from "../pages/SeccionCostosMaquinaria/SeccionCostosMaquinaria.jsx";
 import SeccionCostosFertilizacion from "../pages/SeccionCostosFertilizacion/SeccionCostosFertilizacion.jsx";
