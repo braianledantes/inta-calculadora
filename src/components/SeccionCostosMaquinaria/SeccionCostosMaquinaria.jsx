@@ -34,7 +34,7 @@ export default function SeccionCostosMaquinaria() {
   }
 
   return (
-    <div className="bg-gray-100 p-8 my-4">
+    <div className="bg-gray-100 py-8 my-4">
       <SectionTitle title="🔧 Costos de Maquinaria"/>
 
       <div className="flex flex-wrap justify-center items-center gap-6 mb-8">

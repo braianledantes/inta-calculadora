@@ -10,7 +10,7 @@ function App() {
     <AppProvider>
       <Header/>
       <main className="flex flex-col gap-4 p-4 bg-gray-100">
-        <div className="container mx-auto p-4 flex flex-col gap-4">
+        <div className="container mx-auto flex flex-col gap-4">
           <SeccionCostosMaquinaria/>
           <SeccionCostosFertilizacion/>
           <SeccionCostosSanitizantes/>
