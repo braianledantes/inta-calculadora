@@ -1,3 +1,4 @@
+import {useMemo, useState} from "react";
 import DeleteButton from "../DeleteButton/DeleteButton.jsx";
 import InputOptions from "../InputOptions/InputOptions.jsx";
 import NumberValue from "../NumberValue/NumberValue.jsx";
@@ -5,26 +6,51 @@ import InputNumber from "../InputNumber/InputNumber.jsx";
 import PlanTitle from "../PlanTitle/PlanTitle.jsx";
 
 export function CardSanitizantePlan({plan, sanitizantes, onUpdate, onDelete}) {
+  const [tipoSeleccionado, setTipoSeleccionado] = useState(
+    plan.sanitizante?.tipo || (sanitizantes[0]?.tipo ?? "")
+  );
+
+  // Obtener tipos únicos
+  const tipos = useMemo(
+    () => [...new Set(sanitizantes.map(s => s.tipo))],
+    [sanitizantes]
+  );
+
+  // Filtrar sanitizantes por tipo seleccionado
+  const sanitizantesFiltrados = useMemo(
+    () => sanitizantes.filter(s => s.tipo === tipoSeleccionado),
+    [sanitizantes, tipoSeleccionado]
+  );
 
   const handleDelete = () => {
     onDelete(plan.id);
-  }
+  };
+
+  const handleUpdateTipo = (e) => {
+    const nuevoTipo = e.target.value;
+    setTipoSeleccionado(nuevoTipo);
+    // Opcional: resetear sanitizante al primero del tipo seleccionado
+    const primerSanitizante = sanitizantes.find(s => s.tipo === nuevoTipo);
+    if (primerSanitizante) {
+      onUpdate(plan.id, primerSanitizante, plan.volumenPorHectarea, plan.cantTratamientos);
+    }
+  };
 
   const handleUpdateSanitizante = (e) => {
     const sanitizanteName = e.target.value;
-    const sanitizante = sanitizantes.find(f => f.nombre === sanitizanteName);
+    const sanitizante = sanitizantesFiltrados.find(f => f.nombre === sanitizanteName);
     onUpdate(plan.id, sanitizante, plan.volumenPorHectarea, plan.cantTratamientos);
-  }
+  };
 
   const handleUpdateVolumenPorHectarea = (valor) => {
     const volumenPorHectarea = parseFloat(valor);
     onUpdate(plan.id, plan.sanitizante, volumenPorHectarea, plan.cantTratamientos);
-  }
+  };
 
   const handleUpdateCantTratamientos = (valor) => {
     const cantTratamientos = parseFloat(valor);
     onUpdate(plan.id, plan.sanitizante, plan.volumenPorHectarea, cantTratamientos);
-  }
+  };
 
   return (
     <div className="bg-white shadow-lg rounded-xl p-6 mb-8">
@@ -36,9 +62,15 @@ export function CardSanitizantePlan({plan, sanitizantes, onUpdate, onDelete}) {
         <h3 className="text-lg font-medium text-gray-700 mb-2">🧪 Datos del Sanitizante</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           <InputOptions
+            label="Tipo"
+            value={tipoSeleccionado}
+            options={tipos}
+            onChange={handleUpdateTipo}
+          />
+          <InputOptions
             label="Sanitizante"
             value={plan.sanitizante.nombre}
-            options={sanitizantes.map(f => f.nombre)}
+            options={sanitizantesFiltrados.map(f => f.nombre)}
             onChange={handleUpdateSanitizante}
           />
           <NumberValue name="Precio" value={plan.sanitizante.precioEnvaseDolar} unit="US$"/>
@@ -60,5 +92,5 @@ export function CardSanitizantePlan({plan, sanitizantes, onUpdate, onDelete}) {
         Costo Total: {plan.costoTotalPorHectarea.toLocaleString()} ARS/ha
       </div>
     </div>
-  )
+  );
 }
