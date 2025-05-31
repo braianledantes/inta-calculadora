@@ -19,7 +19,7 @@ export default function SelectorEstadoFenologico({
   }
 
   return (
-    <div>
+    <div className="bg-white shadow-md rounded-lg p-4 w-fit">
       <InputOptions
         label={label}
         value={estadoSeleccionado?.nombre || ""}
