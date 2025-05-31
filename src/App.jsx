@@ -1,7 +1,7 @@
 import Header from "./components/Header/Header.jsx";
 import SeccionCostosMaquinaria from "./components/SeccionCostosMaquinaria/SeccionCostosMaquinaria.jsx";
 import SeccionCostosFertilizacion from "./components/SeccionCostosFertilizacion/SeccionCostosFertilizacion.jsx";
-import SeccionCostosSanitarios from "./components/SeccionCostosSanitarios/SeccionCostosSanitarios.jsx";
+import SeccionCostosSanitizantes from "./components/SeccionCostosSanitizantes/SeccionCostosSanitizantes.jsx";
 import {AppProvider} from "./context/AppContext.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 
@@ -13,7 +13,7 @@ function App() {
         <div className="container mx-auto p-4 flex flex-col gap-4">
           <SeccionCostosMaquinaria/>
           <SeccionCostosFertilizacion/>
-          <SeccionCostosSanitarios/>
+          <SeccionCostosSanitizantes/>
         </div>
       </main>
       <Footer />
