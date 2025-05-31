@@ -15,12 +15,17 @@ const ImportExcel = () => {
     const handleFileUpload = (e) => {
       const file = e.target.files[0];
       importExcel(file, (allData) => {
-        const dataMapped = mapExcelData(allData);
-        maquinaria.saveTractores(dataMapped.tractores);
-        maquinaria.saveImplementos(dataMapped.implementos);
-        estadosFenologicos.saveEstadosFenologicos(dataMapped.estadosFenologicos);
-        fertilizantes.saveFertilizantes(dataMapped.fertilizantes);
-        sanitizantes.saveSanitizantes(dataMapped.sanitizantes);
+        try {
+          const dataMapped = mapExcelData(allData);
+          maquinaria.saveTractores(dataMapped.tractores);
+          maquinaria.saveImplementos(dataMapped.implementos);
+          estadosFenologicos.saveEstadosFenologicos(dataMapped.estadosFenologicos);
+          fertilizantes.saveFertilizantes(dataMapped.fertilizantes);
+          sanitizantes.saveSanitizantes(dataMapped.sanitizantes);
+        } catch (error) {
+          console.error("Error al procesar el archivo Excel:", error);
+          alert("Error al procesar el archivo Excel. Verifique el formato y los datos.");
+        }
       });
     };
 
