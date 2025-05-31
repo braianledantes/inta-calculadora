@@ -1,29 +1,24 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router";
-import Header from "./components/Header/Header.jsx";
+import {BrowserRouter as Router, Navigate, Route, Routes} from "react-router";
 import SeccionCostosMaquinaria from "./pages/SeccionCostosMaquinaria/SeccionCostosMaquinaria.jsx";
 import SeccionCostosFertilizacion from "./pages/SeccionCostosFertilizacion/SeccionCostosFertilizacion.jsx";
 import SeccionCostosSanitizantes from "./pages/SeccionCostosSanitizantes/SeccionCostosSanitizantes.jsx";
-import { AppProvider } from "./context/AppContext.jsx";
-import Footer from "./components/Footer/Footer.jsx";
+import {AppProvider} from "./context/AppContext.jsx";
 import PageNotFound from "./pages/PageNotFound/PageNotFound.jsx";
+import MainLayout from "./layout/MainLayout.jsx";
 
 function App() {
   return (
     <AppProvider>
       <Router>
-        <Header />
-        <main className="flex flex-col gap-4 p-4 bg-gray-100">
-          <div className="container mx-auto flex flex-col gap-4">
-            <Routes>
-              <Route path="/" element={<Navigate to="/maquinaria" replace />} />
-              <Route path="/maquinaria" element={<SeccionCostosMaquinaria />} />
-              <Route path="/fertilizacion" element={<SeccionCostosFertilizacion />} />
-              <Route path="/sanitizantes" element={<SeccionCostosSanitizantes />} />
-              <Route path="*" element={<PageNotFound />} />
-            </Routes>
-          </div>
-        </main>
-        <Footer />
+        <Routes>
+          <Route path="/" element={<MainLayout/>}>
+            <Route path="/" element={<Navigate to="/maquinaria" replace/>}/>
+            <Route path="/maquinaria" element={<SeccionCostosMaquinaria/>}/>
+            <Route path="/fertilizacion" element={<SeccionCostosFertilizacion/>}/>
+            <Route path="/sanitizantes" element={<SeccionCostosSanitizantes/>}/>
+            <Route path="*" element={<PageNotFound/>}/>
+          </Route>
+        </Routes>
       </Router>
     </AppProvider>
   );
