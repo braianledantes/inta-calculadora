@@ -6,6 +6,7 @@ import {AppContext} from "../../context/AppContext.jsx";
 import SectionTitle from "../../components/SectionTitle/SectionTitle.jsx";
 import AddPlanButton from "../../components/AddPlanButton/AddPlanButton.jsx";
 import SelectorEstadoFenologico from "../../components/SelectorEstadoFenologico/SelectorEstadoFenologico.jsx";
+import Grafico
 
 export default function SeccionCostosFertilizacion() {
   const {
@@ -46,6 +47,8 @@ export default function SeccionCostosFertilizacion() {
         <CardFertilizacionPlan key={plan.id} plan={plan} fertilizantes={fertilizantes}
                                onDelete={deletePlan} onUpdate={updatePlan}/>
       ))}
+
+      <Grafico data={chartData} title={"Costo maquinaria"}/>
 
       <AddPlanButton text="Agregar nuevo plan de fertilización" onClick={handleAddPlan}/>
     </div>

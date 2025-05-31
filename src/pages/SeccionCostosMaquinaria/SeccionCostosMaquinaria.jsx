@@ -56,7 +56,9 @@ export default function SeccionCostosMaquinaria() {
       {planes.map(plan => (
           <CardMaquinariaPlan key={plan.id} plan={plan} tractores={tractores} implementos={implementos} onDelete={deletePlan} onUpdate={updatePlan}/>
       ))}
-       <Grafico data={chartData}/>
+      
+      <Grafico data={chartData} title={"Costo maquinaria"}/>
+      
       <AddPlanButton text="Agregar nuevo plan de maquinaria" onClick={handleAddPlan}/>
     </div>
   )
