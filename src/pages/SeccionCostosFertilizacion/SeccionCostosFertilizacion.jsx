@@ -6,7 +6,7 @@ import {AppContext} from "../../context/AppContext.jsx";
 import SectionTitle from "../../components/SectionTitle/SectionTitle.jsx";
 import AddPlanButton from "../../components/AddPlanButton/AddPlanButton.jsx";
 import SelectorEstadoFenologico from "../../components/SelectorEstadoFenologico/SelectorEstadoFenologico.jsx";
-import Grafico
+import Grafico from "../../components/Grafico/Grafico.jsx";
 
 export default function SeccionCostosFertilizacion() {
   const {
@@ -30,6 +30,11 @@ export default function SeccionCostosFertilizacion() {
     addPlan();
   }
 
+  const chartData = planes.map(p => ({
+   name: `Plan ${p.id}`,
+   total: p.costoTotalPorHectarea, 
+  }))
+
   return (
     <div className="bg-gray-100 py-8 my-4">
       <SectionTitle title="🌱 Costos de Fertilización"/>
@@ -48,7 +53,7 @@ export default function SeccionCostosFertilizacion() {
                                onDelete={deletePlan} onUpdate={updatePlan}/>
       ))}
 
-      <Grafico data={chartData} title={"Costo maquinaria"}/>
+      <Grafico data={chartData} title={"Costo fertilización"}/>
 
       <AddPlanButton text="Agregar nuevo plan de fertilización" onClick={handleAddPlan}/>
     </div>
