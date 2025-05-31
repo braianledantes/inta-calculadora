@@ -1,11 +1,11 @@
 // src/utils/mapping.js
 
 import {
-  tractorSchema,
-  implementoSchema,
+  estadoFenologicoSchema,
   fertilizanteSchema,
+  implementoSchema,
   sanitizanteSchema,
-  estadoFenologicoSchema
+  tractorSchema
 } from "../validation/schemas.js";
 
 const schemaMap = {

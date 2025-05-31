@@ -1,6 +1,5 @@
 import InputDolar from "../../components/InputDolar/InputDolar.jsx";
 import {CardFertilizacionPlan} from "../../components/CardFertilizacionPlan/CardFertilizacionPlan.jsx";
-import InputOptions from "../../components/InputOptions/InputOptions.jsx";
 import {useContext} from "react";
 import {AppContext} from "../../context/AppContext.jsx";
 import SectionTitle from "../../components/SectionTitle/SectionTitle.jsx";

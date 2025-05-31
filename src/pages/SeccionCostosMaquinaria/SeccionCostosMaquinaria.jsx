@@ -1,7 +1,6 @@
 import {CardMaquinariaPlan} from "../../components/CardMaquinariaPlan/CardMaquinariaPlan.jsx";
 import InputDolar from "../../components/InputDolar/InputDolar.jsx";
 import InputGasoil from "../../components/InputGasoil/InputGasoil.jsx";
-import InputOptions from "../../components/InputOptions/InputOptions.jsx";
 import {useContext} from "react";
 import {AppContext} from "../../context/AppContext.jsx";
 import SectionTitle from "../../components/SectionTitle/SectionTitle.jsx";

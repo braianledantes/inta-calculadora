@@ -1,9 +1,5 @@
 import Header from "../components/Header/Header.jsx";
-import {Navigate, Outlet, Route, Routes} from "react-router";
-import SeccionCostosMaquinaria from "../pages/SeccionCostosMaquinaria/SeccionCostosMaquinaria.jsx";
-import SeccionCostosFertilizacion from "../pages/SeccionCostosFertilizacion/SeccionCostosFertilizacion.jsx";
-import SeccionCostosSanitizantes from "../pages/SeccionCostosSanitizantes/SeccionCostosSanitizantes.jsx";
-import PageNotFound from "../pages/PageNotFound/PageNotFound.jsx";
+import {Outlet} from "react-router";
 import Footer from "../components/Footer/Footer.jsx";
 
 export default function MainLayout() {
