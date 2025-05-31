@@ -37,24 +37,25 @@ export default function SeccionCostosFertilizacion() {
   }
 
   return (
-    <section className="flex flex-col gap-4 p-4">
-      <SectionTitle title="Costos de Fertilización"/>
-      <div className="flex justify-between flex-wrap gap-2">
-        <div className="flex justify-center items-end gap-4">
-          <InputDolar value={valorDolar} onChange={updateDolar} onRefresh={refreshDolar}/>
-        </div>
-        <InputOptions label="Estado Fenológico" options={estadosFenologicos.map(e => e.nombre)}
-                      onChange={handleEstadoChange} value={estadoFenologicoFertilizante.nombre}/>
+    <div className="bg-gray-100 p-8 my-4">
+      <SectionTitle title="🌱 Costos de Fertilización"/>
+
+      <div className="flex flex-wrap justify-center items-center gap-6 mb-8">
+        <InputDolar value={valorDolar} onChange={updateDolar} onRefresh={refreshDolar}/>
+        <InputOptions
+          label="Estado fenológico"
+          value={estadoFenologicoFertilizante?.nombre || ""}
+          options={estadosFenologicos.map(e => e.nombre)}
+          onChange={handleEstadoChange}
+        />
       </div>
-      <div className="flex flex-col gap-4">
-        {planes.map((plan) => {
-          return <CardFertilizacionPlan key={plan.id} plan={plan} fertilizantes={fertilizantes}
-                                        onDelete={deletePlan} onUpdate={updatePlan}/>;
-        })}
-      </div>
-      <div className="flex justify-end">
-        <AddPlanButton onClick={handleAddPlan}/>
-      </div>
-    </section>
+
+      {planes.map(plan => (
+        <CardFertilizacionPlan key={plan.id} plan={plan} fertilizantes={fertilizantes}
+                               onDelete={deletePlan} onUpdate={updatePlan}/>
+      ))}
+
+      <AddPlanButton onClick={handleAddPlan}/>
+    </div>
   );
 }

@@ -22,28 +22,37 @@ export function CardFertilizacionPlan({plan, fertilizantes, onUpdate, onDelete})
   }
 
   return (
-    <div className="bg-white p-4 border rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-      <div className="flex items-center justify-between mb-4">
-        <PlanTitle title={`Plan ${plan.id}`} />
+    <div className="bg-white shadow-lg rounded-xl p-6 mb-8">
+      <div className="flex justify-between items-center mb-4">
+        <PlanTitle title={`Plan ${plan.id}`}/>
         <DeleteButton onDelete={handleDelete}/>
       </div>
-      <div className="flex flex-row gap-4 flex-wrap mb-4">
-        <InputOptions
-          label="Principio Activo:"
-          value={plan.fertilizante.nombre}
-          options={fertilizantes.map(t => t.nombre)}
-          onChange={handleUpdateFertilizante}
-        />
-
-        <NumberValue name="Precio" value={plan.fertilizante.precioEnvaseDolar} unit="US$"/>
-        <NumberValue name="Dosis por ha" value={plan.fertilizante.dosisAplicacion} unit={plan.fertilizante.unidadDosisAplicacion}/>
-        <NumberValue name="Costo por tratamiento" esComputado value={plan.costoTotalPorTratamiento} unit="AR$"/>
-        <InputNumber name="Cant. tratamientos" value={plan.cantTratamientos} onChange={handleUpdateCantTratamientos} />
+      <div className="mb-6">
+        <h3 className="text-lg font-medium text-gray-700 mb-2">🌱 Datos del Fertilizante</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <InputOptions
+            label="Fertilizante"
+            value={plan.fertilizante.nombre}
+            options={fertilizantes.map(f => f.nombre)}
+            onChange={handleUpdateFertilizante}
+          />
+          <NumberValue name="Precio" value={plan.fertilizante.precioEnvaseDolar} unit="US$"/>
+          <NumberValue name="Dosis por ha" value={plan.fertilizante.dosisAplicacion}
+                       unit={plan.fertilizante.unidadDosisAplicacion}/>
+        </div>
       </div>
-      <div className="flex flex-wrap justify-end items-center gap-3 mb-4 border-t  pt-3">
-        <NumberValue name="Costo Total" esComputado value={plan.costoTotalPorHectarea} unit="AR$/ha"/>
+      <div className="mb-6">
+        <h3 className="text-lg font-medium text-gray-700 mb-2">🖋️ Datos del Plan</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <InputNumber name="Cant. tratamientos" value={plan.cantTratamientos} onChange={handleUpdateCantTratamientos}/>
+        </div>
       </div>
-
+      <div className="mt-3 bg-green-100 text-green-700 font-semibold p-3 rounded-md">
+        🛢️ Costo por tratamiento: {plan.costoTotalPorTratamiento} ARS | Costo : {plan.costoTotalPorHectarea} ARS/ha
+      </div>
+      <div className="text-right text-xl font-bold text-green-600">
+        Costo Total: {plan.costoTotalPorHectarea.toLocaleString()} ARS/ha
+      </div>
     </div>
   )
 }
