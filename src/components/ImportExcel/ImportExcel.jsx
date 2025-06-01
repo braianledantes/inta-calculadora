@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { AppContext } from "../../context/AppContext.jsx";
 import { importExcel } from "../../utils/utils.js";
 import { mapExcelData } from "../../utils/mapping.js";
@@ -12,6 +12,7 @@ const ImportExcel = () => {
       estadosFenologicos,
     } = useContext(AppContext);
     const fileInputRef = useRef(null);
+    const [nombreArchivo, setNombreArchivo] = useState("");
 
     const handleFileUpload = (e) => {
       const file = e.target.files[0];
@@ -23,6 +24,7 @@ const ImportExcel = () => {
           estadosFenologicos.saveEstadosFenologicos(dataMapped.estadosFenologicos);
           fertilizantes.saveFertilizantes(dataMapped.fertilizantes);
           sanitizantes.saveSanitizantes(dataMapped.sanitizantes);
+          setNombreArchivo(file.name);
         } catch (error) {
           console.error("Error al procesar el archivo Excel:", error);
           alert("Error al procesar el archivo Excel. Verifique el formato y los datos.");
@@ -41,7 +43,9 @@ const ImportExcel = () => {
           onClick={handleButtonClick}
         >
           <FiUpload className="text-xl" />
-          Subir archivo Excel
+        {nombreArchivo
+          ? `Excel '${nombreArchivo}' importado`
+          : 'Subir archivo Excel'}
         </button>
 
         <input
