@@ -10,7 +10,7 @@ export default function AddPlanButton({ text, onClick }) {
         hover:bg-[#024c27] hover:shadow-lg
         focus:outline-none focus:ring-2
         transition-all duration-200
-        text-base mb-12 flex items-center justify-center gap-2 uppercase"
+        text-base mb-12 flex items-center justify-center gap-2 uppercase hover:cursor-pointer"
       onClick={onClick}
     >
       <FiPlusCircle className="text-xl" />
