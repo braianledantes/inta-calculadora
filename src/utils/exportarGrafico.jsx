@@ -21,7 +21,19 @@ const exportarGrafico = async (chartRef, { maquinariaPlans = [], sanitizantePlan
         />
         ).toBlob();
 
-        saveAs(blob, 'Costos.pdf');
+        let nombreArchivo = '';
+
+        if (maquinariaPlans.length > 0) {
+            nombreArchivo = 'Costo Maquinaria - INTA.pdf';
+        } else if (fertilizacionPlans.length > 0) {
+            nombreArchivo = 'Costo Fertilizante - INTA.pdf';
+        } else if (sanitizantePlans.length > 0) {
+            nombreArchivo = 'Costo Sanidad - INTA.pdf';
+        } else {
+            nombreArchivo = 'Costos - INTA.pdf';
+        }
+
+        saveAs(blob, nombreArchivo);
     } catch (err) {
         console.error ('Error al generar el PDF:', err);
     }

@@ -9,41 +9,47 @@ const styles = StyleSheet.create({
   smallTitle: { fontSize: 10, marginBottom: 8, fontWeight: 'bold' },
   row: { flexDirection: 'row' },
   cell: { flex: 1, fontSize: 10, padding: 4, borderWidth: 0.5, borderColor: '#000000' },
-  cellTotal: {backgroundColor: '#f0f0f0', fontSize: 12, padding: 4},
+  cellTotal: { fontSize: 12, padding: 4, borderWidth: 0.5, borderColor: '#000000' },
   headerCell: { flex: 1, fontSize: 10, padding: 4, fontWeight: 'bold', borderWidth: 0.5, borderColor: '#000000', backgroundColor: '#264653',  color: '#FFFFFF' },
   topInfoContainer: { marginBottom: 20},
   image: { width: '100%', height: 200, marginBottom: 20 }
 });
 const safeCurrency = (value) => (value != null ? `${value.toLocaleString()} ARS/h` : 'N/A');
 
-const Header = ({ maquinariaPlans, sanitizantePlans, fertilizacionPlans }) => {
+const Header = ({ maquinariaPlans, sanitizantePlans, fertilizacionPlans, valorDolar, estadoFenologico, valorGasoil }) => {
   let titulo = 'Costos';
+  let mostrarGasoil = false;
+  let mostrarHeaderInfo = false;
 
   if (maquinariaPlans?.length) {
     titulo = 'Costos de Maquinaria';
+    mostrarGasoil = true;
+    mostrarHeaderInfo = true;
   } else if (sanitizantePlans?.length) {
     titulo = 'Costos de Sanidad';
+    mostrarHeaderInfo = true;
   } else if (fertilizacionPlans?.length) {
     titulo = 'Costos de Fertilizante';
+    mostrarHeaderInfo = true;
   }
 
   return (
-    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-      <Image src={sipan} style={{ width: 180, height: 40 }} />
-      <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{titulo}</Text>
+    <View>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
+        <Image src={sipan} style={{ width: 180, height: 40 }} />
+        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{titulo}</Text>
+      </View>
+
+      {mostrarHeaderInfo && (
+        <View style={[styles.row, styles.topInfoContainer]}>
+          <Text style={styles.cell}>Dólar: {valorDolar ?? 'N/A'}</Text>
+          <Text style={styles.cell}>Estado Fenológico: {estadoFenologico?.nombre ?? 'N/A'}</Text>
+          {mostrarGasoil && <Text style={styles.cell}>Gasoil: {valorGasoil ?? 'N/A'}</Text>}
+        </View>
+      )}
     </View>
   );
 };
-
-const TopInfo = ({ valorDolar, estadoFenologico, valorGasoil }) => (
-  <View style={[styles.row, styles.topInfoContainer]}>
-    <Text style={styles.cell}>Dólar: {valorDolar ?? 'N/A'}</Text>
-    <Text style={styles.cell}>
-      Estado Fenológico: {estadoFenologico?.nombre ?? 'N/A'}
-    </Text>
-    <Text style={styles.cell}>Gasoil: {valorGasoil ?? 'N/A'}</Text>
-  </View>
-);
 
 const renderTable = (title, headers, rows, summaryRow = null, totalCost = null, titleStyle = styles.title) => (
   <View style={styles.section}>
@@ -73,7 +79,7 @@ const renderTable = (title, headers, rows, summaryRow = null, totalCost = null, 
 
     {totalCost !== null && (
       <View style={[styles.row]}>
-        <Text style={[styles.cell, { flex: 7 }]}></Text>
+        <Text style={[styles.cell, { flex: 7, backgroundColor: '#f0f0f0' }]}></Text>
         <Text style={[styles.cellTotal, { flex: 3 }]}> Costo total: {totalCost}</Text>
       </View>
     )}
@@ -83,8 +89,7 @@ const renderTable = (title, headers, rows, summaryRow = null, totalCost = null, 
 const PDFDocument = ({ imageChartData, maquinariaPlans = [], sanitizantePlans = [], fertilizacionPlans = [], valorDolar, estadoFenologico, valorGasoil }) => (
   <Document>
     <Page size="A4" style={styles.page}>
-      <Header maquinariaPlans={maquinariaPlans} sanitizantePlans={sanitizantePlans} fertilizacionPlans={fertilizacionPlans} />
-      <TopInfo valorDolar={valorDolar} estadoFenologico={estadoFenologico.nombre} valorGasoil={valorGasoil} />
+      <Header maquinariaPlans={maquinariaPlans} sanitizantePlans={sanitizantePlans} fertilizacionPlans={fertilizacionPlans} valorDolar={valorDolar} estadoFenologico={estadoFenologico} valorGasoil={valorGasoil}/>
 
       {maquinariaPlans.length > 0 &&
         maquinariaPlans.map(plan =>
@@ -113,7 +118,7 @@ const PDFDocument = ({ imageChartData, maquinariaPlans = [], sanitizantePlans = 
                 ['Consumo', 'Precio', 'Coef. Conservacion', 'Horas Utiles', 'Valor residual'],
                 [[
                   `${plan.implemento.consumoCombustible} lt/h`,
-                 
+                  `${plan.implemento.precioDolar} US$`,
                   plan.implemento.gastoMantenimiento,
                   `${plan.implemento.horasVidaUtil} h`,
                   `${plan.implemento.porcentajeValorResidual} %`
