@@ -66,7 +66,7 @@ export default function SeccionCostosSanitizantes() {
         <div ref={chartRef}>
           <Grafico data={chartData} title={"Costo Sanitizante"}/>
         </div>
-        <ButtonExportPDF onExport={() => exportarGrafico(chartRef) } />
+        <ButtonExportPDF onExport={() => exportarGrafico(chartRef, { sanitizantePlans: planes ,  valorDolar: valorDolar, estadoFenologico: estadoFenologicoSanitizante })} />
       </div> 
       ) }
 

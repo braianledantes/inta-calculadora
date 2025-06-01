@@ -40,6 +40,7 @@ export default function SeccionCostosMaquinaria() {
    name: `Plan ${p.id}`,
    total: p.costoEconomico, 
   }))
+  
 
   const chartRef = useRef();
 
@@ -69,7 +70,7 @@ export default function SeccionCostosMaquinaria() {
           <div ref={chartRef}>
             <Grafico data={chartData} title={"Costo maquinaria"}/>
           </div>
-          <ButtonExportPDF onExport={() => exportarGrafico(chartRef) } />
+          <ButtonExportPDF onExport={() => exportarGrafico(chartRef, { maquinariaPlans: planes ,  valorDolar: valorDolar, estadoFenologico: estadoFenologicoMaquinaria, valorGasoil: valorGasoilina })} />
         </div>
       ) }
       

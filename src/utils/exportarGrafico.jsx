@@ -3,13 +3,23 @@ import { pdf } from '@react-pdf/renderer';
 import { saveAs } from 'file-saver';
 import PDFDocument from "../components/CostosPDF/CostosPDF"
 
-const exportarGrafico = async (chartRef) => {
+const exportarGrafico = async (chartRef, { maquinariaPlans = [], sanitizantePlans = [], fertilizacionPlans = [] , valorDolar,estadoFenologico, valorGasoil } = {} ) => {
     if(!chartRef.current) return;
 
     try {
         const imageData = await toPng(chartRef.current);
 
-        const blob = await pdf(<PDFDocument imageChartData={imageData} />).toBlob();
+        const blob = await pdf(
+        <PDFDocument
+          imageChartData={imageData}
+          maquinariaPlans={maquinariaPlans}
+          sanitizantePlans={sanitizantePlans}
+          fertilizacionPlans={fertilizacionPlans}
+          valorDolar={valorDolar}
+          estadoFenologico={estadoFenologico}
+          valorGasoil={valorGasoil}
+        />
+        ).toBlob();
 
         saveAs(blob, 'Costos.pdf');
     } catch (err) {

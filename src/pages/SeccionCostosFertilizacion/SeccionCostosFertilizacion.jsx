@@ -65,7 +65,7 @@ export default function SeccionCostosFertilizacion() {
           <div ref={chartRef}>
             <Grafico data={chartData} title={"Costo Fertilizacion"}/>
           </div> 
-          <ButtonExportPDF onExport={() => exportarGrafico(chartRef) } />
+         <ButtonExportPDF onExport={() => exportarGrafico(chartRef, { fertilizacionPlans: planes ,  valorDolar: valorDolar, estadoFenologico: estadoFenologicoFertilizante})} />
         </div>
       ) }
 
