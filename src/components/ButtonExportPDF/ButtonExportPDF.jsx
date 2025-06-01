@@ -7,7 +7,7 @@ export default function ButtonExportPdf({ onExport }) {
       onClick={onExport}
     >
       <FileText className="w-5 h-5" />
-      Descargar/ Exportar PDF
+      Descargar / Exportar PDF
     </button>
   );
 }

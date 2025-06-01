@@ -37,7 +37,7 @@ const ImportExcel = () => {
     return (
       <div>
         <button
-          className="bg-[#e86c2a] text-white px-4 py-2 rounded-lg hover:bg-[#c95a1f] transition-colors duration-300 font-semibold shadow flex items-center gap-2"
+          className="bg-[#e86c2a] text-white px-4 py-2 rounded-lg hover:bg-[#c95a1f] transition-colors duration-300 font-semibold shadow flex items-center gap-2 uppercase"
           onClick={handleButtonClick}
         >
           <FiUpload className="text-xl" />
