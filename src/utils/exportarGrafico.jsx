@@ -1,7 +1,7 @@
 import { toPng } from 'html-to-image';
 import { pdf } from '@react-pdf/renderer';
 import { saveAs } from 'file-saver';
-import PDFDocument from "../components/CostosPDF/CostosPDF"
+import PDFDocument from "../pdf/PDF"
 
 const exportarGrafico = async (chartRef, { maquinariaPlans = [], sanitizantePlans = [], fertilizacionPlans = [] , valorDolar,estadoFenologico, valorGasoil } = {} ) => {
     if(!chartRef.current) return;
