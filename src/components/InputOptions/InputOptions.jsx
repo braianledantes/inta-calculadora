@@ -2,7 +2,7 @@ import {ChevronDown} from 'lucide-react';
 
 export default function InputOptions({label, value,  options, onChange}) {
   return (
-    <div>
+    <div className="lg:max-w-sm sm:max-w-sm md:max-w-md" >
       <label className="block text-sm font-medium">{label}</label>
       <div className="relative">
         <select

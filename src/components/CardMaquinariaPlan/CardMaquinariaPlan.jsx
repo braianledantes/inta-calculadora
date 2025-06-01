@@ -22,7 +22,8 @@ export function CardMaquinariaPlan({plan, tractores, implementos, onUpdate, onDe
   }
 
   return (
-    <div className="bg-white shadow-2xl rounded-3xl p-8 mb-10 border border-green-100 transition-transform duration-300">
+   <div className="max-w-4xl mx-auto px-2">
+    <div className="bg-white shadow-lg rounded-xl p-6 mb-8">
       <div className="flex justify-between items-center mb-6">
         <PlanTitle title={`Plan ${plan.id}`} />
         <DeleteButton onDelete={handleDelete} />
@@ -31,10 +32,9 @@ export function CardMaquinariaPlan({plan, tractores, implementos, onUpdate, onDe
       {/* DATOS DEL TRACTOR */}
       <div className="mb-8">
         <h3 className="text-xl font-bold text-green-800 mb-4 flex items-center gap-2">
-          <span className="text-2xl">🚜</span>
           <span>Datos del Tractor</span>
         </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid lg:grid-cols-6 sm:grid-cols-2 md:grid-cols-3 gap-5">
           <InputOptions
             label="Tractor"
             value={plan.tractor.nombre}
@@ -49,7 +49,7 @@ export function CardMaquinariaPlan({plan, tractores, implementos, onUpdate, onDe
         </div>
         <div className="mt-4 bg-green-50 text-green-800 p-4 rounded-lg border border-green-200 shadow-inner flex flex-wrap gap-x-4 gap-y-2">
           <span>
-            💰 <span className="font-semibold">Amortización:</span>
+            <span className="font-semibold">Amortización:</span>
             <span className="font-normal"> {plan.amortizacionTractor} ARS/h</span>
           </span>
           <span>
@@ -62,10 +62,9 @@ export function CardMaquinariaPlan({plan, tractores, implementos, onUpdate, onDe
       {/* IMPLEMENTO */}
       <div className="mb-8">
         <h3 className="text-xl font-bold text-green-800 mb-4 flex items-center gap-2">
-          <span className="text-2xl">🧩</span>
           <span>Implemento</span>
         </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid lg:grid-cols-6 sm:grid-cols-2 md:grid-cols-3 gap-5">
           <InputOptions
             label="Implemento"
             value={plan.implemento.nombre}
@@ -80,7 +79,7 @@ export function CardMaquinariaPlan({plan, tractores, implementos, onUpdate, onDe
         </div>
         <div className="mt-4 bg-green-50 text-green-800 p-4 rounded-lg border border-green-200 shadow-inner flex flex-wrap gap-x-4 gap-y-2">
           <span>
-            🛢️ <span className="font-semibold">Combustible:</span>
+            <span className="font-semibold">Combustible:</span>
             <span className="font-normal"> {plan.costoCombustibleImplemento} ARS/h</span>
           </span>
           <span>
@@ -100,5 +99,6 @@ export function CardMaquinariaPlan({plan, tractores, implementos, onUpdate, onDe
         <span className="ml-2">{plan.costoEconomico.toLocaleString()} ARS/h</span>
       </div>
     </div>
+   </div>
   )
 }

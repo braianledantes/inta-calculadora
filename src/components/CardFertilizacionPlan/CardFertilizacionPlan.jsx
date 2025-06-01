@@ -22,6 +22,7 @@ export function CardFertilizacionPlan({plan, fertilizantes, onUpdate, onDelete})
   }
 
   return (
+   <div className="max-w-4xl mx-auto px-2">
     <div className="bg-white shadow-lg rounded-xl p-6 mb-8">
       <div className="flex justify-between items-center mb-4">
         <PlanTitle title={`Plan ${plan.id}`}/>
@@ -29,7 +30,6 @@ export function CardFertilizacionPlan({plan, fertilizantes, onUpdate, onDelete})
       </div>
       <div className="mb-6">
         <h3 className="text-lg font-bold text-green-800 mb-2 flex items-center gap-2">
-          <span className="text-xl">🌱</span>
           <span>Datos del Fertilizante</span>
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -46,7 +46,6 @@ export function CardFertilizacionPlan({plan, fertilizantes, onUpdate, onDelete})
       </div>
       <div className="mb-6">
         <h3 className="text-lg font-semibold text-green-800 mb-2 flex items-center gap-2">
-          <span className="text-xl">🖋️</span>
           <span>Datos del Plan</span>
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -55,7 +54,7 @@ export function CardFertilizacionPlan({plan, fertilizantes, onUpdate, onDelete})
       </div>
       <div className="mt-4 bg-green-50 text-green-800 p-4 rounded-lg border border-green-200 shadow-inner flex flex-wrap gap-x-4 gap-y-2">
         <span>
-          <span className="font-semibold">🛢️ Costo por tratamiento:</span>
+          <span className="font-semibold">Costo por tratamiento:</span>
           <span className="font-normal"> {plan.costoTotalPorTratamiento} ARS</span>
         </span>
         <span>
@@ -66,6 +65,7 @@ export function CardFertilizacionPlan({plan, fertilizantes, onUpdate, onDelete})
       <div className="text-right text-2xl font-extrabold border-t pt-6 mt-6">
         Costo Total: <span className="ml-2">{plan.costoTotalPorHectarea.toLocaleString()} ARS/ha</span>
       </div>
+    </div>
     </div>
   )
 }
