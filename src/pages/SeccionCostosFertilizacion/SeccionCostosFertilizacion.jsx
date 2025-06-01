@@ -1,6 +1,6 @@
 import InputDolar from "../../components/InputDolar/InputDolar.jsx";
 import {CardFertilizacionPlan} from "../../components/CardFertilizacionPlan/CardFertilizacionPlan.jsx";
-import {useContext} from "react";
+import {useContext, useEffect, useState} from "react";
 import {AppContext} from "../../context/AppContext.jsx";
 import SectionTitle from "../../components/SectionTitle/SectionTitle.jsx";
 import AddPlanButton from "../../components/AddPlanButton/AddPlanButton.jsx";
@@ -28,9 +28,18 @@ export default function SeccionCostosFertilizacion() {
     setEstadoFenologicoFertilizante
   } = useContext(AppContext).estadosFenologicos;
 
+  const [lastPlanRef, setLastPlanRef] = useState(null);
+
   const handleAddPlan = () => {
     addPlan();
   }
+
+  // Hacer scroll cuando cambia la cantidad de planes
+  useEffect(() => {
+    if (lastPlanRef) {
+      lastPlanRef.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [planes.length, lastPlanRef]);
 
   const chartData = planes.map(p => ({
    name: `Plan ${p.id}`,
@@ -57,9 +66,10 @@ export default function SeccionCostosFertilizacion() {
       
       <div className="flex flex-col lg:flex-row gap-2">
       <div className="flex-1 lg:basis-2/3 space-y-6 order-1">
-      {planes.map(plan => (
+      {planes.map((plan, idx) => (
         <CardFertilizacionPlan key={plan.id} plan={plan} fertilizantes={fertilizantes}
-                               onDelete={deletePlan} onUpdate={updatePlan}/>
+                               onDelete={deletePlan} onUpdate={updatePlan}
+                               ref={idx === planes.length - 1 ? setLastPlanRef : null}/>
       ))}
       <AddPlanButton text="Agregar nuevo plan de maquinaria" onClick={handleAddPlan}/>
       </div>

@@ -1,11 +1,11 @@
-import {useMemo, useState} from "react";
+import {forwardRef, useMemo, useState} from "react";
 import DeleteButton from "../DeleteButton/DeleteButton.jsx";
 import InputOptions from "../InputOptions/InputOptions.jsx";
 import NumberValue from "../NumberValue/NumberValue.jsx";
 import InputNumber from "../InputNumber/InputNumber.jsx";
 import PlanTitle from "../PlanTitle/PlanTitle.jsx";
 
-export function CardSanitizantePlan({plan, sanitizantes, onUpdate, onDelete}) {
+export const CardSanitizantePlan = forwardRef(function CardSanitizantePlan({plan, sanitizantes, onUpdate, onDelete}, ref) {
   const [tipoSeleccionado, setTipoSeleccionado] = useState(
     plan.sanitizante?.tipo || (sanitizantes[0]?.tipo ?? "")
   );
@@ -53,7 +53,7 @@ export function CardSanitizantePlan({plan, sanitizantes, onUpdate, onDelete}) {
   };
 
   return (
-  <div className="max-w-4xl mx-auto px-2">
+  <div className="max-w-4xl mx-auto px-2" ref={ref}>
     <div className="bg-white shadow-lg rounded-xl p-6 mb-8">
       <div className="flex justify-between items-center mb-4">
         <PlanTitle title={`Plan ${plan.id}`}/>
@@ -106,4 +106,4 @@ export function CardSanitizantePlan({plan, sanitizantes, onUpdate, onDelete}) {
     </div>
     </div>
   );
-}
+});

@@ -3,8 +3,9 @@ import InputOptions from "../InputOptions/InputOptions.jsx";
 import NumberValue from "../NumberValue/NumberValue.jsx";
 import InputNumber from "../InputNumber/InputNumber.jsx";
 import PlanTitle from "../PlanTitle/PlanTitle.jsx";
+import {forwardRef} from "react";
 
-export function CardFertilizacionPlan({plan, fertilizantes, onUpdate, onDelete}) {
+export const CardFertilizacionPlan = forwardRef(function CardMaquinariaPlan({plan, fertilizantes, onUpdate, onDelete}, ref) {
 
   const handleDelete = () => {
     onDelete(plan.id);
@@ -22,7 +23,7 @@ export function CardFertilizacionPlan({plan, fertilizantes, onUpdate, onDelete})
   }
 
   return (
-   <div className="max-w-4xl mx-auto px-2">
+   <div className="max-w-4xl mx-auto px-2" ref={ref}>
     <div className="bg-white shadow-lg rounded-xl p-6 mb-8">
       <div className="flex justify-between items-center mb-4">
         <PlanTitle title={`Plan ${plan.id}`}/>
@@ -68,4 +69,4 @@ export function CardFertilizacionPlan({plan, fertilizantes, onUpdate, onDelete})
     </div>
     </div>
   )
-}
+});
