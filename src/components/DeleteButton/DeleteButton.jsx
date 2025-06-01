@@ -7,7 +7,7 @@ export default function DeleteButton({ onDelete }) {
         bg-transparent hover:text-red-700 
         text-gray-700 text-lg rounded-full
         p-2 shadow-md transition-colors duration-200
-        focus:outline-none focus:ring-2 focus:ring-red-300 pointer"
+        focus:outline-none focus:ring-2 focus:ring-red-300 hover:cursor-pointer"
       onClick={onDelete}
       title="Eliminar"
     >
