@@ -56,21 +56,26 @@ export default function SeccionCostosSanitizantes() {
         />
       </div>
 
+      <div className="flex flex-col lg:flex-row gap-2">
+      <div className="flex-1 lg:basis-2/3 space-y-6 order-1">
       {planes.map(plan => (
         <CardSanitizantePlan key={plan.id} plan={plan} sanitizantes={sanitizantes}
                              onDelete={deletePlan} onUpdate={updatePlan}/>
       ))}
+        <AddPlanButton text="Agregar nuevo plan de maquinaria" onClick={handleAddPlan}/>
+      </div>
 
      {planes.length >=2 &&(
-      <div>
+        <div className="lg:basis-1/3 order-2">
+        <div className="sticky top-50 bottom-30" style={{ maxHeight: 'calc(100vh - 80px)', overflowY: 'auto' }}>
         <div ref={chartRef}>
           <Grafico data={chartData} title={"Costo Sanitizante"}/>
         </div>
         <ButtonExportPDF onExport={() => exportarGrafico(chartRef, { sanitizantePlans: planes ,  valorDolar: valorDolar, estadoFenologico: estadoFenologicoSanitizante })} />
       </div> 
+        </div>
       ) }
-
-      <AddPlanButton text="Agregar nuevo plan de sanitización" onClick={handleAddPlan}/>
+      </div>
     </div>
   );
 }
