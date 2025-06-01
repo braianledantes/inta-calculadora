@@ -45,16 +45,19 @@ export default function SeccionCostosMaquinaria() {
 
   return (
     <div className="bg-gray-100 py-8 my-4">
-      <SectionTitle title="🔧 Costos de Maquinaria"/>
+      
+    <div className="flex justify-center gap-3 mb-4 flex-wrap">
+      <SectionTitle title="Costos de Maquinaria" />
+    </div>
 
       <div className="flex flex-wrap justify-center items-center gap-6 mb-8">
         <InputDolar value={valorDolar} onChange={updateDolar} onRefresh={refreshDolar}/>
-        <InputGasoil value={valorGasoilina} onChange={updateGasolina}/>
         <SelectorEstadoFenologico
           estados={estadosFenologicos}
           estadoSeleccionado={estadoFenologicoMaquinaria}
           setEstadoSeleccionado={setEstadoFenologicoMaquinaria}
         />
+        <InputGasoil value={valorGasoilina} onChange={updateGasolina}/>
       </div>
 
       {planes.map(plan => (

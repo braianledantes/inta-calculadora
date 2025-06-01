@@ -1,3 +1,8 @@
-export default function SectionTitle({title}) {
-  return (<h2 className="text-3xl font-bold text-center mb-8">{title}</h2>);
+
+export default function SectionTitle({ title }) {
+  return (
+    <div className="flex items-center justify-center gap-3 mb-8 uppercase">
+      <h2 className="text-3xl font-bold">{title}</h2>
+    </div>
+  );
 }

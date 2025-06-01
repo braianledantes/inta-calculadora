@@ -22,47 +22,82 @@ export function CardMaquinariaPlan({plan, tractores, implementos, onUpdate, onDe
   }
 
   return (
-    <div className="bg-white shadow-lg rounded-xl p-6 mb-8">
-      <div className="flex justify-between items-center mb-4">
-        <PlanTitle title={`Plan ${plan.id}`}/>
-        <DeleteButton onDelete={handleDelete}/>
+    <div className="bg-white shadow-2xl rounded-3xl p-8 mb-10 border border-green-100 transition-transform duration-300">
+      <div className="flex justify-between items-center mb-6">
+        <PlanTitle title={`Plan ${plan.id}`} />
+        <DeleteButton onDelete={handleDelete} />
       </div>
 
-      <div className="mb-6">
-        <h3 className="text-lg font-medium text-gray-700 mb-2">🚜 Datos del Tractor</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          <InputOptions label="Tractor" value={plan.tractor.nombre} options={tractores.map(t => t.nombre)}
-                        onChange={handleUpdateTractor}/>
-          <NumberValue name="Potencia" value={plan.tractor.potencia} unit="HP"/>
-          <NumberValue name="Precio" value={plan.tractor.precioDolar} unit="US$"/>
-          <NumberValue name="Coeficiente conservación" value={plan.tractor.gastoMantenimiento}/>
-          <NumberValue name="Horas útiles" value={plan.tractor.horasVidaUtil} unit="h"/>
-          <NumberValue name="Valor residual" value={plan.tractor.porcentajeValorResidual} unit="%"/>
+      {/* DATOS DEL TRACTOR */}
+      <div className="mb-8">
+        <h3 className="text-xl font-bold text-green-800 mb-4 flex items-center gap-2">
+          <span className="text-2xl">🚜</span>
+          <span>Datos del Tractor</span>
+        </h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <InputOptions
+            label="Tractor"
+            value={plan.tractor.nombre}
+            options={tractores.map((t) => t.nombre)}
+            onChange={handleUpdateTractor}
+          />
+          <NumberValue name="Potencia" value={plan.tractor.potencia} unit="HP" />
+          <NumberValue name="Precio" value={plan.tractor.precioDolar} unit="US$" />
+          <NumberValue name="Coef. conservación" value={plan.tractor.gastoMantenimiento} />
+          <NumberValue name="Horas útiles" value={plan.tractor.horasVidaUtil} unit="h" />
+          <NumberValue name="Valor residual" value={plan.tractor.porcentajeValorResidual} unit="%" />
         </div>
-        <div className="mt-3 bg-green-100 text-green-700 font-semibold p-3 rounded-md">
-          💰 Amortización: {plan.amortizacionTractor} ARS/h | Conservación: {plan.gastoConservacionTractor} ARS/h
-        </div>
-      </div>
-
-      <div className="mb-6">
-        <h3 className="text-lg font-medium text-gray-700 mb-2">🧩 Implemento</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          <InputOptions label="Implemento" value={plan.implemento.nombre} options={implementos.map(i => i.nombre)}
-                        onChange={handleUpdateImplemento}/>
-          <NumberValue name="Consumo" value={plan.implemento.consumoCombustible} unit="lt/h"/>
-          <NumberValue name="Precio" value={plan.implemento.precioDolar} unit="US$"/>
-          <NumberValue name="Coeficiente conservación" value={plan.implemento.gastoMantenimiento}/>
-          <NumberValue name="Horas útiles" value={plan.implemento.horasVidaUtil} unit="h"/>
-          <NumberValue name="Valor residual" value={plan.implemento.porcentajeValorResidual} unit="%"/>
-        </div>
-        <div className="mt-3 bg-green-100 text-green-700 font-semibold p-3 rounded-md">
-          🛢️ Combustible: {plan.costoCombustibleImplemento} ARS/h | Amortización: {plan.amortizacionImplemento} ARS/h |
-          Conservación: {plan.gastoConservacionImplemento} ARS/h
+        <div className="mt-4 bg-green-50 text-green-800 p-4 rounded-lg border border-green-200 shadow-inner flex flex-wrap gap-x-4 gap-y-2">
+          <span>
+            💰 <span className="font-semibold">Amortización:</span>
+            <span className="font-normal"> {plan.amortizacionTractor} ARS/h</span>
+          </span>
+          <span>
+            <span className="font-semibold">Conservación:</span>
+            <span className="font-normal"> {plan.gastoConservacionTractor} ARS/h</span>
+          </span>
         </div>
       </div>
 
-      <div className="text-right text-xl font-bold text-green-600">
-        Costo Total: {plan.costoEconomico.toLocaleString()} ARS/h
+      {/* IMPLEMENTO */}
+      <div className="mb-8">
+        <h3 className="text-xl font-bold text-green-800 mb-4 flex items-center gap-2">
+          <span className="text-2xl">🧩</span>
+          <span>Implemento</span>
+        </h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <InputOptions
+            label="Implemento"
+            value={plan.implemento.nombre}
+            options={implementos.map((i) => i.nombre)}
+            onChange={handleUpdateImplemento}
+          />
+          <NumberValue name="Consumo" value={plan.implemento.consumoCombustible} unit="lt/h" />
+          <NumberValue name="Precio" value={plan.implemento.precioDolar} unit="US$" />
+          <NumberValue name="Coef. conservación" value={plan.implemento.gastoMantenimiento} />
+          <NumberValue name="Horas útiles" value={plan.implemento.horasVidaUtil} unit="h" />
+          <NumberValue name="Valor residual" value={plan.implemento.porcentajeValorResidual} unit="%" />
+        </div>
+        <div className="mt-4 bg-green-50 text-green-800 p-4 rounded-lg border border-green-200 shadow-inner flex flex-wrap gap-x-4 gap-y-2">
+          <span>
+            🛢️ <span className="font-semibold">Combustible:</span>
+            <span className="font-normal"> {plan.costoCombustibleImplemento} ARS/h</span>
+          </span>
+          <span>
+            <span className="font-semibold">Amortización:</span>
+            <span className="font-normal"> {plan.amortizacionImplemento} ARS/h</span>
+          </span>
+          <span>
+            <span className="font-semibold">Conservación:</span>
+            <span className="font-normal"> {plan.gastoConservacionImplemento} ARS/h</span>
+          </span>
+        </div>
+      </div>
+
+      {/* COSTO TOTAL */}
+      <div className="text-right text-2xl font-extrabold text-black border-t pt-6 mt-6">
+        <span className="ml-2">Costo Total:</span>
+        <span className="ml-2">{plan.costoEconomico.toLocaleString()} ARS/h</span>
       </div>
     </div>
   )

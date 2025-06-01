@@ -28,7 +28,7 @@ export const useFertilizante = () => {
 
   const addPlan = () => {
     const fertilizante = fertilizantes[0];
-    const cantTratamientos = 1;
+    const cantTratamientos = 0;
 
     const valoresCalculados = calcularValoresPlanFertilizante(fertilizante, cantTratamientos, valorDolar);
 

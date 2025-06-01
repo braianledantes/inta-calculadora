@@ -1,6 +1,5 @@
 import InputDolar from "../../components/InputDolar/InputDolar.jsx";
 import {CardFertilizacionPlan} from "../../components/CardFertilizacionPlan/CardFertilizacionPlan.jsx";
-import InputOptions from "../../components/InputOptions/InputOptions.jsx";
 import {useContext} from "react";
 import {AppContext} from "../../context/AppContext.jsx";
 import SectionTitle from "../../components/SectionTitle/SectionTitle.jsx";
@@ -42,7 +41,10 @@ export default function SeccionCostosFertilizacion() {
 
   return (
     <div className="bg-gray-100 py-8 my-4">
-      <SectionTitle title="🌱 Costos de Fertilización"/>
+      
+     <div className="flex justify-center gap-3 mb-4 flex-wrap">
+        <SectionTitle title="Costos de Fertilización"/>
+      </div>
 
       <div className="flex flex-wrap justify-center items-center gap-6 mb-8">
         <InputDolar value={valorDolar} onChange={updateDolar} onRefresh={refreshDolar}/>

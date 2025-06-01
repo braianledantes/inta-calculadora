@@ -1,12 +1,23 @@
+import {ChevronDown} from 'lucide-react';
+
 export default function InputOptions({label, value,  options, onChange}) {
   return (
     <div>
       <label className="block text-sm font-medium">{label}</label>
-      <select className="w-full p-2 border border-gray-300 rounded-md hover:cursor-pointer" value={value} onChange={onChange}>
-        {options.map((o, key) => (
-          <option key={key} value={o}>{o}</option>
-        ))}
-      </select>
+      <div className="relative">
+        <select
+          className="w-full p-2 pr-8 border border-gray-300 rounded-md hover:cursor-pointer appearance-none"
+          value={value}
+          onChange={onChange}
+        >
+          {options.map((o, key) => (
+            <option key={key} value={o}>{o}</option>
+          ))}
+        </select>
+        <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg">
+          <ChevronDown/>
+        </span>
+      </div>
     </div>
   );
 }

@@ -10,6 +10,7 @@ import ButtonExportPDF from "../../components/ButtonExportPDF/ButtonExportPDF.js
 import {useRef} from 'react';
 import exportarGrafico from "../../utils/exportarGrafico.jsx";
 
+  
 export default function SeccionCostosSanitizantes() {
   const {
     valorDolar,
@@ -41,7 +42,10 @@ export default function SeccionCostosSanitizantes() {
 
   return (
     <div className="bg-gray-100 py-8 my-4">
-      <SectionTitle title="🧪 Costos de Sanitizantes"/>
+      
+      <div className="flex items-center gap-3 mb-6 justify-center">
+        <SectionTitle title="Costos de Sanitizantes"/>
+      </div>
 
       <div className="flex flex-wrap justify-center items-center gap-6 mb-8">
         <InputDolar value={valorDolar} onChange={updateDolar} onRefresh={refreshDolar}/>

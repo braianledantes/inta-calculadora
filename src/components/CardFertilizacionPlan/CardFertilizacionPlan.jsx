@@ -28,7 +28,10 @@ export function CardFertilizacionPlan({plan, fertilizantes, onUpdate, onDelete})
         <DeleteButton onDelete={handleDelete}/>
       </div>
       <div className="mb-6">
-        <h3 className="text-lg font-medium text-gray-700 mb-2">🌱 Datos del Fertilizante</h3>
+        <h3 className="text-lg font-bold text-green-800 mb-2 flex items-center gap-2">
+          <span className="text-xl">🌱</span>
+          <span>Datos del Fertilizante</span>
+        </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           <InputOptions
             label="Fertilizante"
@@ -42,16 +45,26 @@ export function CardFertilizacionPlan({plan, fertilizantes, onUpdate, onDelete})
         </div>
       </div>
       <div className="mb-6">
-        <h3 className="text-lg font-medium text-gray-700 mb-2">🖋️ Datos del Plan</h3>
+        <h3 className="text-lg font-semibold text-green-800 mb-2 flex items-center gap-2">
+          <span className="text-xl">🖋️</span>
+          <span>Datos del Plan</span>
+        </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           <InputNumber name="Cant. tratamientos" value={plan.cantTratamientos} onChange={handleUpdateCantTratamientos}/>
         </div>
       </div>
-      <div className="mt-3 bg-green-100 text-green-700 font-semibold p-3 rounded-md">
-        🛢️ Costo por tratamiento: {plan.costoTotalPorTratamiento} ARS | Costo : {plan.costoTotalPorHectarea} ARS/ha
+      <div className="mt-4 bg-green-50 text-green-800 p-4 rounded-lg border border-green-200 shadow-inner flex flex-wrap gap-x-4 gap-y-2">
+        <span>
+          <span className="font-semibold">🛢️ Costo por tratamiento:</span>
+          <span className="font-normal"> {plan.costoTotalPorTratamiento} ARS</span>
+        </span>
+        <span>
+          <span className="font-semibold">Costo por ha:</span>
+          <span className="font-normal"> {plan.costoTotalPorHectarea} ARS/ha</span>
+        </span>
       </div>
-      <div className="text-right text-xl font-bold text-green-600">
-        Costo Total: {plan.costoTotalPorHectarea.toLocaleString()} ARS/ha
+      <div className="text-right text-2xl font-extrabold border-t pt-6 mt-6">
+        Costo Total: <span className="ml-2">{plan.costoTotalPorHectarea.toLocaleString()} ARS/ha</span>
       </div>
     </div>
   )
