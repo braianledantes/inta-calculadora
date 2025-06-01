@@ -8,7 +8,9 @@ import {
     SprayCan,
     BarChart3,
     FileDown,
-    UploadCloud
+    UploadCloud,
+    ChevronUp,
+    ChevronDown
 } from "lucide-react";
 
 
@@ -23,13 +25,13 @@ const Home = () => {
                     <h1 className="text-l flex gap-2">
                         <FileWarningIcon className="text-2xl"/>
                         El archivo (.xlsx) que se importe deberá tener una estructura como la siguiente:
+                    </h1>
                         <button
                             onClick={() => setMostrarTablas(!mostrarTablas)}
-                            className="bg-[#036935] hover:bg-[#024c27] text-white px-6 py-3 rounded text-lg shadow-md transition duration-300 ml-4"
+                            className="bg-[#036935] hover:bg-[#024c27] text-white px-6 py-1 rounded rounded-full text-lg shadow-md transition duration-300 ml-4"
                         >
-                            {mostrarTablas ? "Ocultar" : "Ver Ejemplo" }
+                         {mostrarTablas ? ( <> Ocultar  <ChevronUp className="inline-block mr-2" /> </> ) : ( <> Ver Ejemplo <ChevronDown className="inline-block ml-2" /></> )}
                         </button>
-                    </h1>
                 </div>
 
                 {!mostrarTablas && (
@@ -109,7 +111,7 @@ const Home = () => {
                 )}
 
                 {mostrarTablas && (
-                    <div className="border-gray-100 p-4 rounded-xl shadow-lg bg-[#eeeeee] space-y-8">
+                    <div className=" mx-auto w-full max-w-6xl border-lightgray-100 p-4 rounded-xl shadow-lg bg-[#eeeeee] space-y-8">
                         <InfoTablas
                             title="Tractores"
                             headers={[
