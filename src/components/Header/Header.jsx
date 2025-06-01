@@ -21,11 +21,13 @@ const Header = () => {
 
         {/* Logo y Hamburguesa */}
         <div className="flex w-full md:w-auto items-center justify-between">
-          <img
-            src={sipan}
-            alt="Sipan Logo"
-            className="h-[35px] md:h-[54px]"
-          />
+          <Link to={PATHS.HOME}>
+            <img
+              src={sipan}
+              alt="Sipan Logo"
+              className="h-[35px] md:h-[54px] cursor-pointer"
+            />
+          </Link>
           <button
             className="md:hidden ml-auto text-[#036935] text-3xl p-2"
             onClick={() => setOpen(!open)}
