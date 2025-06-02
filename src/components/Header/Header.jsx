@@ -3,7 +3,6 @@ import sipan from '../../assets/Logos_Header.svg';
 import ImportExcel from "../ImportExcel/ImportExcel.jsx";
 import { PATHS } from '../../routes/paths.js';
 import { useState } from "react";
-import { FiMenu, FiX } from "react-icons/fi";
 
 const Header = () => {
   const location = useLocation();
@@ -43,26 +42,13 @@ const Header = () => {
                 className="h-[35px] md:h-[54px] cursor-pointer"
               />
             </Link>
-            <button
-              className="md:hidden ml-auto text-[#036935] text-3xl p-2"
-              onClick={() => setOpen(!open)}
-              aria-label={open ? "Cerrar menú" : "Abrir menú"}
-            >
-              {open ? <FiX /> : <FiMenu />}
-            </button>
+          </div>
+          <div className="absolute top-0 right-0 h-full hidden md:flex items-center justify-center px-6">
+            <div className="h-full flex items-center justify-center px-4 border-l border-[#ccc] transition-all duration-300 group hover:bg-gradient-to-b hover:from-orange-500 hover:to-orange-600 cursor-pointer">
+              <span className="text-black text-lg transition-all duration-300 group-hover:text-white">Calculadoras</span>
+            </div>
           </div>
 
-          {/* Navigation */}
-          <nav
-            className={`
-              ${open ? "flex" : "hidden"}
-              md:flex flex-col md:flex-row items-center gap-2 text-sm md:text-base font-semibold w-full md:w-auto
-              bg-white md:bg-transparent rounded-xl md:rounded-none shadow md:shadow-none mt-2 md:mt-0 p-4 md:p-0
-              absolute md:static top-20 left-0 md:top-auto md:left-auto z-40
-            `}
-          >
-            <ImportExcel />
-          </nav>
         </div>
       </header>
 
@@ -93,6 +79,9 @@ const Header = () => {
             </Link>
           ))}
         </div>
+          <div className="p-4 flex justify-center">
+            <ImportExcel />
+          </div>
       </div>
     </>
   );
