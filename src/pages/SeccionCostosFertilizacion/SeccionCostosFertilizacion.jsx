@@ -5,7 +5,7 @@ import {AppContext} from "../../context/AppContext.jsx";
 import SectionTitle from "../../components/SectionTitle/SectionTitle.jsx";
 import AddPlanButton from "../../components/AddPlanButton/AddPlanButton.jsx";
 import SelectorEstadoFenologico from "../../components/SelectorEstadoFenologico/SelectorEstadoFenologico.jsx";
-import Grafico from "../../components/Grafico/Grafico.jsx";
+import GraficoFertilizacion from "../../components/Grafico/GraficoFertilizacion.jsx";
 import ButtonExportPDF from "../../components/ButtonExportPDF/ButtonExportPDF.jsx"
 import {useRef} from 'react';
 import exportarGrafico from "../../utils/exportarGrafico.jsx";
@@ -41,8 +41,13 @@ export default function SeccionCostosFertilizacion() {
     }
   }, [planes.length, lastPlanRef]);
 
+  console.log("Planes:", planes);
+
   const chartData = planes.map(p => ({
    name: `Plan ${p.id}`,
+   dosisPorHora: p.fertilizante.dosisAplicacion,
+   precioEnvase: p.fertilizante.precioEnvaseDolar,
+   cantTratamientos: p.cantTratamientos,
    total: p.costoTotalPorHectarea, 
   }))
   const chartRef = useRef();
@@ -78,7 +83,7 @@ export default function SeccionCostosFertilizacion() {
         <div className="lg:basis-1/3 order-2">
         <div  className="sticky top-50 bottom-30" style={{ maxHeight: 'calc(100vh - 80px)', overflowY: 'auto' }}>
           <div ref={chartRef}>
-            <Grafico data={chartData} title={"Costo Fertilizacion"}/>
+            <GraficoFertilizacion data={chartData} title={"Costo Fertilizacion"}/>
           </div> 
          <ButtonExportPDF onExport={() => exportarGrafico(chartRef, { fertilizacionPlans: planes ,  valorDolar: valorDolar, estadoFenologico: estadoFenologicoFertilizante})} />
         </div>

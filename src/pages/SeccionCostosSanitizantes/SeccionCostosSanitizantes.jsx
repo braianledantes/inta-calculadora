@@ -5,11 +5,10 @@ import {AppContext} from "../../context/AppContext.jsx";
 import AddPlanButton from "../../components/AddPlanButton/AddPlanButton.jsx";
 import SectionTitle from "../../components/SectionTitle/SectionTitle.jsx";
 import SelectorEstadoFenologico from "../../components/SelectorEstadoFenologico/SelectorEstadoFenologico.jsx";
-import Grafico from '../../components/Grafico/Grafico.jsx'
+import GraficoSanitizante from '../../components/Grafico/GraficosSanitizante.jsx'
 import ButtonExportPDF from "../../components/ButtonExportPDF/ButtonExportPDF.jsx"
 import {useRef} from 'react';
 import exportarGrafico from "../../utils/exportarGrafico.jsx";
-
   
 export default function SeccionCostosSanitizantes() {
   const {
@@ -42,9 +41,15 @@ export default function SeccionCostosSanitizantes() {
     }
   }, [planes.length, lastPlanRef]);
 
+  console.log("Planes sanitizantes:", planes);
+
   const chartData = planes.map(p => ({
    name: `Plan ${p.id}`,
-   total: p.costoTotalPorHectarea, 
+   cantTratamientos: p.cantTratamientos,
+   precio: p.sanitizante.precioEnvaseDolar,
+   dosisPorHa: p.dosisAplicacion,
+   volumenPorHa: p.volumenPorHectarea,
+   total: p.costoTotalPorHectarea 
   }))
   const chartRef = useRef();
   
@@ -78,9 +83,11 @@ export default function SeccionCostosSanitizantes() {
      {planes.length >=2 &&(
         <div className="lg:basis-1/3 order-2">
         <div className="sticky top-50 bottom-30" style={{ maxHeight: 'calc(100vh - 80px)', overflowY: 'auto' }}>
+        
         <div ref={chartRef}>
-          <Grafico data={chartData} title={"Costo Sanitizante"}/>
+          <GraficoSanitizante data={chartData} title={"Costo Sanitizante"}/>
         </div>
+
         <ButtonExportPDF onExport={() => exportarGrafico(chartRef, { sanitizantePlans: planes ,  valorDolar: valorDolar, estadoFenologico: estadoFenologicoSanitizante })} />
       </div> 
         </div>

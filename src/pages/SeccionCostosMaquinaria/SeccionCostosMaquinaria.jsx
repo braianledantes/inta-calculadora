@@ -6,7 +6,7 @@ import {AppContext} from "../../context/AppContext.jsx";
 import SectionTitle from "../../components/SectionTitle/SectionTitle.jsx";
 import AddPlanButton from "../../components/AddPlanButton/AddPlanButton.jsx";
 import SelectorEstadoFenologico from "../../components/SelectorEstadoFenologico/SelectorEstadoFenologico.jsx";
-import Grafico from '../../components/Grafico/Grafico.jsx'
+import GraficoMaquinaria from '../../components/Grafico/GraficoMaquinaria.jsx'
 import ButtonExportPDF from "../../components/ButtonExportPDF/ButtonExportPDF.jsx"
 import exportarGrafico from "../../utils/exportarGrafico.jsx";
 
@@ -46,9 +46,8 @@ export default function SeccionCostosMaquinaria() {
 
   const chartData = planes.map(p => ({
    name: `Plan ${p.id}`,
-   total: p.costoEconomico, 
+   total: p.costoEconomico 
   }))
-  
 
   const chartRef = useRef();
 
@@ -60,13 +59,16 @@ export default function SeccionCostosMaquinaria() {
     </div>
 
       <div className="flex flex-wrap justify-center items-center gap-6 mb-8">
+        
         <InputDolar value={valorDolar} onChange={updateDolar} onRefresh={refreshDolar}/>
+
         <SelectorEstadoFenologico
           estados={estadosFenologicos}
           estadoSeleccionado={estadoFenologicoMaquinaria}
           setEstadoSeleccionado={setEstadoFenologicoMaquinaria}
         />
         <InputGasoil value={valorGasoilina} onChange={updateGasolina}/>
+        
       </div>
 
       <div className="flex flex-col lg:flex-row gap-2">
@@ -77,16 +79,20 @@ export default function SeccionCostosMaquinaria() {
         <AddPlanButton text="Agregar nuevo plan de maquinaria" onClick={handleAddPlan}/>
       </div>
 
-      {planes.length >=2 &&(
+      {planes.length >= 2 &&(
+        
         <div className="lg:basis-1/3 order-2">
-        <div  className="sticky top-50 bottom-30" style={{ maxHeight: 'calc(100vh - 80px)', overflowY: 'auto' }}>
-          <div ref={chartRef}>
-            <Grafico data={chartData} title={"Costo maquinaria"}/>
+          <div  className="sticky top-50 bottom-30" style={{ maxHeight: 'calc(100vh - 80px)', overflowY: 'auto' }}>
+            
+            <div ref={chartRef}>
+              <GraficoMaquinaria data={chartData} title={"Costo maquinaria"}/>
+            </div>
+
+            <ButtonExportPDF onExport={() => exportarGrafico(chartRef, { maquinariaPlans: planes ,  valorDolar: valorDolar, estadoFenologico: estadoFenologicoMaquinaria, valorGasoil: valorGasoilina })} />
           </div>
-          <ButtonExportPDF onExport={() => exportarGrafico(chartRef, { maquinariaPlans: planes ,  valorDolar: valorDolar, estadoFenologico: estadoFenologicoMaquinaria, valorGasoil: valorGasoilina })} />
         </div>
-        </div>
-      ) }
+      )}
+
       </div>
     </div>
   )

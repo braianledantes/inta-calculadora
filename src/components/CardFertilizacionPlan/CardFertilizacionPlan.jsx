@@ -4,9 +4,9 @@ import NumberValue from "../NumberValue/NumberValue.jsx";
 import InputNumber from "../InputNumber/InputNumber.jsx";
 import PlanTitle from "../PlanTitle/PlanTitle.jsx";
 import {forwardRef} from "react";
+import NumberValueModify from "../NumberValueModify/NumberValueModify.jsx";
 
-export const CardFertilizacionPlan = forwardRef(function CardMaquinariaPlan({plan, fertilizantes, onUpdate, onDelete}, ref) {
-
+export const CardFertilizacionPlan = forwardRef(function CardFertilizacionPlan({plan, fertilizantes, onUpdate, onDelete}, ref) {
   const handleDelete = () => {
     onDelete(plan.id);
   }
@@ -22,6 +22,18 @@ export const CardFertilizacionPlan = forwardRef(function CardMaquinariaPlan({pla
     onUpdate(plan.id, plan.fertilizante, cantTratamientos);
   }
 
+  const onChangePrecio = (e) => {
+    const newPrecio = e.target.value;
+    const updatedFertilizante = {...plan.fertilizante, precioEnvaseDolar: newPrecio};
+    onUpdate(plan.id, updatedFertilizante, plan.cantTratamientos);
+  }
+
+  const onChangeDosisPorHa = (e) => {
+    const newDosis = e.target.value;
+    const updatedFertilizante = {...plan.fertilizante, dosisAplicacion: newDosis};
+    onUpdate(plan.id, updatedFertilizante, plan.cantTratamientos);  
+  }
+
   return (
    <div className="max-w-4xl mx-auto px-2" ref={ref}>
     <div className="bg-white shadow-lg rounded-xl p-6 mb-8">
@@ -34,15 +46,16 @@ export const CardFertilizacionPlan = forwardRef(function CardMaquinariaPlan({pla
           <span>Datos del Fertilizante</span>
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+
           <InputOptions
             label="Fertilizante"
             value={plan.fertilizante.nombre}
             options={fertilizantes.map(f => f.nombre)}
             onChange={handleUpdateFertilizante}
           />
-          <NumberValue name="Precio" value={plan.fertilizante.precioEnvaseDolar} unit="US$"/>
-          <NumberValue name="Dosis por ha" value={plan.fertilizante.dosisAplicacion}
-                       unit={plan.fertilizante.unidadDosisAplicacion}/>
+          <NumberValueModify name="Precio" value={plan.fertilizante.precioEnvaseDolar} unit="US$" onChange={onChangePrecio}/>
+          <NumberValueModify name="Dosis por ha" value={plan.fertilizante.dosisAplicacion} unit={plan.fertilizante.unidadDosisAplicacion} onChange={onChangeDosisPorHa}/>
+
         </div>
       </div>
       <div className="mb-6">

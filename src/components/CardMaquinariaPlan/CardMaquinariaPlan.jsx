@@ -3,14 +3,31 @@ import DeleteButton from "../DeleteButton/DeleteButton.jsx";
 import InputOptions from "../InputOptions/InputOptions.jsx";
 import NumberValue from "../NumberValue/NumberValue.jsx";
 import PlanTitle from "../PlanTitle/PlanTitle.jsx";
+import NumberValueModify from "../NumberValueModify/NumberValueModify.jsx";
 
 export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
   { plan, tractores, implementos, onUpdate, onDelete },
   ref
-) {
+  ) {
   const handleDelete = () => {
     onDelete(plan.id);
   }
+
+  //TODO : para poner el precio anterior en el input
+  const [prevPrecioImplemento, setPrevPrecioImplemento] = React.useState(plan.implemento.precioDolar);
+  const [prevPrecioTractor, setPrevPrecioTractor] = React.useState(plan.tractor.precioDolar);
+
+  const onChangePrecioMaquinaria = (e) => {
+    const newPrecio = parseFloat(e.target.value);
+    const updatedTractor = { ...plan.tractor, precioDolar: newPrecio };
+    onUpdate(plan.id, updatedTractor, plan.implemento);
+  };
+
+  const onChangePrecioImplemento = (e) => {
+    const newPrecio = parseFloat(e.target.value);
+    const updatedImplemento = { ...plan.implemento, precioDolar: newPrecio };
+    onUpdate(plan.id, plan.tractor, updatedImplemento);
+  };
 
   const handleUpdateTractor = (e) => {
     const tractorName = e.target.value;
@@ -38,17 +55,20 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
           <span>Datos del Tractor</span>
         </h3>
         <div className="grid lg:grid-cols-6 sm:grid-cols-2 md:grid-cols-3 gap-5">
+
           <InputOptions
             label="Tractor"
             value={plan.tractor.nombre}
             options={tractores.map((t) => t.nombre)}
             onChange={handleUpdateTractor}
           />
+
           <NumberValue name="Potencia" value={plan.tractor.potencia} unit="HP" />
-          <NumberValue name="Precio" value={plan.tractor.precioDolar} unit="US$" />
+          <NumberValueModify name="Precio" value={plan.tractor.precioDolar} unit="US$" onChange={onChangePrecioMaquinaria}/>
           <NumberValue name="Coef. conserv." value={plan.tractor.gastoMantenimiento} />
           <NumberValue name="Horas útiles" value={plan.tractor.horasVidaUtil} unit="h" />
           <NumberValue name="Valor residual" value={plan.tractor.porcentajeValorResidual} unit="%" />
+
         </div>
         <div className="mt-4 bg-green-50 text-green-800 p-4 rounded-lg border border-green-200 shadow-inner flex flex-wrap gap-x-4 gap-y-2">
           <span>
@@ -68,6 +88,7 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
           <span>Implemento</span>
         </h3>
         <div className="grid lg:grid-cols-6 sm:grid-cols-2 md:grid-cols-3 gap-5">
+
           <InputOptions
             label="Implemento"
             value={plan.implemento.nombre}
@@ -75,10 +96,14 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
             onChange={handleUpdateImplemento}
           />
           <NumberValue name="Consumo" value={plan.implemento.consumoCombustible} unit="lt/h" />
-          <NumberValue name="Precio" value={plan.implemento.precioDolar} unit="US$" />
+
+          {/* <NumberValue name="Precio" value={plan.implemento.precioDolar} unit="US$" /> */}
+          <NumberValueModify name="Precio" value={plan.implemento.precioDolar} unit="US$" onChange={onChangePrecioImplemento}/>
+
           <NumberValue name="Coef. conserv." value={plan.implemento.gastoMantenimiento} />
           <NumberValue name="Horas útiles" value={plan.implemento.horasVidaUtil} unit="h" />
           <NumberValue name="Valor residual" value={plan.implemento.porcentajeValorResidual} unit="%" />
+          
         </div>
         <div className="mt-4 bg-green-50 text-green-800 p-4 rounded-lg border border-green-200 shadow-inner flex flex-wrap gap-x-4 gap-y-2">
           <span>

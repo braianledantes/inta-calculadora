@@ -68,6 +68,7 @@ const Header = () => {
 
       {/* Cards Section */}
       <div className="bg-[#eeeeee] shadow-2xl rounded-2xl">
+        <h1 className="text-center text-4xl pt-10">Elije alguna calculadora :</h1>
         <div className="flex flex-wrap justify-center gap-3">
           {cards.map(({ path, label, bg }) => (
             <Link key={path} to={path} onClick={() => setOpen(false)}>

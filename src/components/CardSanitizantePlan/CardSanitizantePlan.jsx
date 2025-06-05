@@ -1,9 +1,9 @@
 import {forwardRef, useMemo, useState} from "react";
 import DeleteButton from "../DeleteButton/DeleteButton.jsx";
 import InputOptions from "../InputOptions/InputOptions.jsx";
-import NumberValue from "../NumberValue/NumberValue.jsx";
 import InputNumber from "../InputNumber/InputNumber.jsx";
 import PlanTitle from "../PlanTitle/PlanTitle.jsx";
+import NumberValueModify from "../NumberValueModify/NumberValueModify.jsx";
 
 export const CardSanitizantePlan = forwardRef(function CardSanitizantePlan({plan, sanitizantes, onUpdate, onDelete}, ref) {
   const [tipoSeleccionado, setTipoSeleccionado] = useState(
@@ -36,9 +36,22 @@ export const CardSanitizantePlan = forwardRef(function CardSanitizantePlan({plan
     }
   };
 
+
+  const onChangeDosisPorHa = (e) => {
+    const newDosis = parseFloat(e.target.value) || 0;
+    const sanitizante = { ...plan.sanitizante, dosisAplicacion: newDosis };
+    onUpdate(plan.id, sanitizante, plan.volumenPorHectarea, plan.cantTratamientos);
+  }
+
   const handleUpdateSanitizante = (e) => {
     const sanitizanteName = e.target.value;
     const sanitizante = sanitizantesFiltrados.find(f => f.nombre === sanitizanteName);
+    onUpdate(plan.id, sanitizante, plan.volumenPorHectarea, plan.cantTratamientos);
+  };
+
+  const onChangePrecioEnvaseDolar = (e) => {
+    const newPrecio = parseFloat(e.target.value) || 0;
+    const sanitizante = { ...plan.sanitizante, precioEnvaseDolar: newPrecio };
     onUpdate(plan.id, sanitizante, plan.volumenPorHectarea, plan.cantTratamientos);
   };
 
@@ -64,21 +77,24 @@ export const CardSanitizantePlan = forwardRef(function CardSanitizantePlan({plan
           <span>Datos del Sanitizante</span>
         </h3>
         <div className="grid lg:grid-cols-4 sm:grid-cols-2 md:grid-cols-3 gap-4">
+
           <InputOptions
             label="Tipo"
             value={tipoSeleccionado}
             options={tipos}
             onChange={handleUpdateTipo}
           />
+
           <InputOptions
             label="Sanitizante"
             value={plan.sanitizante.nombre}
             options={sanitizantesFiltrados.map(f => f.nombre)}
             onChange={handleUpdateSanitizante}
           />
-          <NumberValue name="Precio" value={plan.sanitizante.precioEnvaseDolar} unit="US$"/>
-          <NumberValue name="Dosis por ha" value={plan.sanitizante.dosisAplicacion}
-                       unit={plan.sanitizante.unidadDosisAplicacion}/>
+
+          <NumberValueModify  name="Precio" value={plan.sanitizante.precioEnvaseDolar} unit="US$" onChange={onChangePrecioEnvaseDolar}/>
+          <NumberValueModify name="Dosis por ha" value={plan.sanitizante.dosisAplicacion} unit={plan.sanitizante.unidadDosisAplicacion} onChange={onChangeDosisPorHa}/>
+
         </div>
       </div>
       <div className="mb-6">
