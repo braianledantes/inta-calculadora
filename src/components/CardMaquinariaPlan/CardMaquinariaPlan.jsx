@@ -4,6 +4,7 @@ import InputOptions from "../InputOptions/InputOptions.jsx";
 import NumberValue from "../NumberValue/NumberValue.jsx";
 import PlanTitle from "../PlanTitle/PlanTitle.jsx";
 import NumberValueModify from "../NumberValueModify/NumberValueModify.jsx";
+// import 
 
 export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
   { plan, tractores, implementos, onUpdate, onDelete },
@@ -127,6 +128,7 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
         <span className="ml-2">{plan.costoEconomico.toLocaleString()} ARS/h</span>
       </div>
     </div>
+
    </div>
   )
 });

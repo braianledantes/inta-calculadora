@@ -9,6 +9,7 @@ import SelectorEstadoFenologico from "../../components/SelectorEstadoFenologico/
 import GraficoMaquinaria from '../../components/Grafico/GraficoMaquinaria.jsx'
 import ButtonExportPDF from "../../components/ButtonExportPDF/ButtonExportPDF.jsx"
 import exportarGrafico from "../../utils/exportarGrafico.jsx";
+import ExportButton from "../../components/ButtonExportExcel/ButtonExportExcel.jsx";
 
 export default function SeccionCostosMaquinaria() {
   const {
@@ -89,6 +90,10 @@ export default function SeccionCostosMaquinaria() {
             </div>
 
             <ButtonExportPDF onExport={() => exportarGrafico(chartRef, { maquinariaPlans: planes ,  valorDolar: valorDolar, estadoFenologico: estadoFenologicoMaquinaria, valorGasoil: valorGasoilina })} />
+          
+          <div className="flex justify-center mt-4">
+            <ExportButton />
+          </div>
           </div>
         </div>
       )}

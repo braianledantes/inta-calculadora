@@ -129,6 +129,7 @@ const Home = () => {
                             ]}
                         />
 
+
                         <InfoTablas
                             title="Implementos"
                             headers={[
@@ -192,7 +193,9 @@ const Home = () => {
                     </div>
                 )}
             </div>
+            
         </>
+        
     );
 };
 
