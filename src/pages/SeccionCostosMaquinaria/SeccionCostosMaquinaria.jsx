@@ -45,6 +45,8 @@ export default function SeccionCostosMaquinaria() {
     }
   }, [planes.length, lastPlanRef]);
 
+  console.log('Planes de maquinaria:', planes);
+
   const chartData = planes.map(p => ({
    name: `Plan ${p.id}`,
    total: p.costoEconomico 

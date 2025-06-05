@@ -43,7 +43,7 @@ export const useFertilizante = () => {
     setPlanes([...planes, newPlan]);
   }
 
-  const updatePlan = (id, fertilizante, cantTratamientos) => {
+  const updatePlan = (id, fertilizante, cantTratamientos) => {j
     const valoresCalculados = calcularValoresPlanFertilizante(fertilizante, cantTratamientos, valorDolar);
 
     const updatedPlan = {

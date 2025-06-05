@@ -4,6 +4,7 @@ import ImportExcel from "../ImportExcel/ImportExcel.jsx";
 import { PATHS } from '../../routes/paths.js';
 import { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
+import ButtonExportExcel from "../ButtonExportExcel/ButtonExportExcel.jsx";
 
 const Header = () => {
   const location = useLocation();
@@ -62,6 +63,8 @@ const Header = () => {
             `}
           >
             <ImportExcel />
+            <ButtonExportExcel />
+
           </nav>
         </div>
       </header>
