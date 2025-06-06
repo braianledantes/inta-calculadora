@@ -3,16 +3,12 @@ import DeleteButton from "../DeleteButton/DeleteButton.jsx";
 import InputOptions from "../InputOptions/InputOptions.jsx";
 import NumberValue from "../NumberValue/NumberValue.jsx";
 import PlanTitle from "../PlanTitle/PlanTitle.jsx";
-import NumberValueModify from "../NumberValueModify/NumberValueModify.jsx";
-import { RefreshCcw } from "lucide-react";
-import {ButtonRefreshDolar} from "../ButtonRefreshDolar/ButtonRefreshDolar.jsx";
+import {ContainerInputDolarRefresh} from "../ContainerInputDolarRefresh/ContainerInputDolarRefresh.jsx";
 
-// import 
 
 export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
-  { plan, tractores, implementos, onUpdate, onDelete },
-  ref
-  ) {
+  { plan, tractores, implementos, onUpdate, onDelete },ref) {
+    
   const handleDelete = () => {
     onDelete(plan.id);
   }
@@ -78,18 +74,11 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
 
           <NumberValue name="Potencia" value={plan.tractor.potencia} unit="HP" />
 
-          <div className="flex items-center gap-2">
-            <NumberValueModify
-              name="Precio"
-              value={plan.tractor.precioDolar}
-              unit="US$"
-              onChange={onChangePrecioMaquinaria}
-            />
-            
-            <ButtonRefreshDolar onClick={onRefreshDolarMaquinaria} className={"flex items-center justify-center p-2 bg-green-500 hover:bg-green-600 text-white rounded-full shadow transition-colors mt-5"} 
-            title={"Sincronizar valor del dólar"} style={"minWidth: 36, minHeight: 36"} content={<RefreshCcw size={20} />}/>
-
-          </div>
+          <ContainerInputDolarRefresh
+            value={plan.tractor.precioDolar}
+            onChange={onChangePrecioMaquinaria}
+            onRefresh={onRefreshDolarMaquinaria}
+          />
 
           <NumberValue name="Coef. conserv." value={plan.tractor.gastoMantenimiento} />
           <NumberValue name="Horas útiles" value={plan.tractor.horasVidaUtil} unit="h" />
@@ -125,10 +114,11 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
           />
           <NumberValue name="Consumo" value={plan.implemento.consumoCombustible} unit="lt/h" />
 
-          <div className="flex items-center gap-2">
-            <NumberValueModify name="Precio" value={plan.implemento.precioDolar} unit="US$" onChange={onChangePrecioImplemento}/>
-            <ButtonRefreshDolar onClick={onRefreshDolarImplemento} className={"flex items-center justify-center p-2 bg-green-500 hover:bg-green-600 text-white rounded-full shadow transition-colors mt-5"}             title={"Sincronizar valor del dólar"} style={"minWidth: 36, minHeight: 36"} content={<RefreshCcw size={20} />}/>
-          </div>
+          <ContainerInputDolarRefresh
+            value={plan.implemento.precioDolar}
+            onChange={onChangePrecioImplemento}
+            onRefresh={onRefreshDolarImplemento}
+          />
 
           <NumberValue name="Coef. conserv." value={plan.implemento.gastoMantenimiento} />
           <NumberValue name="Horas útiles" value={plan.implemento.horasVidaUtil} unit="h" />

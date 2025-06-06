@@ -1,12 +1,15 @@
 import DeleteButton from "../DeleteButton/DeleteButton.jsx";
 import InputOptions from "../InputOptions/InputOptions.jsx";
-import NumberValue from "../NumberValue/NumberValue.jsx";
 import InputNumber from "../InputNumber/InputNumber.jsx";
 import PlanTitle from "../PlanTitle/PlanTitle.jsx";
 import {forwardRef} from "react";
+import {useState} from "react";
+import {ContainerInputDolarRefresh} from "../ContainerInputDolarRefresh/ContainerInputDolarRefresh.jsx";
 import NumberValueModify from "../NumberValueModify/NumberValueModify.jsx";
 
 export const CardFertilizacionPlan = forwardRef(function CardFertilizacionPlan({plan, fertilizantes, onUpdate, onDelete}, ref) {
+  const [prevPrecioFertilizacion, setPrevPrecioFertilizacion] = useState(plan.fertilizante.precioEnvaseDolar);
+
   const handleDelete = () => {
     onDelete(plan.id);
   }
@@ -25,6 +28,11 @@ export const CardFertilizacionPlan = forwardRef(function CardFertilizacionPlan({
   const onChangePrecio = (e) => {
     const newPrecio = e.target.value;
     const updatedFertilizante = {...plan.fertilizante, precioEnvaseDolar: newPrecio};
+    onUpdate(plan.id, updatedFertilizante, plan.cantTratamientos);
+  }
+
+  const onRefreshDolarFertilizante = () => {
+    const updatedFertilizante = {...plan.fertilizante, precioEnvaseDolar: prevPrecioFertilizacion};
     onUpdate(plan.id, updatedFertilizante, plan.cantTratamientos);
   }
 
@@ -53,7 +61,13 @@ export const CardFertilizacionPlan = forwardRef(function CardFertilizacionPlan({
             options={fertilizantes.map(f => f.nombre)}
             onChange={handleUpdateFertilizante}
           />
-          <NumberValueModify name="Precio" value={plan.fertilizante.precioEnvaseDolar} unit="US$" onChange={onChangePrecio}/>
+          
+          <ContainerInputDolarRefresh
+            value={plan.fertilizante.precioEnvaseDolar}
+            onChange={onChangePrecio}
+            onRefresh={onRefreshDolarFertilizante}
+          />
+
           <NumberValueModify name="Dosis por ha" value={plan.fertilizante.dosisAplicacion} unit={plan.fertilizante.unidadDosisAplicacion} onChange={onChangeDosisPorHa}/>
 
         </div>
