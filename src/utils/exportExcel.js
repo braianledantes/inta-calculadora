@@ -10,6 +10,12 @@ import { saveAs } from 'file-saver';
  */
 export function exportFormToExcel(planesMaquinaria, planesFertilizantes, planesSanitizantes, fileName = 'datos') {
   // Normaliza cada parámetro a array
+  console.log('Exportando a Excel:', {
+    planesMaquinaria,
+    planesFertilizantes,
+    planesSanitizantes,
+    fileName
+  });
   const dataMaquinaria   = Array.isArray(planesMaquinaria)   ? planesMaquinaria   : [planesMaquinaria];
   const dataFertilizantes= Array.isArray(planesFertilizantes)? planesFertilizantes: [planesFertilizantes];
   const dataSanitizantes  = Array.isArray(planesSanitizantes)  ? planesSanitizantes  : [planesSanitizantes];

@@ -45,7 +45,7 @@ export default function SeccionCostosMaquinaria() {
     }
   }, [planes.length, lastPlanRef]);
 
-  console.log('Planes de maquinaria:', planes);
+  // console.log('Planes de maquinaria:', planes);
 
   const chartData = planes.map(p => ({
    name: `Plan ${p.id}`,
@@ -93,9 +93,6 @@ export default function SeccionCostosMaquinaria() {
 
             <ButtonExportPDF onExport={() => exportarGrafico(chartRef, { maquinariaPlans: planes ,  valorDolar: valorDolar, estadoFenologico: estadoFenologicoMaquinaria, valorGasoil: valorGasoilina })} />
           
-          <div className="flex justify-center mt-4">
-            <ExportButton />
-          </div>
           </div>
         </div>
       )}

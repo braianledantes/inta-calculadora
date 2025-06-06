@@ -5,9 +5,11 @@ import { FaFileExcel } from "react-icons/fa";
 
 export default function ExportButton() {
  const hooks = useContext(AppContext);
+//  console.log('hooks', hooks);
  const { planes: planesMaquinaria } = hooks.maquinaria;
- const { planes: planesFertilizantes } = hooks.maquinaria;
- const { planes: planesSanitizantes } = hooks.maquinaria;
+ const { planes: planesFertilizantes } = hooks.fertilizantes;
+ const { planes: planesSanitizantes } = hooks.sanitizantes;
+ const { planes: planesEstadosFenologicos } = hooks.estadosFenologicos;
  // console.log('existo');
 
  // TODO: a exportFormToExcel le envias todos los planes para que imprima una página por seccion (maquinaria, sanitizantes, fertilizantes)
