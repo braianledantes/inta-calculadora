@@ -8,13 +8,11 @@ export default function ExportButton() {
     const hooks = useContext(AppContext);
     // console.log('hooks', hooks);
 
-    const { planes : planesMaquinaria } = hooks.maquinaria;
+    const { planes: planesMaquinaria, valorDolar, valorGasoilina } = hooks.maquinaria;
     const { planes: planesFertilizantes } = hooks.fertilizantes;
     const { planes: planesSanitizantes } = hooks.sanitizantes;
     const { planes: planesEstadosFenologicos } = hooks.estadosFenologicos;
-    const { planes: valorDolar } = hooks.maquinaria.valorDolar;
-    const { planes: valorGasoilina } = hooks.maquinaria.valorGasoilina;
-    
+
     const fileName = `plan-agricola-${new Date().toISOString().split("T")[0]}`;
 
     const noHayDatos =
@@ -22,8 +20,7 @@ export default function ExportButton() {
     (!planesFertilizantes || planesFertilizantes.length === 0) &&
     (!planesSanitizantes || planesSanitizantes.length === 0) &&
     (!planesEstadosFenologicos || planesEstadosFenologicos.length === 0) &&
-    (!valorDolar || valorDolar.length === 0) &&
-    (!valorGasoilina || valorGasoilina.length === 0);
+    (valorDolar == null) && (valorGasoilina == null);
 
     if (noHayDatos) return null;
 
@@ -34,7 +31,7 @@ export default function ExportButton() {
         <button
             disabled={noHayDatos}
             className={`${ noHayDatos ? "bg-gray-400 cursor-not-allowed" : "bg-green-600 hover:bg-green-700"} text-white px-4 py-2 rounded-lg transition-colors duration-300 font-semibold shadow flex items-center gap-2 uppercase`}
-            onClick={() => exportFormToExcel(planesMaquinaria, planesFertilizantes, planesSanitizantes, planesEstadosFenologicos, valorDolar, valorGasoilina, fileName)}>
+            onClick={() => exportFormToExcel(planesMaquinaria, planesFertilizantes, planesSanitizantes, planesEstadosFenologicos,  valorDolar, valorGasoilina,  fileName)}>
 
             <FaFileExcel style={{ transform: "scaleX(-1)" }} />
             Exportar Excel

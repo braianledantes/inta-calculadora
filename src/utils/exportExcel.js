@@ -37,7 +37,7 @@ export function exportFormToExcel(planesMaquinaria, planesFertilizantes, planesS
       'Amortización $/hora': item.amortizacionImplemento || '',
       'Costo Combustible $/hora': item.costoCombustibleImplemento || '0',
       'Gasto conservación $/hora': item.gastoConservacionImplemento || '0',
-      'Costo Económico $/hora': item.costoEconomico || ''
+      'Costo Económico $/hora': '' 
     }));
 
     // Agregar el tractor como primera fila si existe
@@ -58,6 +58,24 @@ export function exportFormToExcel(planesMaquinaria, planesFertilizantes, planesS
 
     const wsMaquinaria = XLSX.utils.json_to_sheet(maquinariaRows);
 
+    wsMaquinaria['G2'] = { f: `((B2-(B2*E2))/D2)*${valorDolar}` };
+
+    if (maquinariaRows.length >= 2) {
+      wsMaquinaria['J3'] = {f: 'G3+H3+I2+I3+G2'};
+    }
+
+    const ultimaFila = maquinariaRows.length + 2; 
+
+    wsMaquinaria[`A${ultimaFila}`] = { v: 'Gasoil $/litro' };
+    wsMaquinaria[`B${ultimaFila}`] = { v: valorGasoilina };
+    wsMaquinaria[`C${ultimaFila}`] = { v: 'cotización dólar' }; 
+    wsMaquinaria[`D${ultimaFila}`] = { v: valorDolar }; 
+    wsMaquinaria[`E${ultimaFila}`] = { v: 'potencia CV' };
+    wsMaquinaria[`F${ultimaFila}`] = { v: dataMaquinaria[0]?.tractor?.potencia || '' };
+    const range = XLSX.utils.decode_range(wsMaquinaria['!ref']);
+    range.e.r = ultimaFila - 1;
+    wsMaquinaria['!ref'] = XLSX.utils.encode_range(range);
+    
     XLSX.utils.book_append_sheet(workbook, wsMaquinaria, 'Maquinaria');
   }
 
