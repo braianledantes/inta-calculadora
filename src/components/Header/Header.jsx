@@ -15,6 +15,7 @@ const ICONS = {
 };
 
 const Header = () => {
+
   const location = useLocation();
   const [open, setOpen] = useState(false);
 
@@ -32,20 +33,23 @@ const Header = () => {
 
           {/* Logo & menú hamburguesa */}
           <div className="flex w-full md:w-auto items-center justify-between">
+
             <Link to={PATHS.HOME}>
               <img
                 src={sipan}
                 alt="Sipan Logo"
-                className="h-[35px] md:h-[54px] cursor-pointer"
-              />
+                className="h-[35px] md:h-[54px] cursor-pointer"/>
             </Link>
+            
             <button
               className="md:hidden ml-auto text-[#036935] text-3xl p-2"
               onClick={() => setOpen(!open)}
-              aria-label={open ? "Cerrar menú" : "Abrir menú"}
-            >
+              aria-label={open ? "Cerrar menú" : "Abrir menú"}>
+
               {open ? <FiX /> : <FiMenu />}
+
             </button>
+
           </div>
 
           {/* Navegación */}
@@ -54,11 +58,11 @@ const Header = () => {
               ${open ? "flex" : "hidden"}
               md:flex flex-col md:flex-row items-center gap-2 text-sm md:text-base font-semibold w-full md:w-auto
               bg-white md:bg-transparent rounded-xl md:rounded-none shadow md:shadow-none mt-2 md:mt-0 p-4 md:p-0
-              absolute md:static top-20 left-0 md:top-auto md:left-auto z-40
-            `}
-          >
+              absolute md:static top-20 left-0 md:top-auto md:left-auto z-40`}>
+
             <ImportExcel />
             <ButtonExportExcel />
+
           </nav>
         </div>
       </header>
@@ -72,22 +76,26 @@ const Header = () => {
         <div className="flex flex-wrap justify-center gap-4 pt-6">
           {cards.map(({ path, label }) => (
             <Link key={path} to={path} onClick={() => setOpen(false)}>
+
               <div
                 className={`
                   w-[250px] h-[180px] flex flex-col items-center justify-center rounded-2xl p-6 shadow-md 
                   bg-white hover:bg-gray-100 transition duration-300 cursor-pointer text-center
-                  ${location.pathname === path ? "border-2 border-green-600 shadow-lg scale-[1.02]" : ""}
-                `}
-              >
+                  ${location.pathname === path ? "border-2 border-green-600 shadow-lg scale-[1.02]" : ""}`}>
+
                 {ICONS[label]}
+
                 <span className="mt-3 text-2xl font-semibold text-gray-800">{label}</span>
+
               </div>
+              
             </Link>
           ))}
         </div>
       </div>
     </>
   );
+
 };
 
 export default Header;

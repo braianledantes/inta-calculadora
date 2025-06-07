@@ -17,20 +17,19 @@ export const CardFertilizacionPlan = forwardRef(function CardFertilizacionPlan({
   }
 
   const handleUpdateFertilizante = (e) => {
-    const fertilizanteName = e.target.value;
-    const fertilizante = fertilizantes.find(f => f.nombre === fertilizanteName);
+    const nombre = e.target.value;
+    const fertilizante = fertilizantes.find(f => f.nombre === nombre);
     onUpdate(plan.id, fertilizante, plan.cantTratamientos);
-  }
-
-  const handleUpdateCantTratamientos = (valor) => {
-    const cantTratamientos = parseFloat(valor);
-    onUpdate(plan.id, plan.fertilizante, cantTratamientos);
   }
 
   const onChangePrecio = (e) => {
     const newPrecio = e.target.value;
     const updatedFertilizante = {...plan.fertilizante, precioEnvaseDolar: newPrecio};
     onUpdate(plan.id, updatedFertilizante, plan.cantTratamientos);
+  }
+
+  const handleUpdateCantTratamientos = (valor) => {
+    onUpdate(plan.id, plan.fertilizante, parseFloat(valor));
   }
 
   const onRefreshDolarFertilizante = () => {
@@ -71,7 +70,6 @@ export const CardFertilizacionPlan = forwardRef(function CardFertilizacionPlan({
           />
 
           <NumberValueModify name="Dosis por ha" value={plan.fertilizante.dosisAplicacion} unit={plan.fertilizante.unidadDosisAplicacion} onChange={onChangeDosisPorHa}/>
-
         </div>
       </div>
       <div className="mb-6">
@@ -93,10 +91,9 @@ export const CardFertilizacionPlan = forwardRef(function CardFertilizacionPlan({
         </span>
       </div>
       <div className="text-right text-2xl font-extrabold border-t pt-6 mt-6">
-        
         <ContainerCostoTotal costoTotal={plan.costoTotalPorHectarea}/>
-
       </div>
+
     </div>
     </div>
   )

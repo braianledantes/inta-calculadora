@@ -12,21 +12,15 @@ export const CardSanitizantePlan = forwardRef(function CardSanitizantePlan({plan
 
   const [prevPrecioSanitizante, setPrevPrecioSanitizante] = useState(plan.sanitizante.precioEnvaseDolar);
 
-  const [tipoSeleccionado, setTipoSeleccionado] = useState(
-    plan.sanitizante?.tipo || (sanitizantes[0]?.tipo ?? "")
-  );
+  const [tipoSeleccionado, setTipoSeleccionado] = useState(plan.sanitizante?.tipo || (sanitizantes[0]?.tipo ?? ""));
 
   // Obtener tipos únicos
-  const tipos = useMemo(
-    () => [...new Set(sanitizantes.map(s => s.tipo))],
-    [sanitizantes]
-  );
+  const tipos = useMemo(() => [...new Set(sanitizantes.map(s => s.tipo))],
+  [sanitizantes]);
 
   // Filtrar sanitizantes por tipo seleccionado
-  const sanitizantesFiltrados = useMemo(
-    () => sanitizantes.filter(s => s.tipo === tipoSeleccionado),
-    [sanitizantes, tipoSeleccionado]
-  );
+  const sanitizantesFiltrados = useMemo(() => sanitizantes.filter(s => s.tipo === tipoSeleccionado),
+  [sanitizantes, tipoSeleccionado]);
 
   const handleDelete = () => {
     onDelete(plan.id);
