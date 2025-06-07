@@ -51,7 +51,7 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
   }
 
   return (
-   <div className="max-w-6xl mx-auto px-2" ref={ref}>
+   <div className="mx-auto px-2" ref={ref}>
     <div className="bg-white shadow-lg rounded-xl p-6 mb-8">
       <div className="flex justify-between items-center mb-6">
         <PlanTitle title={`Plan ${plan.id}`} />

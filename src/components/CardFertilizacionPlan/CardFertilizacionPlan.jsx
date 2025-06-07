@@ -6,8 +6,10 @@ import {forwardRef} from "react";
 import {useState} from "react";
 import {ContainerInputDolarRefresh} from "../ContainerInputDolarRefresh/ContainerInputDolarRefresh.jsx";
 import NumberValueModify from "../NumberValueModify/NumberValueModify.jsx";
+import {ContainerCostoTotal} from "../ContainerCostoTotal/ContainerCostoTotal.jsx";
 
 export const CardFertilizacionPlan = forwardRef(function CardFertilizacionPlan({plan, fertilizantes, onUpdate, onDelete}, ref) {
+
   const [prevPrecioFertilizacion, setPrevPrecioFertilizacion] = useState(plan.fertilizante.precioEnvaseDolar);
 
   const handleDelete = () => {
@@ -91,7 +93,9 @@ export const CardFertilizacionPlan = forwardRef(function CardFertilizacionPlan({
         </span>
       </div>
       <div className="text-right text-2xl font-extrabold border-t pt-6 mt-6">
-        Costo Total: <span className="ml-2">{plan.costoTotalPorHectarea.toLocaleString()} ARS/ha</span>
+        
+        <ContainerCostoTotal costoTotal={plan.costoTotalPorHectarea}/>
+
       </div>
     </div>
     </div>
