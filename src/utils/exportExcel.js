@@ -8,76 +8,76 @@ import { saveAs } from 'file-saver';
  * @param {Object|Object[]} planesSanitizantes - Datos del formulario de sanitizantes.
  * @param {string} [fileName='datos'] - Nombre del archivo (sin extensión).
  */
-export function exportFormToExcel(planesMaquinaria, planesFertilizantes, planesSanitizantes, planesEstadosFenologicos, valorDolar, valorGasoilina,  fileName = 'datos') {
+export function exportFormToExcel(
+  planesMaquinaria,
+  planesFertilizantes,
+  planesSanitizantes,
+  planesEstadosFenologicos,
+  valorDolar,
+  valorGasoilina,
+  fileName = 'datos'
+) {
   // Normaliza cada parámetro a array
-  // console.log('Exportando a Excel:', {
-  //   planesMaquinaria,
-  //   planesFertilizantes,
-  //   planesSanitizantes,
-  //   fileName
-  // });
-  const dataMaquinaria   = Array.isArray(planesMaquinaria)   ? planesMaquinaria   : [planesMaquinaria];
-  const dataFertilizantes= Array.isArray(planesFertilizantes)? planesFertilizantes: [planesFertilizantes];
-  const dataSanitizantes  = Array.isArray(planesSanitizantes)  ? planesSanitizantes  : [planesSanitizantes];
+  const dataMaquinaria = Array.isArray(planesMaquinaria) ? planesMaquinaria : [planesMaquinaria];
+  const dataFertilizantes = Array.isArray(planesFertilizantes) ? planesFertilizantes : [planesFertilizantes];
+  const dataSanitizantes = Array.isArray(planesSanitizantes) ? planesSanitizantes : [planesSanitizantes];
 
   // Crea un nuevo libro
   const workbook = XLSX.utils.book_new();
 
   // Hoja 1: Maquinaria
-  if (dataMaquinaria && Array.isArray(dataMaquinaria) && dataMaquinaria.length > 0) {
-    // console.log('Datos de maquinaria:', dataMaquinaria);
-    // Construir los datos en el formato de la imagen
-    const maquinariaRows = dataMaquinaria.map(item => ({
-      'Implemento': item.implemento?.nombre || '',
-      'Precio dólar': item.implemento?.precioDolar || '',
-      'Gasto conservación Coeficiente': item.implemento?.gastoMantenimiento || '',
-      'horas utiles': item.implemento?.horasVidaUtil || '',
-      'Valor residual %precio': (item.implemento?.porcentajeValorResidual ? `${item.implemento.porcentajeValorResidual}%` : ''),
-      'Consumo combustible lt/hora CV': item.implemento?.consumoCombustible || '',
-      'Amortización $/hora': item.amortizacionImplemento || '',
-      'Costo Combustible $/hora': item.costoCombustibleImplemento || '0',
-      'Gasto conservación $/hora': item.gastoConservacionImplemento || '0',
-      'Costo Económico $/hora': '' 
-    }));
+  const maquinariaRows = [];
 
-    // Agregar el tractor como primera fila si existe
-    if (dataMaquinaria[0]?.tractor) {
-      maquinariaRows.unshift({
-      'Implemento': `Tractor (${dataMaquinaria[0].tractor.potencia} CV)`,
-      'Precio dólar': dataMaquinaria[0].tractor.precioDolar || '',
-      'Gasto conservación Coeficiente': dataMaquinaria[0].tractor.gastoMantenimiento || '',
-      'horas utiles': dataMaquinaria[0].tractor.horasVidaUtil || '',
-      'Valor residual %precio': (dataMaquinaria[0].tractor.porcentajeValorResidual ? `${dataMaquinaria[0].tractor.porcentajeValorResidual}%` : ''),
-      'Consumo combustible lt/hora CV': '', // El tractor no tiene este campo
-      'Amortización $/hora': dataMaquinaria[0].amortizacionTractor || '',
-      'Costo Combustible $/hora': '', // El tractor no tiene este campo
-      'Gasto conservación $/hora': dataMaquinaria[0].gastoConservacionTractor || '',
-      'Costo Económico $/hora': '' // El tractor no tiene este campo
-      });
-    }
+  dataMaquinaria.forEach((plan, index) => {
+    // Fila tractor con plan
+    maquinariaRows.push({
+      'Plan': `Plan ${index + 1}`,
+      'Implemento': 'Tractor',
+      'Potencia': plan.tractor?.potencia || '',
+      'Precio dólar': plan.tractor?.precioDolar || '',
+      'Gasto conservación Coeficiente': plan.tractor?.gastoMantenimiento || '',
+      'horas utiles': plan.tractor?.horasVidaUtil || '',
+      'Valor residual %precio': plan.tractor?.porcentajeValorResidual
+        ? `${plan.tractor.porcentajeValorResidual}%`
+        : '',
+      'Consumo combustible lt/hora CV': '',
+      'Amortización $/hora': plan.amortizacionTractor || '',
+      'Costo Combustible $/hora': '',
+      'Gasto conservación $/hora': plan.gastoConservacionTractor || '',
+      'Costo Económico $/hora': ''
+    });
 
-    const wsMaquinaria = XLSX.utils.json_to_sheet(maquinariaRows);
+    // Fila implemento sin plan (vacío)
+    maquinariaRows.push({
+      'Plan': '',
+      'Implemento': plan.implemento?.nombre || '',
+      'Potencia': '',
+      'Precio dólar': plan.implemento?.precioDolar || '',
+      'Gasto conservación Coeficiente': plan.implemento?.gastoMantenimiento || '',
+      'horas utiles': plan.implemento?.horasVidaUtil || '',
+      'Valor residual %precio': plan.implemento?.porcentajeValorResidual
+        ? `${plan.implemento.porcentajeValorResidual}%`
+        : '',
+      'Consumo combustible lt/hora CV': plan.implemento?.consumoCombustible || '',
+      'Amortización $/hora': plan.amortizacionImplemento || '',
+      'Costo Combustible $/hora': plan.costoCombustibleImplemento || '0',
+      'Gasto conservación $/hora': plan.gastoConservacionImplemento || '0',
+      'Costo Económico $/hora': ''
+    });
+  });
 
-    wsMaquinaria['G2'] = { f: `((B2-(B2*E2))/D2)*${valorDolar}` };
+  const wsMaquinaria = XLSX.utils.json_to_sheet(maquinariaRows, { origin: 1 });
 
-    if (maquinariaRows.length >= 2) {
-      wsMaquinaria['J3'] = {f: 'G3+H3+I2+I3+G2'};
-    }
+  wsMaquinaria[`A1`] = { v: 'Gasoil $/litro' };
+  wsMaquinaria[`B1`] = { v: valorGasoilina };
+  wsMaquinaria[`C1`] = { v: 'cotización dólar' };
+  wsMaquinaria[`D1`] = { v: valorDolar };
 
-    const ultimaFila = maquinariaRows.length + 2; 
+  const range = XLSX.utils.decode_range(wsMaquinaria['!ref']);
+  range.s.r = 0; // fila 1 (inicio del rango)
+  wsMaquinaria['!ref'] = XLSX.utils.encode_range(range);
 
-    wsMaquinaria[`A${ultimaFila}`] = { v: 'Gasoil $/litro' };
-    wsMaquinaria[`B${ultimaFila}`] = { v: valorGasoilina };
-    wsMaquinaria[`C${ultimaFila}`] = { v: 'cotización dólar' }; 
-    wsMaquinaria[`D${ultimaFila}`] = { v: valorDolar }; 
-    wsMaquinaria[`E${ultimaFila}`] = { v: 'potencia CV' };
-    wsMaquinaria[`F${ultimaFila}`] = { v: dataMaquinaria[0]?.tractor?.potencia || '' };
-    const range = XLSX.utils.decode_range(wsMaquinaria['!ref']);
-    range.e.r = ultimaFila - 1;
-    wsMaquinaria['!ref'] = XLSX.utils.encode_range(range);
-    
-    XLSX.utils.book_append_sheet(workbook, wsMaquinaria, 'Maquinaria');
-  }
+  XLSX.utils.book_append_sheet(workbook, wsMaquinaria, 'Maquinaria');
 
   // Hoja 2: Fertilizantes
   if (dataFertilizantes && Array.isArray(dataFertilizantes) && dataFertilizantes.length > 0) {
@@ -93,11 +93,12 @@ export function exportFormToExcel(planesMaquinaria, planesFertilizantes, planesS
 
   // Genera el binario y descarga
   const wbout = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-  const blob  = new Blob([wbout], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+  const blob = new Blob([wbout], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
   saveAs(blob, `${fileName}.xlsx`);
 }
 
-// dataMaquinaria formato:{
+// dataMaquinaria ejemplo:
+// {
 //   "id": 1,
 //   "tractor": {
 //       "id": 1,
