@@ -14,18 +14,30 @@ export default function ExportButton() {
     const { planes: planesEstadosFenologicos } = hooks.estadosFenologicos;
     const { planes: valorDolar } = hooks.maquinaria.valorDolar;
     const { planes: valorGasoilina } = hooks.maquinaria.valorGasoilina;
+    
+    const fileName = `plan-agricola-${new Date().toISOString().split("T")[0]}`;
+
+    const noHayDatos =
+    (!planesMaquinaria || planesMaquinaria.length === 0) &&
+    (!planesFertilizantes || planesFertilizantes.length === 0) &&
+    (!planesSanitizantes || planesSanitizantes.length === 0) &&
+    (!planesEstadosFenologicos || planesEstadosFenologicos.length === 0) &&
+    (!valorDolar || valorDolar.length === 0) &&
+    (!valorGasoilina || valorGasoilina.length === 0);
+
+    if (noHayDatos) return null;
 
     // TODO: a exportFormToExcel le envias todos los planes para que imprima una página por seccion (maquinaria, sanitizantes, fertilizantes)
     // exportFormToExcel(planesMaquinaria, planesFertilizantes, sanitizantes, "mi_formulario")}
  
     return (
         <button
-        
-            className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors duration-300 font-semibold shadow flex items-center gap-2 uppercase hover:cursor-pointer"
-            onClick={() => exportFormToExcel(planesMaquinaria, planesFertilizantes, planesSanitizantes, planesEstadosFenologicos, valorDolar, valorGasoilina, "mi_formulario")}>
+            disabled={noHayDatos}
+            className={`${ noHayDatos ? "bg-gray-400 cursor-not-allowed" : "bg-green-600 hover:bg-green-700"} text-white px-4 py-2 rounded-lg transition-colors duration-300 font-semibold shadow flex items-center gap-2 uppercase`}
+            onClick={() => exportFormToExcel(planesMaquinaria, planesFertilizantes, planesSanitizantes, planesEstadosFenologicos, valorDolar, valorGasoilina, fileName)}>
 
             <FaFileExcel style={{ transform: "scaleX(-1)" }} />
-            Descargar Excel
+            Exportar Excel
         
         </button>
     );

@@ -1,5 +1,8 @@
 import { Text, View } from '@react-pdf/renderer';
-import styles from '../styles/pdfstyles'
+import styles from '../styles/pdfstyles';
+import { Buffer } from 'buffer';
+window.Buffer = Buffer;
+
 
 export const safeCurrency = (value) => (value != null ? `${value.toLocaleString()} ARS/h` : 'N/A');
 
