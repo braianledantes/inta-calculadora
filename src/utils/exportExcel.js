@@ -1,13 +1,6 @@
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 
-/**
- * Exporta un array de objetos (o un único objeto) a Excel.
- * @param {Object|Object[]} planesMaquinaria - Datos del formulario de maquinaria.
- * @param {Object|Object[]} planesFertilizantes - Datos del formulario de fertilizantes.
- * @param {Object|Object[]} planesSanitizantes - Datos del formulario de sanitizantes.
- * @param {string} [fileName='datos'] - Nombre del archivo (sin extensión).
- */
 export function exportFormToExcel(
   planesMaquinaria,
   planesFertilizantes,
@@ -17,19 +10,15 @@ export function exportFormToExcel(
   valorGasoilina,
   fileName = 'datos'
 ) {
-  // Normaliza cada parámetro a array
   const dataMaquinaria = Array.isArray(planesMaquinaria) ? planesMaquinaria : [planesMaquinaria];
   const dataFertilizantes = Array.isArray(planesFertilizantes) ? planesFertilizantes : [planesFertilizantes];
   const dataSanitizantes = Array.isArray(planesSanitizantes) ? planesSanitizantes : [planesSanitizantes];
 
-  // Crea un nuevo libro
   const workbook = XLSX.utils.book_new();
 
-  // Hoja 1: Maquinaria
+  // Filas de Maquinaria > index + 1 = Tractor > index + 2 = Implemento
   const maquinariaRows = [];
-
   dataMaquinaria.forEach((plan, index) => {
-    // Fila tractor con plan
     maquinariaRows.push({
       'Plan': `Plan ${index + 1}`,
       'Implemento': 'Tractor',
@@ -37,17 +26,14 @@ export function exportFormToExcel(
       'Precio dólar': plan.tractor?.precioDolar || '',
       'Gasto conservación Coeficiente': plan.tractor?.gastoMantenimiento || '',
       'horas utiles': plan.tractor?.horasVidaUtil || '',
-      'Valor residual %precio': plan.tractor?.porcentajeValorResidual
-        ? `${plan.tractor.porcentajeValorResidual}%`
-        : '',
+      'Valor residual %precio': plan.tractor?.porcentajeValorResidual || '',
       'Consumo combustible lt/hora CV': '',
-      'Amortización $/hora': plan.amortizacionTractor || '',
+      'Amortización $/hora': '', 
       'Costo Combustible $/hora': '',
-      'Gasto conservación $/hora': plan.gastoConservacionTractor || '',
+      'Gasto conservación $/hora': '',
       'Costo Económico $/hora': ''
     });
 
-    // Fila implemento sin plan (vacío)
     maquinariaRows.push({
       'Plan': '',
       'Implemento': plan.implemento?.nombre || '',
@@ -55,43 +41,77 @@ export function exportFormToExcel(
       'Precio dólar': plan.implemento?.precioDolar || '',
       'Gasto conservación Coeficiente': plan.implemento?.gastoMantenimiento || '',
       'horas utiles': plan.implemento?.horasVidaUtil || '',
-      'Valor residual %precio': plan.implemento?.porcentajeValorResidual
-        ? `${plan.implemento.porcentajeValorResidual}%`
-        : '',
+      'Valor residual %precio': plan.implemento?.porcentajeValorResidual || '',
       'Consumo combustible lt/hora CV': plan.implemento?.consumoCombustible || '',
-      'Amortización $/hora': plan.amortizacionImplemento || '',
-      'Costo Combustible $/hora': plan.costoCombustibleImplemento || '0',
-      'Gasto conservación $/hora': plan.gastoConservacionImplemento || '0',
-      'Costo Económico $/hora': ''
+      'Amortización $/hora': '', 
+      'Costo Combustible $/hora': '', 
+      'Gasto conservación $/hora': '',
+      'Costo Económico $/hora': ''  
     });
   });
 
+  //Hoja Maquinaria
   const wsMaquinaria = XLSX.utils.json_to_sheet(maquinariaRows, { origin: 1 });
 
+  // Cabeceras Gasoil y Dolar
   wsMaquinaria[`A1`] = { v: 'Gasoil $/litro' };
   wsMaquinaria[`B1`] = { v: valorGasoilina };
   wsMaquinaria[`C1`] = { v: 'cotización dólar' };
   wsMaquinaria[`D1`] = { v: valorDolar };
 
   const range = XLSX.utils.decode_range(wsMaquinaria['!ref']);
-  range.s.r = 0; // fila 1 (inicio del rango)
+  range.s.r = 0;
   wsMaquinaria['!ref'] = XLSX.utils.encode_range(range);
 
+  // Formulas de Maquinaria
+  dataMaquinaria.forEach((plan, index) => {
+    const excelRowIndex = index * 2 + 3; // empieza en fila 2, salta de 2 en 2 por cada plan
+    const rowIndex = excelRowIndex - 1;
+
+    const cellPotencia = `C${excelRowIndex}`;
+    const cellPrecioDolar = `D${excelRowIndex}`;
+    const cellCoeficiente = `E${excelRowIndex}`;
+    const cellHorasUtiles = `F${excelRowIndex}`;
+    const cellValorResidual = `G${excelRowIndex}`;
+    const cellAmortizacion = XLSX.utils.encode_cell({ c: 8, r: rowIndex }); // Fila I
+    const cellGastoConservacion = XLSX.utils.encode_cell({ c: 10, r: rowIndex }); // Fila K 
+    
+    wsMaquinaria[cellAmortizacion] = { f: `+((${cellPrecioDolar} - (${cellPrecioDolar} * (${cellValorResidual}/100))) / ${cellHorasUtiles}) * D1`};
+    wsMaquinaria[cellGastoConservacion] = { f: `+${cellPrecioDolar} * D1 * ${cellCoeficiente} `};
+
+    const cellPrecioDolarImpl = `D${excelRowIndex + 1}`;
+    const cellCoeficienteImpl = `E${excelRowIndex + 1}`;
+    const cellHorasUtilesImpl = `F${excelRowIndex + 1}`;
+    const cellValorResidualImpl = `G${excelRowIndex + 1}`;
+    const cellConsumoCombustibleImpl = `H${excelRowIndex + 1}`;
+    const cellAmortizacionImplemento = XLSX.utils.encode_cell({ c: 8, r: rowIndex + 1 }); // Fila I
+    const cellCostoCombustibleImplemento = XLSX.utils.encode_cell({ c: 9, r: rowIndex + 1 }); // Fila J
+    const cellGastoConservacionImplemento = XLSX.utils.encode_cell({ c: 10, r: rowIndex + 1 }); // Fila K
+    const cellCostoEconomico = XLSX.utils.encode_cell({ c: 11, r: rowIndex + 1 }); // Fila L
+
+    wsMaquinaria[cellAmortizacionImplemento] = { f: `+((${cellPrecioDolarImpl} - (${cellPrecioDolarImpl} * (${cellValorResidualImpl}/100))) / ${cellHorasUtilesImpl}) * D1` };
+    wsMaquinaria[cellCostoCombustibleImplemento] = { f: `+B1 * ${cellConsumoCombustibleImpl} * ${cellPotencia}`};
+    wsMaquinaria[cellGastoConservacionImplemento] = { f: `+${cellPrecioDolarImpl} * D1 * ${cellCoeficienteImpl} `};
+    wsMaquinaria[cellCostoEconomico] = { f: `+${cellAmortizacion} + ${cellAmortizacionImplemento} + ${cellCostoCombustibleImplemento} + ${cellGastoConservacion} + ${cellGastoConservacionImplemento}` };
+
+  });
+
+  // Agrega hoja de maquinaria al libro
   XLSX.utils.book_append_sheet(workbook, wsMaquinaria, 'Maquinaria');
 
   // Hoja 2: Fertilizantes
-  if (dataFertilizantes && Array.isArray(dataFertilizantes) && dataFertilizantes.length > 0) {
+  if (dataFertilizantes.length > 0) {
     const wsFertilizantes = XLSX.utils.json_to_sheet(dataFertilizantes);
     XLSX.utils.book_append_sheet(workbook, wsFertilizantes, 'Fertilizantes');
   }
 
   // Hoja 3: Sanitizantes
-  if (dataSanitizantes && Array.isArray(dataSanitizantes) && dataSanitizantes.length > 0) {
+  if (dataSanitizantes.length > 0) {
     const wsSanitizantes = XLSX.utils.json_to_sheet(dataSanitizantes);
     XLSX.utils.book_append_sheet(workbook, wsSanitizantes, 'Sanitizantes');
   }
 
-  // Genera el binario y descarga
+  // Exportar archivo
   const wbout = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
   const blob = new Blob([wbout], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
   saveAs(blob, `${fileName}.xlsx`);
@@ -124,4 +144,4 @@ export function exportFormToExcel(
 //   "costoCombustibleImplemento": 0,
 //   "gastoConservacionImplemento": 3978,
 //   "costoEconomico": 14840
-// }
+// } 

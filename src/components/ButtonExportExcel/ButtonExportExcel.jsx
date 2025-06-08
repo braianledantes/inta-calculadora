@@ -19,8 +19,7 @@ export default function ExportButton() {
     (!planesMaquinaria || planesMaquinaria.length === 0) &&
     (!planesFertilizantes || planesFertilizantes.length === 0) &&
     (!planesSanitizantes || planesSanitizantes.length === 0) &&
-    (!planesEstadosFenologicos || planesEstadosFenologicos.length === 0) &&
-    (valorDolar == null) && (valorGasoilina == null);
+    (!planesEstadosFenologicos || planesEstadosFenologicos.length === 0)
 
     if (noHayDatos) return null;
 
