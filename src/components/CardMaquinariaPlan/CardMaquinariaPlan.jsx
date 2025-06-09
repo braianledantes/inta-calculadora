@@ -63,8 +63,7 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
         <h3 className="text-xl font-bold text-green-800 mb-4 flex items-center gap-2">
           <span>Datos del Tractor</span>
         </h3>
-        <div className="grid lg:grid-cols-5 sm:grid-cols-2 md:grid-cols-3 gap-5">
-
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-5">
           <InputOptions
             label="Tractor"
             value={plan.tractor.nombre}
@@ -104,8 +103,7 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
           <span>Implemento</span>
         </h3>
 
-        <div className="grid lg:grid-cols-5 sm:grid-cols-2 md:grid-cols-3 gap-5">
-
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-5">
           <InputOptions
             label="Implemento"
             value={plan.implemento.nombre}
