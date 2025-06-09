@@ -6,10 +6,9 @@ import {AppContext} from "../../context/AppContext.jsx";
 import SectionTitle from "../../components/SectionTitle/SectionTitle.jsx";
 import AddPlanButton from "../../components/AddPlanButton/AddPlanButton.jsx";
 import SelectorEstadoFenologico from "../../components/SelectorEstadoFenologico/SelectorEstadoFenologico.jsx";
-import GraficoMaquinaria from '../../components/Grafico/GraficoMaquinaria.jsx'
+import PlanesMaquinariaChart from "../../components/PlanesMaquinariaChart/PlanesMaquinariaChart.jsx";
 import ButtonExportPDF from "../../components/ButtonExportPDF/ButtonExportPDF.jsx"
 import exportarGrafico from "../../utils/exportarGrafico.jsx";
-import ExportButton from "../../components/ButtonExportExcel/ButtonExportExcel.jsx";
 
 export default function SeccionCostosMaquinaria() {
   const {
@@ -45,13 +44,6 @@ export default function SeccionCostosMaquinaria() {
     }
   }, [planes.length, lastPlanRef]);
 
-  // console.log('Planes de maquinaria:', planes);
-
-  const chartData = planes.map(p => ({
-   name: `Plan ${p.id}`,
-   total: p.costoEconomico 
-  }))
-
   const chartRef = useRef();
 
   return (
@@ -85,10 +77,10 @@ export default function SeccionCostosMaquinaria() {
       {planes.length >= 2 &&(
         
         <div className="lg:basis-1/3 order-2">
-          <div  className="sticky top-50 bottom-30" style={{ maxHeight: 'calc(100vh - 80px)', overflowY: 'auto' }}>
+          <div  className="sticky top-50" style={{ maxHeight: 'calc(100vh - 80px)', overflowY: 'auto' }}>
             
             <div ref={chartRef}>
-              <GraficoMaquinaria data={chartData} title={"Costo maquinaria"}/>
+              <PlanesMaquinariaChart planes={planes} />
             </div>
 
             <ButtonExportPDF onExport={() => exportarGrafico(chartRef, { maquinariaPlans: planes ,  valorDolar: valorDolar, estadoFenologico: estadoFenologicoMaquinaria, valorGasoil: valorGasoilina })} />

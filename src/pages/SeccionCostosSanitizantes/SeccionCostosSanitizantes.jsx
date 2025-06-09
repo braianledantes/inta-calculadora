@@ -9,6 +9,7 @@ import GraficoSanitizante from '../../components/Grafico/GraficosSanitizante.jsx
 import ButtonExportPDF from "../../components/ButtonExportPDF/ButtonExportPDF.jsx"
 import {useRef} from 'react';
 import exportarGrafico from "../../utils/exportarGrafico.jsx";
+import PlanesSanitizantesChart from "../../components/PlanesSanitizantesChart/PlanesSanitizantesChart.jsx";
   
 export default function SeccionCostosSanitizantes() {
   const {
@@ -41,16 +42,6 @@ export default function SeccionCostosSanitizantes() {
     }
   }, [planes.length, lastPlanRef]);
 
-  console.log("Planes sanitizantes:", planes);
-
-  const chartData = planes.map(p => ({
-   name: `Plan ${p.id}`,
-   cantTratamientos: p.cantTratamientos,
-   precio: p.sanitizante.precioEnvaseDolar,
-   dosisPorHa: p.dosisAplicacion,
-   volumenPorHa: p.volumenPorHectarea,
-   total: p.costoTotalPorHectarea 
-  }))
   const chartRef = useRef();
   
 
@@ -85,7 +76,7 @@ export default function SeccionCostosSanitizantes() {
         <div className="sticky top-50 bottom-30" style={{ maxHeight: 'calc(100vh - 80px)', overflowY: 'auto' }}>
         
         <div ref={chartRef}>
-          <GraficoSanitizante data={chartData} title={"Costo Sanitizante"}/>
+          <PlanesSanitizantesChart planes={planes} />
         </div>
 
         <ButtonExportPDF onExport={() => exportarGrafico(chartRef, { sanitizantePlans: planes ,  valorDolar: valorDolar, estadoFenologico: estadoFenologicoSanitizante })} />

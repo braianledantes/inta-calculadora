@@ -85,10 +85,6 @@ export const CardFertilizacionPlan = forwardRef(function CardFertilizacionPlan({
           <span className="font-semibold">Costo por tratamiento:</span>
           <span className="font-normal"> {plan.costoTotalPorTratamiento} ARS</span>
         </span>
-        <span>
-          <span className="font-semibold">Costo por ha:</span>
-          <span className="font-normal"> {plan.costoTotalPorHectarea} ARS/ha</span>
-        </span>
       </div>
       <div className="text-right text-2xl font-extrabold border-t pt-6 mt-6">
         <ContainerCostoTotal costoTotal={plan.costoTotalPorHectarea}/>

@@ -9,6 +9,7 @@ import GraficoFertilizacion from "../../components/Grafico/GraficoFertilizacion.
 import ButtonExportPDF from "../../components/ButtonExportPDF/ButtonExportPDF.jsx"
 import {useRef} from 'react';
 import exportarGrafico from "../../utils/exportarGrafico.jsx";
+import PlanesFertilizantesChart from "../../components/PlanesFertilizantesChart/PlanesFertilizantesChart.jsx";
 
 export default function SeccionCostosFertilizacion() {
   const {
@@ -41,15 +42,6 @@ export default function SeccionCostosFertilizacion() {
     }
   }, [planes.length, lastPlanRef]);
 
-  console.log("Planes:", planes);
-
-  const chartData = planes.map(p => ({
-   name: `Plan ${p.id}`,
-   dosisPorHora: p.fertilizante.dosisAplicacion,
-   precioEnvase: p.fertilizante.precioEnvaseDolar,
-   cantTratamientos: p.cantTratamientos,
-   total: p.costoTotalPorHectarea, 
-  }))
   const chartRef = useRef();
   
 
@@ -83,7 +75,7 @@ export default function SeccionCostosFertilizacion() {
         <div className="lg:basis-1/3 order-2">
         <div  className="sticky top-50 bottom-30" style={{ maxHeight: 'calc(100vh - 80px)', overflowY: 'auto' }}>
           <div ref={chartRef}>
-            <GraficoFertilizacion data={chartData} title={"Costo Fertilizacion"}/>
+            <PlanesFertilizantesChart planes={planes} />
           </div> 
          <ButtonExportPDF onExport={() => exportarGrafico(chartRef, { fertilizacionPlans: planes ,  valorDolar: valorDolar, estadoFenologico: estadoFenologicoFertilizante})} />
         </div>
