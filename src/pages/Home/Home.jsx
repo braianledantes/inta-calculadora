@@ -23,15 +23,15 @@ const Home = () => {
             <div className="p-4">
                 <div className="flex items-center justify-center mb-4">
                     <h1 className="text-l flex gap-2">
-                        <FileWarningIcon className="text-2xl"/>
+                        <FileWarningIcon className="text-2xl" />
                         El archivo (.xlsx) que se importe deberá tener una estructura como la siguiente:
                     </h1>
-                        <button
-                            onClick={() => setMostrarTablas(!mostrarTablas)}
-                            className="bg-[#036935] hover:bg-[#024c27] text-white px-6 py-1 rounded rounded-full text-lg shadow-md transition duration-300 ml-4"
-                        >
-                         {mostrarTablas ? ( <> Ocultar  <ChevronUp className="inline-block mr-2" /> </> ) : ( <> Ver Ejemplo <ChevronDown className="inline-block ml-2" /></> )}
-                        </button>
+                    <button
+                        onClick={() => setMostrarTablas(!mostrarTablas)}
+                        className="bg-[#036935] hover:bg-[#024c27] text-white px-6 py-1 rounded rounded-full text-lg shadow-md transition duration-300 ml-4"
+                    >
+                        {mostrarTablas ? (<> Ocultar  <ChevronUp className="inline-block mr-2" /> </>) : (<> Ver Ejemplo <ChevronDown className="inline-block ml-2" /></>)}
+                    </button>
                 </div>
 
                 {!mostrarTablas && (
@@ -112,8 +112,21 @@ const Home = () => {
 
                 {mostrarTablas && (
                     <div className=" mx-auto w-full max-w-6xl border-lightgray-100 p-4 rounded-xl shadow-lg bg-[#eeeeee] space-y-8">
+
+                        <h2 className="text-2xl font-bold mb-4 text-center">Ejemplo de Estructura de Datos</h2>
+                        <p className="text-gray-700 mb-4">
+                            A continuación se muestra un ejemplo de las tablas que puedes importar para calcular los costos agrícolas.
+                            Cada tabla corresponde a una hoja de cálculo en el archivo Excel que debes subir.
+
+                        </p>
+                        <p>
+                            Asegúrese de que los datos estén organizados de acuerdo a este formato y que las columnas y nombre de las tablas coincidan con los ejemplos.
+                            Solo se admiten números enteros o decimales y las unidades deben ser <strong>kg</strong> o <strong>lt</strong>.
+                            De lo contrario, el sistema no podrá procesar los datos correctamente.
+                        </p>
+
                         <InfoTablas
-                            title="Tractores"
+                            title="tractores"
                             headers={[
                                 "id",
                                 "nombre",
@@ -124,49 +137,14 @@ const Home = () => {
                                 "potencia",
                             ]}
                             data={[
-                                [1, "Tractor A", 25000, 1200, 5000, "10%", "100HP"],
-                                [2, "Tractor B", 30000, 1500, 6000, "12%", "120HP"],
+                                [1, "Tractor 1", 60775, 0.00007, 12000, 20, 60],
+                                [2, "Tractor 2", 82875, 0.00005, 12000, 20, 60],
                             ]}
                         />
 
 
                         <InfoTablas
-                            title="Implementos"
-                            headers={[
-                                "numero",
-                                "nombre",
-                                "precioEnvaseDolar",
-                                "volumenEnvase",
-                                "unidadVolumenEnvase",
-                                "dosisAplicacion",
-                                "unidadDosisAplicacion",
-                            ]}
-                            data={[
-                                [1, "Pulverizador", 100, 20, "L", 2, "L/ha"],
-                                [2, "Abonadora", 120, 25, "L", 1.5, "L/ha"],
-                            ]}
-                        />
-
-                        <InfoTablas
-                            title="Fertilizantes"
-                            headers={[
-                                "numero",
-                                "nombre",
-                                "precioEnvaseDolar",
-                                "volumenEnvase",
-                                "unidadVolumenEnvase",
-                                "dosisAplicacion",
-                                "unidadDosisAplicacion",
-                                "tipo",
-                            ]}
-                            data={[
-                                [1, "Urea", 50, 10, "kg", 1, "kg/ha", "Nitrogenado"],
-                                [2, "Fosfato", 60, 8, "kg", 1.2, "kg/ha", "Fosforado"],
-                            ]}
-                        />
-
-                        <InfoTablas
-                            title="Sanitizantes"
+                            title="implementos"
                             headers={[
                                 "id",
                                 "nombre",
@@ -177,25 +155,60 @@ const Home = () => {
                                 "consumoCombustible",
                             ]}
                             data={[
-                                [1, "Sanitizante X", 500, 50, 200, "5%", "0.5 L/h"],
-                                [2, "Sanitizante Y", 650, 60, 250, "6%", "0.6 L/h"],
+                                [1, "Acoplado Matalico", 25000, 0.0004, 10000, 10, 0.10],
+                                [2, "Aporcador", 30000, 0.00025, 4000, 10, 0.12],
                             ]}
                         />
 
                         <InfoTablas
-                            title="Estado Fenológico"
+                            title="fertilizantes"
+                            headers={[
+                                "numero",
+                                "nombre",
+                                "precioEnvaseDolar",
+                                "volumenEnvase",
+                                "unidadVolumenEnvase",
+                                "dosisAplicacion",
+                                "unidadDosisAplicacion",
+                            ]}
+                            data={[
+                                [1, "ACIDO BORICO", 2.46, 1, "lt", 1, "lt"],
+                                [2, "ACIDO FOSFORICO", 8.01, 1, "kg", 1, "kg"],
+                            ]}
+                        />
+
+                        <InfoTablas
+                            title="sanitizantes"
+                            headers={[
+                                "numero",
+                                "nombre",
+                                "precioDolar",
+                                "volumenEnvase",
+                                "unidadVolumenEnvase",
+                                "dosisAplicacion",
+                                "unidadDosisAplicacion",
+                                "tipo",
+                            ]}
+                            data={[
+                                [1, "ABAMECTINA/AVERMECTINA", 186, 1, "kg", 1, "kg", "plaguicida"],
+                                [2, "CARBENDAZIM", 195, 20, "lt", 1, "lt", "fungicida"],
+                            ]}
+                        />
+
+                        <InfoTablas
+                            title="estadosFenologicos"
                             headers={["numero", "nombre", "descripcion"]}
                             data={[
-                                [1, "Floración", "Inicio de la floración de la planta"],
-                                [2, "Madurez", "Fruto listo para cosecha"],
+                                [1, "Inicio Floración", "Fin de septiembre a octubre - Primeras flores abiertas"],
+                                [2, "Plena Floración", "Mediados de octubre - Más del 70% de flores abiertas"],
                             ]}
                         />
                     </div>
                 )}
             </div>
-            
+
         </>
-        
+
     );
 };
 
