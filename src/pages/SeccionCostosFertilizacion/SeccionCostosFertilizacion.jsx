@@ -44,6 +44,9 @@ export default function SeccionCostosFertilizacion() {
 
   const chartRef = useRef();
   
+  const handleExportPdf = () => {
+    exportarGrafico(chartRef, { fertilizacionPlans: planes ,  valorDolar: valorDolar, estadoFenologico: estadoFenologicoFertilizante});
+  }
 
   return (
     <div className="bg-gray-100 py-8 my-4">
@@ -70,18 +73,15 @@ export default function SeccionCostosFertilizacion() {
       ))}
       <AddPlanButton text="Agregar nuevo plan de maquinaria" onClick={handleAddPlan}/>
       </div>
-
-      {planes.length >=2 &&(
         <div className="lg:basis-1/3 order-2">
-        <div  className="sticky top-50 bottom-30" style={{ maxHeight: 'calc(100vh - 80px)', overflowY: 'auto' }}>
-          <div ref={chartRef}>
-            <PlanesFertilizantesChart planes={planes} />
-          </div> 
-         <ButtonExportPDF onExport={() => exportarGrafico(chartRef, { fertilizacionPlans: planes ,  valorDolar: valorDolar, estadoFenologico: estadoFenologicoFertilizante})} />
+          <div  className="sticky top-50 bottom-30" style={{ maxHeight: 'calc(100vh - 80px)', overflowY: 'auto' }}>
+            <div ref={chartRef}>
+              <PlanesFertilizantesChart planes={planes} />
+            </div> 
+            <ButtonExportPDF onExport={handleExportPdf} />
+          </div>
         </div>
       </div>
-      ) }
-     </div>
     </div>
   );
 }

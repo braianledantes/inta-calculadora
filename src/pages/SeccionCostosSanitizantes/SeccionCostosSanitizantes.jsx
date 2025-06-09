@@ -42,6 +42,10 @@ export default function SeccionCostosSanitizantes() {
     }
   }, [planes.length, lastPlanRef]);
 
+  const handleExportPdf = () => {
+    () => exportarGrafico(chartRef, { sanitizantePlans: planes ,  valorDolar: valorDolar, estadoFenologico: estadoFenologicoSanitizante })
+  }
+
   const chartRef = useRef();
   
 
@@ -70,19 +74,14 @@ export default function SeccionCostosSanitizantes() {
       ))}
         <AddPlanButton text="Agregar nuevo plan de maquinaria" onClick={handleAddPlan}/>
       </div>
-
-     {planes.length >=2 &&(
-        <div className="lg:basis-1/3 order-2">
+      <div className="lg:basis-1/3 order-2">
         <div className="sticky top-50 bottom-30" style={{ maxHeight: 'calc(100vh - 80px)', overflowY: 'auto' }}>
-        
-        <div ref={chartRef}>
-          <PlanesSanitizantesChart planes={planes} />
-        </div>
-
-        <ButtonExportPDF onExport={() => exportarGrafico(chartRef, { sanitizantePlans: planes ,  valorDolar: valorDolar, estadoFenologico: estadoFenologicoSanitizante })} />
-      </div> 
-        </div>
-      ) }
+          <div ref={chartRef}>
+            <PlanesSanitizantesChart planes={planes} />
+          </div>
+          <ButtonExportPDF onExport={handleExportPdf} />
+        </div> 
+      </div>
       </div>
     </div>
   );

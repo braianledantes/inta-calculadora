@@ -37,6 +37,10 @@ export default function SeccionCostosMaquinaria() {
     addPlan();
   }
 
+  const handleExportPdf = () => {
+    exportarGrafico(chartRef, { maquinariaPlans: planes ,  valorDolar: valorDolar, estadoFenologico: estadoFenologicoMaquinaria, valorGasoil: valorGasoilina })
+  }
+
   // Hacer scroll cuando cambia la cantidad de planes
   useEffect(() => {
     if (lastPlanRef) {
@@ -73,22 +77,15 @@ export default function SeccionCostosMaquinaria() {
       ))}
         <AddPlanButton text="Agregar nuevo plan de maquinaria" onClick={handleAddPlan}/>
       </div>
-
-      {planes.length >= 2 &&(
-        
-        <div className="lg:basis-1/3 order-2">
-          <div  className="sticky top-50" style={{ maxHeight: 'calc(100vh - 80px)', overflowY: 'auto' }}>
-            
-            <div ref={chartRef}>
-              <PlanesMaquinariaChart planes={planes} />
-            </div>
-
-            <ButtonExportPDF onExport={() => exportarGrafico(chartRef, { maquinariaPlans: planes ,  valorDolar: valorDolar, estadoFenologico: estadoFenologicoMaquinaria, valorGasoil: valorGasoilina })} />
-          
+      <div className="lg:basis-1/3 order-2">
+        <div  className="sticky top-50" style={{ maxHeight: 'calc(100vh - 80px)', overflowY: 'auto' }}> 
+          <div ref={chartRef}>
+            <PlanesMaquinariaChart planes={planes} />
           </div>
-        </div>
-      )}
 
+          <ButtonExportPDF onExport={handleExportPdf} />
+        </div>
+      </div>
       </div>
     </div>
   )
