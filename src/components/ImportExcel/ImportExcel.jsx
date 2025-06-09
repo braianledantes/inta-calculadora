@@ -45,7 +45,7 @@ const ImportExcel = () => {
           <FiUpload className="text-xl" />
         {nombreArchivo
           ? `Excel '${nombreArchivo}' importado`
-          : 'Subir archivo Excel'}
+          : 'Importar Excel'}
         </button>
 
         <input
