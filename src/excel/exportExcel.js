@@ -1,6 +1,6 @@
 import ExcelJS from 'exceljs';
 import { saveAs } from 'file-saver';
-import { addMaquinariaSheet } from './sheets/MaquinariaSheet';
+import { addMaquinariaSheet } from './sheets/maquinariaSheet';
 import { addFertilizantesSheet } from './sheets/fertilizanteSheet';
 import { addSanitizanteSheet } from './sheets/sanitizanteSheet';
 
