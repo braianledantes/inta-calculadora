@@ -63,7 +63,7 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
         <h3 className="text-xl font-bold text-green-800 mb-4 flex items-center gap-2">
           <span>Datos del Tractor</span>
         </h3>
-        <div className="grid lg:grid-cols-6 sm:grid-cols-2 md:grid-cols-3 gap-5">
+        <div className="grid lg:grid-cols-5 sm:grid-cols-2 md:grid-cols-3 gap-5">
 
           <InputOptions
             label="Tractor"
@@ -80,7 +80,7 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
             onRefresh={onRefreshDolarMaquinaria}
           />
 
-          <NumberValue name="Coef. conserv." value={plan.tractor.gastoMantenimiento} />
+          {/* <NumberValue name="Coef. conserv." value={plan.tractor.gastoMantenimiento} /> */}
           <NumberValue name="Horas útiles" value={plan.tractor.horasVidaUtil} unit="h" />
           <NumberValue name="Valor residual" value={plan.tractor.porcentajeValorResidual} unit="%" />
 
@@ -104,7 +104,7 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
           <span>Implemento</span>
         </h3>
 
-        <div className="grid lg:grid-cols-6 sm:grid-cols-2 md:grid-cols-3 gap-5">
+        <div className="grid lg:grid-cols-5 sm:grid-cols-2 md:grid-cols-3 gap-5">
 
           <InputOptions
             label="Implemento"
@@ -120,7 +120,7 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
             onRefresh={onRefreshDolarImplemento}
           />
 
-          <NumberValue name="Coef. conserv." value={plan.implemento.gastoMantenimiento} />
+          {/* <NumberValue name="Coef. conserv." value={plan.implemento.gastoMantenimiento} /> */}
           <NumberValue name="Horas útiles" value={plan.implemento.horasVidaUtil} unit="h" />
           <NumberValue name="Valor residual" value={plan.implemento.porcentajeValorResidual} unit="%" />
           
