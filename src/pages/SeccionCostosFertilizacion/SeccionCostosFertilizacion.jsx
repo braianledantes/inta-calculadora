@@ -76,7 +76,7 @@ export default function SeccionCostosFertilizacion() {
                                onDelete={deletePlan} onUpdate={updatePlan}
                                ref={idx === planes.length - 1 ? setLastPlanRef : null}/>
       ))}
-      <AddPlanButton text="Agregar nuevo plan de maquinaria" onClick={handleAddPlan}/>
+      <AddPlanButton text="Agregar nuevo plan de fertilizacion" onClick={handleAddPlan}/>
       </div>
 
       {planes.length >=2 &&(

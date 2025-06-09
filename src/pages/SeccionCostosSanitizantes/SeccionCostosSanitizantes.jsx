@@ -77,7 +77,7 @@ export default function SeccionCostosSanitizantes() {
                              onDelete={deletePlan} onUpdate={updatePlan}
                              ref={idx === planes.length - 1 ? setLastPlanRef : null}/>
       ))}
-        <AddPlanButton text="Agregar nuevo plan de maquinaria" onClick={handleAddPlan}/>
+        <AddPlanButton text="Agregar nuevo plan de sanitizantes" onClick={handleAddPlan}/>
       </div>
 
      {planes.length >=2 &&(
