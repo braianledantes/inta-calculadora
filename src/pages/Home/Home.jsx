@@ -28,7 +28,7 @@ const Home = () => {
                     </h1>
                     <button
                         onClick={() => setMostrarTablas(!mostrarTablas)}
-                        className="bg-[#036935] hover:bg-[#024c27] text-white px-6 py-1 rounded rounded-full text-lg shadow-md transition duration-300 ml-4"
+                        className="bg-[#036935] hover:bg-[#024c27] text-white px-6 py-1 rounded-full text-lg shadow-md transition duration-300 ml-4"
                     >
                         {mostrarTablas ? (<> Ocultar  <ChevronUp className="inline-block mr-2" /> </>) : (<> Ver Ejemplo <ChevronDown className="inline-block ml-2" /></>)}
                     </button>
