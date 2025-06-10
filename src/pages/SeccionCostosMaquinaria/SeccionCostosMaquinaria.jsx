@@ -54,7 +54,7 @@ export default function SeccionCostosMaquinaria() {
     <div className="bg-gray-100 py-8 my-4">
       
     <div className="flex justify-center gap-3 mb-4 flex-wrap">
-      <SectionTitle title="Costos de Maquinaria" />
+      <SectionTitle title="Calculadora de Costos de Maquinaria" />
     </div>
 
       <div className="flex flex-wrap justify-center items-center gap-6 mb-8">
@@ -75,7 +75,7 @@ export default function SeccionCostosMaquinaria() {
       {planes.map((plan, idx) => (
           <CardMaquinariaPlan key={plan.id} plan={plan} tractores={tractores} implementos={implementos} onDelete={deletePlan} onUpdate={updatePlan} ref={idx === planes.length - 1 ? setLastPlanRef : null}/>
       ))}
-        <AddPlanButton text="Agregar nuevo plan de maquinaria" onClick={handleAddPlan}/>
+        <AddPlanButton text="Ingresar nuevo conjunto" onClick={handleAddPlan}/>
       </div>
       <div className="lg:basis-1/3 order-2">
         <div  className="sticky top-50" style={{ maxHeight: 'calc(100vh - 80px)', overflowY: 'auto' }}> 
