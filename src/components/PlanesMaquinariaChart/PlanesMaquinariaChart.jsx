@@ -2,7 +2,7 @@ import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 
 export default function PlanesMaquinariaChart({ planes = [] }) {
   const formattedPlanes = planes.map(plane => ({
-    name: `Plan ${plane.id}`,
+    name: `Conjunto ${plane.id}`,
     amortizacionTractor: plane.amortizacionTractor || 0,
     gastoConservacionTractor: plane.gastoConservacionTractor || 0,
     amortizacionImplemento: plane.amortizacionImplemento || 0,
