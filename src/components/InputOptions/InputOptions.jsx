@@ -6,7 +6,7 @@ export default function InputOptions({label, value,  options, onChange}) {
       <label className="block text-sm font-medium">{label}</label>
       <div className="relative">
         <select
-          className="w-full p-2 pr-8 border border-gray-300 rounded-md hover:cursor-pointer appearance-none"
+          className="w-full p-2 pr-8 border-2 border-blue-300 focus:border-blue-500 rounded-md hover:cursor-pointer appearance-none"
           value={value}
           onChange={onChange}
         >
