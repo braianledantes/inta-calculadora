@@ -1,9 +1,9 @@
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef } from "react";
 import DeleteButton from "../DeleteButton/DeleteButton.jsx";
 import InputOptions from "../InputOptions/InputOptions.jsx";
 import NumberValue from "../NumberValue/NumberValue.jsx";
 import PlanTitle from "../PlanTitle/PlanTitle.jsx";
-import {ContainerInputDolarRefresh} from "../ContainerInputDolarRefresh/ContainerInputDolarRefresh.jsx";
+import InputNumber from "../InputNumber/InputNumber.jsx";
 
 
 export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
@@ -13,17 +13,14 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
     onDelete(plan.id);
   }
 
-  const [prevPrecioImplemento, setPrevPrecioImplemento] = useState(plan.implemento.precioDolar);
-  const [prevPrecioTractor, setPrevPrecioTractor] = useState(plan.tractor.precioDolar);
-
-  const onChangePrecioMaquinaria = (e) => {
-    const newPrecio = parseFloat(e.target.value);
+  const onChangePrecioMaquinaria = (value) => {
+    const newPrecio = parseFloat(value);
     const updatedTractor = { ...plan.tractor, precioDolar: newPrecio };
     onUpdate(plan.id, updatedTractor, plan.implemento);
   };
 
-  const onChangePrecioImplemento = (e) => {
-    const newPrecio = parseFloat(e.target.value);
+  const onChangePrecioImplemento = (value) => {
+    const newPrecio = parseFloat(value);
     const updatedImplemento = { ...plan.implemento, precioDolar: newPrecio };
     onUpdate(plan.id, plan.tractor, updatedImplemento);
   };
@@ -40,13 +37,15 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
     onUpdate(plan.id, plan.tractor, implemento);
   }
 
-  const onRefreshDolarMaquinaria = () => {
-    const updatedTractor = { ...plan.tractor, precioDolar: prevPrecioTractor };
+  const handleUpdateValorResidualTractor = (value) => {
+    const newValorResidual = parseFloat(value);
+    const updatedTractor = { ...plan.tractor, porcentajeValorResidual: newValorResidual };
     onUpdate(plan.id, updatedTractor, plan.implemento);
   }
 
-  const onRefreshDolarImplemento = () => {
-    const updatedImplemento = { ...plan.implemento, precioDolar: prevPrecioImplemento };
+  const handleUpdateValorResidualImplemento = (value) => {
+    const newValorResidual = parseFloat(value);
+    const updatedImplemento = { ...plan.implemento, porcentajeValorResidual: newValorResidual };
     onUpdate(plan.id, plan.tractor, updatedImplemento);
   }
 
@@ -54,14 +53,14 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
    <div className="mx-auto px-2" ref={ref}>
     <div className="bg-white shadow-lg rounded-xl p-6 mb-8">
       <div className="flex justify-between items-center mb-6">
-        <PlanTitle title={`Plan ${plan.id}`} />
+        <PlanTitle title={`Conjunto ${plan.id}`} />
         <DeleteButton onDelete={handleDelete} />
       </div>
 
       {/* DATOS DEL TRACTOR */}
       <div className="mb-8">
         <h3 className="text-xl font-bold text-green-800 mb-4 flex items-center gap-2">
-          <span>Datos del Tractor</span>
+          <span>Tractor</span>
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-5">
           <InputOptions
@@ -72,16 +71,11 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
           />
 
           <NumberValue name="Potencia" value={plan.tractor.potencia} unit="HP" />
-
-          <ContainerInputDolarRefresh
-            value={plan.tractor.precioDolar}
-            onChange={onChangePrecioMaquinaria}
-            onRefresh={onRefreshDolarMaquinaria}
-          />
-
           {/* <NumberValue name="Coef. conserv." value={plan.tractor.gastoMantenimiento} /> */}
           <NumberValue name="Horas útiles" value={plan.tractor.horasVidaUtil} unit="h" />
-          <NumberValue name="Valor residual" value={plan.tractor.porcentajeValorResidual} unit="%" />
+
+          <InputNumber name="Precio" value={plan.tractor.precioDolar} unit="US$" onChange={onChangePrecioMaquinaria} />
+          <InputNumber name="Valor residual" value={plan.tractor.porcentajeValorResidual} unit="%" onChange={handleUpdateValorResidualTractor} />
 
         </div>
         <div className="mt-4 bg-green-50 text-green-800 p-4 rounded-lg border border-green-200 shadow-inner flex flex-wrap gap-x-4 gap-y-2">
@@ -111,16 +105,11 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
             onChange={handleUpdateImplemento}
           />
           <NumberValue name="Consumo" value={plan.implemento.consumoCombustible} unit="lt/h" />
-
-          <ContainerInputDolarRefresh
-            value={plan.implemento.precioDolar}
-            onChange={onChangePrecioImplemento}
-            onRefresh={onRefreshDolarImplemento}
-          />
-
           {/* <NumberValue name="Coef. conserv." value={plan.implemento.gastoMantenimiento} /> */}
           <NumberValue name="Horas útiles" value={plan.implemento.horasVidaUtil} unit="h" />
-          <NumberValue name="Valor residual" value={plan.implemento.porcentajeValorResidual} unit="%" />
+
+          <InputNumber name="Precio" value={plan.implemento.precioDolar} unit="US$" onChange={onChangePrecioImplemento} />
+          <InputNumber name="Valor residual" value={plan.implemento.porcentajeValorResidual} unit="%" onChange={handleUpdateValorResidualImplemento} />
           
         </div>
         <div className="mt-4 bg-green-50 text-green-800 p-4 rounded-lg border border-green-200 shadow-inner flex flex-wrap gap-x-4 gap-y-2">
