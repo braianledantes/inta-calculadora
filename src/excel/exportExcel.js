@@ -1,8 +1,8 @@
 import ExcelJS from 'exceljs';
 import { saveAs } from 'file-saver';
-import { addMaquinariaSheet } from './sheets/maquinariaSheet';
-import { addFertilizantesSheet } from './sheets/fertilizanteSheet';
-import { addSanitizanteSheet } from './sheets/sanitizanteSheet';
+//import { addMaquinariaSheet } from './sheets/maquinariaSheet.js';
+import { addFertilizantesSheet } from './sheets/fertilizanteSheet.js';
+import { addSanitizanteSheet } from './sheets/sanitizanteSheet.js';
 
 export async function exportFormToExcel(
   planesMaquinaria,
