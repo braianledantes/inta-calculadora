@@ -66,7 +66,7 @@ export default function PlanesSanitizantesChart({ planes = [] }) {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="total" fill="#f97316" name="Total" />
+          <Bar dataKey="total" fill="#529949" name="Total" />
         </BarChart>
       </ResponsiveContainer>
     </div>
