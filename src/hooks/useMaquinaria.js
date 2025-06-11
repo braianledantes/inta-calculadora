@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {getDolar} from "../utils/utils.js";
+import {getDolar} from "../api/dolar.js";
 import {calcularValoresPlanMaquinaria} from "../services/calculos.js";
 import * as LocalDb from "../data/local.js";
 
