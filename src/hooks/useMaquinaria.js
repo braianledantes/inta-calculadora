@@ -49,6 +49,7 @@ export const useMaquinaria = () => {
       implemento: implemento,
       ...valoresCalculados,
     };
+ 
     const newId = planes.length === 0 ? 1 : planes[planes.length - 1].id + 1;
     const newPlan = {...plan, id: newId};
     setPlanes([...planes, newPlan]);

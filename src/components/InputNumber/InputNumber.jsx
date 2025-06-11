@@ -6,12 +6,12 @@ export default function InputNumber({ name, value, unit = "", onChange }) {
   };
 
   // Mostrar el valor redondeado a dos decimales si los tuviera
-  let displayValue = value === 0 || isNaN(value) ? "" : value;
+  let displayValue = value === "" || isNaN(value) ? "" : value;
   if (typeof displayValue === "number" && !Number.isInteger(displayValue)) {
     displayValue = displayValue.toFixed(2);
   }
 
-  const showError = value === 0 || value === undefined || value === null || isNaN(value);
+  const showError = value === "" || value === undefined || value === null || isNaN(value);
 
   return (
     <div className="block text-sm font-medium">

@@ -7,33 +7,40 @@ function capitalize(text) {
 export function addSanitizanteSheet(workbook, planesSanitizantes, valorDolar) {
   if (!Array.isArray(planesSanitizantes) || planesSanitizantes.length === 0) return;
 
-  const sheetSani = workbook.addWorksheet('Sanitizantes');
+  const sheetSanitizante = workbook.addWorksheet('Sanitizantes');
 
   // Cotización dólar
-  sheetSani.getCell('B1').value = 'Cotización dólar';
-  sheetSani.getCell('C1').value = valorDolar;
+  sheetSanitizante.getCell('B1').value = 'Cotización dólar';
+  sheetSanitizante.getCell('C1').value = valorDolar;
 
   ['B1', 'C1'].forEach(ref => {
-    const cell = sheetSani.getCell(ref);
+    const cell = sheetSanitizante.getCell(ref);
     applyStyle(cell, headerInfoStyle);
   });
-  sheetSani.getRow(1).height = 30;
-  sheetSani.getColumn('B').width = 20;
-  sheetSani.getColumn('C').width = 13;
+  sheetSanitizante.getRow(1).height = 30;
+  sheetSanitizante.getColumn('B').width = 20;
+  sheetSanitizante.getColumn('C').width = 13;
 
   // Encabezado principal
-  sheetSani.addRow([
-    'Insumos', 'Principio Activo', 'Tipo', 'Precio envase ($ USD)',
-    'Dosis aplicación', 'Unidad dosis', 'Volumen envase', 'Unidad volumen',
-    'Volumen por Hectárea', 'Cantidad de tratamientos', 'Cantidad',
-    'Costo total por tratamiento ($)', 'Costo total por hectárea ($)'
+  sheetSanitizante.addRow([
+    'Plan Fitosabitario', 
+    'Tratamiento',
+    'Principio Activo',
+    'Tipo',
+    'Precio envase ($ USD)',
+    'Dosis por ha', 
+    'Unidad dosis', 
+    'Volumen por ha', 
+    'Unidad volumen',
+    'Cant. por ha',
+    'Costo por ha',
   ]);
 
-  const headerRow = sheetSani.getRow(2);
+  const headerRow = sheetSanitizante.getRow(2);
   headerRow.height = 30;
 
   for (let col = 4; col <= 13; col++) {
-    sheetSani.getColumn(col).width = 15;
+    sheetSanitizante.getColumn(col).width = 15;
   }
 
   headerRow.eachCell((cell, colNumber) => {
@@ -45,57 +52,31 @@ export function addSanitizanteSheet(workbook, planesSanitizantes, valorDolar) {
     }
   });
 
-  planesSanitizantes.forEach((plan, index) => {
-    const row = sheetSani.addRow([
-      `${index + 1}`,
-      plan.sanitizante?.nombre || '',
-      plan.sanitizante?.tipo || '',
-      plan.sanitizante?.precioEnvaseDolar || '',
-      plan.sanitizante?.dosisAplicacion || '',
-      plan.sanitizante?.unidadDosisAplicacion || '',
-      plan.sanitizante?.volumenEnvase || '',
-      plan.sanitizante?.unidadVolumenEnvase || '',
-      plan.volumenPorHectarea || '',
-      plan.cantTratamientos || '',
-      null, null, null // Fórmulas
-    ]);
+  planesSanitizantes.forEach((plan, indexPlan) => {
 
-    const r = row.number;
-    const aplicarTractorStyle = index % 2 === 0;
+    plan.tratamientos.forEach((tratamiento, indexTratamiento) => {
+      tratamiento.productos.forEach((producto, indexProducto)=> {
 
-    // Fórmulas
-    sheetSani.getCell(`K${r}`).value = { formula: `E${r} * I${r}` };
-    sheetSani.getCell(`L${r}`).value = { formula: `(D${r} * C1) * (E${r} / G${r})` };
-    sheetSani.getCell(`M${r}`).value = { formula: `L${r} * I${r} * J${r}` };
+        const row = sheetSanitizante.addRow([
+          indexProducto === 0 && indexTratamiento === 0 ? plan.id : "",
+          indexProducto === 0 ? tratamiento.id : "",
+          producto.sanitizante.nombre,
+          producto.sanitizante.tipo,
+          producto.precio,
+          producto.dosisPorHectarea,
+          producto.sanitizante.unidadDosisAplicacion,
+          producto.volumenPorHectarea,
+          producto.sanitizante.unidadVolumenEnvase,
+          null, 
+          null, 
+        ]);
+         
+        const r = row.number;
 
-    row.eachCell((cell, colNumber) => {
-        applyStyle(cell, generalCellStyle);
-
-        if (colNumber === 1) {
-            cell.font = { ...cell.font, bold: true };
-            // Aplica bordes completos al índice
-            cell.border = { ...borderStyle };
-            cell.fill = {
-                type: 'pattern',
-                pattern: 'solid',
-                fgColor: { argb: 'FFF3F3F3' } // Color #f3f3f3 en formato ARGB
-            };
-        } else {
-            // Fondo total o alternado
-            if (colNumber === 13) {
-            applyStyle(cell, celdaTotalStyle);
-            }else if (aplicarTractorStyle) {
-            applyStyle(cell, tractorRowStyle);
-            }
-
-            // Bordes exteriores solo para primeras y últimas columnas
-            cell.border = {
-            top: borderStyle.top,
-            bottom: borderStyle.bottom,
-            left: colNumber === 1 ? borderStyle.left : undefined,
-            right: colNumber === 13 ? borderStyle.right : undefined
-            };
-        }
+        // Fórmulas
+        sheetSanitizante.getCell(`J${r}`).value = { formula: `F${r} * H${r}` };
+        sheetSanitizante.getCell(`K${r}`).value = { formula: `J${r} * C1 * E${r}`};
+      })
     });
   });
 }

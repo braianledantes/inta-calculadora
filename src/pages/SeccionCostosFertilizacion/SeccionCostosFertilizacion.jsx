@@ -69,12 +69,15 @@ export default function SeccionCostosFertilizacion() {
       
       <div className="flex flex-col lg:flex-row gap-2">
       <div className="flex-1 lg:basis-2/3 space-y-6 order-1">
+      
       {planes.map((plan, idx) => (
         <CardFertilizacionPlan key={plan.id} plan={plan} fertilizantes={fertilizantes}
                                onDelete={deletePlan} onUpdate={updatePlan}
                                ref={idx === planes.length - 1 ? setLastPlanRef : null}/>
       ))}
+
       <AddPlanButton text="Agregar nuevo plan de maquinaria" onClick={handleAddPlan}/>
+      
       </div>
         <div className="lg:basis-1/3 order-2">
           <div  className="sticky top-50 bottom-30" style={{ maxHeight: 'calc(100vh - 80px)', overflowY: 'auto' }}>
