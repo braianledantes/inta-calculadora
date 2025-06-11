@@ -26,20 +26,32 @@ export default function ProductoSanitizante({ idPlan, idTratamiento, producto })
     setTipoSeleccionado(nuevoTipo);
     const primerSanitizante = sanitizantes.find(s => s.tipo === nuevoTipo);
     if (primerSanitizante) {
-      updateProducto(idPlan, idTratamiento, producto.id, primerSanitizante);
+      updateProducto(idPlan, idTratamiento, producto.id, primerSanitizante, primerSanitizante.precioEnvaseDolar, 1, 1);
     }
   };
 
   const handleChangeSanitizante = (e) => {
     const sanitizanteSeleccionado = sanitizantesFiltrados.find(f => f.nombre === e.target.value);
     if (sanitizanteSeleccionado) {
-      updateProducto(idPlan, idTratamiento, producto.id, sanitizanteSeleccionado);
+      updateProducto(idPlan, idTratamiento, producto.id, sanitizanteSeleccionado, sanitizanteSeleccionado.precioEnvaseDolar, 1, 1);
     }
   }
 
   const handleDeleteProducto = () => {
     deleteProducto(idPlan, idTratamiento, producto.id);
   };
+
+  const handlePrecioChange = (newPrecio) => {
+    updateProducto(idPlan, idTratamiento, producto.id, sanitizante, newPrecio, producto.dosisPorHectarea, producto.volumenPorHectarea);
+  }
+
+  const handleDosisChange = (newDosis) => {
+    updateProducto(idPlan, idTratamiento, producto.id, sanitizante, producto.precio, newDosis, producto.volumenPorHectarea);
+  }
+
+  const handleVolumenChange = (newVolumen) => {
+    updateProducto(idPlan, idTratamiento, producto.id, sanitizante, producto.precio, producto.dosisPorHectarea, newVolumen);
+  }
 
   return (
     <div className="bg-white p-4 rounded-lg shadow-sm mb-4 grid grid-cols-[1fr_auto] gap-4">
@@ -61,18 +73,21 @@ export default function ProductoSanitizante({ idPlan, idTratamiento, producto })
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
           <InputNumber
             name={"Precio Envase"}
-            value={producto.sanitizante.precioEnvaseDolar}
+            value={producto.precio}
             unit={"US$"}
+            onChange={handlePrecioChange}
           />
           <InputNumber
-            name={"Volumen Envase"}
-            value={producto.sanitizante.volumenEnvase}
+            name={"Volumen por hectárea"}
+            value={producto.volumenPorHectarea}
             unit={producto.sanitizante.unidadVolumenEnvase}
+            onChange={handleVolumenChange}
           />
           <InputNumber
             name={"Dosis por hectárea"}
-            value={producto.sanitizante.dosisAplicacion}
+            value={producto.dosisPorHectarea}
             unit={producto.sanitizante.unidadDosisAplicacion}
+            onChange={handleDosisChange}
           />
         </div>
         <div className="mt-4 bg-green-50 text-green-800 p-4 rounded-lg border border-green-200 shadow-inner flex flex-wrap gap-x-4 gap-y-2">

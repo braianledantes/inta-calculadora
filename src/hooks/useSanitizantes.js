@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getDolar } from "../utils/utils.js";
-import { calcularValoresPlanSanitario } from "../services/calculos.js";
+import { calcularValoresPlanSanitario, calcularValoresProductoSanitario } from "../services/calculos.js";
 import * as LocalDb from "../data/local.js";
 
 /*
@@ -119,7 +119,7 @@ export const useSanitizantes = () => {
     // recalcula los costos de los productos
     const updatedTratamientos = plan.tratamientos.map(tratamiento => {
       const updatedProductos = tratamiento.productos.map(producto => {
-        const { cantidadPorHectarea, costoTotalPorHectarea } = calcularValoresPlanSanitario(producto.sanitizante, producto.volumenPorHectarea, 1, valorDolar);
+        const { cantidadPorHectarea, costoTotalPorHectarea } = calcularValoresProductoSanitario(producto.precio, producto.volumenPorHectarea, producto.dosisPorHectarea, valorDolar);
         return {
           ...producto,
           cantidadPorHectarea,
@@ -202,7 +202,7 @@ export const useSanitizantes = () => {
     setPlanes(planes.map(p => p.id === planId ? planActualizado : p));
   }
 
-  const updateProducto = (planId, tratamientoId, idProducto, sanitizante, precio, dosisPorHectarea, volumenPorHectarea) => {
+  const updateProducto = (planId, tratamientoId, idProducto, sanitizante, precio, dosisPorHectarea = 1, volumenPorHectarea = 1) => {
     const plan = getPlan(planId);
     if (!plan) return;
     const tratamiento = plan.tratamientos.find(t => t.id === tratamientoId);
