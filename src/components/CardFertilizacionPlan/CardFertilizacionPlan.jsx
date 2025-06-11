@@ -4,7 +4,6 @@ import InputNumber from "../InputNumber/InputNumber.jsx";
 import PlanTitle from "../PlanTitle/PlanTitle.jsx";
 import {forwardRef} from "react";
 import {useState} from "react";
-import {ContainerInputDolarRefresh} from "../ContainerInputDolarRefresh/ContainerInputDolarRefresh.jsx";
 import NumberValueModify from "../NumberValueModify/NumberValueModify.jsx";
 import {ContainerCostoTotal} from "../ContainerCostoTotal/ContainerCostoTotal.jsx";
 
@@ -23,7 +22,7 @@ export const CardFertilizacionPlan = forwardRef(function CardFertilizacionPlan({
   }
 
   const onChangePrecio = (e) => {
-    const newPrecio = e.target.value;
+    const newPrecio = parseFloat(e);
     const updatedFertilizante = {...plan.fertilizante, precioEnvaseDolar: newPrecio};
     onUpdate(plan.id, updatedFertilizante, plan.cantTratamientos);
   }
@@ -63,11 +62,8 @@ export const CardFertilizacionPlan = forwardRef(function CardFertilizacionPlan({
             onChange={handleUpdateFertilizante}
           />
           
-          <ContainerInputDolarRefresh
-            value={plan.fertilizante.precioEnvaseDolar}
-            onChange={onChangePrecio}
-            onRefresh={onRefreshDolarFertilizante}
-          />
+
+          <InputNumber name="Precio" value={plan.fertilizante.precioEnvaseDolar} unit="US$" onChange={onChangePrecio} />
 
           <NumberValueModify name="Dosis por ha" value={plan.fertilizante.dosisAplicacion} unit={plan.fertilizante.unidadDosisAplicacion} onChange={onChangeDosisPorHa}/>
         </div>

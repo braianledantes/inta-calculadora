@@ -73,7 +73,6 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
           <NumberValue name="Potencia" value={plan.tractor.potencia} unit="HP" />
           {/* <NumberValue name="Coef. conserv." value={plan.tractor.gastoMantenimiento} /> */}
           <NumberValue name="Horas útiles" value={plan.tractor.horasVidaUtil} unit="h" />
-
           <InputNumber name="Precio" value={plan.tractor.precioDolar} unit="US$" onChange={onChangePrecioMaquinaria} />
           <InputNumber name="Valor residual" value={plan.tractor.porcentajeValorResidual} unit="%" onChange={handleUpdateValorResidualTractor} />
 
