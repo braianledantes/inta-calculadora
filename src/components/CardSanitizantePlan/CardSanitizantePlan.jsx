@@ -19,6 +19,12 @@ export const CardSanitizantePlan = forwardRef(function CardSanitizantePlan({ pla
     deletePlan(plan.id);
   };
 
+  const hayTratamientosConProductos = plan.tratamientos.some(
+  tratamiento => tratamiento.productos && tratamiento.productos.length > 0
+);
+
+const mostrarTotal = plan.tratamientos.length > 0 && hayTratamientosConProductos;
+
   return (
     <div className="mx-auto px-2 w-full sm:max-w-md md:max-w-3xl lg:max-w-4xl" ref={ref}>
       <div className="bg-white shadow-lg rounded-xl p-6 mb-8">
@@ -35,14 +41,16 @@ export const CardSanitizantePlan = forwardRef(function CardSanitizantePlan({ pla
             {plan.tratamientos.map(tratamiento => (
               <TratamientoSanitario key={tratamiento.id} planId={plan.id} tratamiento={tratamiento} />
             ))}
-            <div className="mt-4 bg-green-50 text-green-800 p-4 rounded-lg border border-green-200 shadow-inner flex flex-wrap gap-x-4 gap-y-2">
-              <span>
-                <span className="font-semibold">Total:</span>
-                <span className="font-normal"> {plan.total} AR$/ha</span>
-              </span>
-            </div>
+            {mostrarTotal && (
+              <div className="mt-4 bg-green-50 text-green-800 p-4 rounded-lg border border-green-200 shadow-inner flex flex-wrap gap-x-4 gap-y-2">
+                <span>
+                  <span className="font-semibold">Total:</span>
+                  <span className="font-normal"> {plan.total} AR$/ha</span>
+                </span>            
+              </div>
+            )}
             <button
-              className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors"
+              className="bg-blue-500 text-white px-4 py-2 hover:bg-blue-600 transition-colors rounded-bl-lg rounded-br-lg"
               onClick={handleAddPlan}
             >
               Agregar Tratamiento

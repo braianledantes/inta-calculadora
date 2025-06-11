@@ -42,15 +42,17 @@ export default function TratamientoSanitario({ planId, tratamiento }) {
           />
         ))}
       </div>
-      <div className="mt-4 bg-green-50 text-green-800 p-4 rounded-lg border border-green-200 shadow-inner flex flex-wrap gap-x-4 gap-y-2">
-        <span>
-          <span className="font-semibold">Total tratamiento:</span>
-          <span className="font-normal"> {tratamiento.total} AR$/ha</span>
-        </span>
-      </div>
+      {tratamiento.productos.length > 0 && (
+        <div className="mt-4 bg-green-50 text-green-800 p-4 rounded-lg border border-green-200 shadow-inner flex flex-wrap gap-x-4 gap-y-2">
+          <span>
+            <span className="font-semibold">Total tratamiento:</span>
+            <span className="font-normal"> {tratamiento.total} AR$/ha</span>
+          </span>
+        </div>
+      )}
       <div className="mt-4">
         <button
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          className="bg-blue-500 text-white px-4 py-2  hover:bg-blue-600 rounded-bl-lg rounded-br-lg"
           onClick={() => addProducto(planId, tratamiento.id)}
         >
           Agregar Producto
