@@ -25,7 +25,7 @@ export function calcularValoresPlanFertilizante(fertilizante, cantTratamientos, 
   };
 }
 
-export function calcularValoresPlanSanitario(sanitizante, volumenPorHectarea, cantTratamientos, valorDolar) {
+export function calcularValoresPlanSanitario(sanitizante, volumenPorHectarea, cantTratamientos = 1, valorDolar) {
   const cantidadPorHectarea = Math.round(sanitizante.dosisAplicacion * volumenPorHectarea);
   const costoTotalPorTratamiento = Math.round(cantidadPorHectarea * valorDolar * sanitizante.precioEnvaseDolar);
 

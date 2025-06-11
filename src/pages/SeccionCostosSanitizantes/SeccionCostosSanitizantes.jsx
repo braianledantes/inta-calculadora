@@ -17,10 +17,7 @@ export default function SeccionCostosSanitizantes() {
     updateDolar,
     refreshDolar,
     planes,
-    sanitizantes,
     addPlan,
-    updatePlan,
-    deletePlan,
   } = useContext(AppContext).sanitizantes;
 
   const {
@@ -53,7 +50,7 @@ export default function SeccionCostosSanitizantes() {
     <div className="bg-gray-100 py-8 my-4">
       
       <div className="flex items-center gap-3 mb-6 justify-center">
-        <SectionTitle title="Costos de Sanitizantes"/>
+        <SectionTitle title="Calculadora de Costos de Planes Sanitarios"/>
       </div>
 
       <div className="flex flex-wrap justify-center items-center gap-6 mb-8">
@@ -68,11 +65,9 @@ export default function SeccionCostosSanitizantes() {
       <div className="flex flex-col lg:flex-row gap-2">
       <div className="flex-1 lg:basis-2/3 space-y-6 order-1">
       {planes.map((plan, idx) => (
-        <CardSanitizantePlan key={plan.id} plan={plan} sanitizantes={sanitizantes}
-                             onDelete={deletePlan} onUpdate={updatePlan}
-                             ref={idx === planes.length - 1 ? setLastPlanRef : null}/>
+        <CardSanitizantePlan key={plan.id} plan={plan} ref={idx === planes.length - 1 ? setLastPlanRef : null}/>
       ))}
-        <AddPlanButton text="Agregar nuevo plan de maquinaria" onClick={handleAddPlan}/>
+        <AddPlanButton text="Agregar Plan Fitosanitario" onClick={handleAddPlan}/>
       </div>
       <div className="lg:basis-1/3 order-2">
         <div className="sticky top-50 bottom-30" style={{ maxHeight: 'calc(100vh - 80px)', overflowY: 'auto' }}>
