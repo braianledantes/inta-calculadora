@@ -69,7 +69,7 @@ const Header = () => {
 
       {/* Sección de tarjetas */}
       <div className="bg-[#eeeeee] shadow-2xl rounded-2xl pb-10">
-        <h1 className="text-center text-4xl pt-10 font-semibold text-gray-800">
+        <h1 className="text-center text-sm sm:text-4xl pt-10 font-semibold text-gray-800 sm:justify-center">
           Seleccione una categoría de cálculo:
         </h1>
 
@@ -79,13 +79,13 @@ const Header = () => {
 
               <div
                 className={`
-                  w-[250px] h-[180px] flex flex-col items-center justify-center rounded-2xl p-6 shadow-md 
+                  w-[110px] h-[110px] sm:w-[250px] sm:h-[140px] flex flex-col items-center justify-center rounded-2xl p-6 shadow-md 
                   bg-white hover:bg-gray-100 transition duration-300 cursor-pointer text-center
                   ${location.pathname === path ? "border-2 border-green-600 shadow-lg scale-[1.02]" : ""}`}>
 
                 {ICONS[label]}
 
-                <span className="mt-3 text-2xl font-semibold text-gray-800">{label}</span>
+                <span className="mt-3 text-sm sm:text-2xl font-semibold text-gray-800">{label}</span>
 
               </div>
               
