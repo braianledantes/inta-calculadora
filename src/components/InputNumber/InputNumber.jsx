@@ -1,4 +1,5 @@
 export default function InputNumber({ name, value, unit = "", onChange }) {
+  
   const handleChange = (event) => {
     const newValue = parseFloat(event.target.value);
     onChange(newValue);
