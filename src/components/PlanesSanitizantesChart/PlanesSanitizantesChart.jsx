@@ -1,12 +1,43 @@
 import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-export default function PlanesSanitizantesChart({ planes = [] }) {
-  const formattedPlanes = planes.map(p => ({
-     name: `Plan ${p.id}`,
-     costoTotalPorTratamiento: p.costoTotalPorTratamiento,
-     total: p.costoTotalPorHectarea, 
-    }))
+/*
+const planes = [
+  {
+    id: 1,
+    name: "Plan 1",
+    total: 0,
+    tratamientos: [
+      {
+        id: 1,
+        fecha: "2023-10-01",
+        total: 0,
+        productos: [
+          {
+            id: 1,
+            sanitizante: {
+              numero: 1,
+              nombre: "ACEITE MINERAL",
+              precioEnvaseDolar: 2.80,
+              volumenEnvase: 1,
+              unidadVolumenEnvase: "lt",
+              dosisAplicacion: 1,
+              unidadDosisAplicacion: "lt",
+              tipo: "plaguicida",
+            },
+            precio: 2.80,
+            dosisPorHectarea: 1,
+            volumenPorHectarea: 1,
+            cantidadPorHectarea: 1,
+            costoTotalPorHectarea: 2.80,
+          }
+        ]
+      }
+    ]
+  }
+]
+*/
 
+export default function PlanesSanitizantesChart({ planes = [] }) {
   if (planes.length === 0) {
     return (
       <div className="w-full h-96 p-4 bg-white rounded-xl shadow-md pb-12 border border-gray-200 flex items-center justify-center">
@@ -22,7 +53,7 @@ export default function PlanesSanitizantesChart({ planes = [] }) {
         <BarChart
           width={500}
           height={300}
-          data={formattedPlanes}
+          data={planes}
           margin={{
             top: 5,
             right: 30,
@@ -35,8 +66,7 @@ export default function PlanesSanitizantesChart({ planes = [] }) {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="costoTotalPorTratamiento" fill="#f97316" name="Costo Total por Tratamiento" />
-          <Bar dataKey="total" fill="#529949" name="Costo Total por Hectárea" activeBar={<Rectangle fill="#529949" />} />
+          <Bar dataKey="total" fill="#f97316" name="Total" />
         </BarChart>
       </ResponsiveContainer>
     </div>
