@@ -55,11 +55,7 @@ export default function SeccionCostosSanitizantes() {
 
       <div className="flex flex-wrap justify-center items-center gap-6 mb-8">
         <InputDolar value={valorDolar} onChange={updateDolar} onRefresh={refreshDolar}/>
-        <SelectorEstadoFenologico
-          estados={estadosFenologicos}
-          estadoSeleccionado={estadoFenologicoSanitizante}
-          setEstadoSeleccionado={setEstadoFenologicoSanitizante}
-        />
+         {/* <SelectorEstadoFenologico estados={estadosFenologicos} estadoSeleccionado={estadoFenologicoSanitizante} setEstadoSeleccionado={setEstadoFenologicoSanitizante} />*/}
       </div>
 
       {planes.map((plan, idx) => (

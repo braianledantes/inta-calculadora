@@ -5,7 +5,6 @@ import { useRef, useContext, useState, useEffect } from "react";
 import {AppContext} from "../../context/AppContext.jsx";
 import SectionTitle from "../../components/SectionTitle/SectionTitle.jsx";
 import AddPlanButton from "../../components/AddPlanButton/AddPlanButton.jsx";
-import SelectorEstadoFenologico from "../../components/SelectorEstadoFenologico/SelectorEstadoFenologico.jsx";
 import PlanesMaquinariaChart from "../../components/PlanesMaquinariaChart/PlanesMaquinariaChart.jsx";
 import ButtonExportPDF from "../../components/ButtonExportPDF/ButtonExportPDF.jsx"
 import exportarGrafico from "../../utils/exportarGrafico.jsx";
@@ -25,12 +24,6 @@ export default function SeccionCostosMaquinaria() {
     implementos,
   } = useContext(AppContext).maquinaria;
 
-  const {
-    estadosFenologicos,
-    estadoFenologicoMaquinaria,
-    setEstadoFenologicoMaquinaria,
-  } = useContext(AppContext).estadosFenologicos;
-
   const [lastPlanRef, setLastPlanRef] = useState(null);
 
   const handleAddPlan = () => {
@@ -38,7 +31,7 @@ export default function SeccionCostosMaquinaria() {
   }
 
   const handleExportPdf = () => {
-    exportarGrafico(chartRef, { maquinariaPlans: planes ,  valorDolar: valorDolar, estadoFenologico: estadoFenologicoMaquinaria, valorGasoil: valorGasoilina })
+    exportarGrafico(chartRef, { maquinariaPlans: planes ,  valorDolar: valorDolar, valorGasoil: valorGasoilina })
   }
 
   // Hacer scroll cuando cambia la cantidad de planes
@@ -60,14 +53,7 @@ export default function SeccionCostosMaquinaria() {
       <div className="flex flex-wrap justify-center items-center gap-6 mb-8">
         
         <InputDolar value={valorDolar} onChange={updateDolar} onRefresh={refreshDolar}/>
-
-        <SelectorEstadoFenologico
-          estados={estadosFenologicos}
-          estadoSeleccionado={estadoFenologicoMaquinaria}
-          setEstadoSeleccionado={setEstadoFenologicoMaquinaria}
-        />
-        <InputGasoil value={valorGasoilina} onChange={updateGasolina}/>
-        
+        <InputGasoil value={valorGasoilina} onChange={updateGasolina}/>       
       </div>
 
 

@@ -4,7 +4,6 @@ import {useContext, useEffect, useState} from "react";
 import {AppContext} from "../../context/AppContext.jsx";
 import SectionTitle from "../../components/SectionTitle/SectionTitle.jsx";
 import AddPlanButton from "../../components/AddPlanButton/AddPlanButton.jsx";
-import SelectorEstadoFenologico from "../../components/SelectorEstadoFenologico/SelectorEstadoFenologico.jsx";
 // import GraficoFertilizacion from "../../components/Grafico/GraficoFertilizacion.jsx";
 import ButtonExportPDF from "../../components/ButtonExportPDF/ButtonExportPDF.jsx"
 import {useRef} from 'react';
@@ -23,12 +22,6 @@ export default function SeccionCostosFertilizacion() {
     deletePlan,
   } = useContext(AppContext).fertilizantes;
 
-  const {
-    estadosFenologicos,
-    estadoFenologicoFertilizante,
-    setEstadoFenologicoFertilizante
-  } = useContext(AppContext).estadosFenologicos;
-
   const [lastPlanRef, setLastPlanRef] = useState(null);
 
   const handleAddPlan = () => {
@@ -45,7 +38,7 @@ export default function SeccionCostosFertilizacion() {
   const chartRef = useRef();
   
   const handleExportPdf = () => {
-    exportarGrafico(chartRef, { fertilizacionPlans: planes ,  valorDolar: valorDolar, estadoFenologico: estadoFenologicoFertilizante});
+    exportarGrafico(chartRef, { fertilizacionPlans: planes ,  valorDolar: valorDolar});
   }
 
   return (
@@ -58,12 +51,6 @@ export default function SeccionCostosFertilizacion() {
       <div className="flex flex-wrap justify-center items-center gap-6 mb-8">
 
         <InputDolar value={valorDolar} onChange={updateDolar} onRefresh={refreshDolar}/>
-        
-        <SelectorEstadoFenologico
-          estados={estadosFenologicos}
-          estadoSeleccionado={estadoFenologicoFertilizante}
-          setEstadoSeleccionado={setEstadoFenologicoFertilizante}
-        />
       </div>
       
       
