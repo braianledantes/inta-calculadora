@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {getDolar} from "../api/dolar.js";
+import { getGasoil } from "../api/gasoil.js";
 import {calcularValoresPlanMaquinaria} from "../services/calculos.js";
 import * as LocalDb from "../data/local.js";
 
@@ -13,8 +14,11 @@ export const useMaquinaria = () => {
 
   useEffect(() => {
     const fetchDolar = async () => {
+      const gasoilValorApi = await getGasoil();
       const valor = await getDolar();
       setValorDollar(valor);
+      // TODO: posible mejora hacer que se pueda seleccionar el grado de gasoil y la provincia segun los resultados de la API
+      setValorGasolina(gasoilValorApi.grado2);
     }
     fetchDolar().then();
   }, []);
@@ -86,6 +90,8 @@ export const useMaquinaria = () => {
       setPlanes(prevPlanes => prevPlanes.map(p => p.id === plan.id ? {...p, ...valoresCalculados} : p));
     });
   }
+
+  
 
   return {
     valorDolar,
