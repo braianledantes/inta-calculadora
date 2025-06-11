@@ -93,11 +93,11 @@ export default function ProductoSanitizante({ idPlan, idTratamiento, producto })
         <div className="mt-4 bg-green-50 text-green-800 p-4 rounded-lg border border-green-200 shadow-inner flex flex-wrap gap-x-4 gap-y-2">
           <span>
             <span className="font-semibold">Cant. por ha:</span>
-            <span className="font-normal"> {producto.cantidadPorHectarea} {producto.sanitizante.cantidadPorHectarea}/ha</span>
+            <span className="font-normal"> {producto.cantidadPorHectarea}/ha</span>
           </span>
           <span>
             <span className="font-semibold">Costo por ha:</span>
-            <span className="font-normal"> {producto.cantidadPorHectarea} {producto.sanitizante.costoTotalPorHectarea}/ha</span>
+            <span className="font-normal"> {producto.costoTotalPorHectarea}/ha</span>
           </span>
         </div>
       </div>

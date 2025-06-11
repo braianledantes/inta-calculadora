@@ -144,14 +144,14 @@ export const useSanitizantes = () => {
 
   /**
    * Elimina un tratamiento del plan especificado y actualiza los costos.
-   * @param {*} planId 
-   * @param {*} tratamientoId 
-   * @returns 
+   * @param {*} planId
+   * @param {*} tratamientoId
+   * @returns
    */
   const deleteTratamiento = (planId, tratamientoId) => {
     const plan = getPlan(planId);
     if (!plan) return;
-    
+
     const updatedTratamientos = plan.tratamientos.filter(t => t.id !== tratamientoId);
     const updatedPlan = {
       ...plan,
