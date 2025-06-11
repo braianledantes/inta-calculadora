@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getDolar } from "../utils/utils.js";
-import { calcularValoresPlanSanitario, calcularValoresProductoSanitario } from "../services/calculos.js";
+import { calcularValoresProductoSanitario } from "../services/calculos.js";
 import * as LocalDb from "../data/local.js";
 
 /*
