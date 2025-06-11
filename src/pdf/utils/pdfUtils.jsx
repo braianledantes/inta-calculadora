@@ -1,6 +1,7 @@
-import { Text, View } from '@react-pdf/renderer';
+import {Text, View} from '@react-pdf/renderer';
 import styles from '../styles/pdfstyles';
-import { Buffer } from 'buffer';
+import {Buffer} from 'buffer';
+
 window.Buffer = Buffer;
 
 

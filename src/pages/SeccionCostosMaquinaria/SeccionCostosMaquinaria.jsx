@@ -1,7 +1,7 @@
 import {CardMaquinariaPlan} from "../../components/CardMaquinariaPlan/CardMaquinariaPlan.jsx";
 import InputDolar from "../../components/InputDolar/InputDolar.jsx";
 import InputGasoil from "../../components/InputGasoil/InputGasoil.jsx";
-import { useRef, useContext, useState, useEffect } from "react";
+import {useContext, useEffect, useRef, useState} from "react";
 import {AppContext} from "../../context/AppContext.jsx";
 import SectionTitle from "../../components/SectionTitle/SectionTitle.jsx";
 import AddPlanButton from "../../components/AddPlanButton/AddPlanButton.jsx";

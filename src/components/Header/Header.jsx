@@ -1,11 +1,11 @@
-import { Link, useLocation } from "react-router";
+import {Link, useLocation} from "react-router";
 import sipan from '../../assets/Logos_Header.svg';
 import ImportExcel from "../ImportExcel/ImportExcel.jsx";
-import { PATHS } from '../../routes/paths.js';
-import { useState } from "react";
-import { FiMenu, FiX } from "react-icons/fi";
+import {PATHS} from '../../routes/paths.js';
+import {useState} from "react";
+import {FiMenu, FiX} from "react-icons/fi";
 import ButtonExportExcel from "../ButtonExportExcel/ButtonExportExcel.jsx";
-import { Tractor, Sprout, SprayCan } from 'lucide-react'; // Iconos Lucide
+import {SprayCan, Sprout, Tractor} from 'lucide-react'; // Iconos Lucide
 
 // Íconos por categoría
 const ICONS = {

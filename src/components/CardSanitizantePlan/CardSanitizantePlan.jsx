@@ -1,5 +1,5 @@
-import { forwardRef, useContext } from "react";
-import { AppContext } from "../../context/AppContext.jsx";
+import {forwardRef, useContext} from "react";
+import {AppContext} from "../../context/AppContext.jsx";
 import DeleteButton from "../DeleteButton/DeleteButton.jsx";
 import PlanTitle from "../PlanTitle/PlanTitle.jsx";
 import TratamientoSanitario from "../TratamientoSanitario/TratamientoSanitario.jsx";

@@ -1,9 +1,9 @@
-import { Document, Page, Image } from '@react-pdf/renderer';
+import {Document, Image, Page} from '@react-pdf/renderer';
 import Header from './components/Header';
 import Maquinaria from './components/MaquinariaTable';
 import Sanitizante from './components/SanitizanteTable';
 import Fertilizacion from './components/FertilizanteTable';
-import { renderTable, safeCurrency } from './utils/pdfUtils';
+import {renderTable, safeCurrency} from './utils/pdfUtils';
 import styles from './styles/pdfstyles';
 
 const PDFDocument = ({

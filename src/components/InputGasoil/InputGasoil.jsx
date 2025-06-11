@@ -1,4 +1,4 @@
-import { Fuel } from "lucide-react";
+import {Fuel} from "lucide-react";
 
 export default function InputGasoil({ value, onChange }) {
   const handleChange = (event) => {

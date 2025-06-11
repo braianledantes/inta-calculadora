@@ -1,8 +1,8 @@
-import React, { useContext, useRef, useState } from 'react';
-import { AppContext } from "../../context/AppContext.jsx";
-import { importExcel } from "../../utils/utils.js";
-import { mapExcelData } from "../../utils/mapping.js";
-import { FiUpload } from "react-icons/fi"; // Ícono de subida
+import React, {useContext, useRef, useState} from 'react';
+import {AppContext} from "../../context/AppContext.jsx";
+import {importExcel} from "../../utils/utils.js";
+import {mapExcelData} from "../../utils/mapping.js";
+import {FiUpload} from "react-icons/fi"; // Ícono de subida
 
 const ImportExcel = () => {
     const {

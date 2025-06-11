@@ -1,9 +1,7 @@
-import { useContext, useMemo, useState } from "react";
-import { AppContext } from "../../context/AppContext";
+import {useContext, useMemo, useState} from "react";
+import {AppContext} from "../../context/AppContext";
 import DeleteButton from "../DeleteButton/DeleteButton";
-import NumberValueModify from "../NumberValueModify/NumberValueModify";
 import InputOptions from "../InputOptions/InputOptions";
-import NumberValue from "../NumberValue/NumberValue";
 import InputNumber from "../InputNumber/InputNumber";
 
 export default function ProductoSanitizante({ idPlan, idTratamiento, producto }) {

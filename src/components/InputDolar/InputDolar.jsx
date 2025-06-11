@@ -1,4 +1,4 @@
-import { CircleDollarSign, RefreshCcw } from "lucide-react";
+import {CircleDollarSign, RefreshCcw} from "lucide-react";
 
 export default function InputDolar({ value, onChange, onRefresh }) {
   const handleChange = (event) => {

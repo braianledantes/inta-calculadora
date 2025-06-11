@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, {forwardRef} from "react";
 import DeleteButton from "../DeleteButton/DeleteButton.jsx";
 import InputOptions from "../InputOptions/InputOptions.jsx";
 import NumberValue from "../NumberValue/NumberValue.jsx";

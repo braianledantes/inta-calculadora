@@ -1,4 +1,4 @@
-import { renderTable, safeCurrency} from '../utils/pdfUtils';
+import {renderTable, safeCurrency} from '../utils/pdfUtils';
 import styles from '../styles/pdfstyles';
 
 const SanitizanteTable = ({ plans }) => (

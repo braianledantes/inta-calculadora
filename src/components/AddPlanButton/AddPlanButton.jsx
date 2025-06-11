@@ -1,4 +1,4 @@
-import { FiPlusCircle } from "react-icons/fi";
+import {FiPlusCircle} from "react-icons/fi";
 
 export default function AddPlanButton({ text, onClick }) {
   return (

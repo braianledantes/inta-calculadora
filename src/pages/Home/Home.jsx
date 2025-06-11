@@ -1,18 +1,17 @@
-import { useState } from "react";
+import {useState} from "react";
 import InfoCard from "../../components/InfoCard/InfoCard.jsx";
 import InfoTablas from "../../components/InfoTablas/InfoTablas.jsx";
 import {
-    FileWarningIcon,
-    Tractor,
-    Sprout,
-    SprayCan,
-    BarChart3,
-    FileDown,
-    UploadCloud,
-    ChevronUp,
-    ChevronDown
+  BarChart3,
+  ChevronDown,
+  ChevronUp,
+  FileDown,
+  FileWarningIcon,
+  SprayCan,
+  Sprout,
+  Tractor,
+  UploadCloud
 } from "lucide-react";
-
 
 
 const Home = () => {

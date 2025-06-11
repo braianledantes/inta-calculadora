@@ -1,12 +1,12 @@
 import {
-  headerInfoStyle,
-  generalCellStyle,
-  applyStyle,
-  tractorRowStyle,
-  verdeSuave,
   amarilloSuave,
+  applyStyle,
   borderStyle,
-  celdaTotalStyle
+  celdaTotalStyle,
+  generalCellStyle,
+  headerInfoStyle,
+  tractorRowStyle,
+  verdeSuave
 } from './excelStyles';
 
 function capitalize(text) {

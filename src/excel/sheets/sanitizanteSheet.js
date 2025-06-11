@@ -1,4 +1,4 @@
-import { headerInfoStyle, tableHeaderStyle, generalCellStyle, applyStyle, tractorRowStyle, verdeSuave, amarilloSuave, borderStyle, celdaTotalStyle} from './excelStyles';
+import {amarilloSuave, applyStyle, headerInfoStyle, verdeSuave} from './excelStyles';
 
 function capitalize(text) {
   return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();

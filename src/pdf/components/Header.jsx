@@ -1,5 +1,5 @@
-import { View, Text, Image } from '@react-pdf/renderer';
-import sipan from '../../assets/sipanPDF.png'; 
+import {Image, Text, View} from '@react-pdf/renderer';
+import sipan from '../../assets/sipanPDF.png';
 import styles from '../styles/pdfstyles'
 
 const Header = ({ maquinariaPlans, sanitizantePlans, fertilizacionPlans, valorDolar, estadoFenologico, valorGasoil }) => {

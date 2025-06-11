@@ -1,4 +1,4 @@
-import { StyleSheet } from '@react-pdf/renderer';
+import {StyleSheet} from '@react-pdf/renderer';
 
 export default StyleSheet.create({
   page: { padding: 30,   },

@@ -1,5 +1,5 @@
-import { View } from '@react-pdf/renderer';
-import { renderTable, safeCurrency} from '../utils/pdfUtils';
+import {View} from '@react-pdf/renderer';
+import {renderTable, safeCurrency} from '../utils/pdfUtils';
 import styles from '../styles/pdfstyles';
 
 const MaquinariaTable = ({ plans }) => (
