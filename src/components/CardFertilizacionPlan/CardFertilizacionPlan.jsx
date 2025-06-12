@@ -49,30 +49,16 @@ export const CardFertilizacionPlan = forwardRef(function CardFertilizacionPlan({
         <PlanTitle title={`Plan ${plan.id}`}/>
         <DeleteButton onDelete={handleDelete}/>
       </div>
-      <div className="mb-6">
-        <h3 className="text-lg font-bold text-green-800 mb-2 flex items-center gap-2">
-          <span>Datos del Fertilizante</span>
-        </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-
+      <div className="mb-6 mt-8">
           <InputOptions
             label="Fertilizante"
             value={plan.fertilizante.nombre}
             options={fertilizantes.map(f => f.nombre)}
             onChange={handleUpdateFertilizante}
           />
-          
-
-          <InputNumber name="Precio" value={plan.fertilizante.precioEnvaseDolar} unit="US$" onChange={onChangePrecio} />
-
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-5">
+          <InputNumber name="Precio Unitario" value={plan.fertilizante.precioEnvaseDolar} unit="US$" onChange={onChangePrecio} />
           <NumberValueModify name="Dosis por ha" value={plan.fertilizante.dosisAplicacion} unit={plan.fertilizante.unidadDosisAplicacion} onChange={onChangeDosisPorHa}/>
-        </div>
-      </div>
-      <div className="mb-6">
-        <h3 className="text-lg font-semibold text-green-800 mb-2 flex items-center gap-2">
-          <span>Datos del Plan</span>
-        </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           <InputNumber name="Cant. tratamientos" value={plan.cantTratamientos} onChange={handleUpdateCantTratamientos}/>
         </div>
       </div>

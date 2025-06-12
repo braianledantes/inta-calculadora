@@ -57,32 +57,30 @@ export default function ProductoSanitizante({ idPlan, idTratamiento, producto })
     <div>
     <div className="bg-white p-4 rounded-tl-lg rounded-tr-lg shadow-sm">
       <div className="flex justify-between items-center mb-2">
-        <div className="flex items-center gap-3">
-          <h2 className="text-lg font-semibold"> {producto.sanitizante.nombre || "producto1"} </h2>
-          <span className="text-sm text-gray-500">{producto.sanitizante.tipo || "tipo"}</span>
+        <div className="flex flex-wrap gap-7">
+          <InputOptions
+            label="Principio Activo"
+            options={sanitizantesFiltrados.map(s => s.nombre)}
+            value={producto.sanitizante.nombre}
+            onChange={handleChangeSanitizante}
+          />
+          <InputOptions
+            label="Tipo"
+            options={tiposSanitizantes}
+            value={producto.sanitizante.tipo}
+            onChange={handleChangeTipo}
+          />
         </div>
         <DeleteButton onDelete={handleDeleteProducto} />
       </div>
-    <div className="grid sm:grid-cols-5 gap-2">
-      <InputOptions
-        label="Tipo de Sanitizante"
-        options={tiposSanitizantes}
-        value={producto.sanitizante.tipo}
-        onChange={handleChangeTipo}
-      />
-      <InputOptions
-        label="Principio Activo"
-        options={sanitizantesFiltrados.map(s => s.nombre)}
-        value={producto.sanitizante.nombre}
-        onChange={handleChangeSanitizante}
-      />
+    <div className="grid sm:grid-cols-3 gap-2 mt-5">
       <InputNumber
         name={"Precio Envase"}
         value={producto.precio}
         unit={"US$"}
         onChange={handlePrecioChange}
       />
-            <InputNumber
+      <InputNumber
         name={"Volumen hectárea"}
         value={producto.volumenPorHectarea}
         unit={producto.sanitizante.unidadVolumenEnvase}

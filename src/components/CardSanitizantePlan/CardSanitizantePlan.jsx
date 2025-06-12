@@ -26,7 +26,7 @@ export const CardSanitizantePlan = forwardRef(function CardSanitizantePlan({ pla
 const mostrarTotal = plan.tratamientos.length > 0 && hayTratamientosConProductos;
 
   return (
-    <div className="mx-auto px-2 w-full sm:max-w-md md:max-w-3xl lg:max-w-4xl" ref={ref}>
+    <div className="mx-auto px-2 w-full sm:max-w-md md:max-w-3xl lg:max-w-4xl mb-10" ref={ref}>
       <div className="bg-white rounded-xl shadow-lg pt-6 px-6 pb-3">
         <div className="flex justify-between items-center mb-4">
           <PlanTitle title={`Plan Fitosanitario ${plan.id}`} />

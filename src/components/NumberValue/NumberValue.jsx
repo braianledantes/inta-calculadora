@@ -4,18 +4,21 @@ export default function NumberValue({ name, value, unit = "" }) {
   if (typeof displayValue === "number" && !Number.isInteger(displayValue)) {
     displayValue = displayValue.toFixed(2).replace(".", ",");
   }
+
   return (
-    <div className="">
-      <label className="block text-sm font-medium">{name}</label>
-      <div className="relative w-full">
+    <div className="w-full max-w-xs select-none">
+      <label className="block text-sm font-semibold text-gray-800 mb-1">
+        {name}
+      </label>
+      <div className="relative pointer-events-none">
         <input
           value={displayValue}
-          className={`w-full p-2 border border-gray-300 rounded-md hover:cursor-default focus:outline-none${unit ? ' pr-10' : ''}`}
           readOnly
           tabIndex={-1}
+          className="w-full bg-gray-100 text-gray-700 border border-gray-300 rounded-xl py-2 pr-12 pl-3 text-base font-medium shadow-inner cursor-not-allowed select-none"
         />
         {unit && (
-          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none select-none">
+          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-black text-sm font-semibold opacity-80 tracking-wide">
             {unit}
           </span>
         )}
@@ -23,3 +26,4 @@ export default function NumberValue({ name, value, unit = "" }) {
     </div>
   );
 }
+

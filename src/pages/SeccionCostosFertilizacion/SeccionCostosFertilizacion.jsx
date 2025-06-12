@@ -60,7 +60,7 @@ export default function SeccionCostosFertilizacion() {
                                ref={idx === planes.length - 1 ? setLastPlanRef : null}/>
       ))}
 
-      <AddPlanButton text="Agregar nuevo plan de maquinaria" onClick={handleAddPlan}/>
+      <AddPlanButton text="Agregar nuevo plan de fertilizacion" onClick={handleAddPlan}/>
       {planes.length >= 2 && (
         <div>
           <div ref={chartRef}>

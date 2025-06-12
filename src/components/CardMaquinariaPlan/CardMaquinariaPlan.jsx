@@ -50,26 +50,24 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
   }
 
   return (
-   <div className="mx-auto px-2 w-full sm:max-w-md md:max-w-3xl lg:max-w-4xl" ref={ref}>
-    <div className="bg-white shadow-lg rounded-xl p-6 mb-8">
+   <div className="bg-white shadow-lg rounded-xl mx-auto w-full sm:max-w-md md:max-w-3xl lg:max-w-4xl mb-10" ref={ref}>
+    <div className="px-6 pt-6 mb-8">
       <div className="flex justify-between items-center mb-6">
-        <PlanTitle title={`Conjunto ${plan.id}`} />
+        <PlanTitle title={`Conjunto de Maquinaria ${plan.id}`} />
         <DeleteButton onDelete={handleDelete} />
       </div>
 
       {/* DATOS DEL TRACTOR */}
       <div className="mb-8">
-        <h3 className="text-xl font-bold text-green-800 mb-4 flex items-center gap-2">
-          <span>Tractor</span>
-        </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-5">
+        <div className="w-64">
           <InputOptions
             label="Tractor"
             value={plan.tractor.nombre}
             options={tractores.map((t) => t.nombre)}
             onChange={handleUpdateTractor}
           />
-
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5 mt-5">
           <NumberValue name="Potencia" value={plan.tractor.potencia} unit="HP" />
           {/* <NumberValue name="Coef. conserv." value={plan.tractor.gastoMantenimiento} /> */}
           <NumberValue name="Horas útiles" value={plan.tractor.horasVidaUtil} unit="h" />
@@ -77,7 +75,7 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
           <InputNumber name="Valor residual" value={plan.tractor.porcentajeValorResidual} unit="%" onChange={handleUpdateValorResidualTractor} />
 
         </div>
-        <div className="mt-4 bg-green-50 text-green-800 p-4 rounded-lg border border-green-200 shadow-inner flex flex-wrap gap-x-4 gap-y-2">
+        <div className="mt-4 bg-green-50 text-green-800 p-4 border border-green-200 shadow-inner flex flex-wrap gap-x-4 gap-y-2">
           <span>
             <span className="font-semibold">Amortización:</span>
             <span className="font-normal"> {plan.amortizacionTractor} ARS/h</span>
@@ -91,18 +89,14 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
 
       {/* IMPLEMENTO */}
       <div className="mb-8">
-
-        <h3 className="text-xl font-bold text-green-800 mb-4 flex items-center gap-2">
-          <span>Implemento</span>
-        </h3>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-5">
-          <InputOptions
+        <InputOptions
             label="Implemento"
             value={plan.implemento.nombre}
             options={implementos.map((i) => i.nombre)}
             onChange={handleUpdateImplemento}
           />
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5 mt-5">
           <NumberValue name="Consumo" value={plan.implemento.consumoCombustible} unit="lt/h" />
           {/* <NumberValue name="Coef. conserv." value={plan.implemento.gastoMantenimiento} /> */}
           <NumberValue name="Horas útiles" value={plan.implemento.horasVidaUtil} unit="h" />
@@ -111,7 +105,7 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
           <InputNumber name="Valor residual" value={plan.implemento.porcentajeValorResidual} unit="%" onChange={handleUpdateValorResidualImplemento} />
           
         </div>
-        <div className="mt-4 bg-green-50 text-green-800 p-4 rounded-lg border border-green-200 shadow-inner flex flex-wrap gap-x-4 gap-y-2">
+        <div className="mt-4 bg-green-50 text-green-800 p-4  border border-green-200 shadow-inner flex flex-wrap gap-x-4 gap-y-2">
           <span>
             <span className="font-semibold">Combustible:</span>
             <span className="font-normal"> {plan.costoCombustibleImplemento} ARS/h</span>
@@ -126,14 +120,16 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
           </span>
         </div>
       </div>
-
-      {/* COSTO TOTAL */}
-      <div className="text-right text-2xl font-extrabold text-black border-t pt-6 mt-6">
-        <span className="ml-2">Costo Total:</span>
-        <span className="ml-2">{plan.costoEconomico.toLocaleString()} ARS/h</span>
-      </div>
     </div>
-
+      {/* COSTO TOTAL */}
+      <div className="text-right text-2xl font-bold text-gray-800 border-t border-gray-200 px-6 py-4 rounded-b-xl">
+        <span className="font-semibold text-gray-800 font-medium tracking-wide mr-2">
+          Costo Total:
+        </span>
+        <span className="text-green-900 font-extrabold tracking-tight">
+          {plan.costoEconomico.toLocaleString()} <span className="text-sm font-semibold text-gray-600">ARS/h</span>
+        </span>
+      </div>
    </div>
   )
-});
+}); 

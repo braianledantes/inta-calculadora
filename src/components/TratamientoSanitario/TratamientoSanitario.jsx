@@ -55,7 +55,7 @@ export default function TratamientoSanitario({ planId, tratamiento }) {
 
       <div className="bg-white p-4 rounded-lg shadow-sm  mb-4 flex justify-between items-center ">
         <span className="font-bold text-lg font-semibold">
-          Producto 
+          Agregar Producto 
         </span>
         <button
           className="flex items-center justify-center px-2 py-2 border border-black text-black rounded-full hover:bg-black hover:text-white transition-colors duration-200 shadow-sm font-medium"
