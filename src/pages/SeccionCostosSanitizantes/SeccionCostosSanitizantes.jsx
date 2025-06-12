@@ -3,8 +3,7 @@ import {CardSanitizantePlan} from "../../components/CardSanitizantePlan/CardSani
 import {useContext, useEffect, useState} from "react";
 import {AppContext} from "../../context/AppContext.jsx";
 import AddPlanButton from "../../components/AddPlanButton/AddPlanButton.jsx";
-import SectionTitle from "../../components/SectionTitle/SectionTitle.jsx";
-import SelectorEstadoFenologico from "../../components/SelectorEstadoFenologico/SelectorEstadoFenologico.jsx";
+import SectionTitle from "../../components/SectionTitle/SectionTitle.jsx";;
 import GraficoSanitizante from '../../components/Grafico/GraficosSanitizante.jsx'
 import ButtonExportPDF from "../../components/ButtonExportPDF/ButtonExportPDF.jsx"
 import {useRef} from 'react';
@@ -20,12 +19,6 @@ export default function SeccionCostosSanitizantes() {
     addPlan,
   } = useContext(AppContext).sanitizantes;
 
-  const {
-    estadosFenologicos,
-    estadoFenologicoSanitizante,
-    setEstadoFenologicoSanitizante,
-  } = useContext(AppContext).estadosFenologicos;
-
   const [lastPlanRef, setLastPlanRef] = useState(null);
 
   const handleAddPlan = () => {
@@ -40,7 +33,7 @@ export default function SeccionCostosSanitizantes() {
   }, [planes.length, lastPlanRef]);
 
   const handleExportPdf = () => {
-    () => exportarGrafico(chartRef, { sanitizantePlans: planes ,  valorDolar: valorDolar, estadoFenologico: estadoFenologicoSanitizante })
+    () => exportarGrafico(chartRef, { sanitizantePlans: planes ,  valorDolar: valorDolar})
   }
 
   const chartRef = useRef();
@@ -55,7 +48,6 @@ export default function SeccionCostosSanitizantes() {
 
       <div className="flex flex-wrap justify-center items-center gap-6 mb-8">
         <InputDolar value={valorDolar} onChange={updateDolar} onRefresh={refreshDolar}/>
-         {/* <SelectorEstadoFenologico estados={estadosFenologicos} estadoSeleccionado={estadoFenologicoSanitizante} setEstadoSeleccionado={setEstadoFenologicoSanitizante} />*/}
       </div>
 
       {planes.map((plan, idx) => (
