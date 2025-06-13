@@ -43,17 +43,7 @@ const Home = () => {
                             <div className="text-gray-700 space-y-6">
                                 <div className="text-gray-800 w-full max-w-6xl mx-auto px-4">
                                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                                        <InfoCard
-                                            icon={<UploadCloud className="w-5 h-5 " />}
-                                            title="Ingresar y cargar datos agrícolas"
-                                        >
-                                            <li>Subir datos desde un archivo Excel o traerlos desde la web.</li>
-                                            <li>Cotización del dólar (manual o automática)</li>
-                                            <li>Precio del gasoil (manual o automático)</li>
-                                            <li>Cantidad de tratamientos</li>
-                                            <li>Volumen a aplicar con la maquinaria</li>
-                                        </InfoCard>
-
+                                        
                                         <InfoCard
                                             icon={<Tractor className="w-5 h-5 " />}
                                             title="Calcular costos de maquinaria"
@@ -82,11 +72,21 @@ const Home = () => {
 
                                         <InfoCard
                                             icon={<SprayCan className="w-5 h-5 " />}
-                                            title="Calcular costos de sanitizantes"
+                                            title="Calcular costos de sanitizante"
                                         >
-                                            <li>
-                                                Ingresar sanitizante, volumen por hectárea y tratamientos. Obtener el costo total según el valor del dólar.
-                                            </li>
+                                            <li>Crear un plan fitosanitario anual compuesto por varios tratamientos</li>
+                                            <li>En cada tratamiento especificar:</li>
+                                                <ul className="ml-4 list-[circle] space-y-0.5">
+                                                    <li>Productos sanitizantes</li>
+                                                    <li>Dosis por hectárea y volumen de aplicación</li>
+                                                </ul>
+                                            <li>Calcular:</li>
+                                                <ul className="ml-4 list-[circle] space-y-0.5">
+                                                    <li>Costo por tratamiento</li>
+                                                    <li>Costo total del plan</li>
+                                                    <li>Comparación entre planes</li>
+                                                </ul>
+                                            <li>Usa el valor actual del dólar</li>
                                         </InfoCard>
 
                                         <InfoCard
@@ -95,6 +95,13 @@ const Home = () => {
                                         >
                                             <li>Realizar múltiples cálculos</li>
                                             <li>Visualizar gráficos comparativos entre insumos o máquinas</li>
+                                        </InfoCard>
+
+                                        <InfoCard
+                                            icon={<FileDown className="w-5 h-5 " />}
+                                            title="Exportar informes"
+                                        >
+                                            <li>Descargar en Excel los resultados y análisis realizados</li>
                                         </InfoCard>
 
                                         <InfoCard

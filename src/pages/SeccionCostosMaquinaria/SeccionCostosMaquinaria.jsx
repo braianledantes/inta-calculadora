@@ -8,7 +8,7 @@ import AddPlanButton from "../../components/AddPlanButton/AddPlanButton.jsx";
 import PlanesMaquinariaChart from "../../components/PlanesMaquinariaChart/PlanesMaquinariaChart.jsx";
 import ButtonExportPDF from "../../components/ButtonExportPDF/ButtonExportPDF.jsx";
 import exportarGrafico from "../../utils/exportarGrafico.jsx";
-import { LayoutGrid, AlignVerticalJustifyCenter } from "lucide-react";
+import VistaSelector from "../../components/VistaSelector/VistaSelector.jsx";
 
 export default function SeccionCostosMaquinaria() {
   const {
@@ -42,7 +42,6 @@ export default function SeccionCostosMaquinaria() {
     });
   };
 
-  // Detecta cambio de tamaño de pantalla
   useEffect(() => {
     const manejarResize = () => {
       const esPequena = window.innerWidth < 768;
@@ -54,13 +53,12 @@ export default function SeccionCostosMaquinaria() {
       }
     };
 
-    manejarResize(); // Ejecutar al cargar
+    manejarResize();
 
     window.addEventListener("resize", manejarResize);
     return () => window.removeEventListener("resize", manejarResize);
   }, []);
 
-  // Scroll al último plan y ajuste de vista automática
   useEffect(() => {
     if (lastPlanRef.current) {
       lastPlanRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -91,32 +89,8 @@ export default function SeccionCostosMaquinaria() {
         <InputGasoil value={valorGasoilina} onChange={updateGasolina} />
       </div>
 
-      {/* Selector de vista solo visible en pantallas grandes */}
       {planes.length >= 2 && !pantallaPequena && (
-        <div className="flex justify-center gap-4 mb-6">
-          <button
-            onClick={() => handleVistaChange("lista")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition focus:outline-none ${
-              vista === "lista"
-                ? "border border-black text-black"
-                : "border border-gray-300 text-gray-400 hover:text-black hover:border-black"
-            }`}
-          >
-            <AlignVerticalJustifyCenter size={18} />
-            Lista (1 columna)
-          </button>
-          <button
-            onClick={() => handleVistaChange("dosColumnas")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition focus:outline-none ${
-              vista === "dosColumnas"
-                ? "border border-black text-black"
-                : "border border-gray-300 text-gray-400 hover:text-black hover:border-black"
-            }`}
-          >
-            <LayoutGrid size={18} />
-            Dos Columnas
-          </button>
-        </div>
+        <VistaSelector vista={vista} onVistaChange={handleVistaChange} />
       )}
 
       <div
@@ -154,5 +128,4 @@ export default function SeccionCostosMaquinaria() {
     </div>
   );
 }
-
 
