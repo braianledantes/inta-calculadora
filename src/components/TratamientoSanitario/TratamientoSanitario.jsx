@@ -53,14 +53,11 @@ export default function TratamientoSanitario({ planId, tratamiento }) {
         ))}
       </div>
 
-      <div className="bg-white p-4 rounded-lg shadow-sm  mb-4 flex justify-between items-center ">
-        <span className="font-bold text-lg font-semibold">
-          Agregar Producto 
-        </span>
+      <div className=" ">
         <button
-          className="flex items-center justify-center px-2 py-2 border border-black text-black rounded-full hover:bg-black hover:text-white transition-colors duration-200 shadow-sm font-medium"
+          className="bg-white px-4 py-1.5 text-sm font-medium rounded-full border border-black text-black hover:bg-black hover:text-white transition-colors duration-200 shadow-sm flex items-center justify-center"
           onClick={() => addProducto(planId, tratamiento.id)}
-        > <Plus size={18} />
+        >Agregar Producto <Plus size={18} />
         </button>
       </div>
     </div>

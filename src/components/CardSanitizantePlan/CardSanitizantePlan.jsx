@@ -3,35 +3,59 @@ import { AppContext } from "../../context/AppContext.jsx";
 import DeleteButton from "../DeleteButton/DeleteButton.jsx";
 import PlanTitle from "../PlanTitle/PlanTitle.jsx";
 import TratamientoSanitario from "../TratamientoSanitario/TratamientoSanitario.jsx";
-import { Plus } from "lucide-react";
+import Paginacion from "../Paginacion/Paginacion.jsx";
 
 export const CardSanitizantePlan = forwardRef(function CardSanitizantePlan({ plan }, ref) {
   const {
     deletePlan,
     addTratamiento,
+    deleteTratamiento,
   } = useContext(AppContext).sanitizantes;
 
   const [tratamientoActivoIndex, setTratamientoActivoIndex] = useState(0);
-  const haAgregadoTratamientoInicial = useRef(false); // 👈 Flag para evitar múltiples llamadas
+  const haAgregadoTratamientoInicial = useRef(false);
 
   useEffect(() => {
     if (plan.tratamientos.length === 0 && !haAgregadoTratamientoInicial.current) {
       addTratamiento(plan.id);
       haAgregadoTratamientoInicial.current = true;
     }
-  }, [plan.id, plan.tratamientos.length, addTratamiento]);
 
-  const handleAddPlan = () => {
+    setTratamientoActivoIndex(prev => {
+      if (plan.tratamientos.length === 0) return 0;
+      if (prev >= plan.tratamientos.length) return plan.tratamientos.length - 1;
+      return prev;
+    });
+  }, [plan.tratamientos.length, addTratamiento, plan.id]);
+
+  const handleAddTratamiento = () => {
     addTratamiento(plan.id);
-    setTratamientoActivoIndex(plan.tratamientos.length); // mostrar el nuevo tratamiento
+    setTratamientoActivoIndex(plan.tratamientos.length);
   };
 
   const handleDeletePlan = () => {
     deletePlan(plan.id);
   };
 
+  const handleDeleteTratamiento = (tratamientoId) => {
+    const indexToDelete = plan.tratamientos.findIndex(t => t.id === tratamientoId);
+    if (indexToDelete === -1) return;
+
+    deleteTratamiento(plan.id, tratamientoId);
+
+    setTratamientoActivoIndex(prev => {
+      if (indexToDelete === prev) {
+        return prev === 0 ? 0 : prev - 1;
+      }
+      if (indexToDelete < prev) {
+        return prev - 1;
+      }
+      return prev;
+    });
+  };
+
   const hayTratamientosConProductos = plan.tratamientos.some(
-    tratamiento => tratamiento.productos && tratamiento.productos.length > 0
+    t => t.productos && t.productos.length > 0
   );
 
   const mostrarTotal = plan.tratamientos.length > 0 && hayTratamientosConProductos;
@@ -44,39 +68,23 @@ export const CardSanitizantePlan = forwardRef(function CardSanitizantePlan({ pla
           <DeleteButton onDelete={handleDeletePlan} showText text="Eliminar Plan" />
         </div>
 
-        {/* Navegación tipo paginación */}
-        <div className="flex gap-2 mb-6 justify-start items-center flex-wrap">
-          {plan.tratamientos.map((tratamiento, index) => (
-            <button
-              key={tratamiento.id}
-              className={`w-8 h-8 rounded-full border font-semibold text-sm 
-                flex items-center justify-center
-                ${index === tratamientoActivoIndex
-                  ? "bg-black text-white"
-                  : "bg-gray-200 hover:bg-gray-300 text-gray-800"}`}
-              onClick={() => setTratamientoActivoIndex(index)}
-              title={`Tratamiento ${index + 1}`}
-            >
-              {index + 1}
-            </button>
-          ))}
+        <span className="block text-sm text-gray-500 mb-2">Lista de tratamientos</span>
 
-          {/* Botón para agregar tratamiento */}
-          <button
-            className="w-8 h-8 rounded-full border border-black text-black hover:bg-black hover:text-white flex items-center justify-center transition-colors duration-200 shadow-sm"
-            onClick={handleAddPlan}
-            title="Agregar Tratamiento"
-          >
-            <Plus size={18} />
-          </button>
-        </div>
+        <Paginacion
+          tratamientos={plan.tratamientos}
+          tratamientoActivoIndex={tratamientoActivoIndex}
+          onChangeIndex={setTratamientoActivoIndex}
+          onAdd={handleAddTratamiento}
+        />
 
-        {/* Mostrar tratamiento activo */}
         {plan.tratamientos[tratamientoActivoIndex] && (
           <TratamientoSanitario
             key={plan.tratamientos[tratamientoActivoIndex].id}
             planId={plan.id}
             tratamiento={plan.tratamientos[tratamientoActivoIndex]}
+            onDelete={() =>
+              handleDeleteTratamiento(plan.tratamientos[tratamientoActivoIndex].id)
+            }
           />
         )}
       </div>
@@ -86,12 +94,9 @@ export const CardSanitizantePlan = forwardRef(function CardSanitizantePlan({ pla
           <span>
             <span className="font-semibold">Total:</span>
             <span className="font-normal"> {plan.total} AR$/ha</span>
-          </span>            
+          </span>
         </div>
       )}
     </div>
   );
 });
-
-
-
