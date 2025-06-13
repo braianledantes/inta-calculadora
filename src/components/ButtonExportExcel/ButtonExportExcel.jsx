@@ -17,7 +17,7 @@ export default function ExportButton() {
     const noHayDatos =
     (!planesMaquinaria || planesMaquinaria.length === 0) &&
     (!planesFertilizantes || planesFertilizantes.length === 0) &&
-    (!planesSanitizantes || planesSanitizantes.length === 0) 
+    (!planesSanitizantes || planesSanitizantes.length === 0 || planesSanitizantes.every(plan => plan.total === null || plan.total === 0));
     if (noHayDatos) return null;
 
     // TODO: a exportFormToExcel le envias todos los planes para que imprima una página por seccion (maquinaria, sanitizantes, fertilizantes)

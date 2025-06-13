@@ -3,8 +3,7 @@ import {CardSanitizantePlan} from "../../components/CardSanitizantePlan/CardSani
 import {useContext, useEffect, useState} from "react";
 import {AppContext} from "../../context/AppContext.jsx";
 import AddPlanButton from "../../components/AddPlanButton/AddPlanButton.jsx";
-import SectionTitle from "../../components/SectionTitle/SectionTitle.jsx";;
-import GraficoSanitizante from '../../components/Grafico/GraficosSanitizante.jsx'
+import SectionTitle from "../../components/SectionTitle/SectionTitle.jsx";
 import ButtonExportPDF from "../../components/ButtonExportPDF/ButtonExportPDF.jsx"
 import {useRef} from 'react';
 import exportarGrafico from "../../utils/exportarGrafico.jsx";
@@ -54,7 +53,7 @@ export default function SeccionCostosSanitizantes() {
         <CardSanitizantePlan key={plan.id} plan={plan} ref={idx === planes.length - 1 ? setLastPlanRef : null}/>
       ))}
         <AddPlanButton text="Agregar Plan Fitosanitario" onClick={handleAddPlan}/>
-      {planes.length >= 2 && (
+      {planes.length > 0 && planes.some(plan => plan.total !== null && plan.total !== 0) && (
         <div>
           <div ref={chartRef}>
             <PlanesSanitizantesChart planes={planes} />
