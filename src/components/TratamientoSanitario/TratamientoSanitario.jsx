@@ -23,7 +23,7 @@ export default function TratamientoSanitario({ planId, tratamiento }) {
   const fechaFormateada = new Date(tratamiento.fecha).toISOString().split('T')[0]; // Formato YYYY-MM-DD
 
   return (
-    <div>
+    <div className="mb-10">
     <div className="bg-gray-50 p-4 rounded-tl-lg rounded-tr-lg shadow-sm">
       <div className="flex justify-between items-center mb-4">
         <div className="flex items-center gap-6">
@@ -39,7 +39,7 @@ export default function TratamientoSanitario({ planId, tratamiento }) {
         </div>
 
         {/* Derecha: botón de eliminar */}
-        <DeleteButton onDelete={handleDeleteTratamiento} />
+        <DeleteButton onDelete={handleDeleteTratamiento} showText text="Eliminar Tratamiento"  />
       </div>
 
       <div className="mb-4 grid grid-cols-1 gap-2">
