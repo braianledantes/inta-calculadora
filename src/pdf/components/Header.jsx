@@ -12,7 +12,7 @@ const Header = ({ maquinariaPlans, sanitizantePlans, fertilizacionPlans, valorDo
     mostrarGasoil = true;
     mostrarHeaderInfo = true;
   } else if (sanitizantePlans?.length) {
-    titulo = 'Costos de Sanidad';
+    titulo = 'Costos de Planes Sanitarios';
     mostrarHeaderInfo = true;
   } else if (fertilizacionPlans?.length) {
     titulo = 'Costos de Fertilizante';
@@ -29,7 +29,12 @@ const Header = ({ maquinariaPlans, sanitizantePlans, fertilizacionPlans, valorDo
       {mostrarHeaderInfo && (
         <View style={[styles.row, styles.topInfoContainer]}>
           <Text style={styles.cell}>Dólar: {valorDolar ?? 'N/A'}</Text>
-          <Text style={styles.cell}>Estado Fenológico: {estadoFenologico?.nombre ?? 'N/A'}</Text>
+
+          {/* Mostrar Estado Fenológico solo si NO hay planes sanitizantes */}
+          {!sanitizantePlans?.length && (
+            <Text style={styles.cell}>Estado Fenológico: {estadoFenologico?.nombre ?? 'N/A'}</Text>
+          )}
+
           {mostrarGasoil && <Text style={styles.cell}>Gasoil: {valorGasoil ?? 'N/A'}</Text>}
         </View>
       )}

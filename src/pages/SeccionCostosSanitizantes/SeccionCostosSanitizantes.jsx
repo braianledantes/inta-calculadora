@@ -32,10 +32,11 @@ export default function SeccionCostosSanitizantes() {
   }, [planes.length, lastPlanRef]);
 
   const handleExportPdf = () => {
-    () => exportarGrafico(chartRef, { sanitizantePlans: planes ,  valorDolar: valorDolar})
+    exportarGrafico(chartRef, { sanitizantePlans: planes, valorDolar: valorDolar });
   }
 
   const chartRef = useRef();
+  console.log("Contenido de planes:", planes);
   
 
   return (
