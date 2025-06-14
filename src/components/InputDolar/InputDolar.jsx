@@ -9,9 +9,7 @@ const OPTIONS = [
 ];
 
 export default function InputDolar({ value, onChange }) {
-
   const [precioAutomatico, setPrecioAutomatico] = useState({ oficial: 0, tarjeta: 0 });
-
   const [modo, setModo] = useState("oficial");
   const [loading, setLoading] = useState(false);
 
@@ -24,31 +22,54 @@ export default function InputDolar({ value, onChange }) {
       .finally(() => setLoading(false));
   }, []);
 
+  // Actualiza valor solo si es distinto al actual para evitar loop infinito
+  useEffect(() => {
+    if (modo !== "manual") {
+      const nuevoValor = precioAutomatico[modo];
+      if (
+        typeof nuevoValor === "number" &&
+        !isNaN(nuevoValor) &&
+        nuevoValor !== value
+      ) {
+        onChange(nuevoValor);
+      } else if ((nuevoValor === undefined || isNaN(nuevoValor)) && value !== 0) {
+        onChange(0);
+      }
+    }
+  }, [precioAutomatico, modo, onChange, value]);
 
-  // Cambia el modo y actualiza valor si es automático
-  
   const handleModoChange = (e) => {
-    setModo(e.target.value);
-    if (e.target.value === "oficial") 
-      onChange(precioAutomatico.oficial);
-    else if (e.target.value === "tarjeta")
-       onChange(precioAutomatico.tarjeta);
+    const nuevoModo = e.target.value;
+    setModo(nuevoModo);
+    if (nuevoModo !== "manual") {
+      const nuevoValor = precioAutomatico[nuevoModo];
+      if (
+        typeof nuevoValor === "number" &&
+        !isNaN(nuevoValor) &&
+        nuevoValor !== value
+      ) {
+        onChange(nuevoValor);
+      } else if ((nuevoValor === undefined || isNaN(nuevoValor)) && value !== 0) {
+        onChange(0);
+      }
+    }
   };
 
   const handleInputChange = (e) => {
     const valor = parseFloat(e.target.value);
-    if (!isNaN(valor)) {
+    if (!isNaN(valor) && valor !== value) {
       onChange(valor);
+    } else if (isNaN(valor) && value !== 0) {
+      onChange(0);
     }
   };
 
-  // Valor a mostrar en el input (editable solo si modo manual)
-  const inputValue = modo === "manual" ? value : (precioAutomatico[modo] || 0 );
+  const inputValue = modo === "manual" ? value : precioAutomatico[modo] || 0;
 
   return (
     <div className="bg-gradient-to-br from-green-50 to-green-100 shadow-lg rounded-xl p-5 w-[260px] border border-green-200 h-[180px] flex flex-col justify-center items-center gap-3">
       <label className="text-base font-semibold text-green-800 mb-2 flex items-center gap-2">
-        <CircleDollarSign className="text-2xl"/>
+        <CircleDollarSign className="text-2xl" />
         Valor del Gasoil
       </label>
 
@@ -63,7 +84,6 @@ export default function InputDolar({ value, onChange }) {
             {label}
           </option>
         ))}
-
       </select>
 
       <div className="flex items-center gap-3">
@@ -75,13 +95,11 @@ export default function InputDolar({ value, onChange }) {
           onChange={handleInputChange}
           min="0"
           disabled={modo !== "manual"}
-          className={`w-32 p-2 border-2 rounded-lg text-right font-bold bg-white focus:outline-none transition
-            ${
-              modo === "manual"
-                ? "border-green-300 text-green-900 focus:ring-2 focus:ring-green-400"
-                : "border-gray-200 text-gray-400 cursor-not-allowed"
-            }
-          `}
+          className={`w-32 p-2 border-2 rounded-lg text-right font-bold bg-white focus:outline-none transition ${
+            modo === "manual"
+              ? "border-green-300 text-green-900 focus:ring-2 focus:ring-green-400"
+              : "border-gray-200 text-gray-400 cursor-not-allowed"
+          }`}
         />
       </div>
 
