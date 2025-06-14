@@ -51,6 +51,7 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
 
   return (
    <div className="bg-white shadow-lg rounded-xl mx-auto w-full sm:max-w-md md:max-w-3xl lg:max-w-4xl mb-10" ref={ref}>
+
     <div className="px-6 pt-6 mb-8">
       <div className="flex justify-between items-center mb-6">
         <PlanTitle title={`Conjunto de Maquinaria ${plan.id}`} />
@@ -59,6 +60,7 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
 
       {/* DATOS DEL TRACTOR */}
       <div className="mb-8">
+        
         <div className="w-64">
           <InputOptions
             label="Tractor"
@@ -67,9 +69,10 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
             onChange={handleUpdateTractor}
           />
         </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5 mt-5">
+
           <NumberValue name="Potencia" value={plan.tractor.potencia} unit="HP" />
-          {/* <NumberValue name="Coef. conserv." value={plan.tractor.gastoMantenimiento} /> */}
           <NumberValue name="Horas útiles" value={plan.tractor.horasVidaUtil} unit="h" />
           <InputNumber name="Precio" value={plan.tractor.precioDolar} unit="US$" onChange={onChangePrecioMaquinaria} />
           <InputNumber name="Valor residual" value={plan.tractor.porcentajeValorResidual} unit="%" onChange={handleUpdateValorResidualTractor} />
@@ -89,6 +92,7 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
 
       {/* IMPLEMENTO */}
       <div className="mb-8">
+        
         <InputOptions
             label="Implemento"
             value={plan.implemento.nombre}
@@ -98,7 +102,6 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5 mt-5">
           <NumberValue name="Consumo" value={plan.implemento.consumoCombustible} unit="lt/h" />
-          {/* <NumberValue name="Coef. conserv." value={plan.implemento.gastoMantenimiento} /> */}
           <NumberValue name="Horas útiles" value={plan.implemento.horasVidaUtil} unit="h" />
 
           <InputNumber name="Precio" value={plan.implemento.precioDolar} unit="US$" onChange={onChangePrecioImplemento} />
@@ -120,16 +123,19 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
           </span>
         </div>
       </div>
+
     </div>
+
       {/* COSTO TOTAL */}
       <div className="text-right text-2xl font-bold text-gray-800 border-t border-gray-200 px-6 py-4 rounded-b-xl">
-        <span className="font-semibold text-gray-800 font-medium tracking-wide mr-2">
+        <span className="font-semibold text-gray-800 tracking-wide mr-2">
           Costo Total:
         </span>
         <span className="text-green-900 font-extrabold tracking-tight">
           {plan.costoEconomico.toLocaleString()} <span className="text-sm font-semibold text-gray-600">ARS/h</span>
         </span>
       </div>
+
    </div>
   )
 }); 

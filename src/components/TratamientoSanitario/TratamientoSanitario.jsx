@@ -27,7 +27,7 @@ export default function TratamientoSanitario({ planId, tratamiento }) {
     <div className="bg-gray-50 p-4 rounded-tl-lg rounded-tr-lg shadow-sm">
       <div className="flex justify-between items-center mb-4">
         <div className="flex items-center gap-6">
-          <span className="font-bold text-xl font-semibold">
+          <span className="font-bold text-xl ">
             Tratamiento {String(tratamiento.id)}
           </span>
           <input
@@ -39,7 +39,10 @@ export default function TratamientoSanitario({ planId, tratamiento }) {
         </div>
 
         {/* Derecha: botón de eliminar */}
-        <DeleteButton onDelete={handleDeleteTratamiento} showText text="Eliminar Tratamiento"  />
+        <DeleteButton onDelete={handleDeleteTratamiento} showText text="Eliminar Tratamiento" 
+        className="flex items-center justify-center gap-2 text-white hover:text-red-500  text-lg rounded-full p-2 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-300 hover:cursor-pointer bg-black"
+        />
+
       </div>
 
       <div className="mb-4 grid grid-cols-1 gap-2">
