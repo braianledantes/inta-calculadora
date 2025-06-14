@@ -92,6 +92,7 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
 
       {/* IMPLEMENTO */}
       <div className="mb-8">
+        
         <InputOptions
             label="Implemento"
             value={plan.implemento.nombre}
@@ -101,7 +102,6 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5 mt-5">
           <NumberValue name="Consumo" value={plan.implemento.consumoCombustible} unit="lt/h" />
-          {/* <NumberValue name="Coef. conserv." value={plan.implemento.gastoMantenimiento} /> */}
           <NumberValue name="Horas útiles" value={plan.implemento.horasVidaUtil} unit="h" />
 
           <InputNumber name="Precio" value={plan.implemento.precioDolar} unit="US$" onChange={onChangePrecioImplemento} />
@@ -123,7 +123,7 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
           </span>
         </div>
       </div>
-      
+
     </div>
 
       {/* COSTO TOTAL */}

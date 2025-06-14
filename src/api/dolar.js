@@ -21,8 +21,8 @@ export const getDolar = async () => {
 
   try {
     const urls = [
-      'https://dolarapi.com/v1/dolares/oficial',   // <-- Reemplazá por tu API real
-      'https://dolarapi.com/v1/dolares/tarjeta',   // <-- Reemplazá por tu API real
+      'https://dolarapi.com/v1/dolares/oficial',
+      'https://dolarapi.com/v1/dolares/tarjeta',
     ];
 
     const responses = await Promise.all(urls.map(url => fetch(url)));
@@ -40,10 +40,10 @@ export const getDolar = async () => {
     return dolarCached;
 
   } catch (error) {
-    console.error("Error al obtener los precios del dólar:", error);
-    dolarFetching = false;
-    dolarWaiters.forEach(resolve => resolve({ oficial: 0, tarjeta: 0 }));
-    dolarWaiters = [];
+      console.error("Error al obtener los precios del dólar:", error);
+      dolarFetching = false;
+      dolarWaiters.forEach(resolve => resolve({ oficial: 0, tarjeta: 0 }));
+      dolarWaiters = [];
     return { oficial: 0, tarjeta: 0 };
   }
 };

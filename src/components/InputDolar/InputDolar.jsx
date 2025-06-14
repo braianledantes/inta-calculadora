@@ -10,12 +10,7 @@ const OPTIONS = [
 
 export default function InputDolar({ value, onChange }) {
 
-
-   
-  const [precioAutomatico, setPrecioAutomatico] = useState(
-    { oficial: 0, tarjeta: 0 }
-  );
-  
+  const [precioAutomatico, setPrecioAutomatico] = useState({ oficial: 0, tarjeta: 0 });
   const [modo, setModo] = useState("manual");
   const [loading, setLoading] = useState(false);
 
@@ -28,23 +23,26 @@ export default function InputDolar({ value, onChange }) {
       .finally(() => setLoading(false));
   }, []);
 
+
   // Cambia el modo y actualiza valor si es automático
+  
   const handleModoChange = (e) => {
-    const nuevoModo = e.target.value;
-    setModo(nuevoModo);
-    if (nuevoModo === "oficial") onChange(precioAutomatico.oficial);
-    else if (nuevoModo === "tarjeta") onChange(precioAutomatico.tarjeta);
+    setModo(e.target.value);
+    if (e.target.value === "oficial") 
+      onChange(precioAutomatico.oficial);
+    else if (e.target.value === "tarjeta")
+       onChange(precioAutomatico.tarjeta);
   };
 
   const handleInputChange = (e) => {
-    const val = parseFloat(e.target.value);
-    if (!isNaN(val)) {
-      onChange(val);
+    const valor = parseFloat(e.target.value);
+    if (!isNaN(valor)) {
+      onChange(valor);
     }
   };
 
   // Valor a mostrar en el input (editable solo si modo manual)
-  const inputValue = modo === "manual" ? value : (precioAutomatico[modo] || 0);
+  const inputValue = modo === "manual" ? value : (precioAutomatico[modo] || 0 );
 
   return (
     <div className="bg-gradient-to-br from-green-50 to-green-100 shadow-lg rounded-xl p-5 w-[260px] border border-green-200 h-[180px] flex flex-col justify-center items-center gap-3">
@@ -64,6 +62,7 @@ export default function InputDolar({ value, onChange }) {
             {label}
           </option>
         ))}
+
       </select>
 
       <div className="flex items-center gap-3">
