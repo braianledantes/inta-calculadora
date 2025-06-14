@@ -4,7 +4,10 @@ import { Buffer } from 'buffer';
 window.Buffer = Buffer;
 
 
-export const safeCurrency = (value) => (value != null ? `${value.toLocaleString()} ARS/h` : 'N/A');
+export function safeCurrency(value) {
+  if (value === null || value === undefined || isNaN(value)) return '0 US$';
+  return `${value.toFixed(2)} US$`;
+}
 
 export const renderTable = (title, headers, rows, summaryRow = null, totalCost = null, titleStyle) => (
   <View style={styles.section}>
@@ -30,8 +33,8 @@ export const renderTable = (title, headers, rows, summaryRow = null, totalCost =
     )}
     {totalCost !== null && (
       <View style={styles.row}>
-        <Text style={[styles.cell, { flex: 7, backgroundColor: '#f0f0f0' }]}></Text>
-        <Text style={[styles.cellTotal, { flex: 3 }]}>Costo total: {totalCost}</Text>
+        <Text style={[styles.cell, { flex: 6, backgroundColor: '#f0f0f0' }]}></Text>
+        <Text style={[styles.cellTotal, { flex: 4 }]}>Costo total: {totalCost}</Text>
       </View>
     )}
   </View>
