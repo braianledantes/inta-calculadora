@@ -2,7 +2,7 @@ import { View, Text, Image } from '@react-pdf/renderer';
 import sipan from '../../assets/sipanPDF.png'; 
 import styles from '../styles/pdfstyles'
 
-const Header = ({ maquinariaPlans, sanitizantePlans, fertilizacionPlans, valorDolar, estadoFenologico, valorGasoil }) => {
+const Header = ({ maquinariaPlans, sanitizantePlans, fertilizacionPlans, valorDolar, valorGasoil }) => {
   let titulo = 'Costos';
   let mostrarGasoil = false;
   let mostrarHeaderInfo = false;
@@ -19,23 +19,28 @@ const Header = ({ maquinariaPlans, sanitizantePlans, fertilizacionPlans, valorDo
     mostrarHeaderInfo = true;
   }
 
+  const fechaHoy = new Date().toLocaleDateString('es-AR', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+  });
+
   return (
     <View>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
         <Image src={sipan} style={{ width: 180, height: 40 }} />
-        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{titulo}</Text>
+        <View>
+          <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{titulo}</Text>
+          <Text style={{ fontSize: 10, color: 'gray', marginTop: 2 , textAlign: 'right'}}>
+            Fecha: {fechaHoy}
+          </Text>
+        </View>
       </View>
 
       {mostrarHeaderInfo && (
-        <View style={[styles.row, styles.topInfoContainer]}>
-          <Text style={styles.cell}>Dólar: {valorDolar ?? 'N/A'}</Text>
-
-          {/* Mostrar Estado Fenológico solo si NO hay planes sanitizantes */}
-          {!sanitizantePlans?.length && (
-            <Text style={styles.cell}>Estado Fenológico: {estadoFenologico?.nombre ?? 'N/A'}</Text>
-          )}
-
-          {mostrarGasoil && <Text style={styles.cell}>Gasoil: {valorGasoil ?? 'N/A'}</Text>}
+        <View style={[styles.row, styles.topInfoContainer,  {marginTop: 15 }]}>
+          <Text style={styles.cell}>Valor del Dólar: {valorDolar ?? 'N/A'}</Text>
+          {mostrarGasoil && <Text style={styles.cell}>Valor del Gasoil: {valorGasoil ?? 'N/A'}</Text>}
         </View>
       )}
     </View>
@@ -43,3 +48,4 @@ const Header = ({ maquinariaPlans, sanitizantePlans, fertilizacionPlans, valorDo
 };
 
 export default Header;
+

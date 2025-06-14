@@ -78,6 +78,7 @@ export default function SeccionCostosMaquinaria() {
     setVista(nuevaVista);
   };
 
+  console.log(planes)
   return (
     <div className="bg-gray-100 py-8 my-4">
       <div className="flex justify-center gap-3 mb-4 flex-wrap">
