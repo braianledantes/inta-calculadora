@@ -11,7 +11,8 @@ const OPTIONS = [
 export default function InputDolar({ value, onChange }) {
 
   const [precioAutomatico, setPrecioAutomatico] = useState({ oficial: 0, tarjeta: 0 });
-  const [modo, setModo] = useState("manual");
+
+  const [modo, setModo] = useState("oficial");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
