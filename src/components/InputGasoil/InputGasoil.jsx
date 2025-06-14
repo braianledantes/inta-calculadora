@@ -4,13 +4,16 @@ import { getGasoil } from "../../api/gasoil"; // ajusta la ruta
 
 const OPTIONS = [
   { label: "Manual", value: "manual" },
-  { label: "Gasoil Grado 2 (auto)", value: "grado2" },
-  { label: "Gasoil Grado 3 (auto)", value: "grado3" },
+  { label: "Gasoil Grado 2", value: "grado2" },
+  { label: "Gasoil Grado 3", value: "grado3" },
 ];
 
 export default function InputGasoil({ value, onChange }) {
+
   const [precioAutomatico, setPrecioAutomatico] = useState({ grado2: 0, grado3: 0 });
-  const [modo, setModo] = useState("manual"); // manual o grado2 o grado3
+
+  const [modo, setModo] = useState("manual"); 
+
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -79,6 +82,7 @@ export default function InputGasoil({ value, onChange }) {
       </div>
 
       {loading && <p className="text-yellow-600 text-sm">Cargando precios automáticos...</p>}
+
     </div>
   );
 }
