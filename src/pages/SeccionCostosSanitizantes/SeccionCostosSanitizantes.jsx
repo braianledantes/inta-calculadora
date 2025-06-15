@@ -1,14 +1,14 @@
 import InputDolar from "../../components/InputDolar/InputDolar.jsx";
-import {CardSanitizantePlan} from "../../components/CardSanitizantePlan/CardSanitizantePlan.jsx";
-import {useContext, useEffect, useState} from "react";
-import {AppContext} from "../../context/AppContext.jsx";
+import { CardSanitizantePlan } from "../../components/CardSanitizantePlan/CardSanitizantePlan.jsx";
+import { useContext, useEffect, useState, useRef } from "react";
+import { AppContext } from "../../context/AppContext.jsx";
 import AddPlanButton from "../../components/AddPlanButton/AddPlanButton.jsx";
 import SectionTitle from "../../components/SectionTitle/SectionTitle.jsx";
-import ButtonExportPDF from "../../components/ButtonExportPDF/ButtonExportPDF.jsx"
-import {useRef} from 'react';
+import ButtonExportPDF from "../../components/ButtonExportPDF/ButtonExportPDF.jsx";
 import exportarGrafico from "../../utils/exportarGrafico.jsx";
 import PlanesSanitizantesChart from "../../components/PlanesSanitizantesChart/PlanesSanitizantesChart.jsx";
-  
+import VistaSelector from "../../components/VistaSelector/VistaSelector.jsx";
+
 export default function SeccionCostosSanitizantes() {
   const {
     valorDolar,
@@ -18,42 +18,91 @@ export default function SeccionCostosSanitizantes() {
     addPlan,
   } = useContext(AppContext).sanitizantes;
 
-  const [lastPlanRef, setLastPlanRef] = useState(null);
+  const lastPlanRef = useRef(null);
+  const chartRef = useRef();
+
+  const [vista, setVista] = useState("lista");
+  const [vistaAutomatica, setVistaAutomatica] = useState(true);
+  const [pantallaPequena, setPantallaPequena] = useState(window.innerWidth < 768);
 
   const handleAddPlan = () => {
     addPlan();
-  }
-
-  // Hacer scroll cuando cambia la cantidad de planes
-  useEffect(() => {
-    if (lastPlanRef) {
-      lastPlanRef.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-  }, [planes.length, lastPlanRef]);
+  };
 
   const handleExportPdf = () => {
     exportarGrafico(chartRef, { sanitizantePlans: planes, valorDolar: valorDolar });
-  }
+  };
 
-  const chartRef = useRef();
-  console.log("Contenido de planes:", planes);
-  
+  useEffect(() => {
+    const manejarResize = () => {
+      const esPequena = window.innerWidth < 768;
+      setPantallaPequena(esPequena);
+
+      if (esPequena) {
+        setVista("lista");
+        setVistaAutomatica(true);
+      }
+    };
+
+    manejarResize();
+
+    window.addEventListener("resize", manejarResize);
+    return () => window.removeEventListener("resize", manejarResize);
+  }, []);
+
+  useEffect(() => {
+    if (lastPlanRef.current) {
+      lastPlanRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    if (vistaAutomatica && !pantallaPequena) {
+      if (planes.length >= 2) {
+        setVista("dosColumnas");
+      } else {
+        setVista("lista");
+      }
+    }
+  }, [planes.length, vistaAutomatica, pantallaPequena]);
+
+  const handleVistaChange = (nuevaVista) => {
+    setVistaAutomatica(false);
+    setVista(nuevaVista);
+  };
 
   return (
-    <div className="bg-gray-100 py-8 my-4">
-      
+    <div className="bg-gray-100  my-4">
       <div className="flex items-center gap-3 mb-6 justify-center">
-        <SectionTitle title="Calculadora de Costos de Planes Sanitarios"/>
+        <SectionTitle title="Calculadora de Costos de Planes Sanitarios" />
       </div>
 
       <div className="flex flex-wrap justify-center items-center gap-6 mb-8">
-        <InputDolar value={valorDolar} onChange={updateDolar} onRefresh={refreshDolar}/>
+        <InputDolar value={valorDolar} onChange={updateDolar} onRefresh={refreshDolar} />
       </div>
 
-      {planes.map((plan, idx) => (
-        <CardSanitizantePlan key={plan.id} plan={plan} ref={idx === planes.length - 1 ? setLastPlanRef : null}/>
-      ))}
-        <AddPlanButton text="Agregar Plan Fitosanitario" onClick={handleAddPlan}/>
+      {planes.length >= 2 && !pantallaPequena && (
+        <VistaSelector vista={vista} onVistaChange={handleVistaChange} />
+      )}
+
+      <div
+        className={`mb-8 ${
+          vista === "lista"
+            ? "flex flex-col items-center gap-6"
+            : "grid grid-cols-2 gap-6 justify-center"
+        }`}
+      >
+        {planes.map((plan, idx) => (
+          <CardSanitizantePlan
+            key={plan.id}
+            plan={plan}
+            ref={idx === planes.length - 1 ? (el) => { lastPlanRef.current = el; } : null}
+          />
+        ))}
+      </div>
+
+      <div className="mx-auto m-4xl">
+        <AddPlanButton text="Agregar Plan Fitosanitario" onClick={handleAddPlan} />
+      </div>
+
       {planes.length > 0 && planes.some(plan => plan.total !== null && plan.total !== 0) && (
         <div>
           <div ref={chartRef}>

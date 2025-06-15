@@ -80,7 +80,7 @@ export default function SeccionCostosMaquinaria() {
 
   console.log(planes)
   return (
-    <div className="bg-gray-100 py-8 my-4">
+    <div className="bg-gray-100  my-4">
       <div className="flex justify-center gap-3 mb-4 flex-wrap">
         <SectionTitle title="Calculadora de Costos de Maquinaria" />
       </div>

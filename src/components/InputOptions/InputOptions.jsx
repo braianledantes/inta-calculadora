@@ -13,22 +13,22 @@ export default function InputOptions({ label, value, options, onChange }) {
   }, [label]);
 
   return (
-    <div className="inline-block relative">
+    <div className="inline-block relative w-full max-w-xs sm:w-full">
       <label
         ref={labelRef}
-        className="absolute -top-2 left-1 bg-white text-sm font-semibold text-gray-800 z-10 px-2 rounded-md whitespace-nowrap"
+        className="absolute -top-2 left-2 bg-white text-sm font-semibold text-gray-800 z-10 px-2 rounded-md whitespace-nowrap select-none"
       >
         {label}
       </label>
       <div
-        className="relative flex items-center px-3 pr-20 py-3 border-l-4 border-green-900/50 cursor-pointer transition-all duration-200 bg-green-700/8 rounded-tr-xl rounded-br-xl"
+        className="relative flex items-center px-3 pr-10 py-3 border-l-4 border-green-900/50 cursor-pointer transition-all duration-200 bg-green-700/8 rounded-tr-xl rounded-br-xl"
         style={{ minWidth }}
       >
-        <span className="text-base font-semibold text-green-900">
+        <span className="text-base font-semibold text-green-900 truncate">
           {value || "Seleccionar..."}
         </span>
         <ChevronDown
-          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 pointer-events-none"
           size={20}
         />
         <select
@@ -46,4 +46,3 @@ export default function InputOptions({ label, value, options, onChange }) {
     </div>
   );
 }
-

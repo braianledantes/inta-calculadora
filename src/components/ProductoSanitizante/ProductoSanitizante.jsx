@@ -54,55 +54,60 @@ export default function ProductoSanitizante({ idPlan, idTratamiento, producto })
   }
 
   return (
-    <div>
+  <div>
     <div className="bg-white p-4 rounded-tl-lg rounded-tr-lg shadow-sm">
-      <div className="flex justify-between items-center mb-2">
-        <div className="flex flex-wrap gap-7">
-          <InputOptions
-            label="Principio Activo"
-            options={sanitizantesFiltrados.map(s => s.nombre)}
-            value={producto.sanitizante.nombre}
-            onChange={handleChangeSanitizante}
-          />
-          <InputOptions
-            label="Tipo"
-            options={tiposSanitizantes}
-            value={producto.sanitizante.tipo}
-            onChange={handleChangeTipo}
-          />
-        </div>
+      <div className="flex justify-between items-start">
+        <span className="font-semibold text-gray-400 tracking-wide">
+          Producto {producto.id}
+        </span>
         <DeleteButton onDelete={handleDeleteProducto} />
       </div>
-    <div className="grid sm:grid-cols-3 gap-2 mt-5">
-      <InputNumber
-        name={"Precio Envase"}
-        value={producto.precio}
-        unit={"US$"}
-        onChange={handlePrecioChange}
-      />
-      <InputNumber
-        name={"Volumen hectárea"}
-        value={producto.volumenPorHectarea}
-        unit={producto.sanitizante.unidadVolumenEnvase}
-        onChange={handleVolumenChange}
-      />
-      <InputNumber
-        name={"Dosis por hectárea"}
-        value={producto.dosisPorHectarea}
-        unit={producto.sanitizante.unidadDosisAplicacion}
-        onChange={handleDosisChange}
-      />
+
+      <div className="flex flex-wrap gap-7 mt-5">
+        <InputOptions
+          label="Principio Activo"
+          options={sanitizantesFiltrados.map(s => s.nombre)}
+          value={producto.sanitizante.nombre}
+          onChange={handleChangeSanitizante}
+        />
+        <InputOptions
+          label="Tipo"
+          options={tiposSanitizantes}
+          value={producto.sanitizante.tipo}
+          onChange={handleChangeTipo}
+        />
+      </div>
+
+      <div className="grid sm:grid-cols-3 gap-2 mt-5">
+        <InputNumber
+          name={"Precio Envase"}
+          value={producto.precio}
+          unit={"US$"}
+          onChange={handlePrecioChange}
+        />
+        <InputNumber
+          name={"Volumen hectárea"}
+          value={producto.volumenPorHectarea}
+          unit={producto.sanitizante.unidadVolumenEnvase}
+          onChange={handleVolumenChange}
+        />
+        <InputNumber
+          name={"Dosis por hectárea"}
+          value={producto.dosisPorHectarea}
+          unit={producto.sanitizante.unidadDosisAplicacion}
+          onChange={handleDosisChange}
+        />
+      </div>
     </div>
 
-  </div>
-      <div className="w-full bg-green-50 text-green-800 p-4 rounded-bl-lg rounded-br-lg border border-green-200 flex flex-wrap gap-x-4 gap-y-2 shadow-sm">
+    <div className="w-full grid sm:grid-cols-2 bg-green-50 text-green-800 p-4 rounded-bl-lg rounded-br-lg border border-green-900/10 shadow-sm  gap-2">
       <span>
-        <span className="font-semibold">Cant. por ha:</span>
-        <span className="font-normal"> {producto.cantidadPorHectarea}/ha</span>
+        <span className="font-semibold tracking-wide">Cantidad por ha:</span>
+        <span className="font-extrabold tracking-tight"> {producto.cantidadPorHectarea}<span className="font-semibold">/ha</span></span>
       </span>
       <span>
-        <span className="font-semibold">Costo por ha:</span>
-        <span className="font-normal"> {producto.costoTotalPorHectarea}/ha</span>
+        <span className="font-semibold tracking-wide">Costo por ha:</span>
+        <span className="font-extrabold tracking-tight"> {producto.costoTotalPorHectarea}<span className="font-semibold">/ha</span></span>
       </span>
     </div>
   </div>

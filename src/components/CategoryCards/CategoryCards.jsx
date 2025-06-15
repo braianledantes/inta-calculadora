@@ -3,7 +3,6 @@ import { PATHS } from "../../routes/paths";
 import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
 
-
 const CategoryCards = ({ setOpen }) => {
   const location = useLocation();
 
@@ -34,17 +33,15 @@ const CategoryCards = ({ setOpen }) => {
     },
   ];
 
-
   const isHome = location.pathname === PATHS.HOME;
 
   return (
     <div className="bg-[#eeeeee] shadow-2xl rounded-2xl pb-10">
-      <h1 className="text-center text-sm sm:text-4xl pt-10 font-semibold text-gray-800 sm:justify-center">
+      <h1 className="text-center text-sm sm:text-4xl pt-10 font-semibold text-gray-800">
         Seleccione una categoría de cálculo:
       </h1>
 
-      <div className="flex flex-wrap justify-center gap-4 pt-6">
-
+      <div className="flex flex-row sm:flex-wrap justify-center gap-2 sm:gap-4 pt-6">
         {cards.map(({ path, label, planes, addPlan }) => (
           <Link
             key={path}
@@ -58,22 +55,21 @@ const CategoryCards = ({ setOpen }) => {
           >
             <div
               className={`
-                w-[110px] sm:w-[250px] flex flex-col items-center justify-center rounded-2xl p-6 shadow-md 
+                w-[90px] sm:w-[250px] flex flex-col items-center justify-center rounded-xl p-3 sm:p-6 shadow-md 
                 bg-white hover:bg-gray-100 transition-all duration-300 ease-in-out cursor-pointer text-center
                 ${location.pathname === path ? "border-2 border-green-600 shadow-lg scale-[1.02]" : ""}
-              `}>
-
-              {/* Contenedor para ícono con transición de opacidad y altura */}
+              `}
+            >
               <div
                 className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                  isHome ? "opacity-100 h-auto mb-3" : "opacity-0 h-0 mb-0"}`}>
-              </div>
-              <span className="text-sm sm:text-2xl font-semibold text-gray-800">
+                  isHome ? "opacity-100 h-auto mb-2" : "opacity-0 h-0 pt-2 mb-0"
+                }`}
+              ></div>
+              <span className={`text-xs sm:text-2xl font-semibold text-gray-800 ${isHome ? "" : "pb-2"}`}>
                 {label}
               </span>
             </div>
           </Link>
-
         ))}
       </div>
     </div>
@@ -81,5 +77,3 @@ const CategoryCards = ({ setOpen }) => {
 };
 
 export default CategoryCards;
-
-

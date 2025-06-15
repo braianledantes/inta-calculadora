@@ -46,7 +46,7 @@ const Header = () => {
               ${open ? "flex" : "hidden"}
               md:flex flex-col md:flex-row items-center gap-2 text-sm md:text-base font-semibold w-full md:w-auto
               bg-white md:bg-transparent rounded-xl md:rounded-none shadow md:shadow-none mt-2 md:mt-0 p-4 md:p-0
-              absolute md:static top-20 left-0 md:top-auto md:left-auto z-40`}>
+              absolute md:static top-20 left-0 md:top-auto md:left-auto z-40 h-full`}>
             <ImportExcel />
             <ButtonExportExcel />
           </nav>

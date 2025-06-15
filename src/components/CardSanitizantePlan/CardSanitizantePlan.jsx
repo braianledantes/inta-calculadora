@@ -21,7 +21,7 @@ export const CardSanitizantePlan = forwardRef(function CardSanitizantePlan({ pla
       haAgregadoTratamientoInicial.current = true;
     }
 
-    setTratamientoActivoIndex(prev => {
+    setTratamientoActivoIndex((prev) => {
       if (plan.tratamientos.length === 0) return 0;
       if (prev >= plan.tratamientos.length) return plan.tratamientos.length - 1;
       return prev;
@@ -38,12 +38,12 @@ export const CardSanitizantePlan = forwardRef(function CardSanitizantePlan({ pla
   };
 
   const handleDeleteTratamiento = (tratamientoId) => {
-    const indexToDelete = plan.tratamientos.findIndex(t => t.id === tratamientoId);
+    const indexToDelete = plan.tratamientos.findIndex((t) => t.id === tratamientoId);
     if (indexToDelete === -1) return;
 
     deleteTratamiento(plan.id, tratamientoId);
 
-    setTratamientoActivoIndex(prev => {
+    setTratamientoActivoIndex((prev) => {
       if (indexToDelete === prev) {
         return prev === 0 ? 0 : prev - 1;
       }
@@ -55,7 +55,7 @@ export const CardSanitizantePlan = forwardRef(function CardSanitizantePlan({ pla
   };
 
   const hayTratamientosConProductos = plan.tratamientos.some(
-    t => t.productos && t.productos.length > 0
+    (t) => t.productos && t.productos.length > 0
   );
 
   const mostrarTotal = plan.tratamientos.length > 0 && hayTratamientosConProductos;
@@ -87,16 +87,18 @@ export const CardSanitizantePlan = forwardRef(function CardSanitizantePlan({ pla
             }
           />
         )}
+        {mostrarTotal && (
+          <div className="text-right text-2xl font-bold text-gray-800 border-t border-gray-200 px-6 py-4 rounded-b-xl">
+            <span className="font-semibold text-gray-800 tracking-wide mr-2">
+              Costo Total:
+            </span>
+            <span className="text-green-900 font-extrabold tracking-tight">
+              {plan.total.toLocaleString()} <span className="text-sm font-semibold text-gray-600">ARS/ha</span>
+            </span>
+          </div>
+        )}
       </div>
 
-      {mostrarTotal && (
-        <div className="-mt-5 bg-green-50 text-green-800 p-4 rounded-bl-lg rounded-br-lg shadow-sm border border-green-200 shadow-inner flex flex-wrap gap-x-4 gap-y-2">
-          <span>
-            <span className="font-semibold">Total:</span>
-            <span className="font-normal"> {plan.total} AR$/ha</span>
-          </span>
-        </div>
-      )}
     </div>
   );
 });
