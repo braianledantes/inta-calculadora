@@ -1,4 +1,13 @@
-import {amarilloSuave, applyStyle, headerInfoStyle, verdeSuave} from './excelStyles';
+import {
+  headerInfoStyle,
+  generalCellStyle,
+  applyStyle,
+  tractorRowStyle,
+  verdeSuave,
+  amarilloSuave,
+  borderStyle,
+  celdaTotalStyle
+} from './excelStyles';
 
 function capitalize(text) {
   return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
@@ -7,59 +16,54 @@ function capitalize(text) {
 export function addSanitizanteSheet(workbook, planesSanitizantes, valorDolar) {
   if (!Array.isArray(planesSanitizantes) || planesSanitizantes.length === 0) return;
 
-  const sheetSanitizante = workbook.addWorksheet('Sanitizantes');
+  const sheet = workbook.addWorksheet('Sanitizantes');
 
-  // Cotización dólar
-  sheetSanitizante.getCell('B1').value = 'Cotización dólar';
-  sheetSanitizante.getCell('C1').value = valorDolar;
-
-  ['B1', 'C1'].forEach(ref => {
-    const cell = sheetSanitizante.getCell(ref);
-    applyStyle(cell, headerInfoStyle);
+  // Estilo fuente por defecto
+  sheet.eachRow({ includeEmpty: true }, row => {
+    row.eachCell({ includeEmpty: true }, cell => {
+      cell.font = { name: 'Montserrat', size: 9 };
+    });
   });
-  sheetSanitizante.getRow(1).height = 30;
-  sheetSanitizante.getColumn('B').width = 20;
-  sheetSanitizante.getColumn('C').width = 13;
 
-  // Encabezado principal
-  sheetSanitizante.addRow([
-    'Plan Fitosabitario', 
-    'Tratamiento',
-    'Principio Activo',
-    'Tipo',
-    'Precio envase ($ USD)',
-    'Dosis por ha', 
-    'Unidad dosis', 
-    'Volumen por ha', 
-    'Unidad volumen',
-    'Cant. por ha',
-    'Costo por ha',
+  // Fila cotización
+  sheet.getCell('B1').value = 'Cotización dólar';
+  sheet.getCell('C1').value = valorDolar;
+  ['B1', 'C1'].forEach(ref => applyStyle(sheet.getCell(ref), headerInfoStyle));
+  sheet.getRow(1).height = 30;
+  sheet.getColumn('B').width = 20;
+  sheet.getColumn('C').width = 13;
+
+  // Encabezado de tabla
+  sheet.addRow([
+    'Plan Fitosanitario', 'Tratamiento', 'Principio Activo', 'Tipo',
+    'Precio envase ($ USD)', 'Dosis por ha', 'Unidad dosis',
+    'Volumen por ha', 'Unidad volumen', 'Cant. por ha',
+    'Costo por ha', 'Total $/hora'
   ]);
 
-  const headerRow = sheetSanitizante.getRow(2);
+  const headerRow = sheet.getRow(2);
   headerRow.height = 30;
 
-  for (let col = 4; col <= 13; col++) {
-    sheetSanitizante.getColumn(col).width = 15;
-  }
+  const colWidths = [20, 18, 20, 15, 20, 15, 15, 15, 15, 15, 15, 20];
+  colWidths.forEach((w, i) => sheet.getColumn(i + 1).width = w);
 
   headerRow.eachCell((cell, colNumber) => {
     cell.value = capitalize(cell.value?.toString());
-    if (colNumber <= 10) {
-      applyStyle(cell, amarilloSuave);
-    } else {
-      applyStyle(cell, verdeSuave);
-    }
+    applyStyle(cell, colNumber >= 10 ? verdeSuave : amarilloSuave);
   });
 
+  let currentRow = 3;
+
   planesSanitizantes.forEach((plan, indexPlan) => {
+    const planStartRow = currentRow;
 
     plan.tratamientos.forEach((tratamiento, indexTratamiento) => {
-      tratamiento.productos.forEach((producto, indexProducto)=> {
+      const tratamientoStartRow = currentRow;
 
-        const row = sheetSanitizante.addRow([
-          indexProducto === 0 && indexTratamiento === 0 ? plan.id : "",
-          indexProducto === 0 ? tratamiento.id : "",
+      tratamiento.productos.forEach((producto, indexProducto) => {
+        const row = sheet.addRow([
+          `${indexPlan + 1}`,
+          tratamiento.id,
           producto.sanitizante.nombre,
           producto.sanitizante.tipo,
           producto.precio,
@@ -67,16 +71,120 @@ export function addSanitizanteSheet(workbook, planesSanitizantes, valorDolar) {
           producto.sanitizante.unidadDosisAplicacion,
           producto.volumenPorHectarea,
           producto.sanitizante.unidadVolumenEnvase,
-          null, 
-          null, 
+          null, null, null
         ]);
-         
+
         const r = row.number;
 
         // Fórmulas
-        sheetSanitizante.getCell(`J${r}`).value = { formula: `F${r} * H${r}` };
-        sheetSanitizante.getCell(`K${r}`).value = { formula: `J${r} * C1 * E${r}`};
-      })
+        row.getCell(10).value = { formula: `F${r} * H${r}` };
+        row.getCell(11).value = { formula: `J${r} * C1 * E${r}` };
+
+        const esUltimoTratamiento = indexTratamiento === plan.tratamientos.length - 1;
+        const esUltimoProducto = indexProducto === tratamiento.productos.length - 1;
+
+        const isEven = (row.number - 3) % 2 === 0;
+        const style = isEven ? tractorRowStyle : generalCellStyle;
+
+        for (let col = 3; col <= 12; col++) {
+          if (col === 12 && esUltimoTratamiento && esUltimoProducto) continue;
+          const cell = row.getCell(col);
+          applyStyle(cell, style);
+        }
+
+        [1, 2].forEach(col => {
+          const cell = row.getCell(col);
+          applyStyle(cell, {
+            ...tractorRowStyle,
+            alignment: { horizontal: 'center', vertical: 'middle' },
+            font: { bold: true }
+          });
+        });
+
+        if (esUltimoTratamiento && esUltimoProducto) {
+          const totalCell = row.getCell(12);
+          totalCell.value = {
+            formula: `SUM(K${planStartRow}:K${r})`
+          };
+          applyStyle(totalCell, {
+            ...celdaTotalStyle,
+            border: {
+              top: borderStyle.top,
+              bottom: borderStyle.bottom,
+              left: borderStyle.left,
+              right: borderStyle.right
+            },
+            alignment: { horizontal: 'center', vertical: 'middle' }
+          });
+        }
+
+        currentRow++;
+      });
+
+      if (tratamiento.productos.length > 1) {
+        const start = tratamientoStartRow;
+        const end = currentRow - 1;
+        sheet.mergeCells(`B${start}:B${end}`);
+      }
+    });
+
+    if (currentRow - planStartRow > 1) {
+      sheet.mergeCells(`A${planStartRow}:A${currentRow - 1}`);
+    }
+
+    // Bordes exteriores del plan
+    for (let col = 1; col <= 12; col++) {
+      const cellTop = sheet.getCell(planStartRow, col);
+      const cellBottom = sheet.getCell(currentRow - 1, col);
+
+      cellTop.border = {
+        ...cellTop.border,
+        top: borderStyle.top,
+        left: col === 1 ? borderStyle.left : undefined,
+        right: col === 12 ? borderStyle.right : undefined
+      };
+
+      cellBottom.border = {
+        ...cellBottom.border,
+        bottom: borderStyle.bottom,
+        left: col === 1 ? borderStyle.left : undefined,
+        right: col === 12 ? borderStyle.right : undefined
+      };
+    }
+
+    // Aplicar color pastel (amarillo suave) a celdas A y B de cada plan
+    for (let row = planStartRow; row < currentRow; row++) {
+      const cellA = sheet.getCell(`A${row}`);
+      const cellB = sheet.getCell(`B${row}`);
+
+      // Columna A: amarillo suave
+      applyStyle(cellA, {
+        fill: {
+          type: 'pattern',
+          pattern: 'solid',
+          fgColor: { argb: 'FFFCE5CD' }
+        },
+        font: { bold: true },
+        alignment: { horizontal: 'center', vertical: 'middle' }
+      });
+
+      // Columna B: estilo tractor
+      applyStyle(cellB, {
+        ...tractorRowStyle,
+        font: { bold: true },
+        alignment: { horizontal: 'center', vertical: 'middle' }
+      });
+    }
+  });
+
+  // Aplicar estilo general solo a celdas sin fondo Y sin borde
+  sheet.eachRow({ includeEmpty: false }, row => {
+    row.eachCell(cell => {
+      const hasFill = !!cell.fill;
+      const hasBorder = !!cell.border;
+      if (!hasFill && !hasBorder) {
+        applyStyle(cell, generalCellStyle);
+      }
     });
   });
 }
