@@ -6,7 +6,7 @@ import { useState} from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import ButtonExportExcel from "../ButtonExportExcel/ButtonExportExcel.jsx";
 import { Tractor, Sprout, SprayCan } from 'lucide-react';
-import CategoryCards from "../CategoryCards/Categorycards.jsx";
+import CategoryCards from "../CategoryCards/CategoryCards.jsx";
 
 
 // Íconos por categoría
