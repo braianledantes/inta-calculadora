@@ -1,15 +1,5 @@
-import { useState, useEffect } from 'react';
-import { 
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Rectangle,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-  LabelList
-} from 'recharts';
+import {useEffect, useState} from 'react';
+import {Bar, BarChart, CartesianGrid, LabelList, Rectangle, ResponsiveContainer, Tooltip, XAxis, YAxis} from 'recharts';
 
 
 const METRICAS = [

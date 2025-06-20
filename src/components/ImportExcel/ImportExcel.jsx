@@ -1,8 +1,8 @@
-import React, { useContext, useRef, useState } from 'react';
-import { AppContext } from "../../context/AppContext.jsx";
-import { importExcel } from "../../utils/utils.js";
-import { mapExcelData } from "../../utils/mapping.js";
-import { FiUpload } from "react-icons/fi"; // Ícono de subida
+import React, {useContext, useRef, useState} from 'react';
+import {AppContext} from "../../context/AppContext.jsx";
+import {importExcel} from "../../utils/utils.js";
+import {mapExcelData} from "../../utils/mapping.js";
+import {FiUpload} from "react-icons/fi"; // Ícono de subida
 
 const ImportExcel = () => {
     const {
@@ -39,13 +39,13 @@ const ImportExcel = () => {
     return (
       <div>
         <button
-          className="bg-[#e86c2a] text-white px-4 py-2 rounded-lg hover:bg-[#c95a1f] transition-colors duration-300 font-semibold shadow flex items-center gap-2 uppercase hover:cursor-pointer"
+          className="bg-gradient-to-r from-[#c95a1f] via-[#d87431] to-[#f09550] max-w-sm h-16 text-white px-4 py-2 rounded-lg hover:bg-[#c95a1f] transition-colors duration-300 font-semibold shadow flex items-center gap-2 uppercase hover:cursor-pointer"
           onClick={handleButtonClick}
         >
           <FiUpload className="text-xl" />
         {nombreArchivo
           ? `Excel '${nombreArchivo}' importado`
-          : 'Subir archivo Excel'}
+          : 'Importar Excel'}
         </button>
 
         <input

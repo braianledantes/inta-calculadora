@@ -1,14 +1,14 @@
-import { 
+import {
   Bar,
   BarChart,
   CartesianGrid,
+  LabelList,
   Legend,
   Rectangle,
   ResponsiveContainer,
   Tooltip,
   XAxis,
-  YAxis,
-  LabelList
+  YAxis
 } from 'recharts';
 
 export default function Grafico({ title, data }) {

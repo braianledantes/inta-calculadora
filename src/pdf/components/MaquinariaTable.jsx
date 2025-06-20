@@ -1,4 +1,4 @@
-import { View } from '@react-pdf/renderer';
+import { View, Text} from '@react-pdf/renderer';
 import { renderTable, safeCurrency} from '../utils/pdfUtils';
 import styles from '../styles/pdfstyles';
 
@@ -6,12 +6,13 @@ const MaquinariaTable = ({ plans }) => (
   <>
     {plans.map((plan) => (
       <View key={plan.id}>
+        <Text style={styles.titleWithBackground}>
+          Plan Maquinaria {plan.id}
+        </Text>
         {renderTable(
-          `Plan Maquinaria ${plan.id}`,
-          ['Tractor', 'Potencia', 'Precio', 'Coef. Conservacion', 'Horas Utiles', 'Valor Residual'],
+          `${plan.tractor.nombre} (Potencia ${plan.tractor.potencia} HP)`,
+          [ 'Precio', 'Coef. Conservacion', 'Horas Utiles', 'Valor Residual'],
           [[
-            plan.tractor.nombre,
-            `${plan.tractor.potencia} HP`,
             `${plan.tractor.precioDolar} US$`,
             plan.tractor.gastoMantenimiento,
             `${plan.tractor.horasVidaUtil} h`,
@@ -22,7 +23,7 @@ const MaquinariaTable = ({ plans }) => (
             { header: 'Conservación', value: safeCurrency(plan.gastoConservacionTractor) }
           ],
           null,
-          styles.titleWithBackground
+          styles.SubtitleWithBackground
         )}
 
         {renderTable(
@@ -36,12 +37,12 @@ const MaquinariaTable = ({ plans }) => (
             `${plan.implemento.porcentajeValorResidual} %`
           ]],
           [
-            { header: 'Combustible', value: safeCurrency(plan.gastoCombustibleImplemento) },
+            { header: 'Combustible', value: safeCurrency(plan.costoCombustibleImplemento) },
             { header: 'Amortización', value: safeCurrency(plan.amortizacionImplemento) },
             { header: 'Conservación', value: safeCurrency(plan.gastoConservacionImplemento) }
           ],
           safeCurrency(plan.costoEconomico),
-          styles.smallTitle
+          styles.SubtitleWithBackground
         )}
       </View>
     ))}

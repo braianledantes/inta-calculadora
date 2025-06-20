@@ -2,7 +2,8 @@ import test, {describe, it} from 'node:test';
 import {
   calcularValoresPlanFertilizante,
   calcularValoresPlanMaquinaria,
-  calcularValoresPlanSanitario
+  calcularValoresPlanSanitario,
+  calcularValoresProductoSanitario,
 } from "./calculos.js";
 import * as assert from "node:assert";
 
@@ -121,6 +122,34 @@ describe('calcularValoresPlanSanitario', () => {
     assert.equal(result.cantidadPorHectarea, 1, "Cantidad por hectárea incorrecta");
     assert.equal(result.costoTotalPorTratamiento, 176400, "Costo total por tratamiento incorrecto");
     assert.equal(result.costoTotalPorHectarea, 352800, "Costo total por hectárea incorrecto");
+  });
+
+});
+
+describe('calcularValoresProductoSanitario', () => {
+  it('primer producto sanitario', () => {
+    const producto = {
+            id: 1,
+            sanitizante: {
+              numero: 1,
+              nombre: "Aceite de Verano",
+              precioEnvaseDolar: 2,
+              volumenEnvase: 1,
+              unidadVolumenEnvase: "lt",
+              dosisAplicacion: 0.25,
+              unidadDosisAplicacion: "lt",
+              tipo: "plaguicida",
+            },
+            precio: 2,
+            dosisPorHectarea: 0.25,
+            volumenPorHectarea: 20,
+            cantidadPorHectarea: 1,
+            costoTotalPorHectarea: 2.80,
+          }
+    const result = calcularValoresProductoSanitario(producto.precio, producto.volumenPorHectarea, producto.dosisPorHectarea, valorDolar);
+    // verifica los calculos del producto sanitario
+    assert.equal(result.cantidadPorHectarea, 5, "Cantidad por hectárea incorrecta");
+    assert.equal(result.costoTotalPorHectarea, 10500, "Costo total por hectárea incorrecto");
   });
 
 });
