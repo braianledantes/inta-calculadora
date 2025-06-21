@@ -1,11 +1,12 @@
 import {useEffect, useState} from "react";
-import {getDolar} from "../api/dolar.js";
+import {DOLAR_DEFAULT, TIPO_DOLARES, getDolar} from "../api/dolar.js";
 import {getGasoil} from "../api/gasoil.js";
 import {calcularValoresPlanMaquinaria} from "../services/calculos.js";
 import * as LocalDb from "../data/local.js";
 
 export const useMaquinaria = () => {
-  const [valorDolar, setValorDollar] = useState(0);
+  const [dolar, setDolar] = useState(DOLAR_DEFAULT);
+  const [dolares, setDolares] = useState([DOLAR_DEFAULT]);
   const [valorGasoilina, setValorGasolina] = useState(0);
   const [planes, setPlanes] = useState([]);
 
@@ -14,9 +15,15 @@ export const useMaquinaria = () => {
 
   useEffect(() => {
     const fetchDolar = async () => {
+      const dolarManual = dolares[0];
+      const nuevosDolares = await getDolar();
+      setDolares([
+        dolarManual,
+        { tipo: TIPO_DOLARES.OFICIAL, valor: nuevosDolares.oficial },
+        { tipo: TIPO_DOLARES.TARJETA, valor: nuevosDolares.tarjeta },
+      ]);
+
       const gasoilValorApi = await getGasoil();
-      const valor = await getDolar();
-      setValorDollar(valor);
       // TODO: posible mejora hacer que se pueda seleccionar el grado de gasoil y la provincia segun los resultados de la API
       setValorGasolina(gasoilValorApi.grado2);
     }
@@ -41,7 +48,7 @@ export const useMaquinaria = () => {
     const tractor = tractores[0];
     const implemento = implementos[0];
 
-    const valoresCalculados = calcularValoresPlanMaquinaria(tractor, implemento, valorDolar, valorGasoilina);
+    const valoresCalculados = calcularValoresPlanMaquinaria(tractor, implemento, dolar.valor, valorGasoilina);
 
     const plan = {
       id: planes.at(-1)?.id + 1 || 1,
@@ -56,7 +63,7 @@ export const useMaquinaria = () => {
   }
 
   const updatePlan = (id, tractor, implemento) => {
-    const valoresCalculados = calcularValoresPlanMaquinaria(tractor, implemento, valorDolar, valorGasoilina);
+    const valoresCalculados = calcularValoresPlanMaquinaria(tractor, implemento, dolar.valor, valorGasoilina);
 
     const updatedPlan = {
       tractor: tractor,
@@ -71,24 +78,28 @@ export const useMaquinaria = () => {
     setPlanes(planes.filter(plan => plan.id !== id));
   }
 
-  const updateDolar = async (newValue) => {
-    setValorDollar(newValue);
+  const updateDolar = async (newDolar) => {
+    setDolar(newDolar);
+    
+    setDolares(prevDolares => {
+      const existingDolar = prevDolares.find(d => d.tipo === newDolar.tipo);
+      if (existingDolar) {
+        return prevDolares.map(d => d.tipo === newDolar.tipo ? newDolar : d);
+      }
+      return [...prevDolares, newDolar];
+    });    
+
     const updatedPlanes = planes.map(plan => {
-      const valoresCalculados = calcularValoresPlanMaquinaria(plan.tractor, plan.implemento, newValue, valorGasoilina);
+      const valoresCalculados = calcularValoresPlanMaquinaria(plan.tractor, plan.implemento, newDolar.valor, valorGasoilina);
       return {...plan, ...valoresCalculados};
     });
     setPlanes(updatedPlanes);
   }
 
-  const refreshDolar = async () => {
-    const valor = await getDolar();
-    await updateDolar(valor);
-  }
-
   const updateGasolina = (valor) => {
     setValorGasolina(valor);
     const updatedPlanes = planes.map(plan => {
-      const valoresCalculados = calcularValoresPlanMaquinaria(plan.tractor, plan.implemento, valorDolar, valor);
+      const valoresCalculados = calcularValoresPlanMaquinaria(plan.tractor, plan.implemento, dolar.valor, valor);
       return {...plan, ...valoresCalculados};
     });
     setPlanes(updatedPlanes);
@@ -97,9 +108,9 @@ export const useMaquinaria = () => {
   
 
   return {
-    valorDolar,
+    dolar,
+    dolares,
     updateDolar,
-    refreshDolar,
     valorGasoilina,
     updateGasolina,
     planes,

@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {getDolar} from "../api/dolar.js";
+import {DOLAR_DEFAULT, getDolar, TIPO_DOLARES} from "../api/dolar.js";
 import {calcularValoresProductoSanitario} from "../services/calculos.js";
 import * as LocalDb from "../data/local.js";
 
@@ -41,15 +41,21 @@ const planes = [
 */
 
 export const useSanitizantes = () => {
-  const [valorDolar, setValorDollar] = useState(0);
+  const [dolar, setDolar] = useState(DOLAR_DEFAULT);
+  const [dolares, setDolares] = useState([DOLAR_DEFAULT]);
   const [planes, setPlanes] = useState([]);
 
   const [sanitizantes, setSanitizantes] = useState(LocalDb.getSanitizantes());
 
   useEffect(() => {
     const fetchDolar = async () => {
-      const valor = await getDolar();
-      setValorDollar(valor);
+      const dolarManual = dolares[0];
+            const nuevosDolares = await getDolar();
+            setDolares([
+              dolarManual,
+              { tipo: TIPO_DOLARES.OFICIAL, valor: nuevosDolares.oficial },
+              { tipo: TIPO_DOLARES.TARJETA, valor: nuevosDolares.tarjeta },
+            ]);
     }
     fetchDolar().then();
   }, []);
@@ -115,7 +121,7 @@ export const useSanitizantes = () => {
    * @param {*} plan Plan a actualizar
    * @returns Plan actualizado con los costos recalculados
    */
-  const actualizarCostosPlan = (plan) => {
+  const actualizarCostosPlan = (plan, valorDolar = dolar.valor) => {
     // recalcula los costos de los productos
     const updatedTratamientos = plan.tratamientos.map(tratamiento => {
       const updatedProductos = tratamiento.productos.map(producto => {
@@ -271,21 +277,25 @@ export const useSanitizantes = () => {
    * Actualiza el valor del dólar y recalcula los costos de los planes sanitarios.
    * @param {*} newValue Nuevo valor del dólar
    */
-  const updateDolar = async (newValue) => {
-    setValorDollar(newValue);
-    const updatedPlanes = planes.map(plan => (actualizarCostosPlan(plan)));
+  const updateDolar = async (newDolar) => {
+    setDolar(newDolar);
+    
+    setDolares(prevDolares => {
+      const existingDolar = prevDolares.find(d => d.tipo === newDolar.tipo);
+      if (existingDolar) {
+        return prevDolares.map(d => d.tipo === newDolar.tipo ? newDolar : d);
+      }
+      return [...prevDolares, newDolar];
+    });
+    
+    const updatedPlanes = planes.map(plan => actualizarCostosPlan(plan, newDolar.valor));
     setPlanes(updatedPlanes);
   }
 
-  const refreshDolar = async () => {
-    const valor = await getDolar();
-    await updateDolar(valor);
-  }
-
   return {
-    valorDolar,
+    dolar,
+    dolares,
     updateDolar,
-    refreshDolar,
     planes,
     sanitizantes,
     getPlan,
