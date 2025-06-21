@@ -11,9 +11,9 @@ import VistaSelector from "../../components/VistaSelector/VistaSelector.jsx";
 
 export default function SeccionCostosSanitizantes() {
   const {
-    valorDolar,
+    dolar,
+    dolares,
     updateDolar,
-    refreshDolar,
     planes,
     addPlan,
   } = useContext(AppContext).sanitizantes;
@@ -30,7 +30,7 @@ export default function SeccionCostosSanitizantes() {
   };
 
   const handleExportPdf = () => {
-    exportarGrafico(chartRef, { sanitizantePlans: planes, valorDolar: valorDolar });
+    exportarGrafico(chartRef, { sanitizantePlans: planes, valorDolar: dolar.valor });
   };
 
   useEffect(() => {
@@ -76,7 +76,7 @@ export default function SeccionCostosSanitizantes() {
       </div>
 
       <div className="flex flex-wrap justify-center items-center gap-6 mb-8">
-        <InputDolar value={valorDolar} onChange={updateDolar} onRefresh={refreshDolar} />
+        <InputDolar dolar={dolar} dolares={dolares} onChangeDolar={updateDolar} />
       </div>
 
       {planes.length >= 2 && !pantallaPequena && (

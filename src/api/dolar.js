@@ -2,6 +2,17 @@ let dolarCached = undefined;
 let dolarFetching = false;
 let dolarWaiters = [];
 
+export const TIPO_DOLARES = {
+  MANUAL: "manual",
+  OFICIAL: "oficial",
+  TARJETA: "tarjeta",
+};
+
+export const DOLAR_DEFAULT = {
+  tipo: TIPO_DOLARES.MANUAL,
+  valor: 1000,
+};
+
 /**
  * Obtiene el precio del dólar oficial y dólar tarjeta desde dos APIs distintas.
  * Si ya se ha realizado una solicitud, devuelve el valor cacheado.

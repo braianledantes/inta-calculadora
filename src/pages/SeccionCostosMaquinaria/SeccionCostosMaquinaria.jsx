@@ -12,9 +12,9 @@ import VistaSelector from "../../components/VistaSelector/VistaSelector.jsx";
 
 export default function SeccionCostosMaquinaria() {
   const {
-    valorDolar,
+    dolar,
+    dolares,
     updateDolar,
-    refreshDolar,
     valorGasoilina,
     updateGasolina,
     planes,
@@ -37,7 +37,7 @@ export default function SeccionCostosMaquinaria() {
   const handleExportPdf = () => {
     exportarGrafico(chartRef, {
       maquinariaPlans: planes,
-      valorDolar: valorDolar,
+      valorDolar: dolar.valor,
       valorGasoil: valorGasoilina,
     });
   };
@@ -78,7 +78,6 @@ export default function SeccionCostosMaquinaria() {
     setVista(nuevaVista);
   };
 
-  console.log(planes)
   return (
     <div className="bg-gray-100  my-4">
       <div className="flex justify-center gap-3 mb-4 flex-wrap">
@@ -86,7 +85,7 @@ export default function SeccionCostosMaquinaria() {
       </div>
 
       <div className="flex flex-wrap justify-center items-center gap-6 mb-6">
-        <InputDolar value={valorDolar} onChange={updateDolar} onRefresh={refreshDolar} />
+        <InputDolar dolar={dolar} dolares={dolares} onChangeDolar={updateDolar} />
         <InputGasoil value={valorGasoilina} onChange={updateGasolina} />
       </div>
 

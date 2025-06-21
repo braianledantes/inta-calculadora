@@ -11,9 +11,9 @@ import VistaSelector from "../../components/VistaSelector/VistaSelector.jsx";
 
 export default function SeccionCostosFertilizacion() {
   const {
-    valorDolar,
+    dolar,
+    dolares,
     updateDolar,
-    refreshDolar,
     planes,
     fertilizantes,
     addPlan,
@@ -33,7 +33,7 @@ export default function SeccionCostosFertilizacion() {
   };
 
   const handleExportPdf = () => {
-    exportarGrafico(chartRef, { fertilizacionPlans: planes, valorDolar: valorDolar });
+    exportarGrafico(chartRef, { fertilizacionPlans: planes, valorDolar: dolar.valor });
   };
 
   useEffect(() => {
@@ -79,7 +79,7 @@ export default function SeccionCostosFertilizacion() {
       </div>
 
       <div className="flex flex-wrap justify-center items-center gap-6 mb-8">
-        <InputDolar value={valorDolar} onChange={updateDolar} onRefresh={refreshDolar} />
+        <InputDolar dolar={dolar} dolares={dolares} onChangeDolar={updateDolar} />
       </div>
 
       {planes.length >= 2 && !pantallaPequena && (
