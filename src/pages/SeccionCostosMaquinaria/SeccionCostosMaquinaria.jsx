@@ -14,8 +14,9 @@ export default function SeccionCostosMaquinaria() {
   const {
     dolar,
     dolares,
+    gasoil,
+    listaGasoil,
     updateDolar,
-    valorGasoilina,
     updateGasolina,
     planes,
     addPlan,
@@ -38,7 +39,7 @@ export default function SeccionCostosMaquinaria() {
     exportarGrafico(chartRef, {
       maquinariaPlans: planes,
       valorDolar: dolar.valor,
-      valorGasoil: valorGasoilina,
+      valorGasoil: gasoil.valor,
     });
   };
 
@@ -86,7 +87,9 @@ export default function SeccionCostosMaquinaria() {
 
       <div className="flex flex-wrap justify-center items-center gap-6 mb-6">
         <InputDolar dolar={dolar} dolares={dolares} onChangeDolar={updateDolar} />
-        <InputGasoil value={valorGasoilina} onChange={updateGasolina} />
+
+        <InputGasoil gasoil={gasoil} listaGasoil={listaGasoil} onChangeGasoil={updateGasolina} />
+
       </div>
 
       {planes.length >= 2 && !pantallaPequena && (

@@ -1,13 +1,16 @@
 import {useEffect, useState} from "react";
 import {DOLAR_DEFAULT, TIPO_DOLARES, getDolar} from "../api/dolar.js";
-import {getGasoil} from "../api/gasoil.js";
+import {GASOIL_DEFAULT, TIPO_GASOIL , getGasoil} from "../api/gasoil.js";
 import {calcularValoresPlanMaquinaria} from "../services/calculos.js";
 import * as LocalDb from "../data/local.js";
 
 export const useMaquinaria = () => {
   const [dolar, setDolar] = useState(DOLAR_DEFAULT);
   const [dolares, setDolares] = useState([DOLAR_DEFAULT]);
-  const [valorGasoilina, setValorGasolina] = useState(0);
+
+  const [gasoil, setGasoil] = useState(GASOIL_DEFAULT);
+  const [listaGasoil, setListaGasoil] = useState([GASOIL_DEFAULT]);
+
   const [planes, setPlanes] = useState([]);
 
   const [tractores, setTractores] = useState(LocalDb.getTractores());
@@ -15,6 +18,7 @@ export const useMaquinaria = () => {
 
   useEffect(() => {
     const fetchDolar = async () => {
+
       const dolarManual = dolares[0];
       const nuevosDolares = await getDolar();
       setDolares([
@@ -23,9 +27,13 @@ export const useMaquinaria = () => {
         { tipo: TIPO_DOLARES.TARJETA, valor: nuevosDolares.tarjeta },
       ]);
 
+      const gasoilManual = listaGasoil[0];
       const gasoilValorApi = await getGasoil();
-      // TODO: posible mejora hacer que se pueda seleccionar el grado de gasoil y la provincia segun los resultados de la API
-      setValorGasolina(gasoilValorApi.grado2);
+      setListaGasoil([
+        gasoilManual,
+        { tipo: TIPO_GASOIL.GRADO2, valor: gasoilValorApi.grado2 },
+        { tipo: TIPO_GASOIL.GRADO3, valor: gasoilValorApi.grado3 },
+      ]);
     }
     fetchDolar().then();
   }, []);
@@ -48,7 +56,7 @@ export const useMaquinaria = () => {
     const tractor = tractores[0];
     const implemento = implementos[0];
 
-    const valoresCalculados = calcularValoresPlanMaquinaria(tractor, implemento, dolar.valor, valorGasoilina);
+    const valoresCalculados = calcularValoresPlanMaquinaria(tractor, implemento, dolar.valor, gasoil);
 
     const plan = {
       id: planes.at(-1)?.id + 1 || 1,
@@ -63,7 +71,7 @@ export const useMaquinaria = () => {
   }
 
   const updatePlan = (id, tractor, implemento) => {
-    const valoresCalculados = calcularValoresPlanMaquinaria(tractor, implemento, dolar.valor, valorGasoilina);
+    const valoresCalculados = calcularValoresPlanMaquinaria(tractor, implemento, dolar.valor, gasoil);
 
     const updatedPlan = {
       tractor: tractor,
@@ -90,16 +98,7 @@ export const useMaquinaria = () => {
     });    
 
     const updatedPlanes = planes.map(plan => {
-      const valoresCalculados = calcularValoresPlanMaquinaria(plan.tractor, plan.implemento, newDolar.valor, valorGasoilina);
-      return {...plan, ...valoresCalculados};
-    });
-    setPlanes(updatedPlanes);
-  }
-
-  const updateGasolina = (valor) => {
-    setValorGasolina(valor);
-    const updatedPlanes = planes.map(plan => {
-      const valoresCalculados = calcularValoresPlanMaquinaria(plan.tractor, plan.implemento, dolar.valor, valor);
+      const valoresCalculados = calcularValoresPlanMaquinaria(plan.tractor, plan.implemento, newDolar.valor, gasoil.valor);
       return {...plan, ...valoresCalculados};
     });
     setPlanes(updatedPlanes);
@@ -107,11 +106,31 @@ export const useMaquinaria = () => {
 
   
 
+  const updateGasolina = async (newGasolina) => {
+    setGasoil(newGasolina);
+
+    setListaGasoil(prevListaGasoil => {
+      const existingGasoil = prevListaGasoil.find(d => d.tipo === newGasolina.tipo);
+      if (existingGasoil) {
+        return prevListaGasoil.map(d => d.tipo === newGasolina.tipo ? newGasolina : d);
+      }
+      return [...prevListaGasoil, newGasolina];
+    });   
+    
+    const updatedPlanes = planes.map(plan => {
+      const valoresCalculados = calcularValoresPlanMaquinaria(plan.tractor, plan.implemento, newGasolina.valor, gasoil.valor);
+      return {...plan, ...valoresCalculados};
+    });
+    setPlanes(updatedPlanes);
+  }
+
+
   return {
     dolar,
     dolares,
     updateDolar,
-    valorGasoilina,
+    gasoil,
+    listaGasoil,
     updateGasolina,
     planes,
     tractores,

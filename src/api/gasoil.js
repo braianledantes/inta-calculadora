@@ -2,6 +2,17 @@ let gasoilCached = undefined;
 let gasoilFetching = false;
 let gasoilWaiters = [];
 
+export const TIPO_GASOIL = {
+  MANUAL: "manual",
+  GRADO2: "Gas Oil Grado 2",
+  GRADO3: "Gas Oil Grado 3",
+};
+
+export const GASOIL_DEFAULT = {
+  tipo: TIPO_GASOIL.MANUAL,
+  valor: 1000,
+};
+
 /**
  * Obtiene el precio del gasoil grado 2 y grado 3 de la provincia de Buenos Aires de la API de datos de energía.
  * Si ya se ha realizado una solicitud, devuelve el valor cacheado.

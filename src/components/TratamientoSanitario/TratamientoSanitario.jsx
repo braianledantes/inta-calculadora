@@ -68,11 +68,11 @@ export default function TratamientoSanitario({ planId, tratamiento }) {
       </div>
 
       {tratamiento.productos.length > 0 && (
-        <div className="bg-[#1f3944]/10 text-green-800 p-4 rounded-bl-lg rounded-br-lg shadow-inner flex flex-wrap gap-x-4 gap-y-2 shadow-sm">
+        <div className="bg-[#1f3944]/10 text-green-800 p-4 rounded-bl-lg rounded-br-lg flex flex-wrap gap-x-4 gap-y-2 shadow-sm">
           <span>
             <span className="font-semibold text-gray-800 tracking-wide">
               Total tratamiento:
-            </span>{" "}
+            </span>{""}
             <span className="text-green-900 font-extrabold tracking-tight">
               {tratamiento.total}{" "}
               <span className="font-semibold text-gray-600">AR$/ha</span>

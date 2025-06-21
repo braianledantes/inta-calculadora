@@ -1,42 +1,21 @@
-import { useEffect, useState } from "react";
+
 import { Fuel } from "lucide-react";
-import { getGasoil } from "../../api/gasoil";
 
-const OPTIONS = [
-  { label: "Manual", value: "manual" },
-  { label: "Gasoil Grado 2", value: "grado2" },
-  { label: "Gasoil Grado 3", value: "grado3" },
-];
+export default function InputGasoil({ gasoil, listaGasoil, onChangeGasoil }) {
 
-export default function InputGasoil({ value, onChange }) {
-  const [precioAutomatico, setPrecioAutomatico] = useState({ grado2: 0, grado3: 0 });
-  const [modo, setModo] = useState("manual");
-  const [loading, setLoading] = useState(false);
+  const { tipo, valor } = gasoil;
 
-  useEffect(() => {
-    setLoading(true);
-    getGasoil()
-      .then((precios) => {
-        setPrecioAutomatico(precios || { grado2: 0, grado3: 0 });
-      })
-      .finally(() => setLoading(false));
-  }, []);
+  const handleOnChangeGasoil = (e) => {
+  const newGasoil = { ...gasoil, valor: parseFloat(e.target.value) || 0 };
+    onChangeGasoil(newGasoil);
+  }
 
-  const handleModoChange = (e) => {
-    const nuevoModo = e.target.value;
-    setModo(nuevoModo);
-    if (nuevoModo === "grado2") onChange(precioAutomatico.grado2);
-    else if (nuevoModo === "grado3") onChange(precioAutomatico.grado3);
-  };
+  const handleChangeTipo = (e) => {
+    const newTipo = e.target.value;
+    const newGasoil = listaGasoil.find(d => d.tipo === newTipo) || { tipo: newTipo, valor: 0 };
+    onChangeGasoil(newGasoil);
+  }
 
-  const handleInputChange = (e) => {
-    const val = parseFloat(e.target.value);
-    if (!isNaN(val)) {
-      onChange(val);
-    }
-  };
-
-  const inputValue = modo === "manual" ? value : (precioAutomatico[modo] || 0);
 
   return (
     <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 shadow-lg rounded-xl p-5 w-sm border border-yellow-200 flex flex-col justify-center items-center gap-3">
@@ -47,14 +26,13 @@ export default function InputGasoil({ value, onChange }) {
 
       <div className="w-full flex justify-between items-center gap-2">
         <select
-          value={modo}
-          onChange={handleModoChange}
+          value={tipo}
+          onChange={handleChangeTipo}
           className="w-1/2 p-2 border-2 border-yellow-300 rounded-lg text-yellow-900 font-bold bg-white focus:outline-none focus:ring-2 focus:ring-yellow-400 transition"
-          disabled={loading}
         >
-          {OPTIONS.map(({ label, value }) => (
-            <option key={value} value={value}>
-              {label}
+          {listaGasoil.map((g) => (
+            <option key={g.tipo} value={g.tipo}>
+              {g.tipo}
             </option>
           ))}
         </select>
@@ -63,13 +41,13 @@ export default function InputGasoil({ value, onChange }) {
         <div className="relative w-1/2">
           <input
             type="number"
-            value={inputValue}
-            onChange={handleInputChange}
+            value={valor}
+            onChange={handleOnChangeGasoil}
             min="0"
-            disabled={modo !== "manual"}
+            disabled={tipo !== "manual"}
             className={`w-full p-2 pr-12 border-2 rounded-lg text-right font-bold bg-white focus:outline-none transition
               ${
-                modo === "manual"
+                tipo === "manual"
                   ? "border-yellow-300 text-yellow-900 focus:ring-2 focus:ring-yellow-400"
                   : "border-gray-200 text-gray-400 cursor-not-allowed"
               }
@@ -80,8 +58,6 @@ export default function InputGasoil({ value, onChange }) {
           </span>
         </div>
       </div>
-
-      {loading && <p className="text-yellow-600 text-sm mt-2">Cargando precios automáticos...</p>}
     </div>
   );
 }
