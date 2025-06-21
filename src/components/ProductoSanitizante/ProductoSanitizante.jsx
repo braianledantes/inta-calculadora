@@ -53,7 +53,7 @@ export default function ProductoSanitizante({ idPlan, idTratamiento, producto })
 
   return (
   <div>
-    <div className="bg-white p-4 rounded-tl-lg rounded-tr-lg shadow-sm">
+    <div className="bg-white p-4 rounded-tl-lg rounded-tr-lg shadow-sm mt-4">
       <div className="flex justify-between items-start">
         <span className="font-semibold text-gray-400 tracking-wide">
           Producto {producto.id}
@@ -99,14 +99,14 @@ export default function ProductoSanitizante({ idPlan, idTratamiento, producto })
     </div>
 
     <div className="w-full grid sm:grid-cols-2 bg-green-50 text-green-800 p-4 rounded-bl-lg rounded-br-lg border border-green-900/10 shadow-sm  gap-2">
-      <span>
+      <div>
         <span className="font-semibold tracking-wide">Cantidad por ha:</span>
         <span className="font-extrabold tracking-tight"> {producto.cantidadPorHectarea}<span className="font-semibold">/ha</span></span>
-      </span>
-      <span>
+      </div>
+      <div className="flex justify-end">
         <span className="font-semibold tracking-wide">Costo por ha:</span>
         <span className="font-extrabold tracking-tight"> {producto.costoTotalPorHectarea}<span className="font-semibold">/ha</span></span>
-      </span>
+      </div>
     </div>
   </div>
 );

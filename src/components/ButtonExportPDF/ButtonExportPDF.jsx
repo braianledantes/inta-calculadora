@@ -9,7 +9,7 @@ export default function ButtonExportPdf({ onExport }) {
     >
       <FileText className="w-6 h-6 text-white drop-shadow-md" />
 
-      <span className="relative z-10">Descargar / Exportar PDF</span>
+      <span className="relative z-10">Descargar en formato PDF</span>
 
       <span
         className="absolute top-0 left-[-75%] w-20 h-full bg-white opacity-20 rotate-12 blur-xl animate-shimmer pointer-events-none z-20"

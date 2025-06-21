@@ -24,9 +24,9 @@ export default function TratamientoSanitario({ planId, tratamiento }) {
 
   return (
     <div className="mb-10">
-      <div className="bg-gray-50 p-4 rounded-tl-lg rounded-tr-lg shadow-sm border-b border-b-gray-50">
+      <div className="bg-gray-50 sm:p-4 p-2 rounded-tl-lg rounded-tr-lg shadow-sm border-b border-b-gray-50">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-4 md:gap-0">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center w-full sm:items-center gap-4">
             <span className="font-bold text-xl whitespace-nowrap">
               Tratamiento {String(tratamiento.id)}
             </span>
