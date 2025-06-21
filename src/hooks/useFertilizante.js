@@ -60,11 +60,11 @@ export const useFertilizante = () => {
   }
 
   const updateDolar = async (newValue) => {
-    setValorDollar(newValue);
-    planes.forEach(plan => {
-      const valoresCalculados = calcularValoresPlanFertilizante(plan.fertilizante, plan.cantTratamientos, valorDolar);
-      setPlanes(prevPlanes => prevPlanes.map(p => p.id === plan.id ? {...p, ...valoresCalculados} : p));
-    })
+    const updatedPlanes = planes.map(plan => {
+      const valoresCalculados = calcularValoresPlanFertilizante(plan.fertilizante, plan.cantTratamientos, newValue);
+      return {...plan, ...valoresCalculados};
+     });
+    setPlanes(updatedPlanes);
   }
 
   const refreshDolar = async () => {

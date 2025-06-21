@@ -73,10 +73,11 @@ export const useMaquinaria = () => {
 
   const updateDolar = async (newValue) => {
     setValorDollar(newValue);
-    planes.forEach(plan => {
+    const updatedPlanes = planes.map(plan => {
       const valoresCalculados = calcularValoresPlanMaquinaria(plan.tractor, plan.implemento, newValue, valorGasoilina);
-      setPlanes(prevPlanes => prevPlanes.map(p => p.id === plan.id ? {...p, ...valoresCalculados} : p));
-    })
+      return {...plan, ...valoresCalculados};
+    });
+    setPlanes(updatedPlanes);
   }
 
   const refreshDolar = async () => {
@@ -86,10 +87,11 @@ export const useMaquinaria = () => {
 
   const updateGasolina = (valor) => {
     setValorGasolina(valor);
-    planes.forEach(plan => {
+    const updatedPlanes = planes.map(plan => {
       const valoresCalculados = calcularValoresPlanMaquinaria(plan.tractor, plan.implemento, valorDolar, valor);
-      setPlanes(prevPlanes => prevPlanes.map(p => p.id === plan.id ? {...p, ...valoresCalculados} : p));
+      return {...plan, ...valoresCalculados};
     });
+    setPlanes(updatedPlanes);
   }
 
   
