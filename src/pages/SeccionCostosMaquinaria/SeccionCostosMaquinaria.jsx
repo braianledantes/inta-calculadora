@@ -1,21 +1,22 @@
-import {CardMaquinariaPlan} from "../../components/CardMaquinariaPlan/CardMaquinariaPlan.jsx";
+import { useRef, useContext, useState, useEffect } from "react";
+import { AppContext } from "../../context/AppContext.jsx";
+import { CardMaquinariaPlan } from "../../components/CardMaquinariaPlan/CardMaquinariaPlan.jsx";
 import InputDolar from "../../components/InputDolar/InputDolar.jsx";
 import InputGasoil from "../../components/InputGasoil/InputGasoil.jsx";
-import { useRef, useContext, useState, useEffect } from "react";
-import {AppContext} from "../../context/AppContext.jsx";
 import SectionTitle from "../../components/SectionTitle/SectionTitle.jsx";
 import AddPlanButton from "../../components/AddPlanButton/AddPlanButton.jsx";
-import SelectorEstadoFenologico from "../../components/SelectorEstadoFenologico/SelectorEstadoFenologico.jsx";
-import Grafico from '../../components/Grafico/Grafico.jsx'
-import ButtonExportPDF from "../../components/ButtonExportPDF/ButtonExportPDF.jsx"
+import PlanesMaquinariaChart from "../../components/PlanesMaquinariaChart/PlanesMaquinariaChart.jsx";
+import ButtonExportPDF from "../../components/ButtonExportPDF/ButtonExportPDF.jsx";
 import exportarGrafico from "../../utils/exportarGrafico.jsx";
+import VistaSelector from "../../components/VistaSelector/VistaSelector.jsx";
 
 export default function SeccionCostosMaquinaria() {
   const {
-    valorDolar,
+    dolar,
+    dolares,
+    gasoil,
+    listaGasoil,
     updateDolar,
-    refreshDolar,
-    valorGasoilina,
     updateGasolina,
     planes,
     addPlan,
@@ -25,69 +26,109 @@ export default function SeccionCostosMaquinaria() {
     implementos,
   } = useContext(AppContext).maquinaria;
 
-  const {
-    estadosFenologicos,
-    estadoFenologicoMaquinaria,
-    setEstadoFenologicoMaquinaria,
-  } = useContext(AppContext).estadosFenologicos;
-
-  const [lastPlanRef, setLastPlanRef] = useState(null);
-
-  const handleAddPlan = () => {
-    addPlan();
-  }
-
-  // Hacer scroll cuando cambia la cantidad de planes
-  useEffect(() => {
-    if (lastPlanRef) {
-      lastPlanRef.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-  }, [planes.length, lastPlanRef]);
-
-  const chartData = planes.map(p => ({
-   name: `Plan ${p.id}`,
-   total: p.costoEconomico, 
-  }))
-  
-
+  const lastPlanRef = useRef(null);
   const chartRef = useRef();
 
+  const [vista, setVista] = useState("lista");
+  const [vistaAutomatica, setVistaAutomatica] = useState(true);
+  const [pantallaPequena, setPantallaPequena] = useState(window.innerWidth < 768);
+
+  const handleAddPlan = () => addPlan();
+
+  const handleExportPdf = () => {
+    exportarGrafico(chartRef, {
+      maquinariaPlans: planes,
+      valorDolar: dolar.valor,
+      valorGasoil: gasoil.valor,
+    });
+  };
+
+  useEffect(() => {
+    const manejarResize = () => {
+      const esPequena = window.innerWidth < 768;
+      setPantallaPequena(esPequena);
+
+      if (esPequena) {
+        setVista("lista");
+        setVistaAutomatica(true);
+      }
+    };
+
+    manejarResize();
+
+    window.addEventListener("resize", manejarResize);
+    return () => window.removeEventListener("resize", manejarResize);
+  }, []);
+
+  useEffect(() => {
+    if (lastPlanRef.current) {
+      lastPlanRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    if (vistaAutomatica && !pantallaPequena) {
+      if (planes.length >= 2) {
+        setVista("dosColumnas");
+      } else {
+        setVista("lista");
+      }
+    }
+  }, [planes.length, vistaAutomatica, pantallaPequena]);
+
+  const handleVistaChange = (nuevaVista) => {
+    setVistaAutomatica(false);
+    setVista(nuevaVista);
+  };
+
   return (
-    <div className="bg-gray-100 py-8 my-4">
-      
-    <div className="flex justify-center gap-3 mb-4 flex-wrap">
-      <SectionTitle title="Costos de Maquinaria" />
-    </div>
-
-      <div className="flex flex-wrap justify-center items-center gap-6 mb-8">
-        <InputDolar value={valorDolar} onChange={updateDolar} onRefresh={refreshDolar}/>
-        <SelectorEstadoFenologico
-          estados={estadosFenologicos}
-          estadoSeleccionado={estadoFenologicoMaquinaria}
-          setEstadoSeleccionado={setEstadoFenologicoMaquinaria}
-        />
-        <InputGasoil value={valorGasoilina} onChange={updateGasolina}/>
+    <div className="bg-gray-100  my-4">
+      <div className="flex justify-center gap-3 mb-4 flex-wrap">
+        <SectionTitle title="Calculadora de Costos de Maquinaria" />
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-2">
-      <div className="flex-1 lg:basis-2/3 space-y-6 order-1">
-      {planes.map((plan, idx) => (
-          <CardMaquinariaPlan key={plan.id} plan={plan} tractores={tractores} implementos={implementos} onDelete={deletePlan} onUpdate={updatePlan} ref={idx === planes.length - 1 ? setLastPlanRef : null}/>
-      ))}
-        <AddPlanButton text="Agregar nuevo plan de maquinaria" onClick={handleAddPlan}/>
+      <div className="flex flex-wrap justify-center items-center gap-6 mb-6">
+        <InputDolar dolar={dolar} dolares={dolares} onChangeDolar={updateDolar} />
+
+        <InputGasoil gasoil={gasoil} listaGasoil={listaGasoil} onChangeGasoil={updateGasolina} />
+
       </div>
 
-      {planes.length >=2 &&(
-        <div className="lg:basis-1/3 order-2">
-        <div  className="sticky top-50 bottom-30" style={{ maxHeight: 'calc(100vh - 80px)', overflowY: 'auto' }}>
+      {planes.length >= 2 && !pantallaPequena && (
+        <VistaSelector vista={vista} onVistaChange={handleVistaChange} />
+      )}
+
+      <div
+        className={`mb-8 ${
+          vista === "lista"
+            ? "flex flex-col items-center gap-6"
+            : "grid grid-cols-2 gap-6 justify-center"
+        }`}
+      >
+        {planes.map((plan, idx) => (
+          <CardMaquinariaPlan
+            key={plan.id}
+            plan={plan}
+            tractores={tractores}
+            implementos={implementos}
+            onDelete={deletePlan}
+            onUpdate={updatePlan}
+            ref={idx === planes.length - 1 ? (el) => { lastPlanRef.current = el; } : null}
+          />
+        ))}
+      </div>
+
+      <div className="mx-auto m-4xl">
+        <AddPlanButton text="Ingresar nuevo conjunto" onClick={handleAddPlan} />
+      </div>
+
+      {planes.length >= 2 && (
+        <div>
           <div ref={chartRef}>
-            <Grafico data={chartData} title={"Costo maquinaria"}/>
+            <PlanesMaquinariaChart planes={planes} />
           </div>
-          <ButtonExportPDF onExport={() => exportarGrafico(chartRef, { maquinariaPlans: planes ,  valorDolar: valorDolar, estadoFenologico: estadoFenologicoMaquinaria, valorGasoil: valorGasoilina })} />
+          <ButtonExportPDF onExport={handleExportPdf} />
         </div>
-        </div>
-      ) }
-      </div>
+      )}
     </div>
-  )
+  );
 }
+

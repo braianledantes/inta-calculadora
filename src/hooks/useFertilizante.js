@@ -1,18 +1,24 @@
-import {useEffect, useState} from "react";
-import {getDolar} from "../utils/utils.js";
-import {calcularValoresPlanFertilizante} from "../services/calculos.js";
+import { useEffect, useState } from "react";
+import { DOLAR_DEFAULT, getDolar, TIPO_DOLARES } from "../api/dolar.js";
+import { calcularValoresPlanFertilizante } from "../services/calculos.js";
 import * as LocalDb from "../data/local.js";
 
 export const useFertilizante = () => {
-  const [valorDolar, setValorDollar] = useState(0);
+  const [dolar, setDolar] = useState(DOLAR_DEFAULT);
+  const [dolares, setDolares] = useState([DOLAR_DEFAULT]);
   const [planes, setPlanes] = useState([]);
 
   const [fertilizantes, setFertilizantes] = useState(LocalDb.getFertilizantes());
 
   useEffect(() => {
     const fetchDolar = async () => {
-      const valor = await getDolar();
-      setValorDollar(valor);
+      const dolarManual = dolares[0];
+      const nuevosDolares = await getDolar();
+      setDolares([
+        dolarManual,
+        { tipo: TIPO_DOLARES.OFICIAL, valor: nuevosDolares.oficial },
+        { tipo: TIPO_DOLARES.TARJETA, valor: nuevosDolares.tarjeta },
+      ]);
     }
     fetchDolar().then();
   }, []);
@@ -30,7 +36,7 @@ export const useFertilizante = () => {
     const fertilizante = fertilizantes[0];
     const cantTratamientos = 0;
 
-    const valoresCalculados = calcularValoresPlanFertilizante(fertilizante, cantTratamientos, valorDolar);
+    const valoresCalculados = calcularValoresPlanFertilizante(fertilizante, cantTratamientos, dolar.valor);
 
     const plan = {
       id: planes.at(-1)?.id + 1 || 1,
@@ -39,12 +45,12 @@ export const useFertilizante = () => {
       ...valoresCalculados,
     };
     const newId = planes.length === 0 ? 1 : planes[planes.length - 1].id + 1;
-    const newPlan = {...plan, id: newId};
+    const newPlan = { ...plan, id: newId };
     setPlanes([...planes, newPlan]);
   }
 
   const updatePlan = (id, fertilizante, cantTratamientos) => {
-    const valoresCalculados = calcularValoresPlanFertilizante(fertilizante, cantTratamientos, valorDolar);
+    const valoresCalculados = calcularValoresPlanFertilizante(fertilizante, cantTratamientos, dolar.valor);
 
     const updatedPlan = {
       fertilizante,
@@ -52,30 +58,36 @@ export const useFertilizante = () => {
       ...valoresCalculados,
     };
 
-    setPlanes(planes.map(plan => plan.id === id ? {...plan, ...updatedPlan} : plan));
+    setPlanes(planes.map(plan => plan.id === id ? { ...plan, ...updatedPlan } : plan));
   }
 
   const deletePlan = (id) => {
     setPlanes(planes.filter(plan => plan.id !== id));
   }
 
-  const updateDolar = async (newValue) => {
-    setValorDollar(newValue);
-    planes.forEach(plan => {
-      const valoresCalculados = calcularValoresPlanFertilizante(plan.fertilizante, plan.cantTratamientos, valorDolar);
-      setPlanes(prevPlanes => prevPlanes.map(p => p.id === plan.id ? {...p, ...valoresCalculados} : p));
-    })
-  }
+  const updateDolar = async (newDolar) => {
+    setDolar(newDolar);
+    
+    setDolares(prevDolares => {
+      const existingDolar = prevDolares.find(d => d.tipo === newDolar.tipo);
+      if (existingDolar) {
+        return prevDolares.map(d => d.tipo === newDolar.tipo ? newDolar : d);
+      }
+      return [...prevDolares, newDolar];
+    });
+    
+    const updatedPlanes = planes.map(plan => {
+      const valoresCalculados = calcularValoresPlanFertilizante(plan.fertilizante, plan.cantTratamientos, newDolar.valor);
+      return { ...plan, ...valoresCalculados };
+    });
 
-  const refreshDolar = async () => {
-    const valor = await getDolar();
-    await updateDolar(valor);
+    setPlanes(updatedPlanes);
   }
 
   return {
-    valorDolar,
+    dolar,
+    dolares,
     updateDolar,
-    refreshDolar,
     planes,
     fertilizantes,
     getPlan,

@@ -1,44 +1,66 @@
-import { CircleDollarSign, RefreshCcw } from "lucide-react";
+import { CircleDollarSign } from "lucide-react";
 
-export default function InputDolar({ value, onChange, onRefresh }) {
-  const handleChange = (event) => {
-    const newValue = parseFloat(event.target.value);
-    if (!isNaN(newValue)) {
-      onChange(newValue);
-    }
-  };
+// dolar = { tipo: "manual", valor: 0 }
+// dolares = [{ tipo: "manual", valor: 0 }, ...]
+
+export default function InputDolar({ dolar, dolares, onChangeDolar }) {
+
+  const { tipo, valor } = dolar;
+
+  const handleOnChangeDolar = (e) => {
+    const newDolar = { ...dolar, valor: parseFloat(e.target.value) || 0 };
+    onChangeDolar(newDolar);
+  }
+
+  const handleChangeTipo = (e) => {
+    const newTipo = e.target.value;
+    const newDolar = dolares.find(d => d.tipo === newTipo) || { tipo: newTipo, valor: 0 };
+    onChangeDolar(newDolar);
+  }
 
   return (
-    <div className="bg-gradient-to-br from-green-50 to-green-100 shadow-lg rounded-xl p-5 w-[260px] border border-green-200 h-[160px] flex justify-center items-center">
-      <div>
-        <label className="text-base font-semibold text-green-800 mb-3 flex items-center gap-2 p-1">
-          <CircleDollarSign className="text-2xl"/>
-          Valor del Dólar
-        </label>
-        
-        <div className="flex items-center gap-3">
-          
-          <span className="text-green-700 font-semibold text-lg">US$</span>
+    <div className="bg-gradient-to-br from-green-50 to-green-100 shadow-lg rounded-xl p-5 w-sm border border-green-200 flex flex-col justify-center items-center gap-3">
+      <label className="text-base font-semibold text-green-800 flex items-center gap-2">
+        <CircleDollarSign className="text-green-700" size={24} />
+        Valor del Dólar
+      </label>
+
+      <div className="w-full flex justify-between items-center gap-2">
+        <select
+          value={tipo}
+          onChange={handleChangeTipo}
+          className="w-1/2 p-2 border-2 border-green-300 rounded-lg text-green-900 font-bold bg-white focus:outline-none focus:ring-2 focus:ring-green-400 transition"
+        >
+          {dolares.map((d) => (
+            <option key={d.tipo} value={d.tipo}>
+              {d.tipo}
+            </option>
+          ))}
+        </select>
+
+        {/* Contenedor relativo para input con texto "ARS" dentro */}
+        <div className="relative w-1/2">
           <input
             type="number"
-            value={value}
-            onChange={handleChange}
+            value={valor}
+            onChange={handleOnChangeDolar}
             min="0"
-            className="w-32 p-2 border-2 border-green-300 rounded-lg text-right text-green-900 font-bold bg-white focus:outline-none focus:ring-2 focus:ring-green-400 transition"
+            disabled={tipo !== "manual"}
+            className={`w-full p-2 pr-12 border-2 rounded-lg text-right font-bold bg-white focus:outline-none transition
+              ${tipo === "manual"
+                  ? "border-green-300 text-green-900 focus:ring-2 focus:ring-green-400"
+                  : "border-gray-200 text-gray-400 cursor-not-allowed"
+              }
+            `}
           />
-
-
-          <button
-            type="button"
-            onClick={onRefresh}
-            className="flex items-center justify-center p-2 bg-green-500 hover:bg-green-600 text-white rounded-full shadow transition-colors"
-            title="Sincronizar valor del dólar"
-          >
-            <RefreshCcw size={20} />
-          </button>
-
+          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-green-700 font-semibold text-sm pointer-events-none">
+            ARS
+          </span>
         </div>
+        
       </div>
     </div>
   );
 }
+
+

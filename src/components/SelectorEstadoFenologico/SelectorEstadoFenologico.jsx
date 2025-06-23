@@ -1,7 +1,6 @@
 import InputOptions from "../InputOptions/InputOptions.jsx";
-import { DEFAULT_ESTADO_FENOLOGICO } from "../../data/local.js";
-import { GiPlantSeed } from "react-icons/gi";
-import { Flower2, Leaf } from "lucide-react";
+import {DEFAULT_ESTADO_FENOLOGICO} from "../../data/local.js";
+import {Leaf} from "lucide-react";
 
 export default function SelectorEstadoFenologico({
   estados,

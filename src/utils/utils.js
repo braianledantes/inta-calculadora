@@ -1,16 +1,5 @@
 import * as XLSX from 'xlsx';
 
-export const getDolar = async () => {
-  try {
-    const response = await fetch("https://dolarapi.com/v1/dolares/oficial");
-    const data = await response.json();
-    return data.venta;
-  } catch (error) {
-    console.error("Error fetching dollar value:", error);
-    return 0;
-  }
-}
-
 export const formatNumber = (number) => {
   return new Intl.NumberFormat('es-AR', {
     style: 'currency',
@@ -18,8 +7,8 @@ export const formatNumber = (number) => {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   }).format(number);
-}
 
+}
 
 /**
  * Procesa un archivo Excel y devuelve sus datos en formato JSON por hoja.

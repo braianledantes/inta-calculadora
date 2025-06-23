@@ -1,4 +1,4 @@
-import { renderTable, safeCurrency} from '../utils/pdfUtils.jsx';
+import {renderTable, safeCurrency} from '../utils/pdfUtils.jsx';
 import styles from '../styles/pdfstyles';
 
 const FertilizacionTable = ({ plans }) => (
