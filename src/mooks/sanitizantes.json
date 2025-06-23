@@ -1,0 +1,782 @@
+[
+  {
+    "id": 1,
+    "nombre": "ABAMECTINA/AVERMECTINA",
+    "precioDolar": 186,
+    "volumen": 1,
+    "unidadVolumen": "kg",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "kg",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 2,
+    "nombre": "ACEITE MINERAL ",
+    "precioDolar": 2.8,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 3,
+    "nombre": "ACEQUINOCYL",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 4,
+    "nombre": "ACETAMIPRID",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 5,
+    "nombre": "ACIDO FOSFORICO",
+    "precioDolar": 7.2,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 6,
+    "nombre": "ACRINATRINA",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 7,
+    "nombre": "AMITRAZ",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 8,
+    "nombre": "AZADIRACTINA",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 9,
+    "nombre": "BENZOATO DE EMAMECTINA",
+    "precioDolar": 158.4,
+    "volumen": 1,
+    "unidadVolumen": "kg",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "kg",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 10,
+    "nombre": "BIFENAZATE",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "kg",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "kg",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 11,
+    "nombre": "BIFENTRIN",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "kg",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "kg",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 12,
+    "nombre": "BROMOPROPILATO",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "kg",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "kg",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 13,
+    "nombre": "BROMURO DE METILO",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "kg",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "kg",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 14,
+    "nombre": "BUPROFEZIN",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "kg",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "kg",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 15,
+    "nombre": "CARBARIL",
+    "precioDolar": 60.2,
+    "volumen": 1,
+    "unidadVolumen": "kg",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "kg",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 16,
+    "nombre": "CIPERMETRINA  ",
+    "precioDolar": 127,
+    "volumen": 5,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 17,
+    "nombre": "CLOFENTEZINE",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 18,
+    "nombre": "CLORANTRANILIPROLE",
+    "precioDolar": 257,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 19,
+    "nombre": "CLORANTRANILIPROLE + LAMBDACIALOTRINA",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 20,
+    "nombre": "CLORANTRANILIPROLE + TIAMETOXAM",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 21,
+    "nombre": "CYANTRANILIPROLE (CYAZYPYR)",
+    "precioDolar": 144,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 22,
+    "nombre": "CYFLUMETOFEN",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 23,
+    "nombre": "CYFLUTRIN / CYFLUTRINA",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 24,
+    "nombre": "CYHEXATIN",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 25,
+    "nombre": "DELTAMETRINA / DECAMETRINA",
+    "precioDolar": 79,
+    "volumen": 5,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 26,
+    "nombre": "DIFLUBENZURON",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 27,
+    "nombre": "DIMETOATO",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 28,
+    "nombre": "ESFENVALERATO",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 29,
+    "nombre": "ETION",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 30,
+    "nombre": "FENAMIFOS",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 31,
+    "nombre": "FENAZAQUIN",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 32,
+    "nombre": "FENBUTATIN OXIDO",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 33,
+    "nombre": "FENITROTION",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 34,
+    "nombre": "FENPIROXIMATO",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 35,
+    "nombre": "FENVALERATO",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 36,
+    "nombre": "FLONICAMID",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 37,
+    "nombre": "FLUBENDIAMIDE",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 38,
+    "nombre": "FLUFENOXURON",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 39,
+    "nombre": "FORMETANATO",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 40,
+    "nombre": "FOSFINA",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 41,
+    "nombre": "FOSMET",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 42,
+    "nombre": "GAMMACIALOTRINA",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 43,
+    "nombre": "HEXITIAZOX",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 44,
+    "nombre": "IMIDACLOPRID",
+    "precioDolar": 41.5,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 45,
+    "nombre": "INDOXACARB",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 46,
+    "nombre": "ISOCYCLOSERAM",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 47,
+    "nombre": "LAMBDACIALOTRINA",
+    "precioDolar": 86.6,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 48,
+    "nombre": "MERCAPTOTION / MALATION",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 49,
+    "nombre": "METIDATION",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 50,
+    "nombre": "METIOCARB / METMERCAPTURON",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 51,
+    "nombre": "METOMIL",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 52,
+    "nombre": "METOXIFENOCIDE",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 53,
+    "nombre": "NOVALURON",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 54,
+    "nombre": "NOVALURON + ACETAMIPRID",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 55,
+    "nombre": "PERMETRINA",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 56,
+    "nombre": "PIRIDAFENTION",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 57,
+    "nombre": "PIRIMICARB",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 58,
+    "nombre": "PIRIMIFOS  METIL",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 59,
+    "nombre": "POLISULFURO DE CALCIO",
+    "precioDolar": 1.27,
+    "volumen": 1,
+    "unidadVolumen": "kg",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "kg",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 60,
+    "nombre": "PROPARGITE",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "kg",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "kg",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 61,
+    "nombre": "PYRIPROXIFEN",
+    "precioDolar": 73.2,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 62,
+    "nombre": "PYRlDABEN",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 63,
+    "nombre": "SPINETORAM",
+    "precioDolar": 305,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 64,
+    "nombre": "SPINOSAD",
+    "precioDolar": 487.2,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 65,
+    "nombre": "SPIRODICLOFEN",
+    "precioDolar": 102.6,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 66,
+    "nombre": "SPIROTETRAMAT",
+    "precioDolar": 104.25,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 67,
+    "nombre": "SULFATO DE COBRE PENTAHIDRATADO",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 68,
+    "nombre": "SULFOXAFLOR",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 69,
+    "nombre": "TEBUFENOZIDE",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 70,
+    "nombre": "TEFLUBENZURON",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 71,
+    "nombre": "TETRADIFON",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 72,
+    "nombre": "TIACLOPRID",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 73,
+    "nombre": "TIAMETOXAM",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 74,
+    "nombre": "PYRACLOSTROBIN",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 75,
+    "nombre": "PYRIPROPXIFEN",
+    "precioDolar": 1,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 76,
+    "nombre": "TRAMPA CARPOCAPSA",
+    "precioDolar": 31.86,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 77,
+    "nombre": "DISPENSER DE FEROMONA 180 DIAS 550/HA",
+    "precioDolar": 0.41,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  },
+  {
+    "id": 78,
+    "nombre": "DISPENSER DE FEROMONA 120 DIAS 550/HA",
+    "precioDolar": 0.35,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt",
+    "tipo": "plaguicida"
+  }
+]

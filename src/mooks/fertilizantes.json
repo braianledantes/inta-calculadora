@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "nombre": "ACIDO BORICO",
+    "precio": 2.46415,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt"
+  },
+  {
+    "id": 2,
+    "nombre": "ACIDO FOSFORICO",
+    "precio": 8.007566666666667,
+    "volumen": 1,
+    "unidadVolumen": "kg",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "kg"
+  },
+  {
+    "id": 3,
+    "nombre": "AMINOQUELANT HIERRO",
+    "precio": 18.044649999999997,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt"
+  },
+  {
+    "id": 4,
+    "nombre": "BASAFER PLUS",
+    "precio": 18.044649999999997,
+    "volumen": 1,
+    "unidadVolumen": "kg",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "kg"
+  },
+  {
+    "id": 5,
+    "nombre": "BASF FOLIAR (ZN MN 35:25)",
+    "precio": 14.365,
+    "volumen": 1,
+    "unidadVolumen": "kg",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "kg"
+  },
+  {
+    "id": 6,
+    "nombre": "BORO FOLIAR",
+    "precio": 11.160499999999999,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt"
+  },
+  {
+    "id": 7,
+    "nombre": "CLORURO DE CALCIO",
+    "precio": 70,
+    "volumen": 25,
+    "unidadVolumen": "kg",
+    "dosisPorHa": 25,
+    "unidadDosisPorHa": "kg"
+  },
+  {
+    "id": 8,
+    "nombre": "FOSFATO DIAMONICO (18-46-0)",
+    "precio": 1.42545,
+    "volumen": 1,
+    "unidadVolumen": "kg",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "kg"
+  },
+  {
+    "id": 9,
+    "nombre": "GOEMAR CALIBRA BIOESTIMULANTE",
+    "precio": 28.314,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt"
+  },
+  {
+    "id": 10,
+    "nombre": "HIERRO",
+    "precio": 10.4907,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt"
+  },
+  {
+    "id": 11,
+    "nombre": "LEFINGWELL 35-15",
+    "precio": 17.0833,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt"
+  },
+  {
+    "id": 12,
+    "nombre": "NITRATO DE CALCIO",
+    "precio": 21.5,
+    "volumen": 5,
+    "unidadVolumen": "kg",
+    "dosisPorHa": 5,
+    "unidadDosisPorHa": "kg"
+  },
+  {
+    "id": 13,
+    "nombre": "NITRATO DE POTASIO",
+    "precio": 81,
+    "volumen": 25,
+    "unidadVolumen": "kg",
+    "dosisPorHa": 25,
+    "unidadDosisPorHa": "kg"
+  },
+  {
+    "id": 14,
+    "nombre": "PHYTNESS BIOESTIMULANTE",
+    "precio": 31.288075000000003,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt"
+  },
+  {
+    "id": 15,
+    "nombre": "SOL K S",
+    "precio": 2.72935,
+    "volumen": 1,
+    "unidadVolumen": "kg",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "kg"
+  },
+  {
+    "id": 16,
+    "nombre": "SOL MIX",
+    "precio": 1.1934,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt"
+  },
+  {
+    "id": 17,
+    "nombre": "SULFONITRATO DE AMONIO",
+    "precio": 38,
+    "volumen": 25,
+    "unidadVolumen": "kg",
+    "dosisPorHa": 25,
+    "unidadDosisPorHa": "kg"
+  },
+  {
+    "id": 18,
+    "nombre": "UREA",
+    "precio": 23,
+    "volumen": 25,
+    "unidadVolumen": "kg",
+    "dosisPorHa": 25,
+    "unidadDosisPorHa": "kg"
+  },
+  {
+    "id": 19,
+    "nombre": "WUXAL CALCIO",
+    "precio": 10.525125000000001,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt"
+  },
+  {
+    "id": 20,
+    "nombre": "WUXAL MAGNESIO",
+    "precio": 10.016824999999999,
+    "volumen": 1,
+    "unidadVolumen": "lt",
+    "dosisPorHa": 1,
+    "unidadDosisPorHa": "lt"
+  }
+]

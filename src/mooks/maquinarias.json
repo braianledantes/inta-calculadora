@@ -1,0 +1,231 @@
+{
+  "tractores": [
+    {
+      "id": 1,
+      "nombre": "Tractor 1",
+      "precioDolar": 60775,
+      "gastoMantenimiento": 0.00007,
+      "horasVidaUtil": 12000,
+      "porcentajeValorResidual": 20,
+      "potencia": 60
+    },
+    {
+      "id": 2,
+      "nombre": "Tractor 2",
+      "precioDolar": 82875,
+      "gastoMantenimiento": 0.00007,
+      "horasVidaUtil": 12000,
+      "porcentajeValorResidual": 20,
+      "potencia": 60
+    }
+  ],
+  "implementos": [
+    {
+      "id": 1,
+      "nombre": "Acoplado Metálico",
+      "precioDolar": 8287.5,
+      "gastoMantenimiento": 0.0004,
+      "horasVidaUtil": 10000,
+      "porcentajeValorResidual": 10,
+      "consumoCombustible": 0.1
+    },
+    {
+      "id": 2,
+      "nombre": "Aporcador ",
+      "precioDolar": 2320.5,
+      "gastoMantenimiento": 0.00025,
+      "horasVidaUtil": 4000,
+      "porcentajeValorResidual": 10,
+      "consumoCombustible": 0.11
+    },
+    {
+      "id": 3,
+      "nombre": "Arado",
+      "precioDolar": 6409,
+      "gastoMantenimiento": 0.0004,
+      "horasVidaUtil": 5000,
+      "porcentajeValorResidual": 10,
+      "consumoCombustible": 0.14
+    },
+    {
+      "id": 4,
+      "nombre": "Arado subsolador",
+      "precioDolar": 7182.5,
+      "gastoMantenimiento": 0.00015,
+      "horasVidaUtil": 5000,
+      "porcentajeValorResidual": 10,
+      "consumoCombustible": 0.16
+    },
+    {
+      "id": 5,
+      "nombre": "Bordeador",
+      "precioDolar": 3315,
+      "gastoMantenimiento": 0.00025,
+      "horasVidaUtil": 5000,
+      "porcentajeValorResidual": 10,
+      "consumoCombustible": 0.11
+    },
+    {
+      "id": 6,
+      "nombre": "Cincel 3 puntos",
+      "precioDolar": 4972.5,
+      "gastoMantenimiento": 0.00025,
+      "horasVidaUtil": 5000,
+      "porcentajeValorResidual": 10,
+      "consumoCombustible": 0.14
+    },
+    {
+      "id": 7,
+      "nombre": "Desmalezadora",
+      "precioDolar": 8950.5,
+      "gastoMantenimiento": 0.00025,
+      "horasVidaUtil": 4000,
+      "porcentajeValorResidual": 10,
+      "consumoCombustible": 0.12
+    },
+    {
+      "id": 8,
+      "nombre": "Desmalezadora (brazo retractil)",
+      "precioDolar": 4972.5,
+      "gastoMantenimiento": 0.0003,
+      "horasVidaUtil": 3000,
+      "porcentajeValorResidual": 10,
+      "consumoCombustible": 0.12
+    },
+    {
+      "id": 9,
+      "nombre": "Fertilizadora de frutales (liquidos)",
+      "precioDolar": 16575,
+      "gastoMantenimiento": 0.00018,
+      "horasVidaUtil": 5000,
+      "porcentajeValorResidual": 10,
+      "consumoCombustible": 0.11
+    },
+    {
+      "id": 10,
+      "nombre": "Fertilizadora de frutales (solidos)",
+      "precioDolar": 7735,
+      "gastoMantenimiento": 0.0002,
+      "horasVidaUtil": 4000,
+      "porcentajeValorResidual": 10,
+      "consumoCombustible": 0.12
+    },
+    {
+      "id": 11,
+      "nombre": "Hiladora de podos ",
+      "precioDolar": 5967,
+      "gastoMantenimiento": 0.0002,
+      "horasVidaUtil": 10000,
+      "porcentajeValorResidual": 10,
+      "consumoCombustible": 0.1
+    },
+    {
+      "id": 12,
+      "nombre": "Hoja niveladora de tres puntos",
+      "precioDolar": 3867.5,
+      "gastoMantenimiento": 0.0002,
+      "horasVidaUtil": 10000,
+      "porcentajeValorResidual": 10,
+      "consumoCombustible": 0.16
+    },
+    {
+      "id": 13,
+      "nombre": "Motoguadaña",
+      "precioDolar": 884,
+      "gastoMantenimiento": 0.0002,
+      "horasVidaUtil": 10000,
+      "porcentajeValorResidual": 10,
+      "consumoCombustible": 1.2
+    },
+    {
+      "id": 14,
+      "nombre": "Palón nivelador ",
+      "precioDolar": 17127.5,
+      "gastoMantenimiento": 0.0002,
+      "horasVidaUtil": 3000,
+      "porcentajeValorResidual": 20,
+      "consumoCombustible": 0.14
+    },
+    {
+      "id": 15,
+      "nombre": "Pulverizadora  2000 lts",
+      "precioDolar": 26520,
+      "gastoMantenimiento": 0.0003,
+      "horasVidaUtil": 3000,
+      "porcentajeValorResidual": 10,
+      "consumoCombustible": 0.16
+    },
+    {
+      "id": 16,
+      "nombre": "Pulverizadora Botalon 500 lts ",
+      "precioDolar": 3646.5,
+      "gastoMantenimiento": 0.0003,
+      "horasVidaUtil": 3000,
+      "porcentajeValorResidual": 10,
+      "consumoCombustible": 0.14
+    },
+    {
+      "id": 17,
+      "nombre": "Rastra excentrica de arrastre (frutera)",
+      "precioDolar": 9282,
+      "gastoMantenimiento": 0.0003,
+      "horasVidaUtil": 5000,
+      "porcentajeValorResidual": 10,
+      "consumoCombustible": 0.15
+    },
+    {
+      "id": 18,
+      "nombre": "Removedora de compost ",
+      "precioDolar": 26520,
+      "gastoMantenimiento": 0.00015,
+      "horasVidaUtil": 5000,
+      "porcentajeValorResidual": 10,
+      "consumoCombustible": 0.15
+    },
+    {
+      "id": 19,
+      "nombre": "Subsolador ",
+      "precioDolar": 3646.5,
+      "gastoMantenimiento": 0.00015,
+      "horasVidaUtil": 5000,
+      "porcentajeValorResidual": 10,
+      "consumoCombustible": 0.16
+    },
+    {
+      "id": 20,
+      "nombre": "Tracto elevador (cosecha)",
+      "precioDolar": 9282,
+      "gastoMantenimiento": 0.0005,
+      "horasVidaUtil": 5000,
+      "porcentajeValorResidual": 10,
+      "consumoCombustible": 0.14
+    },
+    {
+      "id": 21,
+      "nombre": "Trituradora de podos",
+      "precioDolar": 6630,
+      "gastoMantenimiento": 0.0004,
+      "horasVidaUtil": 5000,
+      "porcentajeValorResidual": 10,
+      "consumoCombustible": 0.1
+    },
+    {
+      "id": 22,
+      "nombre": "Vibrocultivador 3 Puntos ",
+      "precioDolar": 2762.5,
+      "gastoMantenimiento": 0.00025,
+      "horasVidaUtil": 3000,
+      "porcentajeValorResidual": 10,
+      "consumoCombustible": 0.16
+    },
+    {
+      "id": 23,
+      "nombre": "Zanjador de 3 puntos",
+      "precioDolar": 4972.5,
+      "gastoMantenimiento": 0.0002,
+      "horasVidaUtil": 10000,
+      "porcentajeValorResidual": 10,
+      "consumoCombustible": 0.15
+    }
+  ]
+}
