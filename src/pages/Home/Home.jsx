@@ -116,15 +116,6 @@ const Home = () => {
                             [2, "CARBENDAZIM", 195, 20, "lt", 1, "lt", "fungicida"],
                         ]}
                     />
-
-                    <InfoTablas
-                        title="estadosFonológicos"
-                        headers={["numero", "nombre", "descripción"]}
-                        data={[
-                            [1, "Inicio Floración", "Fin de septiembre a octubre - Primeras flores abiertas"],
-                            [2, "Plena Floración", "Mediados de octubre - Más del 70% de flores abiertas"],
-                        ]}
-                    />
                 </div>
             </>
         );
