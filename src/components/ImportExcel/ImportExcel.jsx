@@ -1,15 +1,16 @@
-import React, {useContext, useRef, useState} from 'react';
-import {AppContext} from "../../context/AppContext.jsx";
+import {useRef, useState} from 'react';
 import {importExcel} from "../../utils/utils.js";
 import {mapExcelData} from "../../utils/mapping.js";
 import {FiUpload} from "react-icons/fi"; // Ícono de subida
+import { useMaquinaria } from '../../hooks/useMaquinaria.js';
+import { useFertilizante } from '../../hooks/useFertilizante.js';
+import { useSanitizantes } from '../../hooks/useSanitizantes.js';
 
 const ImportExcel = () => {
-    const {
-      maquinaria,
-      fertilizantes,
-      sanitizantes,
-    } = useContext(AppContext);
+    const maquinaria = useMaquinaria();
+    const fertilizantes = useFertilizante();
+    const sanitizantes = useSanitizantes();
+
     const fileInputRef = useRef(null);
     const [nombreArchivo, setNombreArchivo] = useState("");
 
@@ -18,10 +19,10 @@ const ImportExcel = () => {
       importExcel(file, (allData) => {
         try {
           const dataMapped = mapExcelData(allData);
-          maquinaria.saveTractores(dataMapped.tractores);
-          maquinaria.saveImplementos(dataMapped.implementos);
-          fertilizantes.saveFertilizantes(dataMapped.fertilizantes);
-          sanitizantes.saveSanitizantes(dataMapped.sanitizantes);
+          maquinaria.setTractores(dataMapped.tractores);
+          maquinaria.setImplementos(dataMapped.implementos);
+          fertilizantes.setFertilizantes(dataMapped.fertilizantes);
+          sanitizantes.setSanitizantes(dataMapped.sanitizantes);
           setNombreArchivo(file.name);
         } catch (error) {
           console.error("Error al procesar el archivo Excel:", error);

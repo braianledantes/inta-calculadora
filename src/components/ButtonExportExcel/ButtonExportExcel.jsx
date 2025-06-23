@@ -1,16 +1,13 @@
-import {useContext} from "react";
-import {exportFormToExcel} from "../../excel/exportExcel.js"
-import {AppContext} from "../../context/AppContext.jsx";
-import {FaFileExcel} from "react-icons/fa";
+import { FaFileExcel } from "react-icons/fa";
+import { exportFormToExcel } from "../../excel/exportExcel.js";
+import { useFertilizante } from "../../hooks/useFertilizante.js";
 import { useMaquinaria } from "../../hooks/useMaquinaria.js";
+import { useSanitizantes } from "../../hooks/useSanitizantes.js";
 
 export default function ExportButton() {
-    
-    const hooks = useContext(AppContext);
-
     const { planes: planesMaquinaria, valorDolar, valorGasoilina } = useMaquinaria();
-    const { planes: planesFertilizantes } = hooks.fertilizantes;
-    const { planes: planesSanitizantes } = hooks.sanitizantes;
+    const { planes: planesFertilizantes } = useFertilizante();
+    const { planes: planesSanitizantes } = useSanitizantes();
 
     const fileName = `plan-agricola-${new Date().toISOString().split("T")[0]}`;
 

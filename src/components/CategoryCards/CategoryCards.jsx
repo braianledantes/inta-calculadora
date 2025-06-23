@@ -1,16 +1,15 @@
 import { Link, useLocation } from "react-router";
 import { PATHS } from "../../routes/paths";
-import { useContext } from "react";
-import { AppContext } from "../../context/AppContext";
+import { useMaquinaria } from "../../hooks/useMaquinaria";
+import { useFertilizante } from "../../hooks/useFertilizante";
+import { useSanitizantes } from "../../hooks/useSanitizantes";
 
 const CategoryCards = ({ setOpen }) => {
   const location = useLocation();
 
-  const {
-    maquinaria: { planes: planesMaquinaria, addPlan: addPlanMaquinaria },
-    fertilizantes: { planes: planesFert, addPlan: addPlanFert },
-    sanitizantes: { planes: planesSan, addPlan: addPlanSan },
-  } = useContext(AppContext);
+  const { planes: planesMaquinaria, addPlan: addPlanMaquinaria } = useMaquinaria();
+    const { planes: planesFert, addPlan: addPlanFert } = useFertilizante();
+    const { planes: planesSan, addPlan: addPlanSan } = useSanitizantes();
 
   const cards = [
     {
