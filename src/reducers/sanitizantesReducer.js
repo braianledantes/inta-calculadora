@@ -68,7 +68,12 @@ function sanitizantesReducer(state, action) {
       LocalDb.saveSanitizantes(action.payload);
       return { ...state, sanitizantes: action.payload };
     case ACTIONS.ADD_PLAN: {
-      const { planes } = state;
+      const { planes, sanitizantes } = state;
+      if (sanitizantes.length === 0) {
+        console.error("No hay sanitizantes disponibles para crear un plan.");
+        return state; // No se puede agregar un plan sin sanitizantes
+      }
+
       const newId = planes.at(-1)?.id + 1 || 1;
       const newPlan = {
         id: newId,

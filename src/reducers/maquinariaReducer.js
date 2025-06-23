@@ -56,6 +56,11 @@ function maquinariaReducer(state, action) {
 
     case MAQUINARIA_ACTIONS.ADD_PLAN: {
       const { tractores, implementos, planes, dolar, gasoil } = state;
+      if (tractores.length === 0 || implementos.length === 0) {
+        console.error("No hay tractores o implementos disponibles para crear un plan.");
+        return state; // No se puede agregar un plan sin tractores o implementos
+      }
+
       const tractor = tractores[0];
       const implemento = implementos[0];
       const valoresCalculados = calcularValoresPlanMaquinaria(tractor, implemento, dolar.valor, gasoil.valor);

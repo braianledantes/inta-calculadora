@@ -34,6 +34,12 @@ function fertilizanteReducer(state, action) {
       return { ...state, fertilizantes: action.payload };
     case FERTILIZANTES_ACTIONS.ADD_PLAN: {
       const { fertilizantes, planes, dolar } = state;
+
+      if (fertilizantes.length === 0) {
+        console.error("No hay fertilizantes disponibles para crear un plan.");
+        return state; // No se puede agregar un plan sin fertilizantes
+      }
+
       const fertilizante = fertilizantes[0];
       const cantTratamientos = 0;
       const valoresCalculados = calcularValoresPlanFertilizante(fertilizante, cantTratamientos, dolar.valor);
