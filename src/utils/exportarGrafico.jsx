@@ -3,7 +3,7 @@ import {pdf} from '@react-pdf/renderer';
 import {saveAs} from 'file-saver';
 import PDFDocument from "../pdf/PDF"
 
-const exportarGrafico = async (chartRef, { maquinariaPlans = [], sanitizantePlans = [], fertilizacionPlans = [] , valorDolar,estadoFenologico, valorGasoil } = {} ) => {
+const exportarGrafico = async (chartRef, { maquinariaPlans = [], sanitizantePlans = [], fertilizacionPlans = [] , valorDolar, valorGasoil } = {} ) => {
     if(!chartRef.current) return;
 
     try {
@@ -16,7 +16,6 @@ const exportarGrafico = async (chartRef, { maquinariaPlans = [], sanitizantePlan
           sanitizantePlans={sanitizantePlans}
           fertilizacionPlans={fertilizacionPlans}
           valorDolar={valorDolar}
-          estadoFenologico={estadoFenologico}
           valorGasoil={valorGasoil}
         />
         ).toBlob();

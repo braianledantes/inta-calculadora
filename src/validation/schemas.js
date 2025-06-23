@@ -48,11 +48,3 @@ export const sanitizanteSchema = Joi.array().items(
     unidadDosisAplicacion: Joi.string().valid("kg", "lt").required()
   })
 );
-
-export const estadoFenologicoSchema = Joi.array().items(
-  Joi.object({
-    numero: Joi.number().integer().required(),
-    nombre: Joi.string().min(3).max(50).required(),
-    descripcion: Joi.string().min(10).max(200).required()
-  })
-);

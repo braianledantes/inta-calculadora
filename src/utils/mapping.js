@@ -1,7 +1,6 @@
 // src/utils/mapping.js
 
 import {
-  estadoFenologicoSchema,
   fertilizanteSchema,
   implementoSchema,
   sanitizanteSchema,
@@ -13,7 +12,6 @@ const schemaMap = {
   implementos: implementoSchema,
   fertilizantes: fertilizanteSchema,
   sanitizantes: sanitizanteSchema,
-  estadosFenologicos: estadoFenologicoSchema,
 };
 
 export function mapExcelData(data) {

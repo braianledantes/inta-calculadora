@@ -11,7 +11,6 @@ const PDFDocument = ({
   sanitizantePlans = [],
   fertilizacionPlans = [],
   valorDolar,
-  estadoFenologico,
   valorGasoil,
   imageChartData,
 }) => (
@@ -22,7 +21,6 @@ const PDFDocument = ({
         sanitizantePlans={sanitizantePlans}
         fertilizacionPlans={fertilizacionPlans}
         valorDolar={valorDolar}
-        estadoFenologico={estadoFenologico}
         valorGasoil={valorGasoil}
       />
 

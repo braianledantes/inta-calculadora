@@ -9,7 +9,6 @@ const ImportExcel = () => {
       maquinaria,
       fertilizantes,
       sanitizantes,
-      estadosFenologicos,
     } = useContext(AppContext);
     const fileInputRef = useRef(null);
     const [nombreArchivo, setNombreArchivo] = useState("");
@@ -21,7 +20,6 @@ const ImportExcel = () => {
           const dataMapped = mapExcelData(allData);
           maquinaria.saveTractores(dataMapped.tractores);
           maquinaria.saveImplementos(dataMapped.implementos);
-          estadosFenologicos.saveEstadosFenologicos(dataMapped.estadosFenologicos);
           fertilizantes.saveFertilizantes(dataMapped.fertilizantes);
           sanitizantes.saveSanitizantes(dataMapped.sanitizantes);
           setNombreArchivo(file.name);
