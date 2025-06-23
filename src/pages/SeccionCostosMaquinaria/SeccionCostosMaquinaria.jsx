@@ -28,6 +28,7 @@ export default function SeccionCostosMaquinaria() {
 
   const lastPlanRef = useRef(null);
   const chartRef = useRef();
+  const prevPlanesLength = useRef(planes.length);
 
   const [vista, setVista] = useState("lista");
   const [vistaAutomatica, setVistaAutomatica] = useState(true);
@@ -61,9 +62,10 @@ export default function SeccionCostosMaquinaria() {
   }, []);
 
   useEffect(() => {
-    if (lastPlanRef.current) {
+    if (planes.length > prevPlanesLength.current && lastPlanRef.current) {
       lastPlanRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
     }
+    prevPlanesLength.current = planes.length;
 
     if (vistaAutomatica && !pantallaPequena) {
       if (planes.length >= 2) {
