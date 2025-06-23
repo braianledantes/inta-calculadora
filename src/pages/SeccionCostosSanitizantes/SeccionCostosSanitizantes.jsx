@@ -1,13 +1,13 @@
-import InputDolar from "../../components/InputDolar/InputDolar.jsx";
-import { CardSanitizantePlan } from "../../components/CardSanitizantePlan/CardSanitizantePlan.jsx";
-import { useContext, useEffect, useState, useRef } from "react";
-import { AppContext } from "../../context/AppContext.jsx";
+import { useEffect, useRef, useState } from "react";
 import AddPlanButton from "../../components/AddPlanButton/AddPlanButton.jsx";
-import SectionTitle from "../../components/SectionTitle/SectionTitle.jsx";
 import ButtonExportPDF from "../../components/ButtonExportPDF/ButtonExportPDF.jsx";
-import exportarGrafico from "../../utils/exportarGrafico.jsx";
+import { CardSanitizantePlan } from "../../components/CardSanitizantePlan/CardSanitizantePlan.jsx";
+import InputDolar from "../../components/InputDolar/InputDolar.jsx";
 import PlanesSanitizantesChart from "../../components/PlanesSanitizantesChart/PlanesSanitizantesChart.jsx";
+import SectionTitle from "../../components/SectionTitle/SectionTitle.jsx";
 import VistaSelector from "../../components/VistaSelector/VistaSelector.jsx";
+import { useSanitizantes } from "../../hooks/useSanitizantes.js";
+import exportarGrafico from "../../utils/exportarGrafico.jsx";
 
 export default function SeccionCostosSanitizantes() {
   const {
@@ -16,7 +16,7 @@ export default function SeccionCostosSanitizantes() {
     updateDolar,
     planes,
     addPlan,
-  } = useContext(AppContext).sanitizantes;
+  } = useSanitizantes();
 
   const lastPlanRef = useRef(null);
   const chartRef = useRef();
@@ -84,11 +84,10 @@ export default function SeccionCostosSanitizantes() {
       )}
 
       <div
-        className={`mb-8 ${
-          vista === "lista"
+        className={`mb-8 ${vista === "lista"
             ? "flex flex-col items-center gap-6"
             : "grid grid-cols-2 gap-6 justify-center"
-        }`}
+          }`}
       >
         {planes.map((plan, idx) => (
           <CardSanitizantePlan

@@ -1,14 +1,14 @@
-import { useRef, useContext, useState, useEffect } from "react";
-import { AppContext } from "../../context/AppContext.jsx";
+import { useEffect, useRef, useState } from "react";
+import AddPlanButton from "../../components/AddPlanButton/AddPlanButton.jsx";
+import ButtonExportPDF from "../../components/ButtonExportPDF/ButtonExportPDF.jsx";
 import { CardMaquinariaPlan } from "../../components/CardMaquinariaPlan/CardMaquinariaPlan.jsx";
 import InputDolar from "../../components/InputDolar/InputDolar.jsx";
 import InputGasoil from "../../components/InputGasoil/InputGasoil.jsx";
-import SectionTitle from "../../components/SectionTitle/SectionTitle.jsx";
-import AddPlanButton from "../../components/AddPlanButton/AddPlanButton.jsx";
 import PlanesMaquinariaChart from "../../components/PlanesMaquinariaChart/PlanesMaquinariaChart.jsx";
-import ButtonExportPDF from "../../components/ButtonExportPDF/ButtonExportPDF.jsx";
-import exportarGrafico from "../../utils/exportarGrafico.jsx";
+import SectionTitle from "../../components/SectionTitle/SectionTitle.jsx";
 import VistaSelector from "../../components/VistaSelector/VistaSelector.jsx";
+import { useMaquinaria } from "../../hooks/useMaquinaria.js";
+import exportarGrafico from "../../utils/exportarGrafico.jsx";
 
 export default function SeccionCostosMaquinaria() {
   const {
@@ -24,7 +24,7 @@ export default function SeccionCostosMaquinaria() {
     deletePlan,
     tractores,
     implementos,
-  } = useContext(AppContext).maquinaria;
+  } = useMaquinaria();
 
   const lastPlanRef = useRef(null);
   const chartRef = useRef();

@@ -1,15 +1,14 @@
-import {useContext} from "react";
-import {AppContext} from "../../context/AppContext";
+import { Plus } from "lucide-react";
+import { useSanitizantes } from "../../hooks/useSanitizantes";
 import DeleteButton from "../DeleteButton/DeleteButton";
 import ProductoSanitizante from "../ProductoSanitizante/ProductoSanitizante";
-import { Plus } from "lucide-react";
 
 export default function TratamientoSanitario({ planId, tratamiento }) {
   const {
     deleteTratamiento,
     addProducto,
     updateTratamiento,
-  } = useContext(AppContext).sanitizantes;
+  } = useSanitizantes();
 
   const handleDeleteTratamiento = () => {
     deleteTratamiento(planId, tratamiento.id);

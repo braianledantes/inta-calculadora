@@ -1,16 +1,16 @@
-import { forwardRef, useContext, useEffect, useRef, useState } from "react";
-import { AppContext } from "../../context/AppContext.jsx";
+import { forwardRef, useEffect, useRef, useState } from "react";
+import { useSanitizantes } from "../../hooks/useSanitizantes.js";
 import DeleteButton from "../DeleteButton/DeleteButton.jsx";
+import Paginacion from "../Paginacion/Paginacion.jsx";
 import PlanTitle from "../PlanTitle/PlanTitle.jsx";
 import TratamientoSanitario from "../TratamientoSanitario/TratamientoSanitario.jsx";
-import Paginacion from "../Paginacion/Paginacion.jsx";
 
 export const CardSanitizantePlan = forwardRef(function CardSanitizantePlan({ plan }, ref) {
   const {
     deletePlan,
     addTratamiento,
     deleteTratamiento,
-  } = useContext(AppContext).sanitizantes;
+  } = useSanitizantes();
 
   const [tratamientoActivoIndex, setTratamientoActivoIndex] = useState(0);
   const haAgregadoTratamientoInicial = useRef(false);

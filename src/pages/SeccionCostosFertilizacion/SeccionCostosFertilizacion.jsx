@@ -1,13 +1,13 @@
-import { useRef, useContext, useState, useEffect } from "react";
-import { AppContext } from "../../context/AppContext.jsx";
-import InputDolar from "../../components/InputDolar/InputDolar.jsx";
-import { CardFertilizacionPlan } from "../../components/CardFertilizacionPlan/CardFertilizacionPlan.jsx";
-import SectionTitle from "../../components/SectionTitle/SectionTitle.jsx";
+import { useEffect, useRef, useState } from "react";
 import AddPlanButton from "../../components/AddPlanButton/AddPlanButton.jsx";
 import ButtonExportPDF from "../../components/ButtonExportPDF/ButtonExportPDF.jsx";
-import exportarGrafico from "../../utils/exportarGrafico.jsx";
+import { CardFertilizacionPlan } from "../../components/CardFertilizacionPlan/CardFertilizacionPlan.jsx";
+import InputDolar from "../../components/InputDolar/InputDolar.jsx";
 import PlanesFertilizantesChart from "../../components/PlanesFertilizantesChart/PlanesFertilizantesChart.jsx";
+import SectionTitle from "../../components/SectionTitle/SectionTitle.jsx";
 import VistaSelector from "../../components/VistaSelector/VistaSelector.jsx";
+import { useFertilizante } from "../../hooks/useFertilizante.js";
+import exportarGrafico from "../../utils/exportarGrafico.jsx";
 
 export default function SeccionCostosFertilizacion() {
   const {
@@ -19,7 +19,7 @@ export default function SeccionCostosFertilizacion() {
     addPlan,
     updatePlan,
     deletePlan,
-  } = useContext(AppContext).fertilizantes;
+  } = useFertilizante();
 
   const lastPlanRef = useRef(null);
   const chartRef = useRef();

@@ -14,7 +14,7 @@ export default function Router() {
         <Route path={PATHS.HOME} element={<MainLayout/>}>
           <Route path={PATHS.HOME} element= {<Home/> }/>
           <Route path={PATHS.MAQUINARIA} element={<SeccionCostosMaquinaria/>}/>
-          <Route path={PATHS.FERTILIZANTES} element={<SeccionCostosFertilizacion/>}/>
+           <Route path={PATHS.FERTILIZANTES} element={<SeccionCostosFertilizacion/>}/>
           <Route path={PATHS.SANITIZANTES} element={<SeccionCostosSanitizantes/>}/>
           <Route path="*" element={<PageNotFound/>}/>
         </Route>
