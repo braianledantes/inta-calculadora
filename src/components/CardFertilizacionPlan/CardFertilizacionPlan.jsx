@@ -1,12 +1,10 @@
 import DeleteButton from "../DeleteButton/DeleteButton.jsx";
-import InputOptions from "../InputOptions/InputOptions.jsx";
 import InputNumber from "../InputNumber/InputNumber.jsx";
-import PlanTitle from "../PlanTitle/PlanTitle.jsx";
-import { forwardRef, useState } from "react";
+import InputOptions from "../InputOptions/InputOptions.jsx";
 import NumberValueModify from "../NumberValueModify/NumberValueModify.jsx";
+import PlanTitle from "../PlanTitle/PlanTitle.jsx";
 
-export const CardFertilizacionPlan = forwardRef(function CardFertilizacionPlan({ plan, fertilizantes, onUpdate, onDelete }, ref) {
-  const [prevPrecioFertilizacion, setPrevPrecioFertilizacion] = useState(plan.fertilizante.precioEnvaseDolar);
+export const CardFertilizacionPlan = ({ plan, fertilizantes, onUpdate, onDelete }) => {
 
   const handleDelete = () => {
     onDelete(plan.id);
@@ -35,7 +33,7 @@ export const CardFertilizacionPlan = forwardRef(function CardFertilizacionPlan({
   };
 
   return (
-    <div className="mx-auto bg-white  shadow-lg rounded-xl px-2 w-full sm:max-w-md md:max-w-3xl lg:max-w-4xl" ref={ref}>
+    <div className="mx-auto bg-white  shadow-lg rounded-xl px-2 w-full sm:max-w-md md:max-w-3xl lg:max-w-4xl">
       <div className=" p-6 mb-4">
         <div className="flex justify-between items-center mb-4">
           <PlanTitle title={`Plan ${plan.id}`} />
@@ -78,4 +76,4 @@ export const CardFertilizacionPlan = forwardRef(function CardFertilizacionPlan({
       </div>
     </div>
   );
-});
+};

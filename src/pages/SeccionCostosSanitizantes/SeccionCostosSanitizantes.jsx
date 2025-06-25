@@ -18,9 +18,7 @@ export default function SeccionCostosSanitizantes() {
     addPlan,
   } = useSanitizantes();
 
-  const lastPlanRef = useRef(null);
   const chartRef = useRef();
-  const prevPlanesLength = useRef(planes.length);
 
   const [vista, setVista] = useState("lista");
   const [vistaAutomatica, setVistaAutomatica] = useState(true);
@@ -52,11 +50,6 @@ export default function SeccionCostosSanitizantes() {
   }, []);
 
   useEffect(() => {
-    if (planes.length > prevPlanesLength.current && lastPlanRef.current) {
-      lastPlanRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-    prevPlanesLength.current = planes.length;
-
     if (vistaAutomatica && !pantallaPequena) {
       if (planes.length >= 2) {
         setVista("dosColumnas");
@@ -87,17 +80,13 @@ export default function SeccionCostosSanitizantes() {
 
       <div
         className={`mb-8 ${vista === "lista"
-            ? "flex flex-col items-center gap-6"
-            : "grid grid-cols-2 gap-6 justify-center"
+          ? "flex flex-col items-center gap-6"
+          : "grid grid-cols-2 gap-6 justify-center"
           }`}
       >
-        {planes.map((plan, idx) => (
-          <CardSanitizantePlan
-            key={plan.id}
-            plan={plan}
-            ref={idx === planes.length - 1 ? (el) => { lastPlanRef.current = el; } : null}
-          />
-        ))}
+        {planes.map(plan =>
+          (<CardSanitizantePlan key={plan.id} plan={plan} />)
+        )}
       </div>
 
       <div className="mx-auto m-4xl">

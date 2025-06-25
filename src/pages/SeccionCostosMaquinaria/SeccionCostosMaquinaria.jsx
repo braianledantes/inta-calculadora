@@ -26,9 +26,7 @@ export default function SeccionCostosMaquinaria() {
     implementos,
   } = useMaquinaria();
 
-  const lastPlanRef = useRef(null);
   const chartRef = useRef();
-  const prevPlanesLength = useRef(planes.length);
 
   const [vista, setVista] = useState("lista");
   const [vistaAutomatica, setVistaAutomatica] = useState(true);
@@ -62,11 +60,6 @@ export default function SeccionCostosMaquinaria() {
   }, []);
 
   useEffect(() => {
-    if (planes.length > prevPlanesLength.current && lastPlanRef.current) {
-      lastPlanRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-    prevPlanesLength.current = planes.length;
-
     if (vistaAutomatica && !pantallaPequena) {
       if (planes.length >= 2) {
         setVista("dosColumnas");
@@ -99,13 +92,12 @@ export default function SeccionCostosMaquinaria() {
       )}
 
       <div
-        className={`mb-8 ${
-          vista === "lista"
+        className={`mb-8 ${vista === "lista"
             ? "flex flex-col items-center gap-6"
             : "grid grid-cols-2 gap-6 justify-center"
-        }`}
+          }`}
       >
-        {planes.map((plan, idx) => (
+        {planes.map((plan) => (
           <CardMaquinariaPlan
             key={plan.id}
             plan={plan}
@@ -113,7 +105,6 @@ export default function SeccionCostosMaquinaria() {
             implementos={implementos}
             onDelete={deletePlan}
             onUpdate={updatePlan}
-            ref={idx === planes.length - 1 ? (el) => { lastPlanRef.current = el; } : null}
           />
         ))}
       </div>

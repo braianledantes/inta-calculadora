@@ -1,11 +1,11 @@
-import { forwardRef, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSanitizantes } from "../../hooks/useSanitizantes.js";
 import DeleteButton from "../DeleteButton/DeleteButton.jsx";
 import Paginacion from "../Paginacion/Paginacion.jsx";
 import PlanTitle from "../PlanTitle/PlanTitle.jsx";
 import TratamientoSanitario from "../TratamientoSanitario/TratamientoSanitario.jsx";
 
-export const CardSanitizantePlan = forwardRef(function CardSanitizantePlan({ plan }, ref) {
+export const CardSanitizantePlan = ({ plan }) => {
   const {
     deletePlan,
     addTratamiento,
@@ -61,7 +61,7 @@ export const CardSanitizantePlan = forwardRef(function CardSanitizantePlan({ pla
   const mostrarTotal = plan.tratamientos.length > 0 && hayTratamientosConProductos;
 
   return (
-    <div className="mx-auto sm:px-2 w-full sm:max-w-md md:max-w-3xl lg:max-w-4xl mb-10" ref={ref}>
+    <div className="mx-auto sm:px-2 w-full sm:max-w-md md:max-w-3xl lg:max-w-4xl mb-10">
       <div className="bg-white rounded-xl shadow-lg pt-6 sm:px-6 px-4 pb-3">
         <div className="flex justify-between items-center mb-4">
           <PlanTitle title={`Plan Fitosanitario ${plan.id}`} />
@@ -101,4 +101,4 @@ export const CardSanitizantePlan = forwardRef(function CardSanitizantePlan({ pla
 
     </div>
   );
-});
+};

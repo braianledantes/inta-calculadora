@@ -20,10 +20,7 @@ export default function SeccionCostosFertilizacion() {
     updatePlan,
     deletePlan,
   } = useFertilizante();
-
-  const lastPlanRef = useRef(null);
   const chartRef = useRef();
-  const prevPlanesLength = useRef(planes.length);
 
   const [vista, setVista] = useState("lista");
   const [vistaAutomatica, setVistaAutomatica] = useState(true);
@@ -55,11 +52,6 @@ export default function SeccionCostosFertilizacion() {
   }, []);
 
   useEffect(() => {
-    if (planes.length > prevPlanesLength.current && lastPlanRef.current) {
-      lastPlanRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-    prevPlanesLength.current = planes.length;
-
     if (vistaAutomatica && !pantallaPequena) {
       if (planes.length >= 2) {
         setVista("dosColumnas");
@@ -95,14 +87,13 @@ export default function SeccionCostosFertilizacion() {
             : "grid grid-cols-2 gap-6 justify-center"
         }`}
       >
-        {planes.map((plan, idx) => (
+        {planes.map((plan) => (
           <CardFertilizacionPlan
             key={plan.id}
             plan={plan}
             fertilizantes={fertilizantes}
             onDelete={deletePlan}
             onUpdate={updatePlan}
-            ref={idx === planes.length - 1 ? (el) => { lastPlanRef.current = el; } : null}
           />
         ))}
       </div>

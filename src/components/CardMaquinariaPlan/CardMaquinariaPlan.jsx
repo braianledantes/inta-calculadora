@@ -1,12 +1,10 @@
-import React, {forwardRef} from "react";
 import DeleteButton from "../DeleteButton/DeleteButton.jsx";
+import InputNumber from "../InputNumber/InputNumber.jsx";
 import InputOptions from "../InputOptions/InputOptions.jsx";
 import NumberValue from "../NumberValue/NumberValue.jsx";
 import PlanTitle from "../PlanTitle/PlanTitle.jsx";
-import InputNumber from "../InputNumber/InputNumber.jsx";
 
-export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
-  { plan, tractores, implementos, onUpdate, onDelete }, ref) {
+export const CardMaquinariaPlan = ({ plan, tractores, implementos, onUpdate, onDelete }) => {
 
   const handleDelete = () => {
     onDelete(plan.id);
@@ -49,7 +47,7 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
   };
 
   return (
-    <div className="bg-white shadow-lg rounded-xl mx-auto w-full sm:max-w-md md:max-w-3xl lg:max-w-4xl mb-10" ref={ref}>
+    <div className="bg-white shadow-lg rounded-xl mx-auto w-full sm:max-w-md md:max-w-3xl lg:max-w-4xl mb-10">
       <div className="px-6 pt-6 mb-8">
         <div className="flex justify-between items-center mb-6">
           <PlanTitle title={`Conjunto de Maquinaria ${plan.id}`} />
@@ -130,4 +128,4 @@ export const CardMaquinariaPlan = forwardRef(function CardMaquinariaPlan(
       </div>
     </div>
   );
-});
+};
