@@ -8,15 +8,15 @@ export async function exportFormToExcel(
   planesMaquinaria,
   planesFertilizantes,
   planesSanitizantes,
-  valorDolar,
+  dolarMaquinaria, dolarFertilizante, dolarSanitizante,
   valorGasoilina,
   fileName = 'datos'
 ) {
   const workbook = new ExcelJS.Workbook();
 
-  addMaquinariaSheet(workbook, planesMaquinaria, valorDolar, valorGasoilina);
-  addFertilizantesSheet(workbook, planesFertilizantes, valorDolar);
-  addSanitizanteSheet(workbook, planesSanitizantes, valorDolar);
+  addMaquinariaSheet(workbook, planesMaquinaria, dolarMaquinaria.valor, valorGasoilina);
+  addFertilizantesSheet(workbook, planesFertilizantes, dolarFertilizante.valor);
+  addSanitizanteSheet(workbook, planesSanitizantes, dolarSanitizante.valor);
 
   const buffer = await workbook.xlsx.writeBuffer();
   const blob = new Blob([buffer], {

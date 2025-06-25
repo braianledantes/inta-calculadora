@@ -5,9 +5,9 @@ import { useMaquinaria } from "../../hooks/useMaquinaria.js";
 import { useSanitizantes } from "../../hooks/useSanitizantes.js";
 
 export default function ExportButton() {
-    const { planes: planesMaquinaria, valorDolar, valorGasoilina } = useMaquinaria();
-    const { planes: planesFertilizantes } = useFertilizante();
-    const { planes: planesSanitizantes } = useSanitizantes();
+    const { planes: planesMaquinaria, dolar:dolarMaquinaria, gasoil} = useMaquinaria();
+    const { planes: planesFertilizantes,dolar:dolarFertilizante } = useFertilizante();
+    const { planes: planesSanitizantes, dolar:dolarSanitizante } = useSanitizantes();
 
     const fileName = `plan-agricola-${new Date().toISOString().split("T")[0]}`;
 
@@ -16,7 +16,6 @@ export default function ExportButton() {
         (!planesFertilizantes || planesFertilizantes.length === 0) &&
         (!planesSanitizantes || planesSanitizantes.length === 0 || planesSanitizantes.every(plan => plan.total === null || plan.total === 0));
     if (noHayDatos) return null;
-
     return (
         <button
             disabled={noHayDatos}
@@ -36,7 +35,7 @@ export default function ExportButton() {
                 gap-2
                 uppercase
             `}
-            onClick={() => exportFormToExcel(planesMaquinaria, planesFertilizantes, planesSanitizantes, valorDolar, valorGasoilina,  fileName)}
+            onClick={() => exportFormToExcel(planesMaquinaria, planesFertilizantes, planesSanitizantes, dolarMaquinaria, dolarFertilizante, dolarSanitizante, gasoil.valor,  fileName)}
         >
             <FaFileExcel style={{ transform: "scaleX(-1)" }} />
             Exportar Excel

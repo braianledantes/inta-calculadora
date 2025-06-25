@@ -27,11 +27,9 @@ export default function SeccionCostosSanitizantes() {
   const handleAddPlan = () => {
     addPlan();
   };
-
-  const handleExportPdf = () => {
-    exportarGrafico(chartRef, { sanitizantePlans: planes, valorDolar: dolar.valor });
+  const handleExportPdf = () => {v
+    exportarGrafico(chartRef, { sanitizantePlans: planes, valorDolar: dolar.valor});
   };
-
   useEffect(() => {
     const manejarResize = () => {
       const esPequena = window.innerWidth < 768;

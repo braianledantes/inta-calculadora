@@ -18,7 +18,7 @@ export function addSanitizanteSheet(workbook, planesSanitizantes, valorDolar) {
 
   const sheet = workbook.addWorksheet('Sanitizantes');
 
-  // Estilo fuente por defecto
+  // Fuente por defecto en todo el sheet (Montserrat 9)
   sheet.eachRow({ includeEmpty: true }, row => {
     row.eachCell({ includeEmpty: true }, cell => {
       cell.font = { name: 'Montserrat', size: 9 };
@@ -35,7 +35,7 @@ export function addSanitizanteSheet(workbook, planesSanitizantes, valorDolar) {
 
   // Encabezado de tabla
   sheet.addRow([
-    'Plan Fitosanitario', 'Tratamiento', 'Principio Activo', 'Tipo',
+    'Plan Fitosanitario', 'Tratamiento', 'Fecha', 'Principio Activo', 'Tipo',
     'Precio envase ($ USD)', 'Dosis por ha', 'Unidad dosis',
     'Volumen por ha', 'Unidad volumen', 'Cant. por ha',
     'Costo por ha', 'Total $/hora'
@@ -44,12 +44,12 @@ export function addSanitizanteSheet(workbook, planesSanitizantes, valorDolar) {
   const headerRow = sheet.getRow(2);
   headerRow.height = 30;
 
-  const colWidths = [20, 18, 20, 15, 20, 15, 15, 15, 15, 15, 15, 20];
+  const colWidths = [20, 15, 15, 20, 15, 15, 15, 15, 15, 15, 15, 15, 20];
   colWidths.forEach((w, i) => sheet.getColumn(i + 1).width = w);
 
   headerRow.eachCell((cell, colNumber) => {
     cell.value = capitalize(cell.value?.toString());
-    applyStyle(cell, colNumber >= 10 ? verdeSuave : amarilloSuave);
+    applyStyle(cell, colNumber >= 11 ? verdeSuave : amarilloSuave);
   });
 
   let currentRow = 3;
@@ -64,6 +64,7 @@ export function addSanitizanteSheet(workbook, planesSanitizantes, valorDolar) {
         const row = sheet.addRow([
           `${indexPlan + 1}`,
           tratamiento.id,
+          tratamiento.fecha,
           producto.sanitizante.nombre,
           producto.sanitizante.tipo,
           producto.precio,
@@ -77,8 +78,8 @@ export function addSanitizanteSheet(workbook, planesSanitizantes, valorDolar) {
         const r = row.number;
 
         // Fórmulas
-        row.getCell(10).value = { formula: `F${r} * H${r}` };
-        row.getCell(11).value = { formula: `J${r} * C1 * E${r}` };
+        row.getCell(11).value = { formula: `G${r} * I${r}` };
+        row.getCell(12).value = { formula: `K${r} * C1 * F${r}` };
 
         const esUltimoTratamiento = indexTratamiento === plan.tratamientos.length - 1;
         const esUltimoProducto = indexProducto === tratamiento.productos.length - 1;
@@ -86,12 +87,14 @@ export function addSanitizanteSheet(workbook, planesSanitizantes, valorDolar) {
         const isEven = (row.number - 3) % 2 === 0;
         const style = isEven ? tractorRowStyle : generalCellStyle;
 
-        for (let col = 3; col <= 12; col++) {
-          if (col === 12 && esUltimoTratamiento && esUltimoProducto) continue;
+        // Aplica estilo a celdas de columnas 4 a 13 excepto total en última fila
+        for (let col = 4; col <= 13; col++) {
+          if (col === 13 && esUltimoTratamiento && esUltimoProducto) continue;
           const cell = row.getCell(col);
           applyStyle(cell, style);
         }
 
+        // Columna 1 y 2 (Plan y Tratamiento) negrita, centrado y estilo tractor
         [1, 2].forEach(col => {
           const cell = row.getCell(col);
           applyStyle(cell, {
@@ -101,10 +104,15 @@ export function addSanitizanteSheet(workbook, planesSanitizantes, valorDolar) {
           });
         });
 
+        // Columna 3 (Fecha): Montserrat, tamaño 9, centrado, sin negrita ni fondo
+        const cellFecha = row.getCell(3);
+        cellFecha.alignment = { horizontal: 'center', vertical: 'middle' };
+        cellFecha.font = { name: 'Montserrat', size: 9, bold: false };
+
         if (esUltimoTratamiento && esUltimoProducto) {
-          const totalCell = row.getCell(12);
+          const totalCell = row.getCell(13);
           totalCell.value = {
-            formula: `SUM(K${planStartRow}:K${r})`
+            formula: `SUM(L${planStartRow}:L${r})`
           };
           applyStyle(totalCell, {
             ...celdaTotalStyle,
@@ -121,10 +129,27 @@ export function addSanitizanteSheet(workbook, planesSanitizantes, valorDolar) {
         currentRow++;
       });
 
+      // Fusionar celdas de Tratamiento (B) y Fecha (C) si hay más de un producto
       if (tratamiento.productos.length > 1) {
         const start = tratamientoStartRow;
         const end = currentRow - 1;
         sheet.mergeCells(`B${start}:B${end}`);
+        sheet.mergeCells(`C${start}:C${end}`);
+
+        // Estilo para celda fusionada B (Tratamiento): tractorRowStyle + negrita + centrado + fondo
+        const cellB = sheet.getCell(`B${start}`);
+        applyStyle(cellB, {
+          ...tractorRowStyle,
+          alignment: { horizontal: 'center', vertical: 'middle' },
+          font: { bold: true }
+        });
+
+        // Estilo para celda fusionada C (Fecha): Montserrat, tamaño 9, centrado, sin negrita ni fondo
+        const cellC = sheet.getCell(`C${start}`);
+        applyStyle(cellC, {
+          ...generalCellStyle,
+          font: { name: 'Montserrat', size: 9, bold: false }
+        });
       }
     });
 
@@ -133,7 +158,7 @@ export function addSanitizanteSheet(workbook, planesSanitizantes, valorDolar) {
     }
 
     // Bordes exteriores del plan
-    for (let col = 1; col <= 12; col++) {
+    for (let col = 1; col <= 13; col++) {
       const cellTop = sheet.getCell(planStartRow, col);
       const cellBottom = sheet.getCell(currentRow - 1, col);
 
@@ -141,23 +166,22 @@ export function addSanitizanteSheet(workbook, planesSanitizantes, valorDolar) {
         ...cellTop.border,
         top: borderStyle.top,
         left: col === 1 ? borderStyle.left : undefined,
-        right: col === 12 ? borderStyle.right : undefined
+        right: col === 13 ? borderStyle.right : undefined
       };
 
       cellBottom.border = {
         ...cellBottom.border,
         bottom: borderStyle.bottom,
         left: col === 1 ? borderStyle.left : undefined,
-        right: col === 12 ? borderStyle.right : undefined
+        right: col === 13 ? borderStyle.right : undefined
       };
     }
 
-    // Aplicar color pastel (amarillo suave) a celdas A y B de cada plan
-    for (let row = planStartRow; row < currentRow; row++) {
-      const cellA = sheet.getCell(`A${row}`);
-      const cellB = sheet.getCell(`B${row}`);
+    // Aplicar color pastel (amarillo suave) y negrita a celdas A y B de cada plan
+    for (let rowIdx = planStartRow; rowIdx < currentRow; rowIdx++) {
+      const cellA = sheet.getCell(`A${rowIdx}`);
+      const cellB = sheet.getCell(`B${rowIdx}`);
 
-      // Columna A: amarillo suave
       applyStyle(cellA, {
         fill: {
           type: 'pattern',
@@ -168,7 +192,6 @@ export function addSanitizanteSheet(workbook, planesSanitizantes, valorDolar) {
         alignment: { horizontal: 'center', vertical: 'middle' }
       });
 
-      // Columna B: estilo tractor
       applyStyle(cellB, {
         ...tractorRowStyle,
         font: { bold: true },
@@ -177,7 +200,7 @@ export function addSanitizanteSheet(workbook, planesSanitizantes, valorDolar) {
     }
   });
 
-  // Aplicar estilo general solo a celdas sin fondo Y sin borde
+  // Aplicar estilo general solo a celdas sin fondo y sin borde
   sheet.eachRow({ includeEmpty: false }, row => {
     row.eachCell(cell => {
       const hasFill = !!cell.fill;
