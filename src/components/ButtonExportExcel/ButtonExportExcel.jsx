@@ -24,8 +24,7 @@ export default function ExportButton() {
                 ${noHayDatos ? "bg-gray-400 cursor-not-allowed" : "bg-gradient-to-r from-[#036935]  to-[#024c27] hover:from-green-700 hover:to-green-800"} 
                 text-white 
                 px-4 py-2 
-                h-16 
-                max-w-xs 
+                w-full
                 rounded-lg 
                 transition-colors 
                 duration-300 

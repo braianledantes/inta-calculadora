@@ -43,12 +43,18 @@ const Header = () => {
           {/* Navegación */}
           <nav
             className={`
-              ${open ? "flex" : "hidden"}
-              md:flex flex-col md:flex-row items-center gap-2 text-sm md:text-base font-semibold w-full md:w-auto
-              bg-white md:bg-transparent rounded-xl md:rounded-none shadow md:shadow-none mt-2 md:mt-0 p-4 md:p-0
+              ${open ? "flex " : "hidden"} items-stretch w-full 
+              md:flex flex-col md:flex-row items-center gap-2 text-sm md:text-base font-semibold md:w-auto
+              bg-[#eeeeee] md:bg-transparent rounded-bl-xl rounded-br-xl md:rounded-none shadow md:shadow-none mt-2 md:mt-0 p-1 md:p-0
               absolute md:static top-20 left-0 md:top-auto md:left-auto z-40 h-full`}>
-            <ImportExcel />
-            <ButtonExportExcel />
+            <div className="md:flex md:gap-2">
+              <div className="mb-2 md:mb-0 md:flex-shrink-0">
+                <ImportExcel />
+              </div>
+              <div className="md:flex-shrink-0">
+                <ButtonExportExcel />
+              </div>
+            </div>
           </nav>
         </div>
       </header>

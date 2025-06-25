@@ -38,7 +38,7 @@ const ImportExcel = () => {
     return (
       <div>
         <button
-          className="bg-gradient-to-r from-[#c95a1f] via-[#d87431] to-[#f09550] max-w-sm h-16 text-white px-4 py-2 rounded-lg hover:bg-[#c95a1f] transition-colors duration-300 font-semibold shadow flex items-center gap-2 uppercase hover:cursor-pointer"
+          className="bg-gradient-to-r from-[#c95a1f] via-[#d87431] to-[#f09550] w-full text-white px-4 py-2 rounded-lg hover:bg-[#c95a1f] transition-colors duration-300 font-semibold shadow flex items-center items-center justify-center gap-2 uppercase hover:cursor-pointer"
           onClick={handleButtonClick}
         >
           <FiUpload className="text-xl" />
