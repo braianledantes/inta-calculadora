@@ -42,7 +42,7 @@ export function calcularValoresPlanSanitario(sanitizante, volumenPorHectarea, ca
 }
 
 export function calcularValoresProductoSanitario(precio, volumenPorHectarea, dosisPorHectarea, valorDolar) {
-  const cantidadPorHectarea = Math.round(dosisPorHectarea * volumenPorHectarea);
+  const cantidadPorHectarea = dosisPorHectarea * volumenPorHectarea;
   const costoTotalPorHectarea =  Math.round(cantidadPorHectarea * valorDolar * precio);
   return {
     cantidadPorHectarea,

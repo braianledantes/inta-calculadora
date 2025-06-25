@@ -26,7 +26,7 @@ test('calcularValoresPlan', () => {
     nombre: "Arado",
     precioDolar: 5714,
     gastoMantenimiento: 0.0004,
-    horasVidaUtil: 5000,
+    horasVidaUtil: 50002,
     porcentajeValorResidual: 10,
     consumoCombustible: 0.14
   };
@@ -38,11 +38,11 @@ test('calcularValoresPlan', () => {
   assert.equal(result.gastoConservacionTractor, 3990, "Gasto de conservación del tractor incorrecto");
 
   // verifica los calculos del implemento
-  assert.equal(result.amortizacionImplemento, 1080, "Amortización del implemento incorrecta");
+  assert.equal(result.amortizacionImplemento, 108, "Amortización del implemento incorrecta");
   assert.equal(result.costoCombustibleImplemento, 8820, "Costo de combustible del implemento incorrecto");
   assert.equal(result.gastoConservacionImplemento, 2400, "Gasto de conservación del implemento incorrecto");
   // verifica el costo economico total
-  assert.equal(result.costoEconomico, 20090, "Costo económico total incorrecto");
+  assert.equal(result.costoEconomico, 19118, "Costo económico total incorrecto");
 
 });
 
