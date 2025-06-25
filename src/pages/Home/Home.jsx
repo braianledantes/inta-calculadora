@@ -19,8 +19,8 @@ const Home = () => {
     if (mostrarTablas) {
         return (
             <>
-                <div className="p-4">
-                    <div className="flex items-center justify-center mb-4">
+                <div className="sm:p-4">
+                    <div className="flex items-center justify-center mb-4 flex-col sm:flex-row">
                         <h1 className="text-l flex gap-2">
                             <FileWarningIcon className="text-2xl" />
                             El archivo (.xlsx) que se importe deberá tener una estructura como la siguiente:
@@ -123,8 +123,8 @@ const Home = () => {
 
     return (
         <>
-            <div className="p-4">
-                <div className="flex items-center justify-center mb-4">
+            <div className="sm:p-4">
+                <div className="flex items-center justify-center mb-4 flex-col sm:flex-row">
                     <h1 className="text-l flex gap-2">
                         <FileWarningIcon className="text-2xl" />
                         El archivo (.xlsx) que se importe deberá tener una estructura como la siguiente:
@@ -138,12 +138,12 @@ const Home = () => {
                 </div>
 
                     <div className="min-h-full flex flex-col mt-10 items-center">
-                        <div className="p-6 w-full">
+                        <div className="sm:p-6 w-full">
                             <h1 className="text-2xl text-center font-bold mb-4">
                                 Bienvenido a la Calculadora de Costos
                             </h1>
                             <div className="text-gray-700 space-y-6">
-                                <div className="text-gray-800 w-full max-w-6xl mx-auto px-4">
+                                <div className="text-gray-800 w-full max-w-6xl mx-auto px-4 py-4">
                                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                                         
                                         <InfoCard
