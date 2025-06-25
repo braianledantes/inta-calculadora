@@ -26,7 +26,7 @@ const ACTIONS = {
   UPDATE_DOLAR: "UPDATE_DOLAR",
 };
 
-function actualizarCostosPlan(plan, valorDolar = DOLAR_DEFAULT.valor) {
+function actualizarCostosPlan(plan, valorDolar) {
   const updatedTratamientos = plan.tratamientos.map(tratamiento => {
     const updatedProductos = tratamiento.productos.map(producto => {
       const { cantidadPorHectarea, costoTotalPorHectarea } = calcularValoresProductoSanitario(
@@ -121,7 +121,7 @@ function sanitizantesReducer(state, action) {
       const plan = state.planes.find(p => p.id === planId);
       if (!plan) return state;
       const updatedTratamientos = plan.tratamientos.filter(t => t.id !== tratamientoId);
-      const updatedPlan = actualizarCostosPlan({ ...plan, tratamientos: updatedTratamientos });
+      const updatedPlan = actualizarCostosPlan({ ...plan, tratamientos: updatedTratamientos }, state.dolar.valor);
       return {
         ...state,
         planes: state.planes.map(p => p.id === planId ? updatedPlan : p),
@@ -146,7 +146,7 @@ function sanitizantesReducer(state, action) {
       const newProductos = [...tratamiento.productos, newProducto];
       const updatedTratamiento = { ...tratamiento, productos: newProductos };
       const newTratamientos = plan.tratamientos.map(t => t.id === tratamientoId ? updatedTratamiento : t);
-      const updatedPlan = actualizarCostosPlan({ ...plan, tratamientos: newTratamientos });
+      const updatedPlan = actualizarCostosPlan({ ...plan, tratamientos: newTratamientos }, state.dolar.valor);
       return {
         ...state,
         planes: state.planes.map(p => p.id === planId ? updatedPlan : p),
@@ -167,7 +167,7 @@ function sanitizantesReducer(state, action) {
       } : p);
       const updatedTratamiento = { ...tratamiento, productos: updatedProductos };
       const newTratamientos = plan.tratamientos.map(t => t.id === tratamientoId ? updatedTratamiento : t);
-      const updatedPlan = actualizarCostosPlan({ ...plan, tratamientos: newTratamientos });
+      const updatedPlan = actualizarCostosPlan({ ...plan, tratamientos: newTratamientos }, state.dolar.valor);
       return {
         ...state,
         planes: state.planes.map(p => p.id === planId ? updatedPlan : p),
@@ -182,7 +182,7 @@ function sanitizantesReducer(state, action) {
       const updatedProductos = tratamiento.productos.filter(p => p.id !== idProducto);
       const updatedTratamiento = { ...tratamiento, productos: updatedProductos };
       const newTratamientos = plan.tratamientos.map(t => t.id === tratamientoId ? updatedTratamiento : t);
-      const updatedPlan = actualizarCostosPlan({ ...plan, tratamientos: newTratamientos });
+      const updatedPlan = actualizarCostosPlan({ ...plan, tratamientos: newTratamientos }, state.dolar.valor);
       return {
         ...state,
         planes: state.planes.map(p => p.id === planId ? updatedPlan : p),
@@ -190,6 +190,7 @@ function sanitizantesReducer(state, action) {
     }
     case ACTIONS.UPDATE_DOLAR: {
       const newDolar = action.payload;
+      console.log("UPDATE_DOLAR", newDolar)
       const updatedDolares = state.dolares.find(d => d.tipo === newDolar.tipo)
         ? state.dolares.map(d => d.tipo === newDolar.tipo ? newDolar : d)
         : [...state.dolares, newDolar];

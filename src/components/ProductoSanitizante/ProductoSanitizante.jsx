@@ -63,16 +63,16 @@ export default function ProductoSanitizante({ idPlan, idTratamiento, producto })
 
         <div className="flex flex-wrap gap-7 mt-5">
           <InputOptions
-            label="Principio Activo"
-            options={sanitizantesFiltrados.map(s => s.nombre)}
-            value={producto.sanitizante.nombre}
-            onChange={handleChangeSanitizante}
-          />
-          <InputOptions
             label="Tipo"
             options={tiposSanitizantes}
             value={producto.sanitizante.tipo}
             onChange={handleChangeTipo}
+          />
+          <InputOptions
+            label="Principio Activo"
+            options={sanitizantesFiltrados.map(s => s.nombre)}
+            value={producto.sanitizante.nombre}
+            onChange={handleChangeSanitizante}
           />
         </div>
 
