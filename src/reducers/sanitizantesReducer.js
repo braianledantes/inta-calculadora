@@ -190,7 +190,6 @@ function sanitizantesReducer(state, action) {
     }
     case ACTIONS.UPDATE_DOLAR: {
       const newDolar = action.payload;
-      console.log("UPDATE_DOLAR", newDolar)
       const updatedDolares = state.dolares.find(d => d.tipo === newDolar.tipo)
         ? state.dolares.map(d => d.tipo === newDolar.tipo ? newDolar : d)
         : [...state.dolares, newDolar];
