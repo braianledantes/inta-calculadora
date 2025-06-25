@@ -16,7 +16,7 @@ export default function PlanesFertilizantesChart({ planes = [] }) {
   }
 
   return (
-    <div className="w-full h-96 p-4 bg-white rounded-xl shadow-md pb-12 border border-gray-200 ">
+    <div className="w-full h-[600px] sm:h-96 sm:p-4 bg-white rounded-xl shadow-md pb-12 border border-gray-200">
       <h3 className="text-xl font-semibold text-gray-800 mb-4">Costos de Maquinaria</h3>
       <ResponsiveContainer>
         <BarChart

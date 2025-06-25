@@ -53,8 +53,8 @@ export default function PlanesMaquinariaChart({ planes = [] }) {
   }
 
   return (
-    <div className="w-full h-96 p-4 bg-white rounded-xl shadow-md pb-12 border border-gray-200">
-      <h3 className="text-xl font-semibold text-gray-800 mb-2">Costos de Maquinaria</h3>
+    <div className="w-full h-[600px] sm:h-96 sm:p-4 bg-white rounded-xl shadow-md pb-12 border border-gray-200">
+      <h3 className="text-xl text-center p-2 font-semibold text-gray-800 mb-2">Costos de Maquinaria</h3>
       <ResponsiveContainer>
         <BarChart
           data={formattedPlanes}

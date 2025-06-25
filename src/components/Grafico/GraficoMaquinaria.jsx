@@ -13,8 +13,7 @@ import {
 
 export default function Grafico({ title, data }) {
   return (
-    <div className="w-full h-96 p-4 bg-white rounded-xl shadow-md pb-12 border border-gray-200 ">
-
+    <div className="w-full sm:h-96 p-4 bg-white rounded-xl shadow-md pb-12 border border-gray-200 ">
       <h2 className="text-xl font-semibold text-gray-800 mb-4">{title}</h2>
 
       <ResponsiveContainer width="100%" height="100%">

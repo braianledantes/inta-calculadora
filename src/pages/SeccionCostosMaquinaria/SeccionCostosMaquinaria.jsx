@@ -123,8 +123,8 @@ export default function SeccionCostosMaquinaria() {
       </div>
 
       {planes.length >= 2 && (
-        <div>
-          <div ref={chartRef}>
+        <div >
+          <div ref={chartRef} className="h-full">
             <PlanesMaquinariaChart planes={planes} />
           </div>
           <ButtonExportPDF onExport={handleExportPdf} />
